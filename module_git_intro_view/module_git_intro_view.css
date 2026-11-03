@@ -1,0 +1,66 @@
+/* Styles privés à l’introduction Git/GitHub. */
+.git-view { max-width: var(--page-max-width); margin: auto; padding: 0 var(--space-xl); }
+.course-header { display: flex; justify-content: space-between; gap: var(--space-lg); padding: var(--space-lg) 0; border-bottom: 1px solid var(--color-border); }
+.course-header a { text-decoration: none; font-weight: 700; }
+.course-header > span, .small-note, .preview-label, .interaction-status, .lesson-footer { color: var(--color-muted); font-size: 0.85rem; }
+.course-hero { padding: var(--space-3xl) 0 var(--space-2xl); }
+.eyebrow { display: block; color: var(--color-accent); font: 650 0.75rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--space-md); }
+h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); letter-spacing: -0.05em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); letter-spacing: -0.025em; margin-bottom: var(--space-lg); }
+h3, h4 { font-size: 1.15rem; margin-bottom: var(--space-md); }
+.lead { max-width: 48rem; font-size: 1.15rem; color: var(--color-muted); margin: var(--space-lg) 0; }
+.lesson-goal { max-width: 48rem; }
+.lesson-nav { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-lg); margin-top: var(--space-xl); font-size: 0.9rem; color: var(--color-accent); }
+.lesson-section { padding: var(--space-2xl) 0; border-top: 1px solid var(--color-border); }
+.lesson-section p + p { margin-top: var(--space-md); }
+.two-columns { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
+.folder-example, .definitions article, .repository { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--space-lg); }
+.folder-example { display: grid; gap: var(--space-sm); font-size: 0.9rem; color: var(--color-muted); overflow-wrap: anywhere; }
+.folder-example code { font-family: var(--font-mono); }
+.takeaway { padding: var(--space-lg); margin-top: var(--space-xl); border-left: 3px solid var(--color-accent); background: var(--color-accent-soft); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.takeaway p { margin-top: var(--space-sm); }
+.demo-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: var(--space-md); margin-top: var(--space-xl); }
+.badge { color: var(--color-muted); font-size: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: var(--space-xs) var(--space-sm); }
+button { font: inherit; cursor: pointer; border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 0.75rem var(--space-md); color: var(--color-background); background: var(--color-accent); }
+button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 4px; }
+button:disabled { opacity: 0.55; cursor: default; }
+.timeline-controls { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin: var(--space-lg) 0; }
+.timeline-controls button, button.secondary { color: var(--color-text); background: var(--color-surface); }
+.timeline-controls button[aria-pressed="true"] { color: var(--color-background); background: var(--color-accent); }
+.timeline-panels { display: grid; gap: var(--space-md); }
+.commit-panel { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); align-items: center; padding: var(--space-lg); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.commit-panel[hidden] { display: none; }
+.app-preview { padding: var(--space-lg); background: var(--color-surface); border-radius: var(--radius-md); }
+.app-preview strong, .preview-label { display: block; margin-bottom: var(--space-sm); }
+.app-preview ul { padding-left: var(--space-lg); margin-bottom: 0; }
+.sample-score { font-size: 2rem; color: var(--color-accent); }
+.interaction-status { margin: var(--space-md) 0; }
+.remote-diagram { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-lg); margin: var(--space-xl) 0; }
+.transfer { text-align: center; }
+.transfer strong, .transfer span { display: block; }
+.transfer strong { color: var(--color-accent); font-family: var(--font-mono); }
+.transfer span { color: var(--color-muted); font-size: 0.75rem; }
+.knowledge-check { margin-top: var(--space-lg); padding: var(--space-lg); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+fieldset { padding: 0; margin: 0; border: 0; min-width: 0; }
+legend { font-weight: 650; margin-bottom: var(--space-md); width: 100%; }
+.question-number { color: var(--color-accent); font-family: var(--font-mono); margin-right: var(--space-sm); }
+.answer { display: flex; align-items: baseline; gap: var(--space-sm); padding: 0.75rem; margin-bottom: var(--space-sm); background: var(--color-surface-soft); border-radius: var(--radius-sm); cursor: pointer; }
+input { accent-color: var(--color-accent); }
+.quiz-actions { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-top: var(--space-md); }
+.feedback:not(:empty) { border-left: 3px solid var(--color-accent); padding: var(--space-md); margin-top: var(--space-md); }
+.feedback[data-result="retry"] { border-left-style: dashed; }
+.notice { padding: var(--space-md); border: 1px solid var(--color-border); }
+details { margin-top: var(--space-md); }
+summary { cursor: pointer; }
+.return-link { display: inline-block; color: var(--color-accent); margin-top: var(--space-lg); }
+.lesson-footer { display: flex; flex-wrap: wrap; gap: var(--space-md); padding: var(--space-xl) 0; border-top: 1px solid var(--color-border); }
+@media (max-width: 720px) {
+    .git-view { padding: 0 var(--space-lg); }
+    .course-header { flex-direction: column; gap: var(--space-sm); }
+    .course-hero, .lesson-section { padding: var(--space-xl) 0; }
+    .two-columns, .commit-panel, .remote-diagram { grid-template-columns: 1fr; }
+    .transfer { text-align: left; }
+    .timeline-controls { flex-direction: column; }
+    .timeline-controls button { text-align: left; }
+    .commit-panel, .knowledge-check { padding: var(--space-md); }
+}

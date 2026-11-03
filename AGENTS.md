@@ -8,8 +8,9 @@ dans un dépôt séparé, `stage_academy`. Ici, on construit uniquement le guide
 Privilégier les concepts, les exemples concrets et les responsabilités lisibles.
 Le ton est direct, encourageant, sans marketing ni promesse de maîtrise en une semaine.
 
-L’état initial contient seulement l’accueil et l’aperçu des thèmes. Les cours,
-missions et quiz du guide seront ajoutés sur demande. Ne pas créer de liens vers
+Le guide contient l’accueil et une introduction Git/GitHub avec une frise fictive
+et trois questions corrigées dans `module_git_intro_view/`. La création du compte
+et les manipulations réelles restent à créer. Les autres cours seront ajoutés sur demande. Ne pas créer de liens vers
 des modules inexistants ou faire passer une illustration pour une interaction.
 
 ## Architecture plate par vue
