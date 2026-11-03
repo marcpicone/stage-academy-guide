@@ -15,10 +15,17 @@ nécessaire pour consulter l’accueil. Les sites externes éventuels nécessite
 
 ## État actuel
 
-Cette première version pose uniquement l’architecture et l’accueil : objectif,
-méthode et aperçu des thèmes à venir. Les cartes du parcours ne sont pas des liens
-vers des cours. Le téléphone est une illustration HTML/CSS du quiz à construire.
-Les cours Git/GitHub, Kotlin/Compose, debug, organisation et agents restent à créer.
+L’accueil donne accès à l’introduction Git/GitHub : historique de versions,
+dépôt, commit local, rôle de GitHub et distinction commit/push. La page contient
+une frise fictive de trois étapes du quiz et trois questions avec explications,
+sans note ni sauvegarde de progression. Elle ne lance aucune opération Git réelle.
+
+Ouvrir `module_git_intro_view/index.html` directement ou utiliser le lien de la home.
+Sans JavaScript, les trois étapes restent visibles et les corrections sont proposées
+dans des détails dépliables ; les commandes interactives sont désactivées.
+La création du compte, le fork, le clone et les manipulations réelles viendront dans
+une prochaine page. Les autres cours restent à créer. Le téléphone de l’accueil est
+une illustration HTML/CSS du quiz à construire.
 
 ## Organisation
 
@@ -29,6 +36,10 @@ stage-academy-guide/
   theme_page.css               # Styles HTML généraux
   home_view/
     home_view.css              # Styles propres à l’accueil
+  module_git_intro_view/
+    index.html                 # Cours et contenu de repli sans JS
+    module_git_intro_view.css  # Styles privés au module
+    module_git_intro_view.js   # Frise et questions corrigées
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -62,5 +73,14 @@ confirmation conversationnelle ; une approbation native peut rester nécessaire.
 Références officielles : [configuration](https://learn.chatgpt.com/docs/config-file/config-reference),
 [règles de commande](https://developers.openai.com/codex/rules).
 
-La branche de travail initiale du guide est `dev`. Le premier commit reste local
-jusqu’à une demande explicite de publication.
+La branche principale du guide est `dev`. Un commit ou un push ne se fait que dans
+le périmètre d’une autorisation explicite ou d’une validation Junior adaptée.
+
+## Vérifier l’introduction Git/GitHub
+
+Choisir chaque étape de la frise, vérifier l’aperçu et l’état du bouton sélectionné.
+Pour chaque question, vérifier les deux réponses, changer de réponse et réessayer.
+Vérifier les liens home → introduction → home et le repli sans JavaScript.
+Contrôler aussi les boutons et champs au clavier, le mobile et la console.
+La syntaxe peut être vérifiée avec `node --check module_git_intro_view/module_git_intro_view.js`
+si Node est disponible pour le développement ; Node n’est pas requis pour lire le cours.

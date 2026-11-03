@@ -27,7 +27,7 @@
 .project-caption { text-align: center; margin-top: var(--space-lg); font-size: 0.8rem; }
 .project-caption > span { color: var(--color-accent); }
 
-/* Méthode et aperçu du parcours. Les cartes ne sont pas des liens. */
+/* Méthode et aperçu du parcours. Seule une introduction disponible possède un lien. */
 .method-section, .course-section { padding: var(--space-2xl) 0; border-top: 1px solid var(--color-border); }
 .section-heading { margin-bottom: var(--space-xl); }
 .section-heading h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); letter-spacing: -0.035em; }
@@ -59,3 +59,6 @@
     .method-grid { gap: var(--space-lg); }
     .method-section, .course-section { padding: var(--space-xl) 0; }
 }
+
+.course-link { display: inline-block; color: var(--color-accent); margin-top: var(--space-md); font-weight: 650; font-size: 0.9rem; }
+.course-card:first-child .card-meta { flex-wrap: wrap; }
