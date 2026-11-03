@@ -17,11 +17,11 @@ nécessaire pour consulter l’accueil. Les sites externes éventuels nécessite
 
 L’accueil donne accès à l’introduction Git/GitHub : historique de versions,
 dépôt, commit local, rôle de GitHub et distinction commit/push. La page contient
-une frise fictive de trois étapes du quiz et trois questions avec explications,
+un arbre Git progressif de six étapes et quatre questions avec explications,
 sans note ni sauvegarde de progression. Elle ne lance aucune opération Git réelle.
 
 Ouvrir `module_git_intro_view/index.html` directement ou utiliser le lien de la home.
-Sans JavaScript, les trois étapes restent visibles et les corrections sont proposées
+Sans JavaScript, l’arbre complet et les six étapes restent visibles et les corrections sont proposées
 dans des détails dépliables ; les commandes interactives sont désactivées.
 La création du compte, le fork, le clone et les manipulations réelles viendront dans
 une prochaine page. Les autres cours restent à créer. Le téléphone de l’accueil est
@@ -78,9 +78,14 @@ le périmètre d’une autorisation explicite ou d’une validation Junior adapt
 
 ## Vérifier l’introduction Git/GitHub
 
-Choisir chaque étape de la frise, vérifier l’aperçu et l’état du bouton sélectionné.
+Choisir les six étapes de l’arbre : vérifier les points visibles, le repère dev et les explications.
 Pour chaque question, vérifier les deux réponses, changer de réponse et réessayer.
 Vérifier les liens home → introduction → home et le repli sans JavaScript.
 Contrôler aussi les boutons et champs au clavier, le mobile et la console.
 La syntaxe peut être vérifiée avec `node --check module_git_intro_view/module_git_intro_view.js`
 si Node est disponible pour le développement ; Node n’est pas requis pour lire le cours.
+
+Les mots nouveaux sont expliqués dans des notes en marge (sous les passages sur mobile).
+Deux captures réelles de GitHub sont dans `module_git_intro_view/assets/`, avec leur
+provenance. La PR et l’arbre sont illustratifs. Les conventions initiales/nom_de_branche
+et [FeatureName] Message sont celles du projet ; elles ne sont pas imposées par Git.

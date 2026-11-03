@@ -8,8 +8,8 @@ dans un dépôt séparé, `stage_academy`. Ici, on construit uniquement le guide
 Privilégier les concepts, les exemples concrets et les responsabilités lisibles.
 Le ton est direct, encourageant, sans marketing ni promesse de maîtrise en une semaine.
 
-Le guide contient l’accueil et une introduction Git/GitHub avec une frise fictive
-et trois questions corrigées dans `module_git_intro_view/`. La création du compte
+Le guide contient l’accueil et une introduction Git/GitHub avec un arbre Git illustratif, des définitions en marge
+et quatre questions corrigées dans `module_git_intro_view/`. La création du compte
 et les manipulations réelles restent à créer. Les autres cours seront ajoutés sur demande. Ne pas créer de liens vers
 des modules inexistants ou faire passer une illustration pour une interaction.
 
@@ -67,3 +67,10 @@ gate notifications and on resumption; never decide for the human. A plan approva
 alone does not start implementation; a subsequent explicit implementation request
 authorizes Codex to execute the approved scope with its normal tools and permissions.
 <!-- junior-workflow:end -->
+
+## Vocabulaire pédagogique
+
+Définir chaque nouveau mot technique à sa première apparition. Conserver le terme
+anglais visible avec son sens en français. Préférer une note 💡 en marge, lisible
+sans survol et replacée sous le passage sur mobile. Identifier les captures réelles
+et les simulations ; ne pas présenter les conventions de l’équipe comme des règles Git.
