@@ -1,0 +1,7 @@
+# Configuration locale au projet, appliquée par Codex dans un projet approuvé.
+# Ne pas fixer de modèle : conserver le choix de l’utilisateur.
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = false

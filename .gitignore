@@ -1,0 +1,24 @@
+# Fichiers locaux des éditeurs et du système
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Secrets et configuration personnelle
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.codex/auth.json
+.codex/config.local.toml
+
+# Fichiers générés et temporaires
+*.log
+node_modules/
+dist/
+build/
+.cache/
+coverage/
+.tmp/

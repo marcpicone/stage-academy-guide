@@ -1,0 +1,25 @@
+:root {
+    /* Valeurs partagées. Aucun sélecteur propre à une vue dans ce fichier. */
+    --color-background: #0c1421;
+    --color-surface: #121f31;
+    --color-surface-soft: #192a3f;
+    --color-text: #f2f6fb;
+    --color-muted: #abbad0;
+    --color-accent: #87e5cc;
+    --color-accent-soft: #173e3b;
+    --color-border: #2b3a4e;
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, Consolas, monospace;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2.5rem;
+    --space-2xl: 4rem;
+    --space-3xl: 6rem;
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 2rem;
+    --page-max-width: 1160px;
+    --shadow-soft: 0 28px 80px #00000040;
+}

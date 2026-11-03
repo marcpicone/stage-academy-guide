@@ -1,0 +1,18 @@
+/* Base HTML commune à toutes les vues. */
+* { box-sizing: border-box; }
+html { color-scheme: dark; scroll-padding-top: var(--space-lg); }
+body {
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { line-height: 1.15; }
+a { color: inherit; text-underline-offset: 0.2em; }
+a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 6px; }
+img, svg { max-width: 100%; }
+::selection { background: var(--color-accent); color: var(--color-background); }
+.skip-link { position: absolute; top: -100px; left: var(--space-md); z-index: 10; padding: var(--space-md); background: var(--color-surface); }
+.skip-link:focus { top: var(--space-md); }

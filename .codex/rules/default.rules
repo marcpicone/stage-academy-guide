@@ -1,0 +1,38 @@
+# Règles par préfixe de commande, pas une protection universelle contre toute
+# suppression ou publication via d’autres outils. Les permissions de l’hôte restent
+# la référence. AGENTS.md définit aussi les consignes de travail et de publication.
+
+prefix_rule(
+    pattern = ["sudo"],
+    decision = "forbidden",
+    justification = "Ce guide statique ne nécessite pas de commande privilégiée.",
+    match = ["sudo npm install"],
+)
+
+prefix_rule(
+    pattern = ["rm", "-rf"],
+    decision = "forbidden",
+    justification = "Ne pas supprimer récursivement des fichiers dans ce projet pédagogique.",
+    match = ["rm -rf dist"],
+)
+
+prefix_rule(
+    pattern = ["git", "reset", "--hard"],
+    decision = "forbidden",
+    justification = "Préserver le travail et l’historique du projet.",
+    match = ["git reset --hard HEAD"],
+)
+
+prefix_rule(
+    pattern = ["git", "clean"],
+    decision = "forbidden",
+    justification = "Préserver les fichiers non suivis.",
+    match = ["git clean -fd"],
+)
+
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "Vérifier la destination et l’autorisation avant de publier.",
+    match = ["git push origin dev"],
+)
