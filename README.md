@@ -25,7 +25,7 @@ Sans JavaScript, l’arbre complet et les six étapes restent visibles et les co
 dans des détails dépliables ; les commandes interactives sont désactivées.
 La page 2 (`module_git_setup_view/index.html`) guide la création de compte, le fork,
 la découverte de la CLI et le clone HTTPS de dev. Elle ne modifie pas l’application
-et ne demande ni commit ni push. Deux pages IDE complètent ce parcours. Les autres cours restent à créer. Le téléphone de l’accueil est
+et ne demande ni commit ni push. Trois pages IDE complètent ce parcours. Les autres cours restent à créer. Le téléphone de l’accueil est
 une illustration HTML/CSS du quiz à construire.
 
 ## Organisation
@@ -54,6 +54,10 @@ stage-academy-guide/
   module_ide_setup_view/
     index.html                 # Ouvrir, explorer et lancer le projet existant
     module_ide_setup_view.css  # Page native sans JavaScript
+  module_ide_debug_view/
+    index.html                 # Enquête Logcat et correction guidée
+    module_ide_debug_view.css
+    assets/                    # Capture officielle de Logcat et provenance
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -144,3 +148,18 @@ Vérifier dans le navigateur : accueil → IDE 1 → IDE 2 et retour, ancres et 
 affichage étroit, lecture des définitions et ouverture des corrections. Le véritable
 lancement Android doit être observé avec l’élève et l’encadrant sur leur appareil ;
 le repère de texte dans le guide ne le simule pas comme réussi.
+
+## IDE — page 3 : premier bug
+
+`module_ide_debug_view/index.html` accompagne le bouton pédagogique de la version
+Android `8a7ed61` : reproduire le crash, filtrer Logcat, rejoindre MainActivity.kt,
+comprendre le calcul, remplacer 0 par 4 et vérifier le résultat du clic.
+Les indices et la correction sont dans des détails fermés au chargement.
+La capture officielle montre une autre app ; l’extrait de trace est explicitement
+illustratif et le numéro 62 correspond à la source de départ. Aucun crash réel
+n’a été capturé pour le guide. Pas de JavaScript ni de validation automatique ;
+les confirmations sont manuelles et sans stockage. L’Android reste inchangé.
+
+Vérifier : navigation IDE 2 ↔ IDE 3, image locale agrandie, ancres, détails au clavier,
+petit écran et lecture sans JavaScript. Avec l’encadrant, exécuter le parcours réel
+avant/après correction ; un contrôle statique du guide ne valide pas l’appareil.
