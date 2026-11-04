@@ -16,3 +16,23 @@ img, svg { max-width: 100%; }
 ::selection { background: var(--color-accent); color: var(--color-background); }
 .skip-link { position: absolute; top: -100px; left: var(--space-md); z-index: 10; padding: var(--space-md); background: var(--color-surface); }
 .skip-link:focus { top: var(--space-md); }
+
+/* Navigation commune aux pages de cours : précédent à gauche, suivant à droite. */
+.course-pagination {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+}
+.course-pagination a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-md) 0;
+    color: var(--color-accent);
+    overflow-wrap: anywhere;
+}
+.course-pagination a span:first-child { font-weight: 700; }
+.course-pagination a span:last-child { font-size: 0.9rem; }
+.course-pagination-prev { grid-column: 1; justify-self: start; text-align: left; }
+.course-pagination-next { grid-column: 2; justify-self: end; text-align: right; }

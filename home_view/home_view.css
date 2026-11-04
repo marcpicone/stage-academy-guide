@@ -62,3 +62,5 @@
 
 .course-link { display: inline-block; color: var(--color-accent); margin-top: var(--space-md); font-weight: 650; font-size: 0.9rem; }
 .course-card:first-child .card-meta { flex-wrap: wrap; }
+
+.course-card:nth-child(2) .card-meta { flex-wrap: wrap; }

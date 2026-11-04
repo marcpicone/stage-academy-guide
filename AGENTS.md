@@ -9,8 +9,10 @@ Privilégier les concepts, les exemples concrets et les responsabilités lisible
 Le ton est direct, encourageant, sans marketing ni promesse de maîtrise en une semaine.
 
 Le guide contient l’accueil et une introduction Git/GitHub avec un arbre Git illustratif, des définitions en marge
-et quatre questions corrigées dans `module_git_intro_view/`. La création du compte
-et les manipulations réelles restent à créer. Les autres cours seront ajoutés sur demande. Ne pas créer de liens vers
+et quatre questions corrigées dans `module_git_intro_view/`. La page `module_git_setup_view/` accompagne la création du compte, le fork et le
+clone, avec une introduction à la CLI. Les modifications et publications du
+projet Android restent hors de ce parcours. La première page IDE (`module_ide_intro_view/`) présente Android Studio et ses outils.
+L’ouverture du projet dans l’IDE reste à traiter. Les autres cours seront ajoutés sur demande. Ne pas créer de liens vers
 des modules inexistants ou faire passer une illustration pour une interaction.
 
 ## Architecture plate par vue
@@ -33,7 +35,7 @@ Préférer l’absence de JavaScript quand HTML/CSS suffisent.
 
 ## Contenu et présentation
 
-Les thèmes prévus sont Git/GitHub, Kotlin/Compose, actions/état, debug/Logcat,
+Les thèmes prévus sont Git/GitHub, IDE, Kotlin/Compose, actions/état, debug/Logcat,
 organisation des responsabilités et collaboration avec les LLM/agents.
 Chaque cours futur reliera une notion à une petite modification observable de l’app.
 Séparer ce que l’élève confirme lui-même des vérifications réellement automatisées.
