@@ -25,7 +25,7 @@ Sans JavaScript, l’arbre complet et les six étapes restent visibles et les co
 dans des détails dépliables ; les commandes interactives sont désactivées.
 La page 2 (`module_git_setup_view/index.html`) guide la création de compte, le fork,
 la découverte de la CLI et le clone HTTPS de dev. Elle ne modifie pas l’application
-et ne demande ni commit ni push. Les autres cours restent à créer. Le téléphone de l’accueil est
+et ne demande ni commit ni push. Deux pages IDE complètent ce parcours. Les autres cours restent à créer. Le téléphone de l’accueil est
 une illustration HTML/CSS du quiz à construire.
 
 ## Organisation
@@ -51,6 +51,9 @@ stage-academy-guide/
     module_ide_intro_view.css
     module_ide_intro_view.js    # Exploration du schéma et questions
     assets/                    # Capture officielle et provenance
+  module_ide_setup_view/
+    index.html                 # Ouvrir, explorer et lancer le projet existant
+    module_ide_setup_view.css  # Page native sans JavaScript
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -118,11 +121,26 @@ du compte réel de l’élève doivent être observés avec l’encadrant, pas s
 
 `module_ide_intro_view/index.html` présente le rôle de l’IDE, une capture officielle
 d’Android Studio, cinq zones dans un schéma illustratif, la boucle modifier / construire /
-lancer / observer et trois questions corrigées. L’installation, l’ouverture du projet
-et son lancement effectif restent pour la page pratique suivante, non créée ici.
+lancer / observer et trois questions corrigées. L’ouverture du projet et son lancement sont guidés dans la page pratique suivante.
 La page est accessible depuis la home et depuis la fin de Git page 2. Son bouton
-précédent est à gauche ; aucun lien suivant n’est affiché tant que la page n’existe pas.
+précédent est à gauche et son lien suivant vers la page pratique à droite.
 Sans JavaScript, le schéma et les descriptions restent lisibles, les corrections
 dépliables disponibles et les boutons désactivés. Vérifier les cinq zones, les six
 réponses, les changements de choix et les réinitialisations, ainsi que le clavier,
 les petits écrans et les ressources locales. Les interactions n’agissent pas sur un vrai IDE.
+
+## IDE — page 2
+
+`module_ide_setup_view/index.html` guide l’ouverture du dossier cloné, la synchronisation
+Gradle, la découverte des fichiers et le premier lancement sur un appareil préparé.
+Les chemins et les textes attendus ont été vérifiés dans le projet Android de départ.
+Un encart distingue la préparation technique avec l’encadrant du parcours élève.
+Les définitions en marge, corrections dépliables et cases fonctionnent sans JavaScript.
+Ces cases sont des confirmations manuelles, sans stockage ni validation de l’IDE.
+L’accueil conserve une seule entrée pour la section IDE ; la page 1 mène à la page 2.
+La dernière page ne propose pas de lien suivant tant que la suite n’existe pas.
+
+Vérifier dans le navigateur : accueil → IDE 1 → IDE 2 et retour, ancres et clavier,
+affichage étroit, lecture des définitions et ouverture des corrections. Le véritable
+lancement Android doit être observé avec l’élève et l’encadrant sur leur appareil ;
+le repère de texte dans le guide ne le simule pas comme réussi.

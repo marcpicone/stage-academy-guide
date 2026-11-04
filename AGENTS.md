@@ -12,7 +12,7 @@ Le guide contient l’accueil et une introduction Git/GitHub avec un arbre Git i
 et quatre questions corrigées dans `module_git_intro_view/`. La page `module_git_setup_view/` accompagne la création du compte, le fork et le
 clone, avec une introduction à la CLI. Les modifications et publications du
 projet Android restent hors de ce parcours. La première page IDE (`module_ide_intro_view/`) présente Android Studio et ses outils.
-L’ouverture du projet dans l’IDE reste à traiter. Les autres cours seront ajoutés sur demande. Ne pas créer de liens vers
+La page pratique `module_ide_setup_view/` guide l’ouverture, la lecture des fichiers et le lancement existant, sans modifier le code. Les confirmations finales restent manuelles. Les autres cours seront ajoutés sur demande. Ne pas créer de liens vers
 des modules inexistants ou faire passer une illustration pour une interaction.
 
 ## Architecture plate par vue
