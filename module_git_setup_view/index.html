@@ -28,7 +28,7 @@
     <section class="lesson-section" id="preparer" aria-labelledby="title-preparer">
         <p class="eyebrow">Avant de commencer</p>
         <h2 id="title-preparer">Un compte, un navigateur et Git.</h2>
-        
+
 <p>Cette page te guide jusqu’à une copie du projet sur ton ordinateur. Tu ne modifies aucun fichier de l’application et tu n’as pas encore besoin d’Android Studio.</p>
 <ul><li>Pour créer le compte et le fork : un navigateur, Internet et un accès à ta boîte email.</li><li>Pour le clone : Git installé sur ton ordinateur avec l’aide de ton encadrant.</li></ul>
 <details><summary>Préparation avec l’encadrant</summary>
@@ -45,7 +45,7 @@
     <section class="lesson-section" id="compte" aria-labelledby="title-compte">
         <p class="eyebrow">01 / Sur GitHub</p>
         <h2 id="title-compte">Créer ton compte.</h2>
-        
+
 <ol class="instructions">
 <li>Ouvre <a href="https://github.com/signup">la page de création de compte GitHub</a>. Si tu as déjà ton compte personnel, connecte-toi simplement.</li>
 <li>Choisis un compte gratuit, un nom d’utilisateur et suis les étapes proposées par GitHub. Un pseudo suffit ; évite d’y mettre des informations personnelles inutiles.</li>
@@ -63,7 +63,7 @@
     <section class="lesson-section" id="fork" aria-labelledby="title-fork">
         <p class="eyebrow">02 / Une copie sur ton compte</p>
         <h2 id="title-fork">Faire ton fork du projet Android.</h2>
-        
+
 <p>Un <a class="term" href="#def-fork">fork</a> crée une copie du dépôt dans ton compte GitHub. <strong>Il ne télécharge pas encore le projet sur ton ordinateur.</strong></p>
 <ol class="instructions">
 <li>Ouvre le dépôt d’origine : <a href="https://github.com/marcpicone/stage_academy">marcpicone / stage_academy</a>.</li>
@@ -85,7 +85,7 @@
     <section class="lesson-section" id="cli" aria-labelledby="title-cli">
         <p class="eyebrow">03 / Une petite découverte</p>
         <h2 id="title-cli">La CLI : écrire une instruction, lire une réponse.</h2>
-        
+
 <p><a class="term" href="#def-cli">CLI</a> signifie <em>Command-Line Interface</em> : interface en ligne de commande. On écrit une instruction dans un terminal et l’ordinateur affiche sa réponse.</p>
 <p>Git possède aussi des interfaces graphiques avec des boutons. La ligne de commande est une autre façon d’utiliser le même outil ; tu n’as pas à tout mémoriser.</p>
 <ol class="instructions"><li>Sous Windows, ouvre Git Bash. Sur macOS, ouvre Terminal avec Git installé.</li><li>Écris la commande ci-dessous, puis appuie sur <strong>Entrée</strong>.</li></ol>
@@ -107,7 +107,7 @@
     <section class="lesson-section" id="cloner" aria-labelledby="title-cloner">
         <p class="eyebrow">04 / Une copie sur ton ordinateur</p>
         <h2 id="title-cloner">Cloner ton fork, une seule fois.</h2>
-        
+
 <p>Un <a class="term" href="#def-clone">clone</a> télécharge les fichiers et l’historique dans un dossier local. On clone <strong>ton fork</strong>, et non directement le dépôt de Marc.</p>
 <h3>1. Retrouver la bonne adresse</h3>
 <p>Sur <strong>ton fork</strong>, clique sur <strong>Code → HTTPS</strong> et copie l’adresse qui se termine par <code>.git</code>. Vérifie ton nom d’utilisateur au début de l’adresse.</p>
@@ -138,7 +138,7 @@
     <section class="lesson-section" id="verifier" aria-labelledby="title-verifier">
         <p class="eyebrow">05 / Lire le résultat</p>
         <h2 id="title-verifier">Trois vérifications, sans rien modifier.</h2>
-        
+
 <p>À exécuter dans le dossier <code>stage_academy</code>. Ces trois commandes lisent des informations : elles ne créent ni commit, ni push.</p>
 <h3>Sur quelle branche suis-je ?</h3>
 <pre class="command"><code>git status</code></pre>
@@ -161,7 +161,7 @@ origin  https://github.com/TON_PSEUDO/stage_academy.git (push)</samp></pre></div
     <section class="lesson-section" id="aide" aria-labelledby="title-aide">
         <p class="eyebrow">Si quelque chose bloque</p>
         <h2 id="title-aide">Lire le message avant de recommencer.</h2>
-        
+
 <details><summary>« Repository not found » — dépôt introuvable</summary><p>Ouvre l’adresse du fork dans le navigateur. Vérifie le pseudo, le nom <code>stage_academy</code> et que le fork a bien été créé. Ne relance pas la commande avec une adresse choisie au hasard.</p></details>
 <details><summary>« Destination path … already exists » — le dossier existe déjà</summary><p>Le projet a peut-être déjà été cloné. Ne supprime rien. Vérifie son contenu et demande à l’encadrant s’il faut entrer dedans avec <code>cd stage_academy</code> ou choisir un autre dossier parent.</p></details>
 <details><summary>« Not a git repository » — ce n’est pas un dépôt Git</summary><p>Tu es peut-être dans le dossier parent. Affiche le dossier courant avec <code>pwd</code>, puis entre dans le clone avec <code>cd stage_academy</code>. Un ZIP téléchargé ne remplace pas un clone Git.</p></details>
