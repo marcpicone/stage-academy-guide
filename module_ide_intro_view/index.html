@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Comprendre le rôle d’un IDE et découvrir les grandes zones d’Android Studio avant de manipuler son projet.">
+    <title>L’IDE : ton atelier de développement — Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="./module_ide_intro_view.css">
+    <script src="./module_ide_intro_view.js" defer></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="ide-view">
+    <header class="course-header"><a href="../index.html">← Stage Academy</a><span>L’IDE · Page 1</span></header>
+    <main id="contenu">
+        <section class="course-hero"><p class="eyebrow">Découvrir son outil de travail</p><h1>L’IDE : ton atelier<br>de développement.</h1><p class="lead">Les fichiers du projet sont sur ton ordinateur. Découvre les outils qui t’aideront à les lire, à faire évoluer l’application et à comprendre ce qui se passe.</p><p>Cette page présente l’atelier. L’installation et l’ouverture du projet seront accompagnées dans une prochaine page.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#atelier">À quoi ça sert ?</a><a href="#android-studio">Android Studio</a><a href="#reperes">Les zones</a><a href="#cycle">Du code à l’app</a><a href="#comprehension">À toi de jouer</a></nav></section>
+
+<div class="reading-row">
+    <section class="lesson-section" id="atelier" aria-labelledby="title-atelier">
+        <p class="eyebrow">01 / Le rôle de l’outil</p><h2 id="title-atelier">Un atelier pour travailler sur ton projet.</h2>
+        
+<p>Tu as récupéré le projet sur ton ordinateur. Tu peux voir ses dossiers et ses fichiers. Pour travailler dessus, tu vas utiliser un <a class="term" href="#def-ide">IDE</a>.</p>
+<p>IDE signifie <em>Integrated Development Environment</em>, soit <strong>environnement de développement intégré</strong>. « Intégré » veut simplement dire que plusieurs outils sont réunis au même endroit.</p>
+<div class="tool-list"><article><h3>Lire et écrire</h3><p>Ouvrir un fichier et modifier son contenu dans un éditeur.</p></article><article><h3>Se repérer</h3><p>Retrouver les fichiers du projet et rechercher un élément.</p></article><article><h3>Construire et lancer</h3><p>Préparer l’application, puis l’exécuter sur un appareil.</p></article><article><h3>Observer</h3><p>Lire les messages et chercher pourquoi quelque chose ne marche pas.</p></article></div>
+<aside class="takeaway"><strong>L’IDE est ton outil de travail, pas ton projet.</strong><p>Les fichiers et l’historique restent dans le dossier local. Fermer l’IDE ne supprime pas le projet. Enregistrer un fichier ne fait ni commit ni push.</p></aside>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-ide"><span aria-hidden="true">💡</span><h3>IDE · un atelier intégré</h3><p>Un logiciel qui réunit l’édition du code et plusieurs outils pour travailler sur un projet. Ce n’est ni Git ni GitHub.</p></aside><aside class="word-note" id="def-editeur"><span aria-hidden="true">💡</span><h3>Éditeur · editor</h3><p>La zone dans laquelle on lit et modifie le contenu d’un fichier. Un IDE contient un éditeur, mais aussi d’autres outils.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="android-studio" aria-labelledby="title-android-studio">
+        <p class="eyebrow">02 / Notre atelier</p><h2 id="title-android-studio">Android Studio pour notre quiz.</h2>
+        
+<p>Pour ce parcours Android, notre IDE sera <strong>Android Studio</strong>. Il connaît les outils nécessaires pour préparer et lancer une application Android. D’autres IDE existent : le principe reste de réunir des outils autour du projet.</p>
+<p>Ne cherche pas à comprendre tous les boutons dès maintenant. Commence par repérer les fichiers, l’éditeur et les panneaux qui montrent les messages.</p>
+<figure><a href="./assets/android-studio-window.png"><img src="./assets/android-studio-window.png" alt="Capture officielle d’Android Studio avec six zones numérotées : barre d’outils, navigation, éditeur, barres des panneaux, panneaux d’outils et barre d’état." loading="lazy"></a><figcaption>Capture réelle de la documentation Android Developers, sur un projet d’exemple. Ce n’est pas notre quiz. Les icônes et la disposition peuvent varier selon la version et les panneaux ouverts. Clique pour agrandir.</figcaption></figure>
+<details><summary>Lire les numéros de la capture</summary><ol><li><strong>Toolbar</strong> : barre d’outils, notamment les actions de lancement.</li><li><strong>Navigation bar</strong> : navigation dans le projet.</li><li><strong>Editor</strong> : éditeur du fichier ouvert.</li><li><strong>Tool window bar</strong> : boutons pour ouvrir les panneaux.</li><li><strong>Tool windows</strong> : panneaux, par exemple les fichiers du projet.</li><li><strong>Status bar</strong> : état de l’IDE et du projet.</li></ol></details>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-interface"><span aria-hidden="true">💡</span><h3>Interface · UI</h3><p>Les zones, boutons et menus qui permettent d’utiliser un logiciel. UI signifie User Interface, « interface utilisateur ».</p></aside><aside class="word-note" id="def-projet"><span aria-hidden="true">💡</span><h3>Projet local</h3><p>Le dossier cloné sur ton ordinateur, avec ses fichiers et son historique Git. Android Studio ouvrira ce dossier ; il ne remplace pas le fork sur GitHub.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="reperes" aria-labelledby="title-reperes">
+        <p class="eyebrow">03 / Se repérer</p><h2 id="title-reperes">Chaque zone a une responsabilité.</h2>
+        <p>Sélectionne une zone pour lire son rôle. Le dessin ci-dessous est volontairement simplifié : <strong>ce n’est pas une vraie session Android Studio</strong>.</p>
+<div class="ide-map" role="group" aria-label="Explorer les zones d’un IDE, schéma simplifié">
+    <button class="map-toolbar" type="button" data-zone="toolbar" aria-pressed="false" aria-controls="zone-explanation" disabled><span>Les actions</span><span aria-hidden="true">Rechercher · ▶ Lancer</span></button>
+    <button class="map-project" type="button" data-zone="project" aria-pressed="false" aria-controls="zone-explanation" disabled><span>Les fichiers</span><span aria-hidden="true">stage_academy/<br>↳ app/<br>↳ README.md</span></button>
+    <button class="map-editor" type="button" data-zone="editor" aria-pressed="false" aria-controls="zone-explanation" disabled><span>L’éditeur</span><span aria-hidden="true">README.md<br><br>Mon premier quiz<br>Un projet pour apprendre.</span></button>
+    <button class="map-terminal" type="button" data-zone="terminal" aria-pressed="false" aria-controls="zone-explanation" disabled><span>Le terminal</span><span aria-hidden="true">$ git status</span></button>
+    <button class="map-messages" type="button" data-zone="messages" aria-pressed="false" aria-controls="zone-explanation" disabled><span>Les messages</span><span aria-hidden="true">Build · Run · Logcat</span></button>
+</div>
+<div id="zone-explanation" class="zone-feedback" role="status" aria-live="polite" aria-atomic="true"><h3 id="zone-title">Cinq zones, cinq rôles.</h3><p id="zone-description">Leurs rôles sont aussi décrits en texte ci-dessous.</p></div>
+<details open id="zone-transcript"><summary>Lire les rôles sans utiliser le schéma</summary><dl><dt>Les actions</dt><dd>Zone pour choisir une action, comme lancer l’application. Dans le vrai IDE, il faut aussi choisir la bonne configuration et un appareil.</dd><dt>Les fichiers · Project</dt><dd>Le panneau Project sert à parcourir les dossiers et à retrouver un fichier. Cliquer sur un fichier permet de l’ouvrir dans l’éditeur.</dd><dt>L’éditeur · Editor</dt><dd>La zone centrale affiche le contenu du fichier ouvert. Elle aide à lire et modifier le texte du code ; ce n’est pas l’écran du téléphone.</dd><dt>Le terminal · Terminal</dt><dd>Une fenêtre pour écrire des commandes, comme git status. Le terminal intégré retrouve la même idée de CLI que dans Git Bash.</dd><dt>Les messages · Build / Run / Logcat</dt><dd>Les panneaux de sortie indiquent ce qui se passe. Build concerne la construction ; Run le lancement ; Logcat les messages venant de l’appareil Android. Ils ne racontent pas tous la même chose.</dd></dl></details>
+<noscript><p>Les boutons sont désactivés sans JavaScript. Les explications ci-dessus restent accessibles.</p></noscript>
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-terminal"><span aria-hidden="true">💡</span><h3>Terminal / CLI</h3><p>Le terminal reçoit des commandes écrites. CLI signifie interface en ligne de commande. Un terminal peut être ouvert dans l’IDE ou dans une fenêtre séparée.</p></aside><aside class="word-note" id="def-build"><span aria-hidden="true">💡</span><h3>Build · construction</h3><p>L’ensemble des étapes qui prépare l’application à partir du projet. Si une étape échoue, son panneau permet de lire les messages.</p></aside><aside class="word-note" id="def-logcat"><span aria-hidden="true">💡</span><h3>Logcat · messages de l’appareil</h3><p>Un outil pour lire les messages du système et de l’application sur un appareil Android. On apprendra à s’en servir dans la section debug.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="cycle" aria-labelledby="title-cycle">
+        <p class="eyebrow">04 / Du fichier à l’application</p><h2 id="title-cycle">Modifier, préparer, lancer, observer.</h2>
+        
+<ol class="workflow"><li><strong>Modifier</strong><p>Changer le contenu d’un fichier dans l’éditeur et l’enregistrer.</p></li><li><strong>Compiler et construire</strong><p>Les outils vérifient et transforment le code, puis préparent l’application.</p></li><li><strong>Installer et lancer</strong><p>Mettre l’application sur un téléphone ou un émulateur et la démarrer.</p></li><li><strong>Observer</strong><p>Regarder l’écran et les messages pour vérifier le résultat attendu.</p></li></ol>
+<p>Si la préparation échoue, lis le premier message utile avant de relancer. Si l’application démarre mais fait autre chose que prévu, observe ce qui se passe : c’est une autre question.</p>
+<aside class="takeaway"><strong>Le texte enregistré et l’application exécutée ne sont pas la même chose.</strong><p>Une modification enregistrée n’apparaît pas forcément immédiatement dans l’application déjà lancée. Il faut faire passer le projet par les étapes de préparation et de lancement adaptées.</p></aside>
+<p>Git répond à une autre question : « Quelle étape veux-tu conserver dans l’historique ? » Le commit et le push restent des actions distinctes de cette boucle.</p>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-compiler"><span aria-hidden="true">💡</span><h3>Compiler · compile</h3><p>Transformer le code écrit par les développeurs dans une forme utilisable pour construire le programme. La compilation est une partie de la construction, pas son seul travail.</p></aside><aside class="word-note" id="def-emulateur"><span aria-hidden="true">💡</span><h3>Émulateur · emulator</h3><p>Un appareil Android simulé sur l’ordinateur. Il permet d’exécuter l’application sans utiliser un téléphone physique.</p></aside><aside class="word-note" id="def-debug"><span aria-hidden="true">💡</span><h3>Debug · rechercher un problème</h3><p>Observer et comprendre pourquoi le programme ne se comporte pas comme prévu, puis vérifier une correction.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="comprehension" aria-labelledby="title-comprehension">
+        <p class="eyebrow">05 / À toi de jouer</p><h2 id="title-comprehension">Savoir où regarder.</h2>
+        <p>Pas besoin de connaître les raccourcis ou tous les boutons. Vérifie que tu sais quel outil répond à quel besoin.</p>
+<form class="knowledge-check" data-question="file"><fieldset><legend>01 · Tu veux retrouver README.md. Quelle zone regardes-tu ?</legend><label class="answer"><input type="radio" name="file" value="project" required><span>Le panneau des fichiers · Project</span></label><label class="answer"><input type="radio" name="file" value="editor" required><span>L’éditeur du fichier déjà ouvert</span></label></fieldset><div class="quiz-actions"><button type="submit" disabled>Vérifier ma réponse</button><button type="reset" class="secondary" disabled>Réessayer</button></div><p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p><noscript><details><summary>Lire la correction</summary><p>Le panneau Project permet de retrouver un fichier ; l’éditeur affiche celui que tu as ouvert.</p></details></noscript></form>
+
+<form class="knowledge-check" data-question="error"><fieldset><legend>02 · La construction de l’application échoue. Où cherches-tu les premières informations ?</legend><label class="answer"><input type="radio" name="error" value="messages" required><span>Dans les messages de construction · Build</span></label><label class="answer"><input type="radio" name="error" value="github" required><span>Sur la page de mon profil GitHub</span></label></fieldset><div class="quiz-actions"><button type="submit" disabled>Vérifier ma réponse</button><button type="reset" class="secondary" disabled>Réessayer</button></div><p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p><noscript><details><summary>Lire la correction</summary><p>Le panneau Build montre les messages liés à la préparation de l’application. Le profil GitHub ne décrit pas cette exécution locale.</p></details></noscript></form>
+
+<form class="knowledge-check" data-question="save"><fieldset><legend>03 · Tu enregistres un fichier dans l’IDE. Est-il automatiquement envoyé sur GitHub ?</legend><label class="answer"><input type="radio" name="save" value="yes" required><span>Oui, enregistrer suffit.</span></label><label class="answer"><input type="radio" name="save" value="no" required><span>Non, enregistrer et publier sont des actions différentes.</span></label></fieldset><div class="quiz-actions"><button type="submit" disabled>Vérifier ma réponse</button><button type="reset" class="secondary" disabled>Réessayer</button></div><p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p><noscript><details><summary>Lire la correction</summary><p>Non. Enregistrer modifie le fichier local. Un commit enregistre une étape dans Git ; un push envoie des commits vers le dépôt distant.</p></details></noscript></form>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-raccourci"><span aria-hidden="true">💡</span><h3>Raccourci · shortcut</h3><p>Une touche ou combinaison de touches qui déclenche une action plus rapidement. Tu les découvriras quand ils seront utiles.</p></aside></div>
+</div>
+
+        <section class="next-section"><h2>Ton repère avant de continuer</h2><p>Tu peux expliquer la différence entre les fichiers, l’éditeur, le terminal et les messages. Dans la prochaine page, on ouvrira le dossier du quiz dans Android Studio avec l’encadrant. Cette page pratique n’est pas encore disponible.</p></section>
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_git_setup_view/index.html" rel="prev"><span>← Précédent</span><span>Récupérer mon projet</span></a></nav>
+        <footer class="lesson-footer"><p>Référence et capture :</p><a href="https://developer.android.com/studio/intro/user-interface">Android Developers · L’interface d’Android Studio</a><span>Contenu adapté au parcours ; capture Google / Android Developers, CC BY 4.0.</span></footer>
+    </main>
+</div>
+</body>
+</html>

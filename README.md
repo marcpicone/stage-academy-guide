@@ -23,8 +23,9 @@ sans note ni sauvegarde de progression. Elle ne lance aucune opération Git rée
 Ouvrir `module_git_intro_view/index.html` directement ou utiliser le lien de la home.
 Sans JavaScript, l’arbre complet et les six étapes restent visibles et les corrections sont proposées
 dans des détails dépliables ; les commandes interactives sont désactivées.
-La création du compte, le fork, le clone et les manipulations réelles viendront dans
-une prochaine page. Les autres cours restent à créer. Le téléphone de l’accueil est
+La page 2 (`module_git_setup_view/index.html`) guide la création de compte, le fork,
+la découverte de la CLI et le clone HTTPS de dev. Elle ne modifie pas l’application
+et ne demande ni commit ni push. Les autres cours restent à créer. Le téléphone de l’accueil est
 une illustration HTML/CSS du quiz à construire.
 
 ## Organisation
@@ -40,6 +41,16 @@ stage-academy-guide/
     index.html                 # Cours et contenu de repli sans JS
     module_git_intro_view.css  # Styles privés au module
     module_git_intro_view.js   # Frise et questions corrigées
+  module_git_setup_view/
+    index.html                 # Compte, fork, CLI et clone
+    module_git_setup_view.css
+    module_git_setup_view.js    # Aides locales, aucune commande exécutée
+    assets/                    # Captures officielles et provenance
+  module_ide_intro_view/
+    index.html                 # Rôle de l’IDE et découverte de ses zones
+    module_ide_intro_view.css
+    module_ide_intro_view.js    # Exploration du schéma et questions
+    assets/                    # Capture officielle et provenance
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -89,3 +100,29 @@ Les mots nouveaux sont expliqués dans des notes en marge (sous les passages sur
 Deux captures réelles de GitHub sont dans `module_git_intro_view/assets/`, avec leur
 provenance. La PR et l’arbre sont illustratifs. Les conventions initiales/nom_de_branche
 et [FeatureName] Message sont celles du projet ; elles ne sont pas imposées par Git.
+
+## Page 2 : compte, fork et clone
+
+Le parcours Windows utilise Git Bash, préparé avec l’encadrant. La personnalisation
+du pseudo reste en mémoire, n’appelle aucune API et ne vérifie pas l’existence du
+fork. Le terminal d’entraînement est explicitement simulé, limité à deux commandes.
+Les cases finales sont des déclarations de l’élève, sans validation automatique
+ni sauvegarde. Sans JavaScript, les commandes sont lisibles avec TON_PSEUDO à remplacer.
+
+Vérifier : pseudo valide/invalide et retour aux exemples, refus du compte source,
+simulation des deux commandes et d’une commande inconnue, quatre confirmations,
+liens home/page 1/page 2 et repli sans JavaScript. L’authentification et le clonage
+du compte réel de l’élève doivent être observés avec l’encadrant, pas simulés comme réussis.
+
+## IDE — page 1
+
+`module_ide_intro_view/index.html` présente le rôle de l’IDE, une capture officielle
+d’Android Studio, cinq zones dans un schéma illustratif, la boucle modifier / construire /
+lancer / observer et trois questions corrigées. L’installation, l’ouverture du projet
+et son lancement effectif restent pour la page pratique suivante, non créée ici.
+La page est accessible depuis la home et depuis la fin de Git page 2. Son bouton
+précédent est à gauche ; aucun lien suivant n’est affiché tant que la page n’existe pas.
+Sans JavaScript, le schéma et les descriptions restent lisibles, les corrections
+dépliables disponibles et les boutons désactivés. Vérifier les cinq zones, les six
+réponses, les changements de choix et les réinitialisations, ainsi que le clavier,
+les petits écrans et les ressources locales. Les interactions n’agissent pas sur un vrai IDE.

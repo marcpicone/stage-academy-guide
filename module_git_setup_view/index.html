@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Créer son compte GitHub, faire son fork, découvrir la ligne de commande et cloner le projet Android.">
+    <title>Ton projet sur ton ordinateur — Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="./module_git_setup_view.css">
+    <script src="./module_git_setup_view.js" defer></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="setup-view">
+    <header class="course-header"><a href="../index.html">← Stage Academy</a><span>Git &amp; GitHub · Page 2</span></header>
+    <main id="contenu">
+        <section class="course-hero">
+            <p class="eyebrow">Passer à la pratique</p>
+            <h1>Ton projet.<br>Sur ton ordinateur.</h1>
+            <p class="lead">Créer ton compte GitHub, faire une copie du projet sur ton compte, puis récupérer les fichiers et l’historique sur ton ordinateur.</p>
+            <p>Tu vas aussi découvrir la CLI, sans avoir besoin de tout apprendre d’un coup.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#compte">Mon compte</a><a href="#fork">Mon fork</a><a href="#cli">La CLI</a><a href="#cloner">Le clone</a><a href="#verifier">Vérifier</a><a href="#aide">Si ça bloque</a></nav>
+            <noscript><p>Les explications et commandes restent lisibles sans JavaScript. Remplace TON_PSEUDO à la main ; seule l’aide interactive est désactivée.</p></noscript>
+        </section>
+
+<div class="reading-row">
+    <section class="lesson-section" id="preparer" aria-labelledby="title-preparer">
+        <p class="eyebrow">Avant de commencer</p>
+        <h2 id="title-preparer">Un compte, un navigateur et Git.</h2>
+        
+<p>Cette page te guide jusqu’à une copie du projet sur ton ordinateur. Tu ne modifies aucun fichier de l’application et tu n’as pas encore besoin d’Android Studio.</p>
+<ul><li>Pour créer le compte et le fork : un navigateur, Internet et un accès à ta boîte email.</li><li>Pour le clone : Git installé sur ton ordinateur avec l’aide de ton encadrant.</li></ul>
+<details><summary>Préparation avec l’encadrant</summary>
+<p>Sous Windows, préparer <a href="https://git-scm.com/downloads/win">Git pour Windows</a>, qui fournit Git Bash. Utiliser le navigateur pour le compte et la copie en ligne. Sur macOS, on peut utiliser Terminal avec Git déjà installé ; les commandes montrées ici sont les mêmes.</p>
+<p>Vérifier les conditions de création du compte GitHub avec le jeune et l’établissement avant la séance. Ne pas utiliser le compte ou les identifiants de l’encadrant à sa place.</p>
+</details>
+<aside class="takeaway"><strong>Trois endroits à distinguer.</strong><p>Le projet de départ sur le compte de Marc → ton fork sur ton compte → le clone dans un dossier de ton ordinateur.</p></aside>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-git"><span aria-hidden="true">💡</span><h3>Git</h3><p>L’outil qui garde l’historique du projet. GitHub est le service en ligne ; Git est aussi installé sur ton ordinateur.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="compte" aria-labelledby="title-compte">
+        <p class="eyebrow">01 / Sur GitHub</p>
+        <h2 id="title-compte">Créer ton compte.</h2>
+        
+<ol class="instructions">
+<li>Ouvre <a href="https://github.com/signup">la page de création de compte GitHub</a>. Si tu as déjà ton compte personnel, connecte-toi simplement.</li>
+<li>Choisis un compte gratuit, un nom d’utilisateur et suis les étapes proposées par GitHub. Un pseudo suffit ; évite d’y mettre des informations personnelles inutiles.</li>
+<li>Vérifie ton adresse email en suivant le message envoyé par GitHub.</li>
+<li>Ouvre le menu de ton profil et retrouve ton nom d’utilisateur. Il servira dans l’adresse de ton projet.</li>
+</ol>
+<p>Le mot de passe et les éventuels codes de connexion restent sur GitHub. Ce cours ne te les demande jamais.</p>
+<p class="checkpoint"><strong>Je vérifie :</strong> je suis connecté à mon propre compte et mon email est vérifié.</p>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-username"><span aria-hidden="true">💡</span><h3>Username · nom d’utilisateur</h3><p>Ton identifiant public sur GitHub. Ce n’est pas forcément le nom affiché sur ton profil, et ce n’est pas ton adresse email.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="fork" aria-labelledby="title-fork">
+        <p class="eyebrow">02 / Une copie sur ton compte</p>
+        <h2 id="title-fork">Faire ton fork du projet Android.</h2>
+        
+<p>Un <a class="term" href="#def-fork">fork</a> crée une copie du dépôt dans ton compte GitHub. <strong>Il ne télécharge pas encore le projet sur ton ordinateur.</strong></p>
+<ol class="instructions">
+<li>Ouvre le dépôt d’origine : <a href="https://github.com/marcpicone/stage_academy">marcpicone / stage_academy</a>.</li>
+<li>Repère le propriétaire <code>marcpicone</code>, le nom <code>stage_academy</code>, le fichier README et la branche <code>dev</code>.</li>
+<li>Clique sur <strong>Fork</strong> en haut du dépôt.</li>
+<li>Dans <strong>Owner</strong> (propriétaire), choisis ton compte. Garde le nom <code>stage_academy</code>. Copier seulement la branche par défaut suffit pour ce cours : elle s’appelle <code>dev</code>.</li>
+<li>Clique sur <strong>Create fork</strong> (créer le fork).</li>
+<li>Vérifie que l’adresse commence par <code>github.com/TON_PSEUDO/stage_academy</code> et que le lien « forked from marcpicone/stage_academy » indique le projet d’origine.</li>
+</ol>
+<figure><img src="./assets/fork-button.png" alt="Capture de la documentation GitHub : le bouton Fork est encadré en haut à droite d’un dépôt." loading="lazy"><figcaption>Capture officielle GitHub sur un dépôt d’exemple. Cherche le même bouton dans <code>stage_academy</code> ; les noms et les compteurs peuvent être différents.</figcaption></figure>
+<p>Le dépôt d’origine est public : ton fork sera public lui aussi. N’ajoute pas de mot de passe ou d’information personnelle dans ses fichiers.</p>
+<p class="checkpoint"><strong>Je vérifie :</strong> le propriétaire du fork est mon compte, et le lien vers le dépôt d’origine est visible.</p>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-fork"><span aria-hidden="true">💡</span><h3>Fork · copie sur GitHub</h3><p>Une copie d’un dépôt dans ton compte, qui conserve un lien avec le projet d’origine.</p></aside><aside class="word-note" id="def-repo"><span aria-hidden="true">💡</span><h3>Repository · dépôt · repo</h3><p>Le projet et son historique Git. Le README est le fichier de présentation et d’explications du projet.</p></aside><aside class="word-note" id="def-dev"><span aria-hidden="true">💡</span><h3>Branche dev</h3><p>Le chemin de travail principal choisi pour ce projet. Son nom n’est pas une règle obligatoire de Git.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="cli" aria-labelledby="title-cli">
+        <p class="eyebrow">03 / Une petite découverte</p>
+        <h2 id="title-cli">La CLI : écrire une instruction, lire une réponse.</h2>
+        
+<p><a class="term" href="#def-cli">CLI</a> signifie <em>Command-Line Interface</em> : interface en ligne de commande. On écrit une instruction dans un terminal et l’ordinateur affiche sa réponse.</p>
+<p>Git possède aussi des interfaces graphiques avec des boutons. La ligne de commande est une autre façon d’utiliser le même outil ; tu n’as pas à tout mémoriser.</p>
+<ol class="instructions"><li>Sous Windows, ouvre Git Bash. Sur macOS, ouvre Terminal avec Git installé.</li><li>Écris la commande ci-dessous, puis appuie sur <strong>Entrée</strong>.</li></ol>
+<pre class="command"><code>git --version</code></pre>
+<div class="terminal-example"><p class="terminal-label">Exemple de réponse, le numéro peut changer</p><samp>git version 2.x.y</samp></div>
+<p><code>git</code> désigne l’outil. <code>--version</code> lui demande d’afficher sa version. <strong>Tu écris la commande, pas la réponse.</strong> Si tu vois un symbole <code>$</code> ou <code>&gt;</code> au début d’une ligne d’exemple, c’est souvent l’invite du terminal : ne le recopie pas.</p>
+<details><summary>Essayer dans un petit terminal d’entraînement</summary>
+<p>Cette simulation reconnaît seulement <code>git --version</code> et <code>pwd</code>. Elle n’exécute rien sur ton ordinateur.</p>
+<form id="terminal-training"><label for="training-command">Ta commande</label><input id="training-command" type="text" spellcheck="false" autocomplete="off" placeholder="git --version"><button type="submit" disabled>Simuler la réponse</button><p id="training-output" class="terminal-output" role="status" aria-live="polite"></p></form>
+<noscript><p>Sans JavaScript, retiens cet exemple : <code>git --version</code> demande le numéro de version ; <code>pwd</code> demande le dossier courant.</p></noscript>
+</details>
+<p class="checkpoint"><strong>Je vérifie :</strong> le vrai terminal affiche une version de Git. S’il dit « command not found » ou « git n’est pas reconnu », je m’arrête et je demande à l’encadrant de vérifier l’installation.</p>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-cli"><span aria-hidden="true">💡</span><h3>CLI · ligne de commande</h3><p>Une manière de donner des instructions sous forme de texte. Ce n’est pas réservé à Git.</p></aside><aside class="word-note" id="def-terminal"><span aria-hidden="true">💡</span><h3>Terminal / Git Bash</h3><p>Le terminal est la fenêtre où l’on saisit les commandes. Git Bash est un environnement fourni avec Git pour Windows ; il comprend les commandes de cette page.</p></aside><aside class="word-note" id="def-option"><span aria-hidden="true">💡</span><h3>Option · --version</h3><p>Une précision ajoutée à une commande pour choisir ce qu’elle doit faire. Les tirets font partie de l’option.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="cloner" aria-labelledby="title-cloner">
+        <p class="eyebrow">04 / Une copie sur ton ordinateur</p>
+        <h2 id="title-cloner">Cloner ton fork, une seule fois.</h2>
+        
+<p>Un <a class="term" href="#def-clone">clone</a> télécharge les fichiers et l’historique dans un dossier local. On clone <strong>ton fork</strong>, et non directement le dépôt de Marc.</p>
+<h3>1. Retrouver la bonne adresse</h3>
+<p>Sur <strong>ton fork</strong>, clique sur <strong>Code → HTTPS</strong> et copie l’adresse qui se termine par <code>.git</code>. Vérifie ton nom d’utilisateur au début de l’adresse.</p>
+<figure><img src="./assets/clone-https.png" alt="Capture officielle du menu Code de GitHub : onglet HTTPS, adresse du dépôt et bouton de copie." loading="lazy"><figcaption>Capture officielle sur un dépôt d’exemple. Pour toi, l’adresse doit correspondre à <code>TON_PSEUDO/stage_academy.git</code>. On utilise HTTPS ; pas l’onglet GitHub CLI, qui correspond à un autre outil.</figcaption></figure>
+<h3>2. Choisir le dossier parent</h3>
+<p>Avec l’encadrant, choisis un dossier de travail, par exemple <code>Documents/Stage</code>. Sous Windows, ouvre ce dossier dans l’Explorateur, puis utilise le menu contextuel <strong>Open Git Bash here</strong> (« ouvrir Git Bash ici » ; il peut être dans « Afficher plus d’options »). Sur macOS, place le terminal dans ce dossier avec l’aide de l’encadrant.</p>
+<pre class="command"><code>pwd</code></pre>
+<p><code>pwd</code> affiche le dossier où tu te trouves. Vérifie le chemin avant de continuer. N’ouvre pas le terminal à l’intérieur d’un autre projet Git. Le clone créera lui-même le sous-dossier <code>stage_academy</code>.</p>
+<h3>3. Adapter la commande à ton compte</h3>
+<p>Tu peux remplacer <code>TON_PSEUDO</code> à la main dans la commande. L’aide ci-dessous fait uniquement cette substitution ; elle ne vérifie pas ton compte et ne lance pas Git.</p>
+<label for="github-username">Ton nom d’utilisateur GitHub — jamais ton mot de passe</label>
+<input id="github-username" type="text" maxlength="39" autocomplete="off" spellcheck="false" placeholder="exemple : lea-stage">
+<p id="username-status" role="status" aria-live="polite">Remplace TON_PSEUDO par ton nom d’utilisateur avant d’exécuter la commande.</p>
+<pre class="command"><code data-command="clone">git clone --branch dev https://github.com/TON_PSEUDO/stage_academy.git</code></pre>
+<p><code>clone</code> demande une copie locale. <code>--branch dev</code> choisit la branche <code>dev</code> à l’ouverture. L’adresse indique le dépôt à récupérer.</p>
+<a id="personal-fork" hidden>Ouvrir mon fork sur GitHub</a>
+<p>Exécute la commande dans le vrai terminal, puis attends que l’invite réapparaisse. Tu peux voir « Cloning into… » (« copie dans… ») et des compteurs de téléchargement. Ce dépôt étant public, le clone HTTPS ne devrait pas demander ton mot de passe GitHub.</p>
+<h3>4. Entrer dans le dossier créé</h3>
+<pre class="command"><code>cd stage_academy</code></pre>
+<p><code>cd</code> signifie <em>change directory</em> : changer de dossier. Tu te places maintenant dans le projet, sans modifier ses fichiers.</p>
+<p class="checkpoint"><strong>Je vérifie :</strong> le dossier <code>stage_academy</code> contient les fichiers du projet. Je n’ai pas seulement téléchargé un ZIP : le clone contient aussi l’historique Git.</p>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-clone"><span aria-hidden="true">💡</span><h3>Clone · copie locale</h3><p>Copie d’un dépôt et de son historique sur ton ordinateur. Le fork reste en ligne ; le clone est un dossier local.</p></aside><aside class="word-note" id="def-https"><span aria-hidden="true">💡</span><h3>HTTPS / URL</h3><p>HTTPS est une façon de se connecter au site. L’URL est son adresse. Ici, elle indique exactement quel dépôt cloner.</p></aside><aside class="word-note" id="def-dossier"><span aria-hidden="true">💡</span><h3>Dossier courant / parent</h3><p>Le dossier courant est celui dans lequel la commande s’exécute. Le dossier parent accueillera le sous-dossier du projet.</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="verifier" aria-labelledby="title-verifier">
+        <p class="eyebrow">05 / Lire le résultat</p>
+        <h2 id="title-verifier">Trois vérifications, sans rien modifier.</h2>
+        
+<p>À exécuter dans le dossier <code>stage_academy</code>. Ces trois commandes lisent des informations : elles ne créent ni commit, ni push.</p>
+<h3>Sur quelle branche suis-je ?</h3>
+<pre class="command"><code>git status</code></pre>
+<p>Cherche <code>On branch dev</code> (« sur la branche dev ») et <code>nothing to commit, working tree clean</code> (« aucun changement à enregistrer »). Le message exact peut varier selon la langue et la version.</p>
+<h3>Quel historique ai-je récupéré ?</h3>
+<pre class="command"><code>git --no-pager log --oneline -5</code></pre>
+<p><code>log</code> affiche l’historique ; <code>--oneline</code> résume chaque commit sur une ligne ; <code>-5</code> limite aux cinq derniers ; <code>--no-pager</code> évite d’ouvrir une visionneuse séparée. Retrouve le message du commit initial : <code>[Initial] Initial commit</code>. Le nombre de commits peut évoluer.</p>
+<h3>À quel dépôt GitHub ma copie est-elle reliée ?</h3>
+<pre class="command"><code>git remote -v</code></pre>
+<div class="terminal-example"><p class="terminal-label">Forme attendue — exemple à comparer, pas à exécuter</p><pre><samp data-command="remote">origin  https://github.com/TON_PSEUDO/stage_academy.git (fetch)
+origin  https://github.com/TON_PSEUDO/stage_academy.git (push)</samp></pre></div>
+<p><code>origin</code> est le nom habituel donné au dépôt distant lors du clone. Vérifie que l’adresse vise <strong>ton fork</strong>. Les mentions <code>fetch</code> (« récupérer ») et <code>push</code> (« envoyer ») décrivent les usages de ces adresses ; cette commande n’effectue aucun envoi.</p>
+<aside class="takeaway"><strong>Le but est atteint.</strong><p>Tu peux montrer le dépôt de départ, ton fork sur GitHub et ton dossier local. Le projet est sur ton ordinateur. La découverte de l’IDE et les modifications viendront ensuite.</p></aside>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-status"><span aria-hidden="true">💡</span><h3>Status / log</h3><p>Status signifie « état ». Log désigne ici le journal des étapes enregistrées : l’historique des commits.</p></aside><aside class="word-note" id="def-remote"><span aria-hidden="true">💡</span><h3>Remote · distant / origin</h3><p>Un dépôt situé ailleurs, ici sur GitHub. Origin est un nom local qui mémorise son adresse ; ce nom ne veut pas forcément dire « projet d’origine de Marc ».</p></aside></div>
+</div>
+
+<div class="reading-row">
+    <section class="lesson-section" id="aide" aria-labelledby="title-aide">
+        <p class="eyebrow">Si quelque chose bloque</p>
+        <h2 id="title-aide">Lire le message avant de recommencer.</h2>
+        
+<details><summary>« Repository not found » — dépôt introuvable</summary><p>Ouvre l’adresse du fork dans le navigateur. Vérifie le pseudo, le nom <code>stage_academy</code> et que le fork a bien été créé. Ne relance pas la commande avec une adresse choisie au hasard.</p></details>
+<details><summary>« Destination path … already exists » — le dossier existe déjà</summary><p>Le projet a peut-être déjà été cloné. Ne supprime rien. Vérifie son contenu et demande à l’encadrant s’il faut entrer dedans avec <code>cd stage_academy</code> ou choisir un autre dossier parent.</p></details>
+<details><summary>« Not a git repository » — ce n’est pas un dépôt Git</summary><p>Tu es peut-être dans le dossier parent. Affiche le dossier courant avec <code>pwd</code>, puis entre dans le clone avec <code>cd stage_academy</code>. Un ZIP téléchargé ne remplace pas un clone Git.</p></details>
+<details><summary>« Remote branch dev not found » — branche dev introuvable</summary><p>Vérifie la branche disponible sur ton fork avec l’encadrant. Le cours attend dev ; si le projet a changé, adapte la commande avec son aide.</p></details>
+<details><summary>Une connexion, un mot de passe ou une erreur réseau est demandé</summary><p>Vérifie que l’URL utilise HTTPS et pointe sur le bon dépôt public. Demande à l’encadrant de vérifier l’accès. Ne colle pas de mot de passe ou de jeton dans le cours ou une commande partagée.</p></details>
+<h3>Mon bilan</h3><p>Ces cases sont tes confirmations personnelles. Le cours ne contrôle ni GitHub ni les fichiers de ton ordinateur, et ne sauvegarde pas ces réponses.</p>
+<fieldset class="completion"><legend>Ce que je peux montrer à mon encadrant</legend>
+<label><input type="checkbox" data-completion> Mon compte et mon email sont vérifiés.</label>
+<label><input type="checkbox" data-completion> Mon fork appartient à mon compte GitHub.</label>
+<label><input type="checkbox" data-completion> Mon dossier local contient le projet et git status affiche dev.</label>
+<label><input type="checkbox" data-completion> L’adresse origin correspond à mon fork.</label>
+</fieldset><p id="completion-status" role="status" aria-live="polite">Vérifie ces quatre points avec ton encadrant.</p>
+
+<p>Prochaine étape : découvrir ce qu’est un IDE, l’outil dans lequel on ouvrira et fera évoluer le projet. Pas de modification, de commit ou de push à faire dans cette page.</p>
+
+    </section>
+    <div class="reading-notes"><aside class="word-note" id="def-ide"><span aria-hidden="true">💡</span><h3>IDE · environnement de développement intégré</h3><p>Un logiciel qui réunit plusieurs outils pour lire, écrire et exécuter du code. Nous le découvrirons dans la prochaine section.</p></aside></div>
+</div>
+
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours">
+    <a class="course-pagination-prev" href="../module_git_intro_view/index.html" rel="prev"><span>← Précédent</span><span>Les notions de Git</span></a>
+    <a class="course-pagination-next" href="../module_ide_intro_view/index.html" rel="next"><span>Suivant →</span><span>Découvrir l’IDE</span></a>
+</nav>
+<footer class="lesson-footer"><p>Sources officielles :</p><a href="https://docs.github.com/en/account-and-profile/how-tos/account-management/creating-an-account-on-github">Créer son compte</a><a href="https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo?tool=webui">Fork</a><a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository">Clone</a><a href="https://git-scm.com/book/fr/v2">Livre Git</a></footer>
+    </main>
+</div>
+</body>
+</html>
