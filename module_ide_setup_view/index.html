@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ouvrir et lancer ton quiz · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="module_ide_setup_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="setup-view">
+<header class="course-header"><a href="../index.html">Stage Academy</a><span>02 / L’IDE · Page 2 sur 2</span></header>
+<main id="contenu">
+    <section class="course-hero" aria-labelledby="titre">
+        <p class="eyebrow">Ton premier lancement</p>
+        <h1 id="titre">Ouvrir et lancer ton quiz.</h1>
+        <p class="lead">Ton projet est sur ton ordinateur. Maintenant, ouvre-le dans Android Studio, retrouve ses fichiers et fais apparaître son écran d’accueil sur un appareil Android.</p>
+        <p>Objectif : comprendre le trajet du dossier jusqu’à l’application. Tu observes le projet existant, sans modifier son code.</p>
+        <nav class="lesson-nav" aria-label="Dans cette page"><a href="#ouvrir">Ouvrir</a><a href="#preparer">Préparer</a><a href="#fichiers">Explorer</a><a href="#lancer">Lancer</a><a href="#bilan">Faire le point</a></nav>
+    </section>
+    <aside class="tutor" aria-labelledby="titre-encadrant">
+        <h2 id="titre-encadrant">Avec l’encadrant, avant de commencer</h2>
+        <p>Préparez Android Studio et un téléphone ou un émulateur déjà utilisable. Prévoyez une connexion Internet pour la première préparation du projet.</p>
+        <details><summary>Repères techniques pour l’encadrant</summary><ul>
+            <li>Projet Android cloné à la page Git précédente, branche <code>dev</code>.</li>
+            <li>SDK Android : ensemble des outils et fichiers nécessaires pour construire l’application. Ce projet utilise la plateforme Android 36.</li>
+            <li>JDK : outils Java utilisés par Gradle. Vérifier sa compatibilité avec le projet ; le code cible Java 17.</li>
+            <li>Installer les composants manquants et accepter les licences avec l’élève, en expliquant la demande affichée.</li>
+            <li>Appareil Android 8.0 (API 26) ou plus récent. API désigne ici le niveau de version technique d’Android. Pour un téléphone physique, préparer sa connexion et l’autorisation de débogage ; pour un émulateur, préparer l’appareil virtuel.</li>
+        </ul><p>Ces réglages servent à préparer l’atelier. L’élève n’a pas à les mémoriser pour poursuivre.</p></details>
+    </aside>
+
+    <div class="reading-row">
+    <section class="lesson-section" id="ouvrir" aria-labelledby="titre-ouvrir">
+        <p class="eyebrow">01 / Le bon dossier</p><h2 id="titre-ouvrir">Ouvre le projet que tu as cloné.</h2>
+        <ol class="steps">
+            <li>Lance Android Studio. Sur l’écran d’accueil, choisis <strong>Open</strong> (ouvrir). Si un autre projet est déjà ouvert, utilise <strong>File → Open…</strong> (fichier → ouvrir).</li>
+            <li>Retrouve ton dossier <code>stage_academy</code>, à l’endroit choisi pendant le clone.</li>
+            <li>Sélectionne le dossier qui contient <code>settings.gradle.kts</code> et le sous-dossier <code>app</code>, puis ouvre-le.</li>
+        </ol>
+        <pre aria-label="Repères dans le dossier à ouvrir"><code>stage_academy/          ← dossier à ouvrir
+  settings.gradle.kts
+  README.md
+  app/
+    build.gradle.kts
+    src/</code></pre>
+        <p>Tu reprends un projet existant : le bouton <strong>New Project</strong> (nouveau projet) sert à en créer un autre. Ici, tu n’en as pas besoin.</p>
+        <details><summary>Android Studio demande si je fais confiance au projet</summary><p>Lis la demande avec ton encadrant et vérifie que tu as bien ouvert le clone du dépôt prévu. Ouvrir un projet peut lancer ses outils de construction ; demande-lui de t’aider à choisir.</p></details>
+    </section>
+    <div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Racine · root</h3><p>Le dossier principal du projet. Ici, c’est <code>stage_academy</code>, qui contient notamment <code>app</code>. On ouvre l’ensemble pour que l’IDE connaisse son organisation.</p></aside></div>
+    </div>
+
+    <div class="reading-row">
+    <section class="lesson-section" id="preparer" aria-labelledby="titre-preparer">
+        <p class="eyebrow">02 / Laisser l’atelier se préparer</p><h2 id="titre-preparer">L’IDE découvre comment construire l’app.</h2>
+        <p>Android Studio lit les réglages du projet et lance une <a href="#def-sync" class="term">synchronisation</a> avec <a href="#def-gradle" class="term">Gradle</a>. Certains outils ou <a href="#def-dependance" class="term">dépendances</a> peuvent être téléchargés. La première fois, cela peut prendre plusieurs minutes.</p>
+        <p>Observe la progression et les messages. Attends la fin de la synchronisation avant de lancer l’application. Les intitulés et la position des panneaux peuvent varier selon la version d’Android Studio.</p>
+        <aside class="takeaway"><strong>Synchroniser ne lance pas le quiz.</strong><p>Cette étape permet à l’IDE de comprendre le projet et ses besoins. Le lancement sur l’appareil vient ensuite.</p></aside>
+        <details><summary>La préparation échoue ou semble bloquée</summary><p>Ouvre les messages de synchronisation ou le panneau <strong>Build</strong> (construction). Repère le premier message d’erreur utile et montre-le à l’encadrant. Ensemble, vérifiez la connexion, les composants demandés et les réglages indiqués. Garde le message visible pour comprendre ce qui bloque.</p></details>
+    </section>
+    <div class="reading-notes">
+        <aside class="word-note" id="def-sync"><span aria-hidden="true">💡</span><h3>Synchronisation · sync</h3><p>Ici, mettre à jour ce que l’IDE connaît des réglages du projet. Ce n’est pas un envoi sur GitHub.</p></aside>
+        <aside class="word-note" id="def-gradle"><span aria-hidden="true">💡</span><h3>Gradle</h3><p>L’outil qui organise les tâches nécessaires à la construction de l’application, à partir des réglages du projet.</p></aside>
+        <aside class="word-note" id="def-dependance"><span aria-hidden="true">💡</span><h3>Dépendance · dependency</h3><p>Un morceau de logiciel réutilisé par le projet. Par exemple, Compose fournit des outils pour décrire les écrans.</p></aside>
+    </div>
+    </div>
+
+    <div class="reading-row">
+    <section class="lesson-section" id="fichiers" aria-labelledby="titre-fichiers">
+        <p class="eyebrow">03 / Reconnaître les rôles</p><h2 id="titre-fichiers">Cinq repères, sans tout lire.</h2>
+        <p>Dans le panneau <strong>Project</strong> (projet), sélectionne la vue <strong>Project</strong> si tu veux retrouver les dossiers comme sur ton ordinateur. La vue <strong>Android</strong> les regroupe autrement : les fichiers restent les mêmes.</p>
+        <p>Déplie les dossiers et ouvre les fichiers ci-dessous. Pour chacun, dis à ton encadrant à quoi il sert. Tu n’as pas besoin de comprendre toutes ses lignes.</p>
+        <div class="file-list">
+            <article><h3><code>README.md</code></h3><p>Le point de départ écrit pour les personnes : présentation et consignes du projet. Un fichier <code>.md</code> contient du texte avec une mise en forme légère appelée Markdown.</p></article>
+            <article><h3>Le dossier <code>app/</code></h3><p>Le <a href="#def-module" class="term">module</a> qui regroupe le code, les ressources et les réglages de notre application Android.</p></article>
+            <article><h3><code>MainActivity.kt</code></h3><p class="path">app/src/main/java/fr/stageacademy/quiz/MainActivity.kt</p><p>Le point d’entrée de notre écran : ce fichier Kotlin installe l’interface décrite avec Compose. Le dossier s’appelle <code>java</code>, mais il contient bien ici du Kotlin.</p></article>
+            <article><h3><code>strings.xml</code></h3><p class="path">app/src/main/res/values/strings.xml</p><p>Les textes réutilisés par l’application. Retrouve <code>welcome_title</code> et le texte « Mon premier quiz ».</p></article>
+            <article><h3><code>app/build.gradle.kts</code></h3><p>Les réglages de construction du module : versions Android et dépendances, par exemple. Ce fichier configure les outils ; il ne dessine pas l’écran.</p></article>
+        </div>
+        <details><summary>Petit défi : où chercher pour changer le titre de bienvenue ?</summary><p>Dans <code>app/src/main/res/values/strings.xml</code>, à l’entrée <code>welcome_title</code>. Aujourd’hui, repère-la seulement. On modifiera le texte dans une prochaine étape.</p></details>
+    </section>
+    <div class="reading-notes">
+        <aside class="word-note" id="def-module"><span aria-hidden="true">💡</span><h3>Module</h3><p>Une partie du projet qui rassemble des fichiers et des réglages de construction. Notre projet a un module Android nommé <code>app</code>.</p></aside>
+        <aside class="word-note"><span aria-hidden="true">💡</span><h3>Kotlin · .kt / .kts</h3><p>Le langage utilisé pour programmer notre quiz. Les fichiers <code>.kt</code> contiennent son code ; <code>.kts</code> désigne un script Kotlin, utilisé ici pour les réglages Gradle.</p></aside>
+        <aside class="word-note"><span aria-hidden="true">💡</span><h3>Compose</h3><p>Les outils Android avec lesquels on décrit l’interface en Kotlin : textes, boutons et disposition à l’écran.</p></aside>
+        <aside class="word-note"><span aria-hidden="true">💡</span><h3>Ressource / XML</h3><p>Une ressource est un élément utilisé par l’app, comme un texte ou une image. XML est un format qui organise des informations avec des balises. Ici, <code>strings.xml</code> contient des textes nommés.</p></aside>
+    </div>
+    </div>
+
+    <div class="reading-row">
+    <section class="lesson-section" id="lancer" aria-labelledby="titre-lancer">
+        <p class="eyebrow">04 / Du projet à l’écran</p><h2 id="titre-lancer">Lance l’application existante.</h2>
+        <ol class="steps">
+            <li>Dans la barre d’outils, sélectionne la configuration de lancement <strong>app</strong>.</li>
+            <li>Choisis le téléphone ou l’émulateur préparé avec l’encadrant dans la liste des appareils.</li>
+            <li>Clique sur le triangle <strong>Run ▶</strong> (exécuter). Android Studio construit l’application, l’installe sur cet appareil et la lance.</li>
+            <li>Observe les messages de construction, puis l’écran de l’appareil. Le premier lancement peut prendre du temps.</li>
+        </ol>
+        <div class="expected"><p class="eyebrow">Résultat attendu sur l’appareil</p><h3>Mon premier quiz</h3><p>Bienvenue ! Ici, nous allons construire notre quiz pas à pas.</p><p class="caption">Ces textes viennent du projet de départ. Ce cadre est un repère de lecture, pas un appareil connecté ni une preuve que ton lancement a réussi.</p></div>
+        <p>Le quiz ne propose pas encore de questions : tu viens de lancer son écran de départ. Compare les textes affichés avec ceux de <code>strings.xml</code>.</p>
+        <details><summary>Aucun appareil n’apparaît, ou l’application ne s’ouvre pas</summary><p>Demande à l’encadrant de vérifier l’appareil préparé et sa connexion. Si la construction échoue, lis le panneau Build. Si elle réussit mais que l’écran attendu n’apparaît pas, vérifiez l’appareil sélectionné et le message de lancement. Distingue ces deux situations avant de réessayer.</p></details>
+    </section>
+    <div class="reading-notes">
+        <aside class="word-note"><span aria-hidden="true">💡</span><h3>Configuration de lancement</h3><p>Les indications utilisées par l’IDE pour lancer une partie du projet. Ici, on choisit <code>app</code>.</p></aside>
+        <aside class="word-note"><span aria-hidden="true">💡</span><h3>Appareil cible · target device</h3><p>Le téléphone ou l’émulateur sur lequel tu demandes à l’IDE d’exécuter l’application.</p></aside>
+        <aside class="word-note"><span aria-hidden="true">💡</span><h3>Émulateur · emulator</h3><p>Un appareil Android virtuel qui fonctionne sur ton ordinateur. Le quiz y tourne comme sur un appareil de test.</p></aside>
+    </div>
+    </div>
+
+    <section class="lesson-section" id="bilan" aria-labelledby="titre-bilan">
+        <p class="eyebrow">05 / À toi de montrer</p><h2 id="titre-bilan">Du dossier au résultat, tu sais te repérer.</h2>
+        <p>Avec ton encadrant, coche ce que tu as réellement fait. Les cases sont des confirmations personnelles : le guide ne vérifie pas Android Studio et ne sauvegarde pas ta progression.</p>
+        <fieldset class="checklist"><legend>Mes repères dans le vrai projet</legend>
+            <label><input type="checkbox"> <span>J’ai ouvert le dossier cloné et attendu la fin de la synchronisation.</span></label>
+            <label><input type="checkbox"> <span>Je peux montrer README.md, MainActivity.kt et strings.xml, puis expliquer leur rôle.</span></label>
+            <label><input type="checkbox"> <span>Je sais montrer les messages de construction et l’appareil choisi.</span></label>
+            <label><input type="checkbox"> <span>J’ai vu « Mon premier quiz » sur l’appareil et retrouvé son titre dans strings.xml.</span></label>
+        </fieldset>
+        <details><summary>Question : synchroniser suffit-il à voir le quiz sur le téléphone ?</summary><p>Non. La synchronisation prépare la compréhension du projet dans l’IDE. Il faut ensuite sélectionner une configuration, un appareil et lancer l’application avec Run.</p></details>
+        <p class="closing">Prochaine étape : comprendre une petite modification du code et observer son effet à l’écran. Pour aujourd’hui, explique à ton encadrant le trajet que tu viens de suivre.</p>
+    </section>
+    <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_ide_intro_view/index.html" rel="prev"><span>← Précédent</span><span>Découvrir l’IDE</span></a></nav>
+    <footer class="lesson-footer"><p>Sources officielles :</p><a href="https://developer.android.com/studio/projects">Android Developers · Organisation d’un projet</a><a href="https://developer.android.com/studio/run">Android Developers · Construire et lancer une app</a><p>Les chemins et les textes se réfèrent au projet de départ stage_academy.</p></footer>
+</main>
+</div>
+</body>
+</html>
