@@ -25,7 +25,7 @@ Sans JavaScript, l’arbre complet et les six étapes restent visibles et les co
 dans des détails dépliables ; les commandes interactives sont désactivées.
 La page 2 (`module_git_setup_view/index.html`) guide la création de compte, le fork,
 la découverte de la CLI et le clone HTTPS de dev. Elle ne modifie pas l’application
-et ne demande ni commit ni push. Trois pages IDE complètent ce parcours. Les autres cours restent à créer. Le téléphone de l’accueil est
+et ne demande ni commit ni push. Quatre pages IDE complètent ce parcours. La première approche du code commence avec les variables et les types. Les autres pages restent à créer. Le téléphone de l’accueil est
 une illustration HTML/CSS du quiz à construire.
 
 ## Organisation
@@ -58,6 +58,15 @@ stage-academy-guide/
     index.html                 # Enquête Logcat et correction guidée
     module_ide_debug_view.css
     assets/                    # Capture officielle de Logcat et provenance
+  module_ide_share_view/
+    index.html                 # Vue Git ou terminal, commit, push et PR
+    module_ide_share_view.css
+  module_code_variables_view/
+    index.html                 # Variables et types, première question Kotlin
+    module_code_variables_view.css
+  module_code_functions_view/
+    index.html                 # Action, paramètres, retour et portée
+    module_code_functions_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -163,3 +172,62 @@ les confirmations sont manuelles et sans stockage. L’Android reste inchangé.
 Vérifier : navigation IDE 2 ↔ IDE 3, image locale agrandie, ancres, détails au clavier,
 petit écran et lecture sans JavaScript. Avec l’encadrant, exécuter le parcours réel
 avant/après correction ; un contrôle statique du guide ne valide pas l’appareil.
+
+## IDE — page 4 : partager la correction
+
+`module_ide_share_view/index.html` présente deux parcours alternatifs, dans la même
+section IDE : boutons Git d’Android Studio ou terminal intégré. Branche, lecture du
+diff, sélection du fichier, commit, push vers origin et PR vers dev du propre fork.
+La correction est supposée locale et non commitée au départ ; les autres états
+sont à examiner avec l’encadrant. Les exemples ab/… et TON_PSEUDO sont à remplacer.
+
+Les deux parcours sont des détails natifs, utilisables sans JavaScript. Ils ne sont
+pas à exécuter successivement. La PR utilise l’intégration GitHub si disponible,
+sinon le navigateur ; Git seul ne crée pas de PR. Pas de GitHub CLI imposée, de
+fusion demandée ou de modification automatique de l’app, du Git ou du compte.
+Les commandes doivent être exécutées par l’élève, une à une, dans son clone.
+
+Vérifier les liens IDE 3 ↔ IDE 4, la lecture au clavier des parcours, les notes sur
+mobile et les exemples depuis un vrai fork d’exercice. Le guide ne vérifie ni
+l’authentification, ni le push, ni l’existence de la PR. Les menus sont dépendants
+de la version d’Android Studio ; les références IntelliJ décrivent la plateforme.
+
+## Code — page 1 : variables et types
+
+`module_code_variables_view/index.html` introduit les variables par l’image de la
+boîte nommée : nom, type autorisé, valeur. Les déclarations utilisent uniquement
+val et les types explicites String, Int, Double et Boolean. Les noms sont anglais,
+les traductions dans le cours et les textes destinés au joueur en français.
+Le nommage est illustré par plusieurs rôles possibles pour une même valeur.
+
+L’exercice prépare une question, trois choix et une bonne réponse avec des valeurs
+simples. Il ne demande pas encore de placement dans MainActivity, de vue Compose,
+de score, de comparaison ou de gestion de changement de valeur. L’intégration dans
+l’app est reportée aux étapes suivantes. Les exemples de durée et d’indice sont
+des données, sans comportement associé. Pas de références techniques dans le
+parcours élève ; références auteur : documentation Kotlin sur les variables,
+les types de base et les nombres (https://kotlinlang.org/docs/numbers.html).
+
+Les exercices dépliables et confirmations fonctionnent sans JavaScript. Vérifier
+les notes, la boîte illustrée, les détails au clavier et le petit écran.
+Le dépôt Android n’est pas modifié par cette page.
+
+## Code — page 2 : fonctions
+
+`module_code_functions_view/index.html` présente une fonction comme une action :
+paramètres, corps, résultat, appels, comparaison ==, return, portée et Unit.
+Le validateur final reçoit les deux réponses ; l’exemple à une réponse fixée dans
+le fichier est distinct et sert à expliquer la portée sans dépendre de l’ordre
+des définitions. Les blocs imbriqués et les paramètres sont mentionnés simplement.
+Pas de conditions, de score, de var ou de Compose dans cette leçon.
+
+Le validateur seul peut être ajouté au niveau du fichier dans MainActivity.kt par
+l’élève. Il n’est pas encore appelé par un bouton. Un programme console complet
+est proposé en détail, avec main comme cadre fourni et résultats attendus ;
+ne pas le confondre avec le point de départ de l’app Android. Le site n’exécute
+rien. Exercices et confirmations sans JavaScript ni stockage.
+
+Sources auteur : https://kotlinlang.org/docs/functions.html et
+https://kotlinlang.org/docs/equality.html. Les références restent hors du parcours
+élève. Vérifier la navigation variables ↔ fonctions, les détails au clavier, le
+petit écran, puis les vrais résultats du programme console avec l’encadrant.
