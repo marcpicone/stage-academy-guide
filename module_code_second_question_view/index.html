@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Ajouter une deuxième question au quiz, réutiliser la validation et repérer les répétitions avant d’organiser les données."><title>Ajouter une deuxième question · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_second_question_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="second-question-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 4</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Réutiliser ce que tu connais</p><h1 id="titre">Ajouter une deuxième question.</h1><p class="lead">Ta première question fonctionne. Ajoute-en une autre avec les mêmes ingrédients, puis regarde ce qui se répète et ce qui devient moins facile à retrouver.</p><p>Nous gardons les variables simples et la même fonction de validation. Les deux questions seront visibles l’une sous l’autre, avec un message chacune.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#preparer">Préparer</a><a href="#donnees">Les données</a><a href="#actions">Les actions</a><a href="#ecran">L’écran</a><a href="#tester">Tester</a><a href="#recul">Prendre du recul</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="preparer" aria-labelledby="titre-preparer"><p class="eyebrow">01 / Partir de ce qui marche</p><h2 id="titre-preparer">Garde un premier point de repère.</h2>
+<p>Dans ton projet Android, reprends la version de la page précédente. Vérifie que Git donne « Bonne réponse ! », et que les deux autres boutons donnent « Essaie encore. ».</p><p>Avec l’encadrant, garde cette étape dans Git avant de modifier l’écran. Pour la suite, tu peux préparer une branche comme <code>ab/ajouter_deuxieme_question</code>, en utilisant tes initiales et un point de départ qui contient ta première question fonctionnelle.</p><p>Le but n’est pas encore de faire défiler les questions une à une ou de calculer un score. Tu vas construire deux groupes de réponses indépendants dans le même écran.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Point de départ</h3><p>La version du projet sur laquelle tu travailles. Relancer et vérifier son comportement aide à distinguer un problème déjà présent d’un problème introduit ensuite.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="donnees" aria-labelledby="titre-donnees"><p class="eyebrow">02 / Distinguer les informations</p><h2 id="titre-donnees">Quelle valeur appartient à quelle question ?</h2>
+<p>Si tu recopies les cinq déclarations de la première question dans le même bloc sans changer leurs noms, le programme ne pourra pas distinguer les deux groupes. Donne des noms différents aux valeurs qui appartiennent aux deux questions.</p><p>Pour la première, fais apparaître <code>firstQuestion</code> dans les noms :</p><pre><code>val firstQuestionText: String = &quot;Quel outil garde l’historique du code ?&quot;
+val firstQuestionFirstChoice: String = &quot;Git&quot;
+val firstQuestionSecondChoice: String = &quot;Android&quot;
+val firstQuestionThirdChoice: String = &quot;Compose&quot;
+val firstQuestionCorrectAnswer: String = &quot;Git&quot;</code></pre>
+<p>Prépare ensuite la seconde question sur Compose :</p><pre><code>val secondQuestionText: String = &quot;Quel composant Compose affiche du texte ?&quot;
+val secondQuestionFirstChoice: String = &quot;Button&quot;
+val secondQuestionSecondChoice: String = &quot;Text&quot;
+val secondQuestionThirdChoice: String = &quot;Column&quot;
+val secondQuestionCorrectAnswer: String = &quot;Text&quot;</code></pre>
+<p>Quand tu renommes les valeurs de la première question, mets aussi à jour leurs utilisations dans les boutons, le texte et la validation. L’action de renommage de l’IDE peut t’aider avec l’encadrant ; relis les changements avant de continuer.</p>
+<aside class="takeaway"><strong>Des noms longs mais explicites évitent les confusions.</strong><p><code>secondQuestionSecondChoice</code> signifie « deuxième choix de la deuxième question ». Ce nom dit précisément ce que tu lis. Il montre aussi que les noms commencent à devenir encombrants.</p></aside>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>first / second</h3><p>Premier / deuxième. Ici, ces mots distinguent les deux questions, puis leurs choix.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Portée · scope</h3><p>Dans le même bloc, deux variables locales ne peuvent pas porter le même nom. Nous gardons toutes les données au début de WelcomeScreen pour cet exercice.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Renommer · rename</h3><p>Changer un nom et ses utilisations pour conserver leur lien. Modifier seulement la déclaration laisse des utilisations avec l’ancien nom.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="actions" aria-labelledby="titre-actions"><p class="eyebrow">03 / Un message par question</p><h2 id="titre-actions">Réutilise la règle, distingue les actions.</h2>
+<p>Garde <strong>une seule</strong> fonction <code>isCorrectAnswer</code> au niveau du fichier. Sa règle compare deux textes, quelle que soit la question. Elle n’a pas besoin d’être recopiée.</p><p>En revanche, chaque question doit garder son propre message :</p><pre><code>var firstFeedbackText: String by remember {
+    mutableStateOf(&quot;Choisis une réponse pour la question 1.&quot;)
+}
+var secondFeedbackText: String by remember {
+    mutableStateOf(&quot;Choisis une réponse pour la question 2.&quot;)
+}</code></pre>
+<p>L’action de la première question devient <code>checkFirstAnswer</code> et utilise <code>firstQuestionCorrectAnswer</code> puis <code>firstFeedbackText</code>. Écris celle de la deuxième sur le même modèle :</p><pre id="second-action"><code>fun checkSecondAnswer(selectedAnswer: String): Unit {
+    val isAnswerCorrect: Boolean = isCorrectAnswer(
+        selectedAnswer,
+        secondQuestionCorrectAnswer,
+    )
+    if (isAnswerCorrect) {
+        secondFeedbackText = &quot;Bonne réponse !&quot;
+    } else {
+        secondFeedbackText = &quot;Essaie encore.&quot;
+    }
+}</code></pre>
+<p>Vérifie les deux liens : la bonne réponse vient de la <strong>deuxième</strong> question, et le message modifié est celui de la <strong>deuxième</strong> question. Les deux actions restent à l’intérieur de WelcomeScreen pour accéder aux données qui les entourent.</p>
+<details><summary>Pourquoi les deux actions peuvent-elles avoir une variable isAnswerCorrect ?</summary><p>Chacune déclare cette variable dans son propre corps. Les deux variables sont locales à deux fonctions différentes. Elles ne se gênent pas. Ce n’est pas la même situation que deux déclarations du même nom dans le même bloc.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Indépendant · independent</h3><p>Répondre à la deuxième question doit changer son message, sans remplacer celui de la première.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Réutiliser · reuse</h3><p>Appeler la même règle avec d’autres valeurs. isCorrectAnswer reçoit deux textes : cette action sert aux deux questions.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="ecran" aria-labelledby="titre-ecran"><p class="eyebrow">04 / Compléter la vue</p><h2 id="titre-ecran">Ajoute le deuxième groupe de boutons.</h2>
+<p>Dans Column, garde l’ordre suivant : titre, question 1, ses trois boutons, son message, puis question 2, ses trois boutons et son message.</p><p>Par exemple, le bouton du deuxième choix de la deuxième question utilise cette même valeur à deux endroits :</p><pre><code>Button(onClick = { checkSecondAnswer(secondQuestionSecondChoice) }) {
+    Text(text = secondQuestionSecondChoice)
+}</code></pre>
+<p>Le bouton affiche « Text » et transmet « Text » à l’action de la deuxième question. Relis chaque bouton pour éviter qu’il affiche un choix mais en vérifie un autre.</p>
+<p>Deux questions peuvent dépasser la hauteur de l’appareil. Le cadre fourni ajoute <code>verticalScroll(rememberScrollState())</code> à Column pour permettre le défilement vertical. Ajoute ces deux imports s’ils ne sont pas déjà présents :</p><pre id="scroll-imports"><code>import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll</code></pre>
+<details><summary>Comparer avec une version complète de WelcomeScreen</summary><p>Essaie d’abord de compléter tes données et tes boutons. Utilise ce bloc pour comparer ou reprendre un point précis avec l’encadrant. Si tu le remplaces entièrement, garde le reste du fichier et l’unique fonction isCorrectAnswer.</p><pre id="screen-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val firstQuestionText: String = &quot;Quel outil garde l’historique du code ?&quot;
+    val firstQuestionFirstChoice: String = &quot;Git&quot;
+    val firstQuestionSecondChoice: String = &quot;Android&quot;
+    val firstQuestionThirdChoice: String = &quot;Compose&quot;
+    val firstQuestionCorrectAnswer: String = &quot;Git&quot;
+
+    val secondQuestionText: String = &quot;Quel composant Compose affiche du texte ?&quot;
+    val secondQuestionFirstChoice: String = &quot;Button&quot;
+    val secondQuestionSecondChoice: String = &quot;Text&quot;
+    val secondQuestionThirdChoice: String = &quot;Column&quot;
+    val secondQuestionCorrectAnswer: String = &quot;Text&quot;
+
+    var firstFeedbackText: String by remember {
+        mutableStateOf(&quot;Choisis une réponse pour la question 1.&quot;)
+    }
+    var secondFeedbackText: String by remember {
+        mutableStateOf(&quot;Choisis une réponse pour la question 2.&quot;)
+    }
+
+    fun checkFirstAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = isCorrectAnswer(
+            selectedAnswer,
+            firstQuestionCorrectAnswer,
+        )
+        if (isAnswerCorrect) {
+            firstFeedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            firstFeedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    fun checkSecondAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = isCorrectAnswer(
+            selectedAnswer,
+            secondQuestionCorrectAnswer,
+        )
+        if (isAnswerCorrect) {
+            secondFeedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            secondFeedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Text(text = &quot;Question 1&quot;, style = MaterialTheme.typography.titleMedium)
+        Text(text = firstQuestionText)
+        Button(onClick = { checkFirstAnswer(firstQuestionFirstChoice) }) {
+            Text(text = firstQuestionFirstChoice)
+        }
+        Button(onClick = { checkFirstAnswer(firstQuestionSecondChoice) }) {
+            Text(text = firstQuestionSecondChoice)
+        }
+        Button(onClick = { checkFirstAnswer(firstQuestionThirdChoice) }) {
+            Text(text = firstQuestionThirdChoice)
+        }
+        Text(text = firstFeedbackText)
+        Text(text = &quot;Question 2&quot;, style = MaterialTheme.typography.titleMedium)
+        Text(text = secondQuestionText)
+        Button(onClick = { checkSecondAnswer(secondQuestionFirstChoice) }) {
+            Text(text = secondQuestionFirstChoice)
+        }
+        Button(onClick = { checkSecondAnswer(secondQuestionSecondChoice) }) {
+            Text(text = secondQuestionSecondChoice)
+        }
+        Button(onClick = { checkSecondAnswer(secondQuestionThirdChoice) }) {
+            Text(text = secondQuestionThirdChoice)
+        }
+        Text(text = secondFeedbackText)
+    }
+}</code></pre></details>
+<p>La deuxième question n’apparaît pas seulement après la première : les deux sont dans cet écran. Fais défiler pour atteindre le bas et tous les boutons.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Défilement · scroll</h3><p>Déplacer le contenu à l’écran pour voir ce qui dépasse. Le code de défilement est fourni ici pour rendre les deux questions accessibles.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Correspondance</h3><p>Le texte affiché, l’argument transmis au clic et le message mis à jour doivent appartenir au même groupe de question.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="tester" aria-labelledby="titre-tester"><p class="eyebrow">05 / Vérifier les liens</p><h2 id="titre-tester">Deux questions, deux résultats indépendants.</h2>
+<p>Enregistre puis lance avec Run. Prévois chaque résultat avant de cliquer.</p><ol class="steps"><li>Question 1 : clique sur Git. Son message doit devenir « Bonne réponse ! ».</li><li>Descends vers la question 2 : son message doit encore proposer de choisir une réponse.</li><li>Question 2 : clique sur Button, puis Text. Son message doit passer de « Essaie encore. » à « Bonne réponse ! ».</li><li>Remonte : le message de la question 1 doit toujours indiquer « Bonne réponse ! ».</li><li>Question 1 : clique sur Android. Seul son message devient « Essaie encore. ».</li><li>Question 2 : clique sur Column. Son message devient « Essaie encore. ».</li></ol>
+<details><summary>Une réponse modifie le mauvais message</summary><p>Pars du bouton : quelle action appelle son onClick ? Quelle valeur est transmise ? Dans cette action, quelle bonne réponse est utilisée et quel message est changé ? Compare les préfixes first et second. Un nom existant mais appartenant à l’autre question peut compiler tout en donnant un comportement incorrect.</p></details>
+<details><summary>La deuxième question ne tient pas à l’écran</summary><p>Vérifie les deux imports et le modifier verticalScroll dans le bloc complet. Essaie de faire défiler sur l’appareil, pas seulement de regarder le premier écran visible.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Test de comportement</h3><p>Vérifier ce que l’application fait vraiment. Une compilation réussie ne détecte pas tous les mélanges entre les deux questions.</p></aside></div></div>
+<section class="lesson-section" id="recul" aria-labelledby="titre-recul"><p class="eyebrow">06 / Observer avant d’organiser</p><h2 id="titre-recul">Et si tu ajoutais encore deux questions ?</h2><p>Ne les code pas encore : cherche ce qu’il faudrait recopier ou renommer. Montre les données, les actions et les boutons concernés à ton encadrant.</p><ol class="steps"><li>Quelles informations reviennent pour chaque question ?</li><li>Quelles lignes ont la même forme, avec seulement un nom ou un texte différent ?</li><li>Où risquerais-tu de garder par erreur une référence à la première question ?</li><li>Qu’est-ce qui est déjà partagé sans être recopié ?</li></ol><details><summary>Comparer mes observations</summary><p>Chaque question possède un énoncé, des choix, une bonne réponse et un message. Les deux actions de clic et les groupes de boutons se ressemblent beaucoup. La validation isCorrectAnswer est déjà commune.</p><p>Le code fonctionne, mais ajouter des questions oblige à suivre de plus en plus de noms et de liens. Nous allons maintenant chercher à regrouper les informations et à réutiliser davantage de code.</p></details><fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>J’ai ajouté une deuxième question sans recopier la règle isCorrectAnswer.</span></label><label><input type="checkbox"><span>Chaque bouton transmet le choix qu’il affiche à l’action de sa question.</span></label><label><input type="checkbox"><span>J’ai vérifié sur l’appareil que les messages restent indépendants.</span></label><label><input type="checkbox"><span>Je peux montrer les répétitions et expliquer un risque de confusion.</span></label></fieldset><p class="caption">Confirmations personnelles, sans lecture de ton projet ni sauvegarde de progression par le guide.</p><p class="closing">Garde cette étape avec ton encadrant. La suite introduira une façon de regrouper plusieurs choix, au lieu de leur donner chacun un nom différent.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_compose_view/index.html" rel="prev"><span>← Précédent</span><span>Répondre à une question</span></a></nav></main></div></body></html>

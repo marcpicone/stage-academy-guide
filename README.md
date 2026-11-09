@@ -70,6 +70,9 @@ stage-academy-guide/
   module_code_compose_view/
     index.html                 # Text, Button, action, condition et état
     module_code_compose_view.css
+  module_code_second_question_view/
+    index.html                 # Deux questions et observation des répétitions
+    module_code_second_question_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -254,3 +257,22 @@ Sources auteur : https://developer.android.com/develop/ui/compose/state ,
 https://developer.android.com/develop/ui/compose/components/button et
 https://kotlinlang.org/docs/control-flow.html . Pas de références techniques
 supplémentaires imposées dans le parcours élève.
+
+## Code — page 4 : deuxième question
+
+`module_code_second_question_view/index.html` fait réutiliser le validateur et
+dupliquer les données/actions/vues de deux questions dans WelcomeScreen. Les
+préfixes firstQuestion/secondQuestion rendent les liens explicites et montrent
+l’encombrement avant l’introduction des collections. Pas encore de liste, de
+modèle, de score ou de navigation entre questions : les deux groupes s’affichent
+sur le même écran avec deux états de message indépendants. La portée est rappelée
+sur les noms et variables locales des deux actions.
+
+Un bloc complet de comparaison est dépliable. Les imports rememberScrollState et
+verticalScroll sont fournis pour accéder à tous les boutons sur un petit appareil.
+La validation doit exister une seule fois au niveau du fichier. Les tests manuels
+visent les six choix, les transitions et l’indépendance des messages.
+
+Les liens Compose ↔ deuxième question et le badge home sont mis à jour. Aucun
+JavaScript requis ni modification du dépôt Android. Source auteur pour le cadre
+de défilement : https://developer.android.com/develop/ui/compose/touch-input/scroll/scroll-modifiers .
