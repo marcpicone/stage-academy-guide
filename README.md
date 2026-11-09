@@ -67,6 +67,9 @@ stage-academy-guide/
   module_code_functions_view/
     index.html                 # Action, paramètres, retour et portée
     module_code_functions_view.css
+  module_code_compose_view/
+    index.html                 # Text, Button, action, condition et état
+    module_code_compose_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -231,3 +234,23 @@ Sources auteur : https://kotlinlang.org/docs/functions.html et
 https://kotlinlang.org/docs/equality.html. Les références restent hors du parcours
 élève. Vérifier la navigation variables ↔ fonctions, les détails au clavier, le
 petit écran, puis les vrais résultats du programme console avec l’encadrant.
+
+## Code — page 3 : première question Compose
+
+`module_code_compose_view/index.html` fournit le remplacement de WelcomeScreen :
+données locales, trois boutons, règle isCorrectAnswer inchangée, action locale
+checkAnswer, choix du message par if/else et état de texte. Elle introduit var à
+partir du besoin de changer ce message, puis explique remember/mutableStateOf/by.
+Pas de score ni de collection. L’état remember n’est pas une sauvegarde durable.
+Les imports d’état et du bouton sont détaillés, le validateur doit exister une
+seule fois au niveau du fichier. Le guide ne modifie pas le dépôt Android.
+
+Navigation fonctions ↔ Compose, card home à trois pages, exercices et confirmations
+sans JavaScript. Le protocole de test réel demande les trois choix et un retour
+d’une réponse correcte à une réponse incorrecte. Compiler l’exemple ne confirme
+pas son rendu ou le résultat des gestes sur l’appareil.
+
+Sources auteur : https://developer.android.com/develop/ui/compose/state ,
+https://developer.android.com/develop/ui/compose/components/button et
+https://kotlinlang.org/docs/control-flow.html . Pas de références techniques
+supplémentaires imposées dans le parcours élève.
