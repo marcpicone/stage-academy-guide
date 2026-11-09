@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Afficher une question avec Compose, relier ses boutons à la validation et mettre à jour le message de réponse."><title>Répondre à une question · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_compose_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="compose-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 3</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Des données au clic</p><h1 id="titre">Répondre à une question.</h1><p class="lead">Tes données décrivent la question. Ta fonction sait vérifier une réponse. Relie-les maintenant à un écran : trois boutons et un message qui réagit au clic.</p><p>La structure de la vue est fournie. Ton objectif est de comprendre quelle valeur est affichée et quelle action chaque bouton déclenche.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#compose">L’écran</a><a href="#bouton">Le clic</a><a href="#condition">Le message</a><a href="#etat">Ce qui change</a><a href="#projet">Dans le projet</a><a href="#verifier">Vérifier</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="compose" aria-labelledby="titre-compose"><p class="eyebrow">01 / Décrire ce que le joueur voit</p><h2 id="titre-compose">Une première vue avec Compose.</h2>
+<p>Compose permet de décrire l’interface Android en Kotlin. Une fonction marquée <code>@Composable</code> peut décrire des éléments d’écran. Dans notre projet, c’est le rôle de <code>WelcomeScreen</code>, déjà appelée par le code de départ.</p><div class="component-cards"><article><h3>Text · afficher du texte</h3><pre><code>Text(text = questionText)</code></pre><p>Le paramètre <code>text</code> reçoit la phrase à afficher. Ici, nous transmettons la valeur de notre variable <code>questionText</code>.</p></article><article><h3>Column · placer à la verticale</h3><pre><code>Column {
+    Text(text = questionText)
+    Text(text = firstChoice)
+}</code></pre><p>Les éléments décrits entre les accolades se placent les uns sous les autres.</p></article><article><h3>Button · proposer une action</h3><p>Un bouton contient un libellé visible et reçoit une action à effectuer au clic. Nous allons utiliser un Text pour son libellé.</p></article></div><p>Dans les exemples fournis, <code>Modifier</code> règle la taille ou les marges, et <code>MaterialTheme</code> fournit un style de texte. Garde ces réglages pour cette étape : nous allons d’abord relier les données et les actions.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Interface / vue · UI / view</h3><p>Ce que le joueur voit et utilise : textes, boutons et leur disposition.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Composable</h3><p>Une fonction signalée par @Composable, utilisée ici pour décrire une partie de l’interface. Notre fonction de validation reste une fonction Kotlin ordinaire.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Composant · component</h3><p>Un élément réutilisable de l’interface, comme Text ou Button.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="bouton" aria-labelledby="titre-bouton"><p class="eyebrow">02 / Un bouton, une action</p><h2 id="titre-bouton">Qu’exécute le clic ?</h2>
+<p>Voici le bouton du premier choix :</p><pre><code>Button(onClick = { checkAnswer(firstChoice) }) {
+    Text(text = firstChoice)
+}</code></pre>
+<p><code>Text(text = firstChoice)</code> affiche « Git ». <code>onClick</code> reçoit le bloc d’action <code>{ checkAnswer(firstChoice) }</code>. Ce bloc sera exécuté quand le joueur cliquera, pas quand le bouton est décrit.</p><p><code>checkAnswer</code> sera notre action qui demande la validation puis choisit le message. Le même nom de variable sert ici à afficher le choix et à transmettre sa valeur au clic : on vérifie bien ce que le joueur a choisi.</p><p>Les deux autres boutons utiliseront exactement le même principe avec <code>secondChoice</code> et <code>thirdChoice</code>.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>onClick · au clic</h3><p>Le paramètre qui reçoit l’action à exécuter quand le bouton est activé.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Bloc d’action · lambda</h3><p>Une action écrite entre accolades et transmise à une autre fonction. Ici, le bouton la garde pour le clic. Nous n’avons besoin que de cet usage pour commencer.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="condition" aria-labelledby="titre-condition"><p class="eyebrow">03 / Utiliser le résultat de validation</p><h2 id="titre-condition">Si la réponse est correcte… sinon…</h2>
+<p><code>isCorrectAnswer</code> renvoie true ou false. Pour choisir ce qui se passe selon ce résultat, on utilise une condition :</p><pre><code>if (isAnswerCorrect) {
+    feedbackText = &quot;Bonne réponse !&quot;
+} else {
+    feedbackText = &quot;Essaie encore.&quot;
+}</code></pre>
+<p><code>if</code> signifie « si » : si <code>isAnswerCorrect</code> vaut <code>true</code>, on exécute le premier bloc. <code>else</code> signifie « sinon » : si la valeur est <code>false</code>, on exécute le deuxième. Un seul des deux messages est choisi pour cet appel.</p><p>Voici l’action complète, à lire avant de l’intégrer à l’écran :</p><pre><code>fun checkAnswer(selectedAnswer: String): Unit {
+    val isAnswerCorrect: Boolean = isCorrectAnswer(selectedAnswer, correctAnswer)
+    if (isAnswerCorrect) {
+        feedbackText = &quot;Bonne réponse !&quot;
+    } else {
+        feedbackText = &quot;Essaie encore.&quot;
+    }
+}</code></pre>
+<p>Elle reçoit le choix, appelle notre règle de validation, puis change le message. Son retour est <code>Unit</code> : son rôle est de mettre à jour ce message, pas de fournir un nouveau résultat à récupérer.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Condition · condition</h3><p>Une question vraie ou fausse qui permet de choisir quelle action exécuter.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>feedbackText</h3><p>Le « texte de retour au joueur » : le message qui lui indique le résultat de son choix.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>isAnswerCorrect</h3><p>« La réponse est-elle correcte ? » : le résultat Boolean de notre validation.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="etat" aria-labelledby="titre-etat"><p class="eyebrow">04 / Une information qui évolue</p><h2 id="titre-etat">Quand garder val, quand utiliser var ?</h2>
+<p>Les textes des choix ne changent pas pendant cet exercice : <code>val</code> convient. Le message doit au contraire être remplacé après un clic : nous utilisons <code>var</code>.</p><pre><code>var feedbackText: String by remember {
+    mutableStateOf(&quot;Choisis une réponse.&quot;)
+}</code></pre>
+<p>Plus tard, <code>feedbackText = "Bonne réponse !"</code> donne un nouveau texte à la même variable. On ne remet pas <code>var</code> devant son nom : la variable existe déjà.</p><p>La différence répond à un besoin : <strong>val</strong> pour une valeur qu’on ne réaffecte pas ; <strong>var</strong> quand le programme doit la remplacer. Son type reste String : on remplace un texte par un autre texte.</p>
+<aside class="takeaway"><strong>var autorise un changement ; l’état Compose rend ce changement visible.</strong><p>Un simple <code>var feedbackText: String = "…"</code> ne suffit pas à demander à Compose de mettre à jour l’écran au clic. Le petit cadre ci-dessus est nécessaire dans cet exemple.</p></aside>
+<ul class="state-parts"><li><code>mutableStateOf</code> crée une valeur observée par Compose. Quand elle change, Compose peut mettre à jour les éléments qui la lisent.</li><li><code>remember</code> conserve cette valeur entre les nouvelles descriptions de cette même vue à l’écran.</li><li><code>by</code>, avec les imports fournis, permet de lire et modifier cet état en utilisant directement <code>feedbackText</code>.</li></ul>
+<p>Nous affichons la valeur avec <code>Text(text = feedbackText)</code>. Le message change quand l’état change. <code>remember</code> n’est pas une sauvegarde durable : un redémarrage de l’activité, par exemple après une rotation, peut remettre le message initial.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>État · state</h3><p>Une information qui peut évoluer et dont l’affichage dépend. Ici, c’est le message après la réponse.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Réaffecter · reassign</h3><p>Remplacer la valeur d’une variable existante pendant le fonctionnement du programme. Dans notre exemple, cela demande var.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Recomposition</h3><p>Compose décrit à nouveau les parties concernées de l’interface pour tenir compte des valeurs observées qui ont changé.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="projet" aria-labelledby="titre-projet"><p class="eyebrow">05 / Relier les morceaux</p><h2 id="titre-projet">Construis une question utilisable.</h2>
+<p>Ouvre <code>app/src/main/java/fr/stageacademy/quiz/MainActivity.kt</code>. Prépare ta branche de travail avec l’encadrant comme dans la page sur le partage depuis l’IDE.</p><ol class="steps"><li>Garde une seule définition de <code>isCorrectAnswer</code>, celle de la page précédente, en dehors des autres fonctions et classes. Si elle n’est pas encore dans ce fichier, ajoute la définition ci-dessous à la fin.</li><li>Remplace la fonction <code>WelcomeScreen</code> existante et sa ligne <code>@Composable</code> par le bloc fourni. Ne remplace pas toute la classe MainActivity ni la prévisualisation.</li><li>Vérifie les imports indiqués après le bloc, puis lance avec Run et teste les trois choix.</li></ol>
+<details><summary>Retrouver la fonction isCorrectAnswer de la page précédente</summary><pre id="validator-example"><code>fun isCorrectAnswer(
+    selectedAnswer: String,
+    correctAnswer: String,
+): Boolean {
+    val result: Boolean = selectedAnswer == correctAnswer
+    return result
+}</code></pre></details>
+<pre id="screen-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val questionText: String = &quot;Quel outil garde l’historique du code ?&quot;
+    val firstChoice: String = &quot;Git&quot;
+    val secondChoice: String = &quot;Android&quot;
+    val thirdChoice: String = &quot;Compose&quot;
+    val correctAnswer: String = &quot;Git&quot;
+
+    var feedbackText: String by remember {
+        mutableStateOf(&quot;Choisis une réponse.&quot;)
+    }
+
+    fun checkAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = isCorrectAnswer(selectedAnswer, correctAnswer)
+        if (isAnswerCorrect) {
+            feedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            feedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    Column(
+        modifier = modifier.fillMaxSize().padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Text(text = questionText)
+        Button(onClick = { checkAnswer(firstChoice) }) {
+            Text(text = firstChoice)
+        }
+        Button(onClick = { checkAnswer(secondChoice) }) {
+            Text(text = secondChoice)
+        }
+        Button(onClick = { checkAnswer(thirdChoice) }) {
+            Text(text = thirdChoice)
+        }
+        Text(text = feedbackText)
+    }
+}</code></pre>
+<details><summary>Les imports nécessaires pour l’état et le bouton</summary><p>Ces imports sont déjà présents dans le projet de départ avec le bouton « Click me ». S’ils manquent dans ton fichier, ajoute uniquement ceux qui ne sont pas déjà en haut du fichier :</p><pre><code>import androidx.compose.material3.Button
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue</code></pre><p>Les autres éléments de la vue reprennent les imports de l’écran de départ : Text, Column, Modifier, Composable, les espacements et le thème.</p></details>
+<p>Le bouton « Click me » est maintenant remplacé par les trois boutons de réponse. Les paramètres de disposition de Column et le titre reprennent le cadre existant. Les valeurs de durée, d’indice ou de numéro de question ne sont pas nécessaires à ce premier écran.</p>
+<details><summary>Pourquoi checkAnswer est-elle à l’intérieur de WelcomeScreen ?</summary><p>C’est une action locale, utilisée uniquement par cet écran. Elle peut lire <code>correctAnswer</code> et changer <code>feedbackText</code> déclarés dans le bloc qui l’entoure. Les trois boutons du même écran peuvent l’appeler. <code>isCorrectAnswer</code>, définie au niveau du fichier, reste indépendante et reçoit les deux textes nécessaires à sa règle.</p><p>On utilise ainsi la portée étudiée à la page précédente. Nous séparerons davantage les responsabilités quand le quiz grandira.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Import</h3><p>Une ligne qui rend disponible un nom fourni ailleurs. Ici, les outils Compose viennent des bibliothèques déjà présentes dans le projet.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Logique / affichage</h3><p>isCorrectAnswer applique la règle ; Text et Button décrivent l’écran. checkAnswer fait ici le lien entre le choix, la règle et le message.</p></aside></div></div>
+<section class="lesson-section" id="verifier" aria-labelledby="titre-verifier"><p class="eyebrow">06 / Observer le vrai résultat</p><h2 id="titre-verifier">Teste les trois chemins.</h2><p>Avant chaque clic, prévois ce que transmettra le bouton et quel message devrait apparaître.</p><ol class="steps"><li>Au lancement : lis « Choisis une réponse. ».</li><li>Clique sur Android : le message devient « Essaie encore. ».</li><li>Clique sur Git : il devient « Bonne réponse ! ».</li><li>Clique sur Compose après Git : il redevient « Essaie encore. ».</li></ol><p>Tu peux répondre plusieurs fois : cet exercice remplace seulement le message. Il ne compte pas de points et ne passe pas encore à une autre question.</p><details><summary>Le message ne change pas ou l’IDE affiche une erreur</summary><p>Vérifie que tu as attendu la fin de la construction et lancé la bonne application. Dans le fichier, retrouve le bloc d’état, Text(text = feedbackText) et l’appel à checkAnswer dans chaque onClick. Vérifie aussi les imports et les éventuelles définitions en double de WelcomeScreen ou isCorrectAnswer. Lis le premier message utile avec l’encadrant.</p></details><details><summary>Question : pourquoi un clic sur Android appelle-t-il la même action qu’un clic sur Git ?</summary><p>L’action est réutilisable. Chaque bouton lui fournit une valeur différente : secondChoice ou firstChoice. La règle reçoit ce choix, puis le résultat décide du message.</p></details><fieldset class="checklist"><legend>À montrer à l’encadrant</legend><label><input type="checkbox"><span>Je retrouve quelle variable alimente chaque texte et chaque bouton.</span></label><label><input type="checkbox"><span>Je peux suivre clic → checkAnswer → isCorrectAnswer → résultat.</span></label><label><input type="checkbox"><span>Je comprends pourquoi le message utilise var et un état Compose.</span></label><label><input type="checkbox"><span>J’ai observé les trois choix et un changement de réponse sur l’appareil.</span></label></fieldset><p class="caption">Ces cases sont tes confirmations. Le guide ne lance pas l’appareil et ne sauvegarde pas ta progression.</p><p class="closing">Ta première question fonctionne. La prochaine étape sera d’en ajouter une deuxième, puis d’observer ce qui se répète et comment mieux organiser le code.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_functions_view/index.html" rel="prev"><span>← Précédent</span><span>Les fonctions : décrire une action</span></a></nav></main></div></body></html>
