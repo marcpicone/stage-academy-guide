@@ -73,6 +73,9 @@ stage-academy-guide/
   module_code_second_question_view/
     index.html                 # Deux questions et observation des répétitions
     module_code_second_question_view.css
+  module_code_lists_view/
+    index.html                 # List<String>, indices et boucle for
+    module_code_lists_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -276,3 +279,22 @@ visent les six choix, les transitions et l’indépendance des messages.
 Les liens Compose ↔ deuxième question et le badge home sont mis à jour. Aucun
 JavaScript requis ni modification du dépôt Android. Source auteur pour le cadre
 de défilement : https://developer.android.com/develop/ui/compose/touch-input/scroll/scroll-modifiers .
+
+## Code — page 5 : listes de choix
+
+`module_code_lists_view/index.html` remplace les trois variables de choix par
+List<String> et les trois boutons par un for typé. Ordre, élément, indice à partir
+de zéro, size, listOf et portée de choice sont introduits. Les deux questions,
+leurs états, actions et le validateur sont conservés. Pas de Map, de classe, de
+modèle de question ni de mutation de liste pendant l’exécution.
+
+L’exercice ajoute Logcat à la première liste puis déplace Git en dernier ; aucun
+bouton ni action ne doit être recopié et l’égalité de textes doit rester valide.
+Le programme complet est repliable et le protocole contrôle aussi l’indépendance
+des messages. Les listes sont utilisées en lecture ; le cours ne confond pas
+interface en lecture seule et immutabilité universelle.
+
+Liens deuxième question ↔ listes et badge home à cinq pages. Pas de JavaScript ni
+de modification du dépôt Android. Sources auteur :
+https://kotlinlang.org/docs/collections-overview.html et
+https://kotlinlang.org/docs/control-flow.html#for-loops .

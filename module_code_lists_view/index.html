@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Regrouper les choix dans une List de textes et utiliser une boucle for pour générer leurs boutons dans le quiz."><title>Regrouper les choix dans une liste · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_lists_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="lists-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 5</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Moins de noms, plus de choix</p><h1 id="titre">Regrouper les choix dans une liste.</h1><p class="lead">Tu as trois choix et trois boutons par question. Au lieu de leur donner chacun un nom, rassemble-les dans une liste et décris une seule fois comment afficher un choix.</p><p>Objectif : ajouter un quatrième choix en modifiant les données, sans recopier un bouton ni une nouvelle action.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#besoin">Le besoin</a><a href="#liste">La liste</a><a href="#position">Les positions</a><a href="#boucle">Le parcours</a><a href="#projet">Dans le projet</a><a href="#tester">Vérifier</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="besoin" aria-labelledby="titre-besoin"><p class="eyebrow">01 / Partir de la répétition</p><h2 id="titre-besoin">Ces valeurs appartiennent au même groupe.</h2>
+<p>À la page précédente, la première question avait ces trois déclarations :</p><pre><code>val firstQuestionFirstChoice: String = &quot;Git&quot;
+val firstQuestionSecondChoice: String = &quot;Android&quot;
+val firstQuestionThirdChoice: String = &quot;Compose&quot;</code></pre>
+<p>Elles décrivent toutes des choix de la même question. Un quatrième choix demanderait un nouveau nom, un nouveau bouton et de nouveaux liens à vérifier. Une liste permet de garder plusieurs choix sous un nom commun : <code>firstQuestionChoices</code>.</p><p>Avec l’encadrant, repars de tes deux questions fonctionnelles et garde cette étape dans Git. Prépare ta branche de travail avant les modifications, par exemple <code>ab/regrouper_les_choix</code>.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Structure de données · data structure</h3><p>Une façon d’organiser des informations pour les retrouver et les utiliser. La liste est notre premier exemple.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Choices · choix</h3><p>Le pluriel indique que ce nom représente plusieurs choix, et non un seul texte.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="liste" aria-labelledby="titre-liste"><p class="eyebrow">02 / Un nom pour plusieurs éléments</p><h2 id="titre-liste">Déclare une List de String.</h2>
+<p>Pour la première question, remplace les trois déclarations de choix par :</p><pre id="first-list"><code>val firstQuestionChoices: List&lt;String&gt; = listOf(
+    &quot;Git&quot;,
+    &quot;Android&quot;,
+    &quot;Compose&quot;,
+)</code></pre>
+<dl class="anatomy"><dt><code>firstQuestionChoices</code></dt><dd>Le nom du groupe : les choix de la première question.</dd><dt><code>List&lt;String&gt;</code></dt><dd>Le type de la variable : une liste dont les éléments sont des textes.</dd><dt><code>listOf(…)</code></dt><dd>L’appel qui crée la liste avec les valeurs indiquées entre parenthèses, séparées par des virgules.</dd></dl>
+<p>Une liste conserve l’ordre de ses éléments. Ici, Git vient avant Android, puis Compose. Chaque élément est une valeur ; on ne crée plus trois noms de variables différents.</p><p>Nous utilisons la liste en lecture : nous ne lui ajoutons pas d’élément pendant que l’application fonctionne. Pour l’exercice, nous modifierons les valeurs écrites dans le code, puis nous relancerons.</p>
+<details><summary>Une liste remplace-t-elle aussi la question et sa bonne réponse ?</summary><p>Pas dans cette étape. <code>firstQuestionText</code> reste un texte, et <code>firstQuestionCorrectAnswer</code> reste la bonne réponse. Notre liste regroupe uniquement les choix. Nous apprendrons ensuite à réunir les informations qui décrivent une question.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>List · liste</h3><p>Un groupe ordonné d’éléments. Une même valeur peut apparaître plusieurs fois dans une liste.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Élément · element / item</h3><p>Une valeur dans la liste. Git est ici le premier élément.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Les signes &lt; et &gt;</h3><p>Dans List&lt;String&gt;, ils précisent le type des éléments. Ce ne sont pas des signes de comparaison à cet endroit.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="position" aria-labelledby="titre-position"><p class="eyebrow">03 / Retrouver un élément</p><h2 id="titre-position">La première position porte le numéro 0.</h2>
+<p>Pour accéder à un élément précis, on utilise son indice entre crochets :</p><pre><code>val firstChoice: String = firstQuestionChoices[0]
+val choiceCount: Int = firstQuestionChoices.size</code></pre>
+<p><code>firstChoice</code> reçoit « Git » et <code>choiceCount</code> reçoit <code>3</code>. Le point dans <code>.size</code> permet ici de lire le nombre d’éléments de la liste.</p>
+<ol class="index-list" start="0"><li><strong>Indice 0</strong><span>Git</span></li><li><strong>Indice 1</strong><span>Android</span></li><li><strong>Indice 2</strong><span>Compose</span></li></ol>
+<p>Cette liste a trois éléments, mais pas d’élément à l’indice 3. Y accéder avec <code>firstQuestionChoices[3]</code> provoquerait une erreur pendant l’exécution. Ces deux lignes sont un exemple de lecture : nous n’avons pas besoin de les ajouter à l’écran pour générer les boutons.</p>
+<details><summary>À toi : que contient firstQuestionChoices[1] ?</summary><p>« Android », le deuxième élément. Le numéro affiché dans le langage commence à zéro, pas à un.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Indice · index</h3><p>Le numéro de position d’un élément dans une liste. Le premier indice est 0.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Size · taille</h3><p>Le nombre d’éléments. Une taille de 3 correspond aux indices 0, 1 et 2.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Crochets · brackets</h3><p>Les signes [ et ] utilisés ici pour demander un élément par son indice.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="boucle" aria-labelledby="titre-boucle"><p class="eyebrow">04 / Répéter une action pour chaque élément</p><h2 id="titre-boucle">Une boucle pour les boutons.</h2>
+<p>Nous voulons appliquer la même description à tous les choix : un bouton qui affiche ce choix et le transmet à l’action de validation. La boucle <code>for</code> permet de parcourir les éléments :</p><pre id="first-loop"><code>for (choice: String in firstQuestionChoices) {
+    Button(onClick = { checkFirstAnswer(choice) }) {
+        Text(text = choice)
+    }
+}</code></pre>
+<p>Lis la première ligne ainsi : « Pour chaque texte choice dans firstQuestionChoices, décris ce bouton. »</p><ol class="steps"><li>Premier passage : <code>choice</code> contient « Git ».</li><li>Deuxième passage : <code>choice</code> contient « Android ».</li><li>Troisième passage : <code>choice</code> contient « Compose ».</li><li>Il n’y a plus d’élément : le parcours se termine.</li></ol>
+<p><code>choice</code> est le nom local utilisé dans le corps de la boucle pour l’élément courant. Chaque bouton affiche cet élément et le fournit à <code>checkFirstAnswer</code> lorsqu’on clique dessus.</p>
+<aside class="takeaway"><strong>Décrire les boutons et cliquer sont deux moments différents.</strong><p>Compose parcourt la liste pour décrire les boutons. Le bloc <code>onClick</code> garde l’action pour plus tard : la boucle ne répond pas automatiquement à la question.</p></aside>
+<p>Remplace les trois boutons de la première question par ce parcours. Pour la deuxième, utilise la même forme avec <code>secondQuestionChoices</code> et <code>checkSecondAnswer</code>.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Boucle · loop</h3><p>Une instruction qui répète un bloc de code. Ici, for le fait une fois pour chaque élément de la liste.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>for / in</h3><p>« Pour chaque … dans … ». La liste indique les éléments à parcourir.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Portée de choice</h3><p>Le nom choice est accessible dans le corps de cette boucle, y compris le bloc du bouton. Une autre boucle peut avoir son propre choice.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="projet" aria-labelledby="titre-projet"><p class="eyebrow">05 / Transformer les deux questions</p><h2 id="titre-projet">Changer l’organisation, garder les règles.</h2>
+<p>Dans <code>MainActivity.kt</code>, travaille dans <code>WelcomeScreen</code>. Prépare aussi une liste pour les choix de la deuxième question :</p><pre><code>val secondQuestionChoices: List&lt;String&gt; = listOf(
+    &quot;Button&quot;,
+    &quot;Text&quot;,
+    &quot;Column&quot;,
+)</code></pre>
+<ol class="steps"><li>Remplace les trois variables de choix de chaque question par sa liste.</li><li>Remplace les trois boutons de chaque question par sa boucle for.</li><li>Garde les énoncés, les bonnes réponses, les messages et les deux actions de clic.</li><li>Garde une seule fonction <code>isCorrectAnswer</code> au niveau du fichier, ainsi que les imports et le défilement de la page précédente.</li><li>Enregistre, relance et vérifie que les deux questions fonctionnent toujours comme avant.</li></ol>
+<details><summary>Comparer avec la version complète de WelcomeScreen</summary><p>Cette version reprend le cadre de la page précédente. Les changements concernent uniquement les listes de choix et les deux parcours qui décrivent les boutons.</p><pre id="screen-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val firstQuestionText: String = &quot;Quel outil garde l’historique du code ?&quot;
+    val firstQuestionChoices: List&lt;String&gt; = listOf(
+        &quot;Git&quot;,
+        &quot;Android&quot;,
+        &quot;Compose&quot;,
+    )
+    val firstQuestionCorrectAnswer: String = &quot;Git&quot;
+
+    val secondQuestionText: String = &quot;Quel composant Compose affiche du texte ?&quot;
+    val secondQuestionChoices: List&lt;String&gt; = listOf(
+        &quot;Button&quot;,
+        &quot;Text&quot;,
+        &quot;Column&quot;,
+    )
+    val secondQuestionCorrectAnswer: String = &quot;Text&quot;
+
+    var firstFeedbackText: String by remember {
+        mutableStateOf(&quot;Choisis une réponse pour la question 1.&quot;)
+    }
+    var secondFeedbackText: String by remember {
+        mutableStateOf(&quot;Choisis une réponse pour la question 2.&quot;)
+    }
+
+    fun checkFirstAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = isCorrectAnswer(
+            selectedAnswer,
+            firstQuestionCorrectAnswer,
+        )
+        if (isAnswerCorrect) {
+            firstFeedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            firstFeedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    fun checkSecondAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = isCorrectAnswer(
+            selectedAnswer,
+            secondQuestionCorrectAnswer,
+        )
+        if (isAnswerCorrect) {
+            secondFeedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            secondFeedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Text(text = &quot;Question 1&quot;, style = MaterialTheme.typography.titleMedium)
+        Text(text = firstQuestionText)
+        for (choice: String in firstQuestionChoices) {
+            Button(onClick = { checkFirstAnswer(choice) }) {
+                Text(text = choice)
+            }
+        }
+        Text(text = firstFeedbackText)
+        Text(text = &quot;Question 2&quot;, style = MaterialTheme.typography.titleMedium)
+        Text(text = secondQuestionText)
+        for (choice: String in secondQuestionChoices) {
+            Button(onClick = { checkSecondAnswer(choice) }) {
+                Text(text = choice)
+            }
+        }
+        Text(text = secondFeedbackText)
+    }
+}</code></pre></details>
+<p><code>List</code> et <code>listOf</code> sont disponibles en Kotlin sans import supplémentaire dans cet exemple. Le défilement utilise toujours les deux imports ajoutés à la page précédente.</p>
+<details><summary>L’IDE ne retrouve plus firstQuestionFirstChoice</summary><p>Ce nom a été retiré lorsque tu as remplacé les trois variables par une liste. Recherche ses utilisations restantes dans WelcomeScreen. Dans les boutons, la boucle doit maintenant utiliser <code>choice</code>. Évite de recréer les anciennes variables pour masquer une utilisation oubliée.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Conserver le comportement</h3><p>Le joueur doit obtenir les mêmes réponses qu’avant. Nous changeons la manière d’organiser les choix et de les afficher, pas la règle qui décide si une réponse est correcte.</p></aside></div></div>
+<section class="lesson-section" id="tester" aria-labelledby="titre-tester"><p class="eyebrow">06 / Une nouvelle possibilité</p><h2 id="titre-tester">Ajoute un choix sans recopier de bouton.</h2><ol class="steps"><li>Teste les six choix : Git est correct pour la première question, Text pour la deuxième. Les autres choix donnent « Essaie encore. » et les messages restent indépendants.</li><li>Dans <code>firstQuestionChoices</code>, ajoute le texte <code>"Logcat"</code> comme quatrième élément. Ne modifie ni la boucle ni l’action de validation.</li><li>Relance : un quatrième bouton « Logcat » doit apparaître pour la première question. Son clic donne « Essaie encore. ».</li><li>Déplace « Git » à la fin de la liste et relance. Il doit être affiché en dernier et rester la bonne réponse.</li></ol><p>Nous comparons le texte choisi avec la bonne réponse, pas sa position. Changer l’ordre ne doit donc pas changer la validation.</p>
+<details><summary>Pourquoi le nouveau bouton existe-t-il sans nouveau code de bouton ?</summary><p>La boucle décrit un bouton pour chaque élément de la liste. Ajouter un élément dans les données ajoute donc un passage lors de la prochaine description de l’écran après relance.</p></details>
+<details><summary>Qu’est-ce qui se répète encore entre les deux questions ?</summary><p>Chaque question a toujours son propre énoncé, sa liste de choix, sa bonne réponse et son message. Les deux actions et les deux groupes d’affichage ont encore une forme semblable. Les listes ont résolu un premier problème, mais nous devons encore organiser les informations de chaque question.</p></details>
+<fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je sais lire List&lt;String&gt; et écrire une liste de choix.</span></label><label><input type="checkbox"><span>Je distingue le nombre d’éléments et leur indice.</span></label><label><input type="checkbox"><span>Je peux suivre la valeur de choice à chaque passage dans for.</span></label><label><input type="checkbox"><span>J’ai ajouté puis réordonné un choix sans recopier de bouton.</span></label><label><input type="checkbox"><span>Les deux questions gardent leurs résultats et leurs messages indépendants.</span></label></fieldset><p class="caption">Ces confirmations sont personnelles. Le guide n’exécute pas ton code et ne sauvegarde pas ta progression.</p><p class="closing">Tu sais regrouper les choix. La suite permettra de rassembler l’énoncé, les choix et la bonne réponse dans un même modèle de question.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_second_question_view/index.html" rel="prev"><span>← Précédent</span><span>Ajouter une deuxième question</span></a></nav></main></div></body></html>
