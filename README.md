@@ -85,6 +85,9 @@ stage-academy-guide/
   module_code_quiz_progression_view/
     index.html                 # État du quiz, question suivante et fin
     module_code_quiz_progression_view.css
+  module_code_score_view/
+    index.html                 # Score, réponse unique et recommencement
+    module_code_score_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -377,3 +380,24 @@ la fin sur appareil. Le guide ne modifie pas le dépôt Android et n’exécute 
 Sources auteur : https://kotlinlang.org/docs/visibility-modifiers.html ,
 https://kotlinlang.org/docs/lambdas.html et
 https://developer.android.com/develop/ui/compose/state .
+
+## Code — page 9 : score et recommencement
+
+`module_code_score_view/index.html` ajoute un point par bonne première réponse.
+Contrairement à la page 8, le premier choix devient définitif, incorrect ou non.
+Le presenter conserve son résultat et renvoie ce résultat sans recompter si
+submitAnswer est rappelée. Les boutons se désactivent aussi côté vue. Le message
+incorrect devient « Réponse incorrecte. » au lieu de proposer de réessayer.
+
+Score privé, getScore, copie affichée dans un état Compose et callback
+onAnswerSubmitted pour relire après l’action. Le score final est affiché sur le
+nombre total de questions (une barre de texte, aucune division). restart remet
+indice, drapeau de réponse, résultat courant et score à zéro ; la vue relit ses
+trois informations. Le bouton n’apparaît qu’à la fin. Pas de persistance ni de
+nouvelle architecture. Le cas vide reste terminé avec 0 / 0.
+
+Le protocole manuel obtient 3 / 4 puis vérifie une deuxième partie. Le code
+complet du presenter et des deux vues est fourni. Question.kt ne change pas.
+Navigation progression ↔ score et badge home à neuf pages. Aucun JS requis et
+aucune modification du dépôt Android. La suite prévue : visibilité, contrats et
+interfaces, responsabilités/architecture, puis découverte des coding agents.
