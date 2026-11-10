@@ -97,6 +97,9 @@ stage-academy-guide/
   module_code_architecture_view/
     index.html                 # Lecture des rôles, MVP, MVVM et fichiers plats
     module_code_architecture_view.css
+  module_code_data_lifecycle_view/
+    index.html                 # Mémoire, vue, activité, processus et persistance
+    module_code_data_lifecycle_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -480,3 +483,30 @@ Sources auteur (les références techniques ne sont pas imposées à l’élève
 Validation : ressources/ancres, cohérence avec les blocs du quiz et distinction
 des axes de comparaison. Aucun nouveau comportement à compiler. Vérifier le
 rendu, les schémas, les détails au clavier et le tableau sur petit écran.
+
+## Code — page 13 : données et durée de vie
+
+`module_code_data_lifecycle_view/index.html` distingue portée et durée de vie,
+variables locales, remember, instance du presenter, activité, processus et
+stockage persistant. DataStore est présenté comme un outil sur disque, sans
+implémentation de sauvegarde ou meilleur score dans l’app. Un objet partagé à
+l’échelle de l’application ne survit pas à l’arrêt du processus. Manager/factory/
+graph restent un repère facultatif pour l’encadrant, sans code ajouté.
+
+Les expériences sont manuelles et accompagnées : passage de question, restart,
+arrière-plan, rotation et arrêt forcé sans désinstallation/effacement. Aucune
+observation appareil n’est simulée comme accomplie. La rotation est conditionnée
+à une recréation réelle. Un log optionnel dans onCreate aide à observer celle-ci
+sans prouver une mort de processus ; la page rappelle de retirer is:crash.
+Le guide ne pilote ni l’appareil ni le dépôt Android.
+
+Navigation architecture ↔ données, home à treize pages. Pas de JavaScript ou
+d’introduction aux tests automatisés. Asynchrone/coroutines/Flow restent la suite
+prévue, sans lien vers une page inexistante. Sources auteur :
+- https://developer.android.com/develop/ui/compose/lifecycle
+- https://developer.android.com/guide/components/activities/activity-lifecycle
+- https://developer.android.com/guide/components/activities/process-lifecycle
+- https://developer.android.com/topic/libraries/architecture/saving-states
+- https://developer.android.com/topic/libraries/architecture/datastore
+- https://developer.android.com/training/data-storage
+- https://developer.android.com/reference/android/util/Log
