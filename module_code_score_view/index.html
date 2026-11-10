@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Compter une seule fois la première réponse de chaque question, afficher le score du quiz et recommencer avec un état remis à zéro."><title>Compter les points et recommencer · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_score_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="score-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 9</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Terminer une partie complète</p><h1 id="titre">Compter les points et recommencer.</h1><p class="lead">Ton quiz avance jusqu’à la fin. Ajoute un point par bonne réponse, affiche le résultat et propose une nouvelle partie.</p><p>Le presenter compte les points et remet le quiz à zéro. La vue affiche les informations qu’elle relit après chaque action.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#regle">La règle</a><a href="#presenter">Compter</a><a href="#boutons">Une seule réponse</a><a href="#resultat">Afficher</a><a href="#recommencer">Recommencer</a><a href="#assembler">Assembler</a><a href="#tester">Tester</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="regle" aria-labelledby="titre-regle"><p class="eyebrow">01 / Décider avant de coder</p><h2 id="titre-regle">Seule la première réponse compte.</h2>
+<p>À la page précédente, le joueur pouvait changer de réponse avant de passer à la suivante. Pour compter les points, nous changeons volontairement cette règle :</p><ol class="steps"><li>Une bonne première réponse rapporte un point.</li><li>Une mauvaise première réponse rapporte zéro point.</li><li>Après ce premier choix, les boutons de réponse sont désactivés. Le résultat ne peut plus être changé pour cette question.</li><li>« Question suivante » permet toujours d’avancer après une réponse, correcte ou incorrecte.</li></ol><p>Pour quatre questions, le score final est compris entre 0 et 4. Nous ne retirons pas de point et il n’y a pas de temps limite dans cet exercice.</p><p>Avec l’encadrant, garde la version précédente dans Git puis prépare une branche comme <code>ab/ajouter_score_et_recommencer</code>.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Score</h3><p>Le nombre de points obtenus. Dans cette version, il correspond au nombre de bonnes premières réponses.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Règle de comptage</h3><p>Le choix qui définit quand un point est gagné. Elle doit être comprise avant de modifier le code.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="presenter" aria-labelledby="titre-presenter"><p class="eyebrow">02 / Garder le contrôle de la règle</p><h2 id="titre-presenter">Le presenter compte, la vue demande.</h2>
+<p>Le score est une propriété privée du presenter, parce que la vue ne doit pas pouvoir lui ajouter directement des points :</p><pre><code>private var score: Int = 0
+
+fun getScore(): Int {
+    return score
+}</code></pre>
+<p>Le drapeau hasAnsweredCurrentQuestion existe déjà. Il sert maintenant aussi à empêcher de compter plusieurs réponses pour la même question. Une nouvelle propriété conserve le résultat de la première réponse :</p><pre><code>private var isCurrentAnswerCorrect: Boolean = false</code></pre>
+<p>Dans submitAnswer, avant de refaire le calcul :</p><pre><code>if (hasAnsweredCurrentQuestion) {
+    return isCurrentAnswerCorrect
+}</code></pre>
+<p>Si une réponse est déjà enregistrée, l’action renvoie le résultat précédent sans changer le score. Sinon, elle vérifie le choix, conserve ce résultat et ajoute un point si nécessaire.</p><details><summary>QuizPresenter.kt complet</summary><pre id="presenter-file"><code>package fr.stageacademy.quiz
+
+class QuizPresenter(private val questions: List&lt;Question&gt;) {
+    private var currentQuestionIndex: Int = 0
+    private var hasAnsweredCurrentQuestion: Boolean = false
+    private var isCurrentAnswerCorrect: Boolean = false
+    private var score: Int = 0
+
+    fun getScore(): Int {
+        return score
+    }
+
+    fun getCurrentQuestionIndex(): Int {
+        return currentQuestionIndex
+    }
+
+    fun isFinished(): Boolean {
+        return currentQuestionIndex &gt;= questions.size
+    }
+
+    fun getCurrentQuestion(): Question {
+        return questions[currentQuestionIndex]
+    }
+
+    fun isCorrectAnswer(
+        question: Question,
+        selectedAnswer: String,
+    ): Boolean {
+        val result: Boolean = selectedAnswer == question.correctAnswer
+        return result
+    }
+
+    fun submitAnswer(selectedAnswer: String): Boolean {
+        if (isFinished()) {
+            return false
+        }
+        if (hasAnsweredCurrentQuestion) {
+            return isCurrentAnswerCorrect
+        }
+        val question: Question = getCurrentQuestion()
+        isCurrentAnswerCorrect = isCorrectAnswer(question, selectedAnswer)
+        hasAnsweredCurrentQuestion = true
+        if (isCurrentAnswerCorrect) {
+            score = score + 1
+        }
+        return isCurrentAnswerCorrect
+    }
+
+    fun canGoToNextQuestion(): Boolean {
+        return hasAnsweredCurrentQuestion
+    }
+
+    fun goToNextQuestion(): Unit {
+        if (canGoToNextQuestion()) {
+            currentQuestionIndex = currentQuestionIndex + 1
+            hasAnsweredCurrentQuestion = false
+            isCurrentAnswerCorrect = false
+        }
+    }
+
+    fun restart(): Unit {
+        currentQuestionIndex = 0
+        hasAnsweredCurrentQuestion = false
+        isCurrentAnswerCorrect = false
+        score = 0
+    }
+}</code></pre></details>
+<p>Le passage à la question suivante remet les deux informations de réponse à false, mais conserve le score. L’action restart remet aussi le score et l’indice à zéro.</p>
+<aside class="takeaway"><strong>La protection doit exister dans le presenter.</strong><p>Désactiver un bouton améliore l’usage, mais la règle doit rester correcte si submitAnswer est appelée deux fois. Le presenter refuse de recompter, même si un autre code lui redemande le travail.</p></aside>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Première réponse enregistrée</h3><p>Le presenter conserve son résultat jusqu’au passage à la question suivante. Un appel supplémentaire ne remplace pas cette réponse.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>score = score + 1</h3><p>Lire le score actuel, lui ajouter un point, puis conserver la nouvelle valeur dans la même variable.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="boutons" aria-labelledby="titre-boutons"><p class="eyebrow">03 / Montrer la règle au joueur</p><h2 id="titre-boutons">Désactive les choix après la réponse.</h2>
+<p>Dans QuestionView, les boutons de choix deviennent :</p><pre><code>Button(
+    onClick = { checkAnswer(choice) },
+    enabled = !canGoToNextQuestion,
+) {
+    Text(text = choice)
+}</code></pre>
+<p>Au départ, canGoToNextQuestion vaut false : les choix sont donc activés. Après une réponse, cette valeur devient true : les choix se désactivent et « Question suivante » s’active.</p><p>Le signe <code>!</code> inverse un Boolean : « pas ». <code>!false</code> donne true et <code>!true</code> donne false. Nous utilisons ici l’inverse de l’autorisation d’avancer pour savoir si l’on peut encore répondre.</p><p>Le message ne dit plus au joueur de réessayer sur la même question. Garde « Bonne réponse ! » pour une réponse correcte et remplace le message incorrect par « Réponse incorrecte. ».</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Inverser · negate</h3><p>Transformer vrai en faux, ou faux en vrai. En Kotlin, ! se place devant le Boolean.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>enabled · activé</h3><p>Une information d’affichage et d’interaction. Le presenter applique aussi la règle, indépendamment de l’état du bouton.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="resultat" aria-labelledby="titre-resultat"><p class="eyebrow">04 / Relire le score pour l’affichage</p><h2 id="titre-resultat">Une nouvelle valeur observée par Compose.</h2>
+<p>Dans WelcomeScreen, nous ajoutons une valeur d’affichage, initialisée avec le score du presenter :</p><pre><code>var displayedScore: Int by remember(presenter) {
+    mutableStateOf(presenter.getScore())
+}</code></pre>
+<p>Le score privé dans le presenter reste la référence pour la règle. displayedScore est sa copie pour l’affichage, relue après l’action. Modifier seulement score dans une classe Kotlin ordinaire ne prévient pas Compose.</p><p>QuestionView reçoit donc une action supplémentaire :</p><pre><code>onAnswerSubmitted: () -&gt; Unit</code></pre>
+<p>Après avoir demandé la validation et mis à jour son message, elle appelle <code>onAnswerSubmitted()</code>. WelcomeScreen fournit cette action :</p><pre><code>onAnswerSubmitted = {
+    displayedScore = presenter.getScore()
+}</code></pre>
+<p>Ce n’est pas cette action d’affichage qui ajoute un point : elle ne fait que relire le résultat. Le trajet est clic → submitAnswer → comptage → relecture → affichage.</p><p>Le texte du score est :</p><pre><code>Text(text = &quot;Score : $displayedScore / ${questions.size}&quot;)</code></pre>
+<p>Le signe $ insère la valeur dans le texte. La barre / est ici un caractère affiché, pas une division : « Score : 2 / 4 » signifie deux points sur quatre possibles.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>displayedScore</h3><p>« Score affiché » : l’information observée par Compose pour écrire le résultat à l’écran.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>onAnswerSubmitted</h3><p>« Quand une réponse a été envoyée ». Une action transmise pour prévenir l’écran qu’il doit relire le score.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="recommencer" aria-labelledby="titre-recommencer"><p class="eyebrow">05 / Une nouvelle partie</p><h2 id="titre-recommencer">Remettre tout le déroulement à zéro.</h2>
+<p>Le bouton « Recommencer » apparaît sur l’écran de fin. Son action demande au presenter :</p><pre><code>fun restart(): Unit {
+    currentQuestionIndex = 0
+    hasAnsweredCurrentQuestion = false
+    isCurrentAnswerCorrect = false
+    score = 0
+}</code></pre>
+<p>Puis la vue relit l’indice, le statut de fin et le score. Elle affiche la première question, ses choix activés et le message initial.</p><p>On utilise la même instance du presenter. Réinitialiser une partie n’est pas recréer les fichiers, relancer Android Studio ou récupérer les données sur GitHub.</p><details><summary>Que se passe-t-il avec une liste vide ?</summary><p>Le score reste 0, et le quiz est déjà terminé puisque la liste ne contient pas de question. Recommencer ne peut pas inventer une question. Le texte « 0 / 0 » peut être affiché ; aucune division n’est exécutée.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Restart · recommencer</h3><p>Revenir à l’état initial d’une partie. Il faut réinitialiser toutes les informations concernées, pas seulement le score.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Réinitialiser · reset</h3><p>Redonner les valeurs de départ : indice 0, aucun choix enregistré et score 0.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="assembler" aria-labelledby="titre-assembler"><p class="eyebrow">06 / Dans les trois fichiers</p><h2 id="titre-assembler">Garder les liens explicites.</h2>
+<p>Question.kt ne change pas. Dans QuizPresenter.kt, utilise la version complète donnée plus haut. Dans MainActivity.kt, remplace les deux fonctions de vue par ces versions, en conservant la classe MainActivity, sa prévisualisation et les imports existants.</p>
+<details><summary>QuestionView complète</summary><pre id="question-view"><code>@Composable
+fun QuestionView(
+    question: Question,
+    questionIndex: Int,
+    presenter: QuizPresenter,
+    onAnswerSubmitted: () -&gt; Unit,
+    onNextQuestion: () -&gt; Unit,
+) {
+    var feedbackText: String by remember(presenter, questionIndex) {
+        mutableStateOf(&quot;Choisis une réponse.&quot;)
+    }
+    var canGoToNextQuestion: Boolean by remember(presenter, questionIndex) {
+        mutableStateOf(presenter.canGoToNextQuestion())
+    }
+
+    fun checkAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = presenter.submitAnswer(selectedAnswer)
+        if (isAnswerCorrect) {
+            feedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            feedbackText = &quot;Réponse incorrecte.&quot;
+        }
+        canGoToNextQuestion = presenter.canGoToNextQuestion()
+        onAnswerSubmitted()
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = question.text)
+        for (choice: String in question.choices) {
+            Button(
+                onClick = { checkAnswer(choice) },
+                enabled = !canGoToNextQuestion,
+            ) {
+                Text(text = choice)
+            }
+        }
+        Text(text = feedbackText)
+        Button(
+            onClick = onNextQuestion,
+            enabled = canGoToNextQuestion,
+        ) {
+            Text(text = &quot;Question suivante&quot;)
+        }
+    }
+}</code></pre></details><details><summary>WelcomeScreen complet</summary><pre id="welcome-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val firstQuestion: Question = Question(
+        text = &quot;Quel outil garde l’historique du code ?&quot;,
+        choices = listOf(&quot;Git&quot;, &quot;Android&quot;, &quot;Compose&quot;),
+        correctAnswer = &quot;Git&quot;,
+    )
+
+    val secondQuestion: Question = Question(
+        text = &quot;Quel composant Compose affiche du texte ?&quot;,
+        choices = listOf(&quot;Button&quot;, &quot;Text&quot;, &quot;Column&quot;),
+        correctAnswer = &quot;Text&quot;,
+    )
+
+    val thirdQuestion: Question = Question(
+        text = &quot;Quel mot-clé déclare une fonction en Kotlin ?&quot;,
+        choices = listOf(&quot;fun&quot;, &quot;val&quot;, &quot;if&quot;),
+        correctAnswer = &quot;fun&quot;,
+    )
+
+    val fourthQuestion: Question = Question(
+        text = &quot;Quel type représente vrai ou faux ?&quot;,
+        choices = listOf(&quot;String&quot;, &quot;Boolean&quot;, &quot;Int&quot;),
+        correctAnswer = &quot;Boolean&quot;,
+    )
+
+    val questions: List&lt;Question&gt; = listOf(
+        firstQuestion,
+        secondQuestion,
+        thirdQuestion,
+        fourthQuestion,
+    )
+    val presenter: QuizPresenter = remember(questions) { QuizPresenter(questions) }
+    var displayedQuestionIndex: Int by remember(presenter) {
+        mutableStateOf(presenter.getCurrentQuestionIndex())
+    }
+    var isQuizFinished: Boolean by remember(presenter) {
+        mutableStateOf(presenter.isFinished())
+    }
+    var displayedScore: Int by remember(presenter) {
+        mutableStateOf(presenter.getScore())
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Text(text = &quot;Score : $displayedScore / ${questions.size}&quot;)
+        if (isQuizFinished) {
+            Text(text = &quot;Quiz terminé&quot;)
+            Button(onClick = {
+                presenter.restart()
+                displayedQuestionIndex = presenter.getCurrentQuestionIndex()
+                isQuizFinished = presenter.isFinished()
+                displayedScore = presenter.getScore()
+            }) {
+                Text(text = &quot;Recommencer&quot;)
+            }
+        } else {
+            Text(text = &quot;Question ${displayedQuestionIndex + 1}&quot;)
+            val question: Question = presenter.getCurrentQuestion()
+            QuestionView(
+                question = question,
+                questionIndex = displayedQuestionIndex,
+                presenter = presenter,
+                onAnswerSubmitted = {
+                    displayedScore = presenter.getScore()
+                },
+                onNextQuestion = {
+                    presenter.goToNextQuestion()
+                    displayedQuestionIndex = presenter.getCurrentQuestionIndex()
+                    isQuizFinished = presenter.isFinished()
+                },
+            )
+        }
+    }
+}</code></pre></details>
+<p>Aucun nouvel import n’est nécessaire. Chaque appel de QuestionView doit fournir onAnswerSubmitted en plus de onNextQuestion. Le bouton « Recommencer » n’est décrit que dans la branche de fin.</p><p>Quand l’écran quitte la fin, QuestionView est affichée de nouveau et retrouve son message initial. Le cadre remember lié au presenter et à l’indice conserve le fonctionnement vu à la page précédente.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Vérifier un appel</h3><p>Ajouter un paramètre à une fonction demande aussi de mettre à jour les endroits où on l’appelle. Les exemples complets montrent les deux côtés.</p></aside></div></div>
+<section class="lesson-section" id="tester" aria-labelledby="titre-tester"><p class="eyebrow">07 / Tester une vraie partie</p><h2 id="titre-tester">Prévois le total, puis compare.</h2><ol class="steps"><li>Lance une partie : le score commence à 0 / 4 et les choix de la première question sont activés.</li><li>Question 1 : choisis Git. Le score devient 1 / 4 et les boutons de réponse se désactivent. Des clics supplémentaires ne doivent pas ajouter de point.</li><li>Question 2 : choisis Button. Le score reste 1 / 4. Tu ne peux pas remplacer cette réponse par Text sur la même question.</li><li>Questions 3 et 4 : choisis fun puis Boolean. À la fin, le total attendu est 3 / 4.</li><li>Clique sur « Recommencer ». Vérifie la question 1, le score 0 / 4, le message initial, les choix activés et « Suivante » désactivé.</li><li>Fais une deuxième partie avec d’autres réponses : son total ne doit pas contenir les points de la première.</li></ol>
+<details><summary>Le score ne change pas à l’écran</summary><p>Vérifie le résultat dans le presenter, puis le lien d’affichage : checkAnswer appelle-t-elle onAnswerSubmitted après submitAnswer ? WelcomeScreen fournit-elle l’action qui relit getScore dans displayedScore ? Le Text lit-il bien displayedScore ?</p></details><details><summary>Après Recommencer, quelque chose reste de la partie précédente</summary><p>Dans restart, relis les quatre informations remises à zéro. Dans le clic, vérifie les trois relectures d’affichage. Un score à zéro ne suffit pas si l’indice ou le drapeau de réponse n’a pas été réinitialisé.</p></details>
+<fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je sais où le point est ajouté et pourquoi un deuxième appel ne le recompte pas.</span></label><label><input type="checkbox"><span>La première réponse est définitive, correcte ou incorrecte.</span></label><label><input type="checkbox"><span>Je peux suivre l’action jusqu’à la mise à jour du score affiché.</span></label><label><input type="checkbox"><span>J’ai vérifié le total final et une nouvelle partie avec un état remis à zéro.</span></label></fieldset><p class="caption">Confirmations personnelles : le guide ne pilote pas l’appareil, ne lit pas ton code et ne sauvegarde pas ta progression.</p><p class="closing">Le quiz a maintenant un déroulement, un résultat et un recommencement. Nous pourrons prendre du recul sur ce code pour comprendre la visibilité, les contrats et l’architecture.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_quiz_progression_view/index.html" rel="prev"><span>← Précédent</span><span>Faire avancer le quiz</span></a></nav></main></div></body></html>
