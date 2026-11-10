@@ -110,3 +110,11 @@ créé automatiquement. La tâche d’application réalise le design des questio
 sans changement de règles, avec revue et observation. Le guide reste statique ;
 les exemples d’instructions sont du contenu pédagogique, pas de nouvelles règles
 pour le développement du guide ou une autorisation de modifier le dépôt Android.
+
+## Exercice résultat — LLM page 6
+
+`module_agents_result_design_view/` laisse rédiger les prompts et choisir le design
+à l’élève : mission, critères et indices dépliables, sans solution complète.
+Conserver le calcul du score et le recommencement direct du quiz. Vérifications
+manuelles zéro/toutes/partie des bonnes réponses puis remise à zéro, adaptées au
+nombre réel de questions. Brouillons non sauvegardés, aucune exécution du guide.

@@ -654,3 +654,22 @@ Sources officielles consultées :
 - https://learn.chatgpt.com/docs/agent-configuration/agents-md
 - https://learn.chatgpt.com/docs/build-skills
 - https://learn.chatgpt.com/docs/config-file/config-basic
+
+## LLM et agents — page 6 : résultat, exercice plus autonome
+
+`module_agents_result_design_view/` fournit une mission et des critères sans
+prompt complet, solution Kotlin ni maquette à recopier. L’élève prépare les textes,
+la référence et ses propres demandes, affine un point puis guide la réalisation.
+Indices natifs fermés par défaut et liens vers les méthodes précédentes.
+Les données d’une maquette sont distinguées du score calculé pour la partie.
+Pas de pourcentage, classement ou stockage ajouté. Le recommencement existant
+retourne directement au quiz, sans ajout de retour vers l’accueil.
+
+Les parcours manuels couvrent zéro, toutes et une partie des bonnes réponses
+(0/4, 4/4, 2/4 pour quatre questions), suivis d’un recommencement. Critères de
+lisibilité sur appareil et compte rendu attendu/observé, sans exécution par le guide.
+Les brouillons et cases ne sauvegardent rien. Un fichier result-design.txt et les
+références sont conservés par l’élève dans son dossier de design.
+
+Home à six pages LLM, navigation consignes ↔ résultat ; aucun lien futur anticipé.
+Aucun changement au dépôt Android, aucun agent ou service lancé par cette page.
