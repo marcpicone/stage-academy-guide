@@ -94,6 +94,9 @@ stage-academy-guide/
   module_code_contracts_view/
     index.html                 # QuizContract, implémentation et attentes
     module_code_contracts_view.css
+  module_code_architecture_view/
+    index.html                 # Lecture des rôles, MVP, MVVM et fichiers plats
+    module_code_architecture_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -450,3 +453,30 @@ et les deux vues sont fournis. Navigation visibilité ↔ contrats et home à on
 pages. Aucun JS requis et aucune modification du dépôt Android. Source auteur :
 https://kotlinlang.org/docs/interfaces.html . QA : compilation des exemples,
 refus des implémentations incomplètes et vérification des règles via le contrat.
+
+## Code — page 12 : architecture
+
+`module_code_architecture_view/index.html` prend du recul sur la version construite
+en suivant le guide (et non sur l’état du dépôt Android de départ). Responsabilités
+des quatre fichiers, trajet clic/règle/état/affichage, MVP et sa variante vue passive,
+MVVM et état de présentation, distinction du rôle ViewModel avec la classe Jetpack.
+Notre quiz est décrit comme une séparation pédagogique avec presenter et relecture
+explicite, sans prétendre être toutes les variantes de MVP. Le contrat est un type
+utilisé pour appeler l’objet, pas un objet intermédiaire d’exécution.
+
+L’organisation plate est définie comme notre choix de rangement de fichiers et
+peut coexister avec une séparation MVP ou MVVM. Aucun nouveau code Android, aucune
+migration MVVM ou bibliothèque imposée. Schémas HTML sémantiques simplifiés, table
+comparative défilable au clavier, cinq exercices de lecture et confirmations
+sans JavaScript. Les notes restent en marge sur ordinateur et sous le texte sur
+petit écran. Navigation contrats ↔ architecture et badge home à douze pages.
+
+Sources auteur (les références techniques ne sont pas imposées à l’élève) :
+- https://martinfowler.com/eaaDev/PassiveScreen.html — variante Passive View, pas définition universelle de MVP.
+- https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm — responsabilités MVVM, source .NET pour le principe général.
+- https://developer.android.com/topic/architecture — responsabilités et frontières Android.
+- https://developer.android.com/topic/libraries/architecture/viewmodel — classe Jetpack et durée de vie, pas persistance automatique après arrêt du processus.
+
+Validation : ressources/ancres, cohérence avec les blocs du quiz et distinction
+des axes de comparaison. Aucun nouveau comportement à compiler. Vérifier le
+rendu, les schémas, les détails au clavier et le tableau sur petit écran.
