@@ -566,7 +566,7 @@ Progression demandée :
 3. Préparer l’écran de question dans le même style.
 4. Passer à l’usage d’un coding agent via une application desktop.
 
-Les étapes suivantes ne sont pas encore créées ni liées. Le modèle, les outils,
+La page de conception de l’accueil est créée et liée ; les étapes suivantes restent à venir. Le modèle, les outils,
 la lecture de diff et l’exécution seront approfondis à l’étape coding agent ; ne
 pas y passer directement depuis l’introduction. Une maquette reste une référence
 visuelle et ne crée pas une interface Android fonctionnelle. Le dépôt Android
@@ -578,3 +578,17 @@ Sources auteur :
 
 Vérifier les liens, notes en marge, détails et brouillons au clavier et sur petit
 écran. Aucun JavaScript requis et aucune génération effectuée par le site.
+
+## LLM et agents — page 2 : concevoir l’accueil
+
+`module_agents_home_design_view/index.html` fait choisir les textes, demander une
+maquette, comparer deux versions et préparer un document de design. Le croquis
+HTML/CSS est explicitement illustratif ; son bouton dessiné ne déclenche rien.
+Les prompts sont des exemples rédigés, aucune génération n’est exécutée par le site.
+L’illustration séparée est distinguée de la maquette entière. L’exercice conserve
+les textes et références dans un dossier choisi avec l’encadrant, sans créer les
+fichiers automatiquement. Le textarea et les cases ne sauvegardent pas la progression.
+
+Home à deux pages, entrée unique par l’introduction ; navigation intro → accueil.
+La page de question et l’utilisation desktop d’un coding agent restent à venir.
+Aucun changement Android, navigation du quiz ou installation de service sur cette étape.

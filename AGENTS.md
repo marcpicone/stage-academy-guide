@@ -75,3 +75,11 @@ Définir chaque nouveau mot technique à sa première apparition. Conserver le t
 anglais visible avec son sens en français. Préférer une note 💡 en marge, lisible
 sans survol et replacée sous le passage sur mobile. Identifier les captures réelles
 et les simulations ; ne pas présenter les conventions de l’équipe comme des règles Git.
+
+## Design de l’accueil — LLM page 2
+
+`module_agents_home_design_view/` prépare textes, maquette, retouche et document de
+design avant réalisation Android. Croquis HTML/CSS explicitement illustratif et
+prompts rédigés pour le cours, sans génération connectée. Un seul point d’entrée
+LLM sur la home, puis navigation séquentielle. Garder l’écran de question et les
+coding agents desktop pour les prochaines pages. Aucun code Android modifié ici.
