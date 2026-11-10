@@ -76,6 +76,9 @@ stage-academy-guide/
   module_code_lists_view/
     index.html                 # List<String>, indices et boucle for
     module_code_lists_view.css
+  module_code_question_model_view/
+    index.html                 # data class Question, instances et vue commune
+    module_code_question_model_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -298,3 +301,25 @@ Liens deuxième question ↔ listes et badge home à cinq pages. Pas de JavaScri
 de modification du dépôt Android. Sources auteur :
 https://kotlinlang.org/docs/collections-overview.html et
 https://kotlinlang.org/docs/control-flow.html#for-loops .
+
+## Code — page 6 : modèle Question
+
+`module_code_question_model_view/index.html` introduit une classe, une instance,
+les propriétés et le constructeur via data class Question(text, choices,
+correctAnswer). Les arguments nommés et l’accès par point sont expliqués.
+List<Question> utilise le concept de liste déjà vu ; le corps fourni de
+QuestionView réutilise l’affichage et l’action locale. Tout reste dans MainActivity.
+Le validateur reste unique et inchangé ; pas de presenter, interface, score,
+héritage ou fichiers supplémentaires dans cette étape.
+
+remember(question) conserve un message par appel et le réinitialise si la question
+reçue change. Le cours garde un ordre fixe pendant l’exécution ; il n’introduit pas
+le déplacement dynamique des éléments ni la persistance des réponses. Le modèle
+ne valide pas encore la cohérence d’une réponse avec ses choix, ce qui est explicite.
+
+Deux questions de départ et deux exemples supplémentaires sont fournis pour
+vérifier que l’ajout se fait dans les données et la liste, sans copier la vue.
+Les tests réels doivent contrôler les réponses et les messages indépendants.
+Navigation listes ↔ modèle et badge home à six pages ; aucun JS requis.
+Sources auteur : https://kotlinlang.org/docs/data-classes.html et
+https://kotlinlang.org/docs/classes.html . Le guide ne modifie pas l’app Android.
