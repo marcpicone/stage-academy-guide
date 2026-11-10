@@ -566,7 +566,7 @@ Progression demandée :
 3. Préparer l’écran de question dans le même style.
 4. Passer à l’usage d’un coding agent via une application desktop.
 
-Les pages de design de l’accueil et de la question sont créées et liées ; l’étape coding agent reste à venir. Le modèle, les outils,
+Les pages de design de l’accueil et de la question sont créées et liées ; la première étape coding agent est maintenant créée. Le modèle, les outils,
 la lecture de diff et l’exécution seront approfondis à l’étape coding agent ; ne
 pas y passer directement depuis l’introduction. Une maquette reste une référence
 visuelle et ne crée pas une interface Android fonctionnelle. Le dépôt Android
@@ -590,7 +590,7 @@ les textes et références dans un dossier choisi avec l’encadrant, sans crée
 fichiers automatiquement. Le textarea et les cases ne sauvegardent pas la progression.
 
 Home à deux pages, entrée unique par l’introduction ; navigation intro → accueil.
-La page de question est maintenant liée ; l’utilisation desktop d’un coding agent reste à venir.
+La page de question est maintenant liée ; l’utilisation desktop d’un coding agent est la page suivante.
 Aucun changement Android, navigation du quiz ou installation de service sur cette étape.
 
 ## LLM et agents — page 3 : concevoir l’écran de question
@@ -606,5 +606,27 @@ explicitement illustratif ; prompts rédigés, sans génération automatique ni 
 La lecture sur petit écran et un énoncé plus long font partie des critères de choix.
 Le textarea et les cases restent manuels, sans stockage de progression. Home à trois
 pages LLM, entrée unique par l’introduction et navigation accueil ↔ question.
-L’étape suivante prévue est l’usage desktop d’un coding agent, sans lien anticipé.
+La page suivante introduit l’usage desktop d’un coding agent.
 Aucun fichier Android ni comportement du quiz n’est modifié par cette leçon.
+
+## LLM et agents — page 4 : coding agent desktop
+
+`module_agents_desktop_view/` introduit agent/outils, sélection du clone Android
+local, demande de lecture, références accessibles, modification limitée de l’accueil,
+lecture du diff et observation du résultat. Codex sert d’exemple sans procédure
+figée d’installation, de compte ou de menus. L’encadrant prépare l’environnement.
+Le quiz existant est un prérequis ; le guide ne prétend pas que le dépôt starter
+Android a reçu les modifications des leçons. Aucun fichier Android modifié ici.
+
+L’exercice demande à l’agent de créer l’accueil et son bouton Commencer vers le
+quiz existant, sans refaire les questions, les règles ou l’architecture. Pas de
+bibliothèque nouvelle, commit/push automatique ou cours de tests automatisés.
+Le compte rendu distingue fichiers écrits, compilation et observation sur appareil.
+Le diff illustratif n’est pas un résultat réel ; le panneau de revue inclut aussi
+les modifications préexistantes. Brouillon sans stockage et cases manuelles.
+Home à quatre pages LLM, navigation question ↔ agent, aucun lien futur anticipé.
+
+Sources officielles consultées pour cette page :
+- https://learn.chatgpt.com/docs/projects — accès aux dossiers de projet locaux.
+- https://learn.chatgpt.com/docs/environments/modes — travail dans le dossier local.
+- https://learn.chatgpt.com/docs/code-review — panneau de revue et état Git.

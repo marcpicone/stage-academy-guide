@@ -82,7 +82,7 @@ et les simulations ; ne pas présenter les conventions de l’équipe comme des 
 design avant réalisation Android. Croquis HTML/CSS explicitement illustratif et
 prompts rédigés pour le cours, sans génération connectée. Un seul point d’entrée
 LLM sur la home, puis navigation séquentielle. L’écran de question est la page suivante ; garder les
-coding agents desktop pour une prochaine page. Aucun code Android modifié ici.
+coding agents desktop pour la page 4. Aucun code Android modifié ici.
 
 ## Design de la question — LLM page 3
 
@@ -90,4 +90,13 @@ coding agents desktop pour une prochaine page. Aucun code Android modifié ici.
 déjà introduites : première réponse définitive, +1 si correcte, choix désactivés
 puis suite disponible. Préparer les états avant/correct/incorrect et la lecture
 d’un énoncé long sans nouvelle logique Android. Croquis et prompts illustratifs,
-brouillon sans sauvegarde. Ne pas anticiper la page de coding agent.
+brouillon sans sauvegarde. La page de coding agent suit cette préparation.
+
+## Coding agent desktop — LLM page 4
+
+`module_agents_desktop_view/` guide une première réalisation d’accueil dans le
+clone de l’élève : lire le projet, fournir les références, cadrer la tâche, relire
+le diff et lancer l’app avec l’encadrant. Codex est un exemple documenté, sans menus
+figés ni installation automatique. Ne pas confondre les snippets du parcours et
+le contenu réel du dépôt Android starter. La page est statique et ne lance rien.
+Pas de refonte des questions à cette étape ; les règles existantes sont conservées.
