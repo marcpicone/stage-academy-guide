@@ -103,6 +103,9 @@ stage-academy-guide/
   module_code_async_view/
     index.html                 # Synchrone/asynchrone, coroutines et Flow
     module_code_async_view.css
+  module_agents_intro_view/
+    index.html                 # LLM, outils, contexte, demande et relecture
+    module_agents_intro_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -541,3 +544,37 @@ https://kotlinlang.org/docs/coroutines-flow.html ,
 https://developer.android.com/develop/ui/compose/side-effects et
 https://developer.android.com/topic/libraries/architecture/coroutines .
 Le guide ne modifie pas le dépôt Android et ne pilote pas l’appareil.
+
+## LLM et agents — page 1 : apprendre à demander
+
+`module_agents_intro_view/index.html` commence par le prompt et la génération de
+texte/images. Le chemin du dossier est conservé pour préserver l’URL déjà ouverte.
+GIGO est présenté comme un repère, pas une garantie : une demande précise aide,
+mais le résultat doit encore être relu. Quatre questions guident les demandes :
+résultat, public/but, contraintes utiles, forme de réponse.
+
+Exemples avant/après pour les textes d’accueil et pour une maquette ; un prompt
+d’asset séparé montre la différence avec un écran complet. Tous les exemples sont
+rédigés pour le cours, aucun texte ou visuel n’est généré par le guide. Pas de
+service connecté, agent, code/diff à lire, autorisation de commande ou publication
+introduits sur cette page. Les zones de brouillon sont des textarea natifs sans
+envoi ni stockage ; l’élève doit copier son texte s’il veut le conserver.
+
+Progression demandée :
+1. Prompt et demandes de texte/image (cette page).
+2. Concevoir/améliorer l’accueil du quiz avec ces outils.
+3. Préparer l’écran de question dans le même style.
+4. Passer à l’usage d’un coding agent via une application desktop.
+
+Les étapes suivantes ne sont pas encore créées ni liées. Le modèle, les outils,
+la lecture de diff et l’exécution seront approfondis à l’étape coding agent ; ne
+pas y passer directement depuis l’introduction. Une maquette reste une référence
+visuelle et ne crée pas une interface Android fonctionnelle. Le dépôt Android
+reste inchangé. L’entrée home et le lien depuis la page asynchrone sont alignés.
+
+Sources auteur :
+- https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices — clarté, contexte et forme du résultat, sans recommandations de modèles.
+- https://docs.cloud.google.com/vertex-ai/generative-ai/docs/image/img-gen-prompt-guide — sujet, contexte, style et itérations pour l’image, sans configuration de service imposée.
+
+Vérifier les liens, notes en marge, détails et brouillons au clavier et sur petit
+écran. Aucun JavaScript requis et aucune génération effectuée par le site.
