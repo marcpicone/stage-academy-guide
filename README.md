@@ -91,6 +91,9 @@ stage-academy-guide/
   module_code_visibility_view/
     index.html                 # private/public, classe et fichier
     module_code_visibility_view.css
+  module_code_contracts_view/
+    index.html                 # QuizContract, implémentation et attentes
+    module_code_contracts_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -425,3 +428,25 @@ dix pages. Aucun JavaScript requis, aucune modification du dépôt Android.
 Source auteur : https://kotlinlang.org/docs/visibility-modifiers.html .
 Validation : compilation du code autorisé, refus des accès privés et maintien du
 comportement du quiz ; le rendu et la manipulation restent à contrôler sur appareil.
+
+## Code — page 11 : contrats et interfaces
+
+`module_code_contracts_view/index.html` introduit QuizContract (huit opérations
+utilisées par la vue), : QuizContract et override. La vue et la variable assemblée
+dans WelcomeScreen utilisent le type interface ; la création reste explicitement
+QuizPresenter(questions). Les propriétés et le helper de comparaison restent
+privés, QuestionView reste privée au fichier. Aucun changement de comportement.
+
+Les conditions/comportements complètent les signatures : getCurrentQuestion exige
+un quiz non terminé, submitAnswer ne recompte pas, goToNextQuestion exige une
+réponse, restart remet tout à zéro. Le compilateur ne prouve pas ces promesses.
+Les exercices invalides retirent une méthode ou override, puis doivent être
+restaurés. Une interface seule n’est pas construite avec QuizContract().
+Pas d’interface supplémentaire imposée aux autres classes ni de nouvelle
+implémentation de production ; une substitution future devra respecter les règles.
+
+QuizContract.kt est le seul fichier ajouté au parcours app. Le contrat, la classe
+et les deux vues sont fournis. Navigation visibilité ↔ contrats et home à onze
+pages. Aucun JS requis et aucune modification du dépôt Android. Source auteur :
+https://kotlinlang.org/docs/interfaces.html . QA : compilation des exemples,
+refus des implémentations incomplètes et vérification des règles via le contrat.
