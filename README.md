@@ -88,6 +88,9 @@ stage-academy-guide/
   module_code_score_view/
     index.html                 # Score, réponse unique et recommencement
     module_code_score_view.css
+  module_code_visibility_view/
+    index.html                 # private/public, classe et fichier
+    module_code_visibility_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -401,3 +404,24 @@ complet du presenter et des deux vues est fourni. Question.kt ne change pas.
 Navigation progression ↔ score et badge home à neuf pages. Aucun JS requis et
 aucune modification du dépôt Android. La suite prévue : visibilité, contrats et
 interfaces, responsabilités/architecture, puis découverte des coding agents.
+
+## Code — page 10 : visibilité private/public
+
+`module_code_visibility_view/index.html` distingue private dans une classe,
+private au niveau du fichier, public par défaut, portée locale et val/var. Les
+exemples partent du score privé, des méthodes appelées par la vue et de la
+comparaison devenue un détail de submitAnswer. Pas de protected/internal ni
+d’interface introduits ici. Le mot public ne concerne pas le partage GitHub.
+
+L’exercice rend QuizPresenter.isCorrectAnswer privée, écrit public sur getScore
+pour montrer l’équivalence et rend QuestionView privée au fichier MainActivity.
+Le reste des appels et les règles de score restent inchangés. Une expérience
+d’accès interdit doit être annulée avant compilation. L’exemple formatScore sert
+seulement à expliquer la visibilité de fichier, sans nouveau fichier app imposé.
+
+Les blocs complets du presenter et de QuestionView sont fournis. WelcomeScreen
+est celui de la page précédente. Navigation score ↔ visibilité et badge home à
+dix pages. Aucun JavaScript requis, aucune modification du dépôt Android.
+Source auteur : https://kotlinlang.org/docs/visibility-modifiers.html .
+Validation : compilation du code autorisé, refus des accès privés et maintien du
+comportement du quiz ; le rendu et la manipulation restent à contrôler sur appareil.
