@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Créer un modèle Question avec une data class, construire plusieurs instances et réutiliser une vue Compose pour les afficher."><title>Un modèle pour tes questions · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_question_model_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="model-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 6</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Des informations qui vont ensemble</p><h1 id="titre">Un modèle pour tes questions.</h1><p class="lead">Une liste regroupe tes choix. Mais l’énoncé, les choix et la bonne réponse sont encore séparés. Décris maintenant ce qu’est une question, puis utilise ce modèle plusieurs fois.</p><p>Première rencontre avec les classes : un modèle de données concret et un affichage réutilisable. Tout reste dans MainActivity.kt pour cette étape.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#besoin">Le besoin</a><a href="#modele">Le modèle</a><a href="#instances">Les questions</a><a href="#liste">La liste</a><a href="#vue">La vue</a><a href="#projet">Assembler</a><a href="#tester">Vérifier</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="besoin" aria-labelledby="titre-besoin"><p class="eyebrow">01 / Lire ce qui se répète</p><h2 id="titre-besoin">Quelles informations décrivent une question ?</h2>
+<p>Tu retrouves trois rôles pour chaque question : le texte de l’énoncé, la liste des choix et la bonne réponse. Les préfixes firstQuestion et secondQuestion t’aident à les relier, mais ce lien existe seulement dans leurs noms.</p><p>Nous voulons transmettre <strong>une question complète</strong> à l’affichage, sans donner séparément chaque information. Imagine une fiche avec trois champs toujours présents.</p>
+<dl class="question-card"><div><dt>text · String</dt><dd>L’énoncé de la question.</dd></div><div><dt>choices · List&lt;String&gt;</dt><dd>Ses choix, dans l’ordre.</dd></div><div><dt>correctAnswer · String</dt><dd>Sa bonne réponse.</dd></div></dl>
+<p>Avec l’encadrant, garde d’abord la version à deux questions qui fonctionne dans Git, puis prépare une branche de travail comme <code>ab/modeliser_les_questions</code>.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Modèle de données · data model</h3><p>Une description des informations qui constituent quelque chose. Ici, les trois champs d’une question.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Champ / propriété · property</h3><p>Une information nommée qui appartient à un objet. Le texte d’une question sera une propriété de cet objet.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="modele" aria-labelledby="titre-modele"><p class="eyebrow">02 / Décrire la forme commune</p><h2 id="titre-modele">Ta première data class.</h2>
+<p>Une classe définit un type que l’on peut utiliser dans le programme. Une classe peut réunir des données et des actions. Pour commencer, notre classe Question décrit uniquement des données :</p><pre id="question-model"><code>data class Question(
+    val text: String,
+    val choices: List&lt;String&gt;,
+    val correctAnswer: String,
+)</code></pre>
+<p><code>class Question</code> donne un nom au modèle. Le mot-clé <code>data</code> indique que cette classe sert principalement à représenter des données. Les trois propriétés et leurs types sont déclarés entre parenthèses.</p><p>Les <code>val</code> font ici partie de la classe : chaque question créée possédera ses propres valeurs pour text, choices et correctAnswer. Déclarer ce modèle ne crée pas encore de question concrète.</p>
+<p>Place la définition au niveau du fichier, en dehors de WelcomeScreen et des autres fonctions. Nous n’ajoutons pas de nouveau fichier ni de nouvelle architecture à ce stade.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Classe · class</h3><p>Un modèle qui définit un type et ce que ses objets possèdent. Ici, Question décrit les données communes à toutes nos questions.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Data class</h3><p>Une classe Kotlin destinée à représenter des données. Nous commençons par ses propriétés ; ses autres possibilités viendront quand elles seront utiles.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Question / question</h3><p>Une majuscule commence le nom de la classe Question. Une variable qui contient une question garde une minuscule : question, firstQuestion.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="instances" aria-labelledby="titre-instances"><p class="eyebrow">03 / Remplir la fiche</p><h2 id="titre-instances">Crée deux instances du même modèle.</h2>
+<p>Une instance est un objet concret créé à partir d’une classe. Voici notre première question :</p><pre id="first-question"><code>val firstQuestion: Question = Question(
+    text = &quot;Quel outil garde l’historique du code ?&quot;,
+    choices = listOf(&quot;Git&quot;, &quot;Android&quot;, &quot;Compose&quot;),
+    correctAnswer = &quot;Git&quot;,
+)</code></pre>
+<p><code>firstQuestion: Question</code> indique le nom et le type de notre variable. À droite, <code>Question(…)</code> crée un objet avec les valeurs fournies. Nous nommons les arguments pour lire facilement ce que nous donnons à chaque propriété.</p><p>Ce <code>text = …</code> ne déclare pas une nouvelle variable locale : il indique la valeur transmise au paramètre text lors de la création de l’objet.</p>
+<p>Le même modèle permet de créer la deuxième question :</p><pre id="second-question"><code>val secondQuestion: Question = Question(
+    text = &quot;Quel composant Compose affiche du texte ?&quot;,
+    choices = listOf(&quot;Button&quot;, &quot;Text&quot;, &quot;Column&quot;),
+    correctAnswer = &quot;Text&quot;,
+)</code></pre>
+<p>Les objets ont la même forme, mais des contenus différents. La première question attend « Git », la deuxième attend « Text ».</p>
+<details><summary>Comment lire une information dans une question ?</summary><pre><code>val questionText: String = firstQuestion.text
+val choices: List&lt;String&gt; = firstQuestion.choices
+val correctAnswer: String = firstQuestion.correctAnswer</code></pre><p>Le point permet de lire une propriété de cet objet. <code>firstQuestion.correctAnswer</code> vaut « Git » ; <code>secondQuestion.correctAnswer</code> vaut « Text ».</p></details>
+<details><summary>La classe garantit-elle que la bonne réponse figure dans les choix ?</summary><p>Pas avec cette définition. Elle exige les trois propriétés et leurs types, mais tu dois encore fournir des données cohérentes. Vérifie que la bonne réponse correspond exactement à un choix. Nous ajouterons des règles supplémentaires quand le quiz en aura besoin.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Objet / instance · object / instance</h3><p>Une réalisation concrète d’une classe. firstQuestion et secondQuestion désignent ici deux objets Question.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Constructeur · constructor</h3><p>Ce qui permet de créer une instance avec ses informations de départ. En Kotlin, nous l’appelons ici avec Question(…).</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="liste" aria-labelledby="titre-liste"><p class="eyebrow">04 / Réutiliser la liste</p><h2 id="titre-liste">Une liste peut contenir des questions.</h2>
+<p>Tu connais <code>List&lt;String&gt;</code>. Le même principe permet de regrouper nos objets :</p><pre><code>val questions: List&lt;Question&gt; = listOf(firstQuestion, secondQuestion)</code></pre>
+<p>Chaque élément est maintenant une Question. Pendant le parcours, le nom local question désigne successivement chacun de ces objets :</p><pre><code>for (question: Question in questions) {
+    QuestionView(question = question)
+}</code></pre>
+<p>Nous allons définir QuestionView pour afficher la question reçue. Le parcours ne connaît plus les noms firstQuestionText ou secondQuestionChoices : il transmet chaque objet complet à la même vue.</p>
+<aside class="takeaway"><strong>Deux niveaux de listes, deux rôles.</strong><p><code>questions</code> regroupe les questions du quiz. <code>question.choices</code> regroupe les choix d’une question précise. La première contient des Question, la seconde des String.</p></aside>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>List&lt;Question&gt;</h3><p>Une liste dont les éléments sont des objets Question. La liste conserve l’ordre dans lequel nous les affichons.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Argument nommé</h3><p>Dans QuestionView(question = question), le nom à gauche du signe = désigne le paramètre ; à droite, on transmet la valeur locale question.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="vue" aria-labelledby="titre-vue"><p class="eyebrow">05 / Une fonction pour le même affichage</p><h2 id="titre-vue">QuestionView reçoit une question.</h2>
+<p>Les deux groupes de boutons avaient la même forme. Une fonction d’interface peut décrire ce groupe une seule fois, puis recevoir la question à afficher :</p><pre id="question-view"><code>@Composable
+fun QuestionView(question: Question) {
+    var feedbackText: String by remember(question) {
+        mutableStateOf(&quot;Choisis une réponse.&quot;)
+    }
+
+    fun checkAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = isCorrectAnswer(
+            selectedAnswer,
+            question.correctAnswer,
+        )
+        if (isAnswerCorrect) {
+            feedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            feedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = question.text)
+        for (choice: String in question.choices) {
+            Button(onClick = { checkAnswer(choice) }) {
+                Text(text = choice)
+            }
+        }
+        Text(text = feedbackText)
+    }
+}</code></pre>
+<p><code>question.text</code> fournit l’énoncé. La boucle lit <code>question.choices</code>. Au clic, la validation reçoit <code>question.correctAnswer</code>. Ces informations restent réunies dans le même objet.</p><p>Chaque appel de QuestionView possède son état d’affichage pour le message. Le cadre <code>remember(question)</code> conserve cet état pendant les mises à jour de la même vue ; si la question reçue change, il repart du message initial. Nous gardons ici un ordre fixe des questions, sans réorganisation pendant l’exécution.</p><p>La fonction locale checkAnswer est décrite une seule fois dans la vue, au lieu d’écrire checkFirstAnswer et checkSecondAnswer. Elle travaille avec la question reçue par cet appel. La règle <code>isCorrectAnswer</code> reste la même fonction Kotlin indépendante.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>QuestionView · vue d’une question</h3><p>Une fonction Compose réutilisable. Elle reçoit les données d’une question et décrit ses textes, ses boutons et son message.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Données et affichage</h3><p>Question décrit les informations. QuestionView décrit leur affichage et relie les clics à la validation. Le message affiché appartient encore à la vue dans cette étape.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="projet" aria-labelledby="titre-projet"><p class="eyebrow">06 / Dans ton projet</p><h2 id="titre-projet">Remplace les groupes par le modèle et la vue.</h2>
+<p>Dans MainActivity.kt :</p><ol class="steps"><li>Ajoute une seule définition de <code>Question</code> au niveau du fichier, par exemple après la dernière fonction.</li><li>Ajoute une seule fonction <code>QuestionView</code> au niveau du fichier, en dehors des autres fonctions et classes.</li><li>Remplace uniquement la fonction WelcomeScreen et sa ligne @Composable par l’exemple ci-dessous. Il crée les données puis appelle QuestionView pour chaque question.</li><li>Garde MainActivity, la prévisualisation, les imports existants et l’unique fonction isCorrectAnswer.</li></ol>
+<details><summary>Le nouveau WelcomeScreen complet</summary><pre id="welcome-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val firstQuestion: Question = Question(
+        text = &quot;Quel outil garde l’historique du code ?&quot;,
+        choices = listOf(&quot;Git&quot;, &quot;Android&quot;, &quot;Compose&quot;),
+        correctAnswer = &quot;Git&quot;,
+    )
+
+    val secondQuestion: Question = Question(
+        text = &quot;Quel composant Compose affiche du texte ?&quot;,
+        choices = listOf(&quot;Button&quot;, &quot;Text&quot;, &quot;Column&quot;),
+        correctAnswer = &quot;Text&quot;,
+    )
+
+    val questions: List&lt;Question&gt; = listOf(firstQuestion, secondQuestion)
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        for (question: Question in questions) {
+            QuestionView(question = question)
+        }
+    }
+}</code></pre></details>
+<p>Aucun nouvel import n’est nécessaire par rapport à la page précédente. Le défilement reste sur l’écran qui contient toutes les questions. Les blocs de données et d’actions de l’ancien WelcomeScreen sont remplacés, pas conservés en double.</p>
+<details><summary>Qu’est-ce qui a été déplacé ?</summary><p>L’énoncé, les choix et la réponse sont les propriétés d’un objet Question. Les deux affichages sont remplacés par un seul QuestionView appelé deux fois. Les messages et l’action locale sont maintenant dans cette vue. Tout reste dans le même fichier et la règle de validation ne change pas.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Réorganiser le code</h3><p>Changer comment les informations et les actions sont regroupées, tout en vérifiant que le comportement attendu reste le même.</p></aside></div></div>
+<section class="lesson-section" id="tester" aria-labelledby="titre-tester"><p class="eyebrow">07 / Ajouter des données, pas des boutons</p><h2 id="titre-tester">Passe à trois, puis quatre questions.</h2><p>Enregistre et lance d’abord les deux questions : Git reste correct pour la première et Text pour la deuxième. Vérifie aussi les autres choix et l’indépendance des messages.</p><p>Écris ensuite une troisième et une quatrième instance dans WelcomeScreen, avant la déclaration de questions :</p><details><summary>Deux propositions pour t’entraîner</summary><pre id="third-question"><code>val thirdQuestion: Question = Question(
+    text = &quot;Quel mot-clé déclare une fonction en Kotlin ?&quot;,
+    choices = listOf(&quot;fun&quot;, &quot;val&quot;, &quot;if&quot;),
+    correctAnswer = &quot;fun&quot;,
+)</code></pre><pre id="fourth-question"><code>val fourthQuestion: Question = Question(
+    text = &quot;Quel type représente vrai ou faux ?&quot;,
+    choices = listOf(&quot;String&quot;, &quot;Boolean&quot;, &quot;Int&quot;),
+    correctAnswer = &quot;Boolean&quot;,
+)</code></pre></details><p>Ajoute leurs noms à la liste :</p><pre><code>val questions: List&lt;Question&gt; = listOf(
+    firstQuestion,
+    secondQuestion,
+    thirdQuestion,
+    fourthQuestion,
+)</code></pre>
+<p>Ne recopie ni QuestionView ni l’action checkAnswer. Après relance, fais défiler et teste : fun est correct pour la troisième question, Boolean pour la quatrième.</p><ol class="steps"><li>Réponds correctement à chaque question et vérifie les quatre messages.</li><li>Change ensuite une réponse sur une question : les trois autres messages doivent rester identiques.</li><li>Ajoute un choix incorrect dans la liste choices d’une question, relance et vérifie l’apparition du bouton et son résultat.</li></ol>
+<details><summary>Question : faut-il une nouvelle classe pour chaque question ?</summary><p>Non. Les questions partagent la même description, la classe Question. Nous créons plusieurs instances avec des valeurs différentes. Une classe pour chaque énoncé ferait perdre l’intérêt du modèle commun.</p></details>
+<fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue la classe Question et une instance comme firstQuestion.</span></label><label><input type="checkbox"><span>Je sais lire une propriété avec le point, par exemple question.choices.</span></label><label><input type="checkbox"><span>Je distingue la liste de questions et la liste de choix d’une question.</span></label><label><input type="checkbox"><span>J’ai ajouté deux questions en changeant les données, sans recopier leur affichage.</span></label><label><input type="checkbox"><span>J’ai testé les réponses et l’indépendance des messages sur l’appareil.</span></label></fieldset><p class="caption">Confirmations personnelles : le guide ne lit pas ton projet, ne pilote pas l’appareil et ne sauvegarde pas ta progression.</p><p class="closing">Tu peux maintenant décrire plusieurs questions avec le même modèle et le même affichage. La suite permettra de réfléchir à l’endroit où placer les règles et le déroulement du quiz.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_lists_view/index.html" rel="prev"><span>← Précédent</span><span>Regrouper les choix dans une liste</span></a></nav></main></div></body></html>
