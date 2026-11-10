@@ -82,6 +82,9 @@ stage-academy-guide/
   module_code_presenter_view/
     index.html                 # Responsabilités et premier QuizPresenter
     module_code_presenter_view.css
+  module_code_quiz_progression_view/
+    index.html                 # État du quiz, question suivante et fin
+    module_code_quiz_progression_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -349,3 +352,28 @@ Sources auteur : https://kotlinlang.org/docs/classes.html ,
 https://kotlinlang.org/docs/packages.html et
 https://developer.android.com/develop/ui/compose/state . Le guide ne modifie
 pas le dépôt Android.
+
+## Code — page 8 : faire avancer le quiz
+
+`module_code_quiz_progression_view/index.html` ajoute une progression sans score.
+QuizPresenter reçoit List<Question>, garde un indice et un drapeau de réponse
+privés, propose submitAnswer et garde isCorrectAnswer comme règle indépendante.
+Une réponse incorrecte permet aussi d’avancer ; plusieurs choix restent possibles
+avant le passage. goToNextQuestion ne fait rien sans réponse et remet le drapeau
+à false, ce qui empêche un deuxième appel immédiat de sauter une question.
+
+getCurrentQuestion a comme précondition !isFinished. L’UI choisit la fin avant
+de lire la question : liste vide et dernière transition sont couvertes par ce
+protocole. L’indice final vaut size et ne doit pas être utilisé en accès de liste.
+La vue relit explicitement indice/statut après l’action et les stocke dans l’état
+Compose. L’indice de question fait réinitialiser les messages même pour deux
+questions identiques. Callback () -> Unit, enabled et private sont définis.
+Pas de flux réactif implicite, interface, score, recommencement ou persistance.
+
+Les deux vues et le presenter complet sont fournis. Question.kt est inchangé.
+Navigation presenter ↔ progression et badge home à huit pages. Vérifier les
+transitions, la remise à zéro des messages, l’activation après toute réponse et
+la fin sur appareil. Le guide ne modifie pas le dépôt Android et n’exécute rien.
+Sources auteur : https://kotlinlang.org/docs/visibility-modifiers.html ,
+https://kotlinlang.org/docs/lambdas.html et
+https://developer.android.com/develop/ui/compose/state .
