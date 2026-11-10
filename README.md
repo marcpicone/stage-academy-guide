@@ -566,7 +566,7 @@ Progression demandée :
 3. Préparer l’écran de question dans le même style.
 4. Passer à l’usage d’un coding agent via une application desktop.
 
-La page de conception de l’accueil est créée et liée ; les étapes suivantes restent à venir. Le modèle, les outils,
+Les pages de design de l’accueil et de la question sont créées et liées ; l’étape coding agent reste à venir. Le modèle, les outils,
 la lecture de diff et l’exécution seront approfondis à l’étape coding agent ; ne
 pas y passer directement depuis l’introduction. Une maquette reste une référence
 visuelle et ne crée pas une interface Android fonctionnelle. Le dépôt Android
@@ -590,5 +590,21 @@ les textes et références dans un dossier choisi avec l’encadrant, sans crée
 fichiers automatiquement. Le textarea et les cases ne sauvegardent pas la progression.
 
 Home à deux pages, entrée unique par l’introduction ; navigation intro → accueil.
-La page de question et l’utilisation desktop d’un coding agent restent à venir.
+La page de question est maintenant liée ; l’utilisation desktop d’un coding agent reste à venir.
 Aucun changement Android, navigation du quiz ou installation de service sur cette étape.
+
+## LLM et agents — page 3 : concevoir l’écran de question
+
+`module_agents_question_design_view/` réutilise la référence d’accueil, ses couleurs,
+formes et style de textes. L’élève prépare une maquette avant réponse, les états
+correct/incorrect, puis un document de design et les références associées.
+Les règles de la page score sont conservées : première réponse définitive, choix
+désactivés après réponse, +1 si correct, suite disponible après réponse. Aucun
+surlignage du choix cliqué ou dévoilement de solution n’est requis. Croquis HTML/CSS
+explicitement illustratif ; prompts rédigés, sans génération automatique ni JS.
+
+La lecture sur petit écran et un énoncé plus long font partie des critères de choix.
+Le textarea et les cases restent manuels, sans stockage de progression. Home à trois
+pages LLM, entrée unique par l’introduction et navigation accueil ↔ question.
+L’étape suivante prévue est l’usage desktop d’un coding agent, sans lien anticipé.
+Aucun fichier Android ni comportement du quiz n’est modifié par cette leçon.

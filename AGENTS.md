@@ -81,5 +81,13 @@ et les simulations ; ne pas présenter les conventions de l’équipe comme des 
 `module_agents_home_design_view/` prépare textes, maquette, retouche et document de
 design avant réalisation Android. Croquis HTML/CSS explicitement illustratif et
 prompts rédigés pour le cours, sans génération connectée. Un seul point d’entrée
-LLM sur la home, puis navigation séquentielle. Garder l’écran de question et les
-coding agents desktop pour les prochaines pages. Aucun code Android modifié ici.
+LLM sur la home, puis navigation séquentielle. L’écran de question est la page suivante ; garder les
+coding agents desktop pour une prochaine page. Aucun code Android modifié ici.
+
+## Design de la question — LLM page 3
+
+`module_agents_question_design_view/` conserve le style de l’accueil et les règles
+déjà introduites : première réponse définitive, +1 si correcte, choix désactivés
+puis suite disponible. Préparer les états avant/correct/incorrect et la lecture
+d’un énoncé long sans nouvelle logique Android. Croquis et prompts illustratifs,
+brouillon sans sauvegarde. Ne pas anticiper la page de coding agent.
