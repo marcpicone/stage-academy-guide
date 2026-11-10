@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Séparer les données, la règle de validation et l’affichage du quiz avec une classe QuizPresenter simple et des appels explicites."><title>Séparer la vue et les règles du quiz · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_presenter_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="presenter-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 7</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Une place pour chaque rôle</p><h1 id="titre">Séparer la vue et les règles du quiz.</h1><p class="lead">Tes questions ont un modèle et un affichage commun. Donne maintenant un rôle précis à une classe : vérifier les réponses, sans connaître les boutons ou les messages à l’écran.</p><p>Objectif : déplacer une règle déjà comprise, puis suivre son appel depuis le clic. Nous gardons les mêmes questions et les mêmes résultats.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#roles">Les rôles</a><a href="#classe">La classe</a><a href="#appel">L’instance et l’appel</a><a href="#fichiers">Les fichiers</a><a href="#vue">La vue</a><a href="#verifier">Vérifier</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="roles" aria-labelledby="titre-roles"><p class="eyebrow">01 / Reconnaître les responsabilités</p><h2 id="titre-roles">Qui doit savoir quoi ?</h2>
+<p>Jusqu’ici, MainActivity.kt contient les données, la validation et les vues. Cherche ce qui changerait pour modifier la bonne réponse, changer un libellé ou modifier la règle de validation : ces besoins ne concernent pas les mêmes éléments.</p><dl class="roles"><div><dt>Question · les données</dt><dd>Connaît l’énoncé, les choix et la bonne réponse.</dd></div><div><dt>QuizPresenter · la règle</dt><dd>Reçoit une question et un choix, puis indique si ce choix est correct.</dd></div><div><dt>QuestionView · l’affichage</dt><dd>Affiche les données, transmet les clics et traduit le résultat en message.</dd></div></dl>
+<p>Dans cette étape, le message et son état Compose restent dans la vue. Le presenter ne gère pas encore le score ou le passage à la question suivante. Nous lui donnons une première responsabilité simple et vérifiable.</p><p>Avec l’encadrant, garde d’abord le quiz fonctionnel dans Git, puis prépare une branche comme <code>ab/separer_validation_et_vue</code>.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Responsabilité · responsibility</h3><p>Le travail précis confié à une partie du programme. Comprendre qui fait quoi aide à savoir où intervenir.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Presenter</h3><p>Le nom choisi ici pour une classe qui portera les règles et, plus tard, le déroulement du quiz. Ce n’est pas un mot-clé Kotlin ni une fonction spéciale d’Android.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="classe" aria-labelledby="titre-classe"><p class="eyebrow">02 / Une classe qui porte une action</p><h2 id="titre-classe">Déclare QuizPresenter.</h2>
+<p>Question était une data class pour décrire des informations. Nous utilisons maintenant une classe Kotlin ordinaire pour regrouper une action :</p><pre id="presenter-class"><code>class QuizPresenter {
+    fun isCorrectAnswer(
+        question: Question,
+        selectedAnswer: String,
+    ): Boolean {
+        val result: Boolean = selectedAnswer == question.correctAnswer
+        return result
+    }
+}</code></pre>
+<p>Tu reconnais la comparaison de la page sur les fonctions. Elle est maintenant placée dans les accolades de la classe QuizPresenter. Une fonction qui appartient à une classe est aussi appelée une <strong>méthode</strong>.</p><p>L’action reçoit une Question et le texte choisi. Elle lit <code>question.correctAnswer</code> et renvoie un Boolean. Elle n’affiche rien et ne contient aucun outil Compose.</p><p>Nous n’avons pas changé la règle : l’égalité exacte des textes reste le critère. Recevoir la question complète rend explicite l’information utilisée par le presenter.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Méthode · method</h3><p>Une fonction qui appartient à une classe. Ici, isCorrectAnswer appartient à QuizPresenter.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Classe ordinaire / data class</h3><p>Les deux définissent des types. Question utilise data pour représenter des données ; QuizPresenter est une classe à laquelle nous confions une action.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="appel" aria-labelledby="titre-appel"><p class="eyebrow">03 / Créer, transmettre, appeler</p><h2 id="titre-appel">Une instance concrète du presenter.</h2>
+<p>Comme pour une question, on crée une instance de la classe :</p><pre><code>val presenter: QuizPresenter = QuizPresenter()</code></pre>
+<p>QuizPresenter est le type et le modèle. <code>presenter</code> est le nom de la variable qui désigne l’objet créé par <code>QuizPresenter()</code>. Cet objet possède la méthode de validation.</p><p>Depuis la vue, on lui demande le travail avec le point :</p><pre><code>val isAnswerCorrect: Boolean = presenter.isCorrectAnswer(
+    question = question,
+    selectedAnswer = selectedAnswer,
+)</code></pre>
+<p>La vue connaît cet objet parce qu’on le lui transmet comme paramètre. Elle ne le retrouve pas toute seule et il n’est pas créé par un mécanisme Android caché.</p>
+<ol class="call-flow"><li>Le joueur clique sur un choix.</li><li>La vue appelle presenter.isCorrectAnswer avec la question et le choix.</li><li>Le presenter renvoie true ou false.</li><li>La vue utilise ce résultat pour mettre à jour son message.</li></ol>
+<p>Le if qui choisit « Bonne réponse ! » ou « Essaie encore. » reste dans la vue : il choisit la présentation d’un résultat. La règle qui décide si la réponse est correcte est dans le presenter.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Instance · instance</h3><p>L’objet concret créé à partir d’une classe. Ici, une même instance de QuizPresenter sera transmise aux vues des différentes questions.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Transmettre · pass</h3><p>Fournir un objet ou une valeur comme argument d’un appel. Les paramètres rendent les liens visibles dans le code.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="fichiers" aria-labelledby="titre-fichiers"><p class="eyebrow">04 / Ranger le code par rôle</p><h2 id="titre-fichiers">Trois fichiers dans le même dossier.</h2>
+<p>Dans Android Studio, ouvre le dossier <code>app/src/main/java/fr/stageacademy/quiz/</code>. Nous restons dans ce dossier, sans créer une hiérarchie de dossiers supplémentaire.</p><pre><code>quiz/
+  MainActivity.kt    // lancement et vues Compose
+  Question.kt        // modèle de données
+  QuizPresenter.kt   // règle de validation</code></pre>
+<ol class="steps"><li>Crée <code>Question.kt</code> et déplace la déclaration de Question de MainActivity.kt vers ce fichier. Elle ne doit exister qu’une seule fois.</li><li>Crée <code>QuizPresenter.kt</code> et ajoute la classe du presenter.</li><li>Vérifie que les trois fichiers commencent par la même ligne <code>package fr.stageacademy.quiz</code>.</li></ol>
+<details><summary>Contenu complet de Question.kt</summary><pre id="model-file"><code>package fr.stageacademy.quiz
+
+data class Question(
+    val text: String,
+    val choices: List&lt;String&gt;,
+    val correctAnswer: String,
+)</code></pre></details><details><summary>Contenu complet de QuizPresenter.kt</summary><pre id="presenter-file"><code>package fr.stageacademy.quiz
+
+class QuizPresenter {
+    fun isCorrectAnswer(
+        question: Question,
+        selectedAnswer: String,
+    ): Boolean {
+        val result: Boolean = selectedAnswer == question.correctAnswer
+        return result
+    }
+}</code></pre></details>
+<p>Dans l’IDE, tu peux créer un fichier Kotlin depuis le menu contextuel du dossier avec <strong>New → Kotlin Class/File</strong> (nouveau → classe/fichier Kotlin). Le libellé peut varier. Choisis un fichier si tu veux y placer le contenu complet fourni.</p><p>Le même package permet ici d’utiliser ces types sans ajouter d’import entre eux. Mettre une classe dans un autre fichier aide à la retrouver ; ce rangement ne crée pas à lui seul une protection ou une nouvelle règle métier.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Package</h3><p>Le groupe logique auquel appartient le code Kotlin. La ligne package en haut du fichier indique ce groupe. Nous gardons le même package que le projet de départ.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Déplacer / dupliquer</h3><p>Déplacer laisse une seule déclaration dans son nouvel emplacement. Copier sans retirer l’ancienne peut provoquer une erreur de déclaration en double.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="vue" aria-labelledby="titre-vue"><p class="eyebrow">05 / Brancher la vue sur son presenter</p><h2 id="titre-vue">Rendre chaque lien visible.</h2>
+<p>Dans WelcomeScreen, ajoute la création conservée du presenter avant les questions :</p><pre><code>val presenter: QuizPresenter = remember { QuizPresenter() }</code></pre>
+<p><code>remember</code>, déjà rencontré pour l’état d’écran, conserve ici la même instance pendant les mises à jour de cette vue. Ce n’est ni une sauvegarde durable ni une création automatique : l’appel QuizPresenter() est écrit à cet endroit. Comme le presenter ne garde encore aucun état, cela prépare surtout un emplacement clair pour son instance.</p><p>Dans la boucle, transmets-le à chaque vue :</p><pre><code>for (question: Question in questions) {
+    QuestionView(question = question, presenter = presenter)
+}</code></pre>
+<p>QuestionView reçoit maintenant deux paramètres. Remplace sa définition par :</p><pre id="question-view"><code>@Composable
+fun QuestionView(
+    question: Question,
+    presenter: QuizPresenter,
+) {
+    var feedbackText: String by remember(question) {
+        mutableStateOf(&quot;Choisis une réponse.&quot;)
+    }
+
+    fun checkAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = presenter.isCorrectAnswer(
+            question = question,
+            selectedAnswer = selectedAnswer,
+        )
+        if (isAnswerCorrect) {
+            feedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            feedbackText = &quot;Essaie encore.&quot;
+        }
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = question.text)
+        for (choice: String in question.choices) {
+            Button(onClick = { checkAnswer(choice) }) {
+                Text(text = choice)
+            }
+        }
+        Text(text = feedbackText)
+    }
+}</code></pre>
+<details><summary>Comparer le WelcomeScreen complet</summary><p>Ce cadre montre les deux questions initiales pour rester court. Si tu en as déjà quatre, garde leurs instances et la liste qui les contient. Les changements concernent uniquement la création et la transmission du presenter.</p><pre id="welcome-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val presenter: QuizPresenter = remember { QuizPresenter() }
+
+    val firstQuestion: Question = Question(
+        text = &quot;Quel outil garde l’historique du code ?&quot;,
+        choices = listOf(&quot;Git&quot;, &quot;Android&quot;, &quot;Compose&quot;),
+        correctAnswer = &quot;Git&quot;,
+    )
+
+    val secondQuestion: Question = Question(
+        text = &quot;Quel composant Compose affiche du texte ?&quot;,
+        choices = listOf(&quot;Button&quot;, &quot;Text&quot;, &quot;Column&quot;),
+        correctAnswer = &quot;Text&quot;,
+    )
+
+    val questions: List&lt;Question&gt; = listOf(firstQuestion, secondQuestion)
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        for (question: Question in questions) {
+            QuestionView(question = question, presenter = presenter)
+        }
+    }
+}</code></pre></details>
+<p>Une fois tous les appels mis à jour, retire l’ancienne fonction <code>isCorrectAnswer</code> déclarée seule au niveau du fichier dans MainActivity.kt. La méthode du presenter doit être l’unique emplacement de cette règle. Garde la classe MainActivity, sa prévisualisation et les imports Compose existants.</p>
+<details><summary>L’IDE signale un nom inconnu ou un paramètre manquant</summary><p>Vérifie le package de Question.kt et QuizPresenter.kt. Dans MainActivity.kt, cherche tous les appels de QuestionView : chacun doit fournir presenter. Dans l’action du clic, l’appel doit commencer par <code>presenter.isCorrectAnswer</code>. Un oubli à l’un de ces endroits peut empêcher la compilation.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Dépendance explicite</h3><p>QuestionView a besoin d’un QuizPresenter pour valider. Son paramètre le montre et son appelant doit le fournir.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>État de la vue</h3><p>Le message reste stocké dans QuestionView. Le presenter de cette page n’a aucun état à modifier : il renvoie seulement le résultat de la vérification.</p></aside></div></div>
+<section class="lesson-section" id="verifier" aria-labelledby="titre-verifier"><p class="eyebrow">06 / Même résultat, rôles plus clairs</p><h2 id="titre-verifier">Vérifie le comportement et explique le trajet.</h2><ol class="steps"><li>Enregistre les trois fichiers et lance avec Run.</li><li>Teste les choix corrects et incorrects de chaque question. Les résultats doivent rester ceux de la page précédente.</li><li>Réponds à plusieurs questions puis change une réponse : vérifie que seul le message concerné change.</li><li>Depuis le clic, retrouve l’appel au presenter, sa méthode et la valeur renvoyée. Reviens ensuite au if qui choisit le message.</li></ol>
+<details><summary>À toi : quel fichier ouvrirais-tu pour chacun de ces changements ?</summary><p>Ajouter une propriété au modèle Question ? Modifier la règle de validation ? Changer le libellé du message ? Réponds avant de lire la correction.</p><details><summary>Lire la correction</summary><p>Question.kt pour la forme des données, QuizPresenter.kt pour la règle et MainActivity.kt, dans QuestionView, pour les messages affichés. Les questions concrètes restent créées dans WelcomeScreen à cette étape.</p></details></details>
+<details><summary>Pourquoi ne pas faire appeler Text ou Button par le presenter ?</summary><p>Sa tâche est de décider si une réponse est correcte. En restant indépendant de Compose, cette règle peut être vérifiée sans dessiner un écran. La vue utilise le résultat pour choisir ce qu’elle affiche.</p></details>
+<fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue données, règle de validation et affichage.</span></label><label><input type="checkbox"><span>Je retrouve la création de l’instance QuizPresenter et sa transmission à la vue.</span></label><label><input type="checkbox"><span>Je peux suivre le clic, l’appel de méthode, le résultat et le message.</span></label><label><input type="checkbox"><span>Question et la règle de validation n’existent pas en double.</span></label><label><input type="checkbox"><span>Le quiz conserve ses résultats et ses messages indépendants sur l’appareil.</span></label></fieldset><p class="caption">Confirmations personnelles : le guide ne vérifie pas ton projet ou l’appareil et ne sauvegarde pas ta progression.</p><p class="closing">Tu as séparé une première règle de l’interface. Tu pourras maintenant faire évoluer le déroulement du quiz sans tout mélanger dans le code des boutons.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_question_model_view/index.html" rel="prev"><span>← Précédent</span><span>Un modèle pour tes questions</span></a></nav></main></div></body></html>
