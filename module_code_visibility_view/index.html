@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Comprendre private et public dans une classe ou un fichier Kotlin, protéger les règles du presenter et choisir ce que la vue peut appeler."><title>private et public : qui peut utiliser quoi ? · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_visibility_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="visibility-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 10</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Choisir ce que les autres peuvent utiliser</p><h1 id="titre">private et public : qui peut utiliser quoi ?</h1><p class="lead">La vue peut demander une validation et lire le score. Elle ne doit pas modifier directement le score ou l’indice. La visibilité permet d’écrire cette limite dans le code.</p><p>Tu as déjà rencontré private dans le presenter. Nous allons comprendre son rôle, le comparer à public et rendre privés deux détails qui n’ont pas besoin d’être appelés ailleurs.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#besoin">Le besoin</a><a href="#prive">Dans la classe</a><a href="#public">Ce qui est public</a><a href="#fichier">Dans le fichier</a><a href="#exercice">Appliquer</a><a href="#verifier">Vérifier</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="besoin" aria-labelledby="titre-besoin"><p class="eyebrow">01 / Garder les règles cohérentes</p><h2 id="titre-besoin">Demander une action plutôt que modifier un détail.</h2>
+<p>Dans ton quiz, submitAnswer compte au plus une fois la première réponse. goToNextQuestion exige une réponse avant d’avancer. Ces règles dépendent du score, de l’indice et des informations privées conservées par le presenter.</p><p>Si la vue pouvait écrire directement <code>presenter.score = 100</code> ou changer l’indice, elle pourrait contourner ces règles. Nous voulons qu’elle utilise les actions prévues et qu’elle puisse lire les résultats nécessaires.</p>
+<dl class="access-cards"><div><dt>À utiliser depuis la vue</dt><dd>submitAnswer, getScore, goToNextQuestion, restart…</dd></div><div><dt>À garder à l’intérieur</dt><dd>score, currentQuestionIndex, les informations de réponse et les détails de calcul.</dd></div></dl>
+<p>Une partie du programme a besoin de connaître les services d’une autre partie, pas tous ses détails internes.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Visibilité · visibility</h3><p>La règle qui détermine d’où le code peut accéder à une déclaration : une classe, une propriété ou une fonction.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Détail interne</h3><p>Une information ou une action nécessaire au fonctionnement d’une partie du code, mais qui n’a pas à être utilisée directement ailleurs.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="prive" aria-labelledby="titre-prive"><p class="eyebrow">02 / À l’intérieur d’une classe</p><h2 id="titre-prive">private réserve l’accès à cette classe.</h2>
+<p>Dans QuizPresenter, le score est déclaré ainsi :</p><pre><code>private var score: Int = 0
+
+fun getScore(): Int {
+    return score
+}</code></pre>
+<p>Les méthodes de QuizPresenter peuvent lire et modifier score. En revanche, le code de la vue ne peut pas lire directement <code>presenter.score</code> ni lui donner une valeur, même si la vue se trouvait dans le même fichier que la classe.</p><p>La vue peut appeler <code>presenter.getScore()</code>. Elle reçoit le nombre à afficher ; elle n’obtient pas le droit de modifier la propriété privée.</p>
+<details><summary>Exemple volontairement incorrect : que refuse le compilateur ?</summary><pre><code>// Depuis le code de la vue :
+presenter.score = 100</code></pre><p>L’accès à score est refusé parce que cette propriété est privée à QuizPresenter. Il ne faut pas retirer private pour faire disparaître le message : il faut retrouver l’action autorisée qui correspond au besoin.</p></details>
+<aside class="takeaway"><strong>La visibilité aide à faire respecter la responsabilité.</strong><p>Le presenter contrôle les points en fonction des réponses. La vue lui transmet les actions et affiche les résultats.</p></aside>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>private · privé</h3><p>Pour un membre de classe, l’accès direct est réservé au code de cette classe.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Encapsulation</h3><p>Garder les détails internes ensemble et contrôler la façon dont les autres parties les utilisent. Le score privé et les actions du presenter en donnent un premier exemple.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="public" aria-labelledby="titre-public"><p class="eyebrow">03 / Les opérations proposées aux autres</p><h2 id="titre-public">public rend l’élément utilisable depuis l’extérieur.</h2>
+<p>Dans notre projet, les méthodes du presenter utilisées par la vue sont publiques. En Kotlin, public est la visibilité par défaut pour ces déclarations :</p><pre><code>fun getScore(): Int {
+    return score
+}</code></pre><p>écrit la même visibilité que :</p><pre><code>public fun getScore(): Int {
+    return score
+}</code></pre>
+<p>Tu n’es donc pas obligé d’écrire public partout. Nous l’écrivons sur getScore dans l’exemple complet pour rendre ce choix visible.</p><p>Public ne signifie pas « tout le monde peut tout modifier ». Une propriété déclarée avec <code>val</code> reste non réaffectable, même si elle est publique. La visibilité détermine <strong>qui peut accéder</strong> ; val ou var détermine <strong>si la valeur peut être remplacée</strong>.</p><p>Le type Question doit rester accessible depuis MainActivity.kt et QuizPresenter.kt. Le presenter doit aussi rester accessible au code qui le crée. On ne rend pas une déclaration privée simplement parce qu’elle est dans un fichier séparé.</p>
+<details><summary>À toi : faut-il rendre getScore privée pour protéger le score ?</summary><p>Non. La propriété score reste privée, mais la vue doit pouvoir lire le total via getScore. Rendre cette méthode privée empêcherait l’appel nécessaire à l’affichage.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>public · public</h3><p>L’élément peut être utilisé par le code extérieur qui a accès au type ou à la déclaration. Ici, la vue peut appeler les méthodes publiques du presenter.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Public dans le code / sur GitHub</h3><p>Le mot-clé public de Kotlin ne change pas les réglages de partage du dépôt GitHub. Il décrit les accès dans le programme.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="fichier" aria-labelledby="titre-fichier"><p class="eyebrow">04 / Le sens dépend de l’emplacement</p><h2 id="titre-fichier">private au niveau du fichier.</h2>
+<p>Quand une fonction est déclarée en dehors des classes et des autres fonctions, private la réserve au fichier où elle est écrite.</p><p>Voici un exemple de lecture, indépendant du quiz :</p><pre id="file-example"><code>private fun formatScore(score: Int, questionCount: Int): String {
+    return &quot;Score : $score / $questionCount&quot;
+}
+
+fun getExampleLabel(): String {
+    return formatScore(3, 4)
+}</code></pre>
+<p>getExampleLabel peut appeler formatScore parce que les deux sont dans ce fichier. Une fonction dans un autre fichier ne peut pas appeler directement formatScore, même avec le même package. Un import ne contourne pas cette limite.</p><p>Dans ton application, QuestionView est déclarée au niveau de MainActivity.kt et n’est appelée que depuis ce fichier. On peut donc écrire :</p><pre><code>@Composable
+private fun QuestionView(
+    question: Question,
+    questionIndex: Int,
+    presenter: QuizPresenter,
+    onAnswerSubmitted: () -&gt; Unit,
+    onNextQuestion: () -&gt; Unit,
+) {
+    // Le corps existant est conservé.
+}</code></pre>
+<p>WelcomeScreen continue à l’appeler dans le même fichier. Si, plus tard, on déplace cet appel vers un autre fichier, il faudra revoir l’emplacement ou la visibilité en fonction du besoin.</p>
+<details><summary>Et une variable déclarée dans une fonction ?</summary><p>Sa portée la limite déjà à son bloc. On ne met pas private ou public devant une variable locale comme isAnswerCorrect dans checkAnswer. Son emplacement et la portée étudiée plus tôt expliquent où son nom est accessible.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Portée / visibilité</h3><p>La portée dépend de l’endroit où le nom est déclaré. La visibilité ajoute une limite d’accès pour les déclarations concernées. Une variable locale n’a pas de modificateur private ou public.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Au niveau du fichier · top-level</h3><p>Une déclaration située en dehors des classes et des fonctions. Pour cette déclaration, private signifie « dans ce fichier seulement ».</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="exercice" aria-labelledby="titre-exercice"><p class="eyebrow">05 / Deux limites utiles dans le quiz</p><h2 id="titre-exercice">Rends privés les détails inutiles à la vue.</h2>
+<p>Avec l’encadrant, garde d’abord la version du score et du recommencement dans Git. Prépare ta branche de travail, par exemple <code>ab/preciser_visibilite</code>.</p>
+<ol class="steps"><li>Dans QuizPresenter.kt, retrouve tous les appels à isCorrectAnswer. Après la leçon sur le score, cette méthode n’est appelée que par submitAnswer dans la même classe. Ajoute private devant sa déclaration.</li><li>Sur getScore, tu peux écrire public explicitement pour lire l’intention. Cela ne change pas sa visibilité actuelle.</li><li>Dans MainActivity.kt, ajoute private devant fun QuestionView. Garde son annotation @Composable et son corps.</li><li>Ne change pas Question.kt. Conserve publiques les actions et lectures du presenter que la vue appelle.</li></ol>
+<details><summary>QuizPresenter.kt complet après le changement</summary><pre id="presenter-file"><code>package fr.stageacademy.quiz
+
+class QuizPresenter(private val questions: List&lt;Question&gt;) {
+    private var currentQuestionIndex: Int = 0
+    private var hasAnsweredCurrentQuestion: Boolean = false
+    private var isCurrentAnswerCorrect: Boolean = false
+    private var score: Int = 0
+
+    public fun getScore(): Int {
+        return score
+    }
+
+    fun getCurrentQuestionIndex(): Int {
+        return currentQuestionIndex
+    }
+
+    fun isFinished(): Boolean {
+        return currentQuestionIndex &gt;= questions.size
+    }
+
+    fun getCurrentQuestion(): Question {
+        return questions[currentQuestionIndex]
+    }
+
+    private fun isCorrectAnswer(
+        question: Question,
+        selectedAnswer: String,
+    ): Boolean {
+        val result: Boolean = selectedAnswer == question.correctAnswer
+        return result
+    }
+
+    fun submitAnswer(selectedAnswer: String): Boolean {
+        if (isFinished()) {
+            return false
+        }
+        if (hasAnsweredCurrentQuestion) {
+            return isCurrentAnswerCorrect
+        }
+        val question: Question = getCurrentQuestion()
+        isCurrentAnswerCorrect = isCorrectAnswer(question, selectedAnswer)
+        hasAnsweredCurrentQuestion = true
+        if (isCurrentAnswerCorrect) {
+            score = score + 1
+        }
+        return isCurrentAnswerCorrect
+    }
+
+    fun canGoToNextQuestion(): Boolean {
+        return hasAnsweredCurrentQuestion
+    }
+
+    fun goToNextQuestion(): Unit {
+        if (canGoToNextQuestion()) {
+            currentQuestionIndex = currentQuestionIndex + 1
+            hasAnsweredCurrentQuestion = false
+            isCurrentAnswerCorrect = false
+        }
+    }
+
+    fun restart(): Unit {
+        currentQuestionIndex = 0
+        hasAnsweredCurrentQuestion = false
+        isCurrentAnswerCorrect = false
+        score = 0
+    }
+}</code></pre></details><details><summary>QuestionView complète avec sa visibilité</summary><pre id="question-view"><code>@Composable
+private fun QuestionView(
+    question: Question,
+    questionIndex: Int,
+    presenter: QuizPresenter,
+    onAnswerSubmitted: () -&gt; Unit,
+    onNextQuestion: () -&gt; Unit,
+) {
+    var feedbackText: String by remember(presenter, questionIndex) {
+        mutableStateOf(&quot;Choisis une réponse.&quot;)
+    }
+    var canGoToNextQuestion: Boolean by remember(presenter, questionIndex) {
+        mutableStateOf(presenter.canGoToNextQuestion())
+    }
+
+    fun checkAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = presenter.submitAnswer(selectedAnswer)
+        if (isAnswerCorrect) {
+            feedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            feedbackText = &quot;Réponse incorrecte.&quot;
+        }
+        canGoToNextQuestion = presenter.canGoToNextQuestion()
+        onAnswerSubmitted()
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = question.text)
+        for (choice: String in question.choices) {
+            Button(
+                onClick = { checkAnswer(choice) },
+                enabled = !canGoToNextQuestion,
+            ) {
+                Text(text = choice)
+            }
+        }
+        Text(text = feedbackText)
+        Button(
+            onClick = onNextQuestion,
+            enabled = canGoToNextQuestion,
+        ) {
+            Text(text = &quot;Question suivante&quot;)
+        }
+    }
+}</code></pre></details>
+<p>WelcomeScreen et ses appels ne changent pas. Ce n’est pas un nouvel écran ni une nouvelle règle de score : tu précises quelles déclarations sont disponibles ailleurs.</p>
+<details><summary>Expérience accompagnée : essayer puis annuler un accès interdit</summary><p>Dans WelcomeScreen, juste après la création du presenter, essaie temporairement <code>presenter.score = 100</code>. Observe le refus de l’IDE. Retire cette ligne avant de compiler ou de lancer.</p><p>Essaie ensuite temporairement d’appeler <code>presenter.isCorrectAnswer(firstQuestion, "Git")</code>. Après le passage en private, cet accès direct est lui aussi refusé. Retire la ligne et garde le chemin normal : submitAnswer.</p><p>Le refus aide à comprendre la limite. Ce n’est pas une raison pour rendre la propriété ou la méthode publique.</p></details>
+<aside class="takeaway"><strong>Une fonction peut devenir privée parce que les besoins ont changé.</strong><p>Au début, la validation était appelée directement depuis la vue. Maintenant, submitAnswer gère l’enregistrement et le score. La comparaison devient un détail interne ; la vue passe par l’action qui applique toutes les règles.</p></aside>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Accès autorisé</h3><p>La vue demande submitAnswer pour enregistrer une réponse. Elle ne doit pas appeler seulement la comparaison si cela contourne l’enregistrement du premier choix et le score.</p></aside></div></div>
+<section class="lesson-section" id="verifier" aria-labelledby="titre-verifier"><p class="eyebrow">06 / Vérifier les accès et le comportement</p><h2 id="titre-verifier">Les limites changent, le quiz fonctionne pareil.</h2><ol class="steps"><li>Retire les lignes d’expérience volontairement incorrectes, puis compile et lance.</li><li>Fais une partie : les points, la réponse unique et « Suivante » doivent fonctionner comme avant.</li><li>À la fin, recommence et vérifie la remise à zéro.</li><li>Montre une propriété privée, une méthode publique, une méthode privée et une fonction privée au niveau du fichier.</li></ol>
+<details><summary>Question : deux fonctions dans le même fichier peuvent-elles lire score ?</summary><p>Pas simplement parce qu’elles sont dans le même fichier. Score est privée dans QuizPresenter : seules les méthodes de cette classe y accèdent directement. La fonction extérieure passe par getScore ou les actions autorisées.</p></details>
+<details><summary>Question : peut-on appeler QuestionView depuis un autre fichier ?</summary><p>Après ce changement, non : elle est privée au fichier MainActivity.kt. WelcomeScreen peut toujours l’appeler dans ce même fichier.</p></details>
+<fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je comprends pourquoi le score est privé et getScore publique.</span></label><label><input type="checkbox"><span>Je distingue private dans une classe et private au niveau d’un fichier.</span></label><label><input type="checkbox"><span>Je sais que public est ici la visibilité par défaut.</span></label><label><input type="checkbox"><span>Je distingue l’accès à une valeur et la possibilité de la remplacer.</span></label><label><input type="checkbox"><span>J’ai retiré les accès interdits et vérifié une partie puis le recommencement.</span></label></fieldset><p class="caption">Confirmations personnelles : le guide ne compile pas ton projet et ne sauvegarde pas ta progression.</p><p class="closing">Tu sais maintenant distinguer les opérations proposées aux autres et les détails internes. Nous pourrons décrire ces opérations dans un contrat avant de regarder l’architecture d’ensemble.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_score_view/index.html" rel="prev"><span>← Précédent</span><span>Compter les points et recommencer</span></a></nav></main></div></body></html>
