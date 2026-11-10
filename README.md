@@ -79,6 +79,9 @@ stage-academy-guide/
   module_code_question_model_view/
     index.html                 # data class Question, instances et vue commune
     module_code_question_model_view.css
+  module_code_presenter_view/
+    index.html                 # Responsabilités et premier QuizPresenter
+    module_code_presenter_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -323,3 +326,26 @@ Les tests réels doivent contrôler les réponses et les messages indépendants.
 Navigation listes ↔ modèle et badge home à six pages ; aucun JS requis.
 Sources auteur : https://kotlinlang.org/docs/data-classes.html et
 https://kotlinlang.org/docs/classes.html . Le guide ne modifie pas l’app Android.
+
+## Code — page 7 : premier presenter
+
+`module_code_presenter_view/index.html` déplace la règle de validation dans une
+classe Kotlin ordinaire QuizPresenter, sans état. Une instance créée explicitement
+dans WelcomeScreen avec remember est transmise à QuestionView. La vue conserve
+son état de message et le if qui traduit un résultat en texte ; la règle de
+correction dépend uniquement de Question et du choix reçu. Pas d’interface, de
+score, d’injection de dépendances par framework ou de nouvelle navigation.
+
+Le parcours déplace Question vers Question.kt et ajoute QuizPresenter.kt à côté
+de MainActivity.kt dans le même package. Il demande de supprimer les anciennes
+déclarations après migration des appels. Les deux fichiers complets et les vues
+sont fournis ; le cadre WelcomeScreen garde deux questions mais les élèves qui
+en ont quatre conservent leurs données. La même instance sans état peut vérifier
+toutes les questions. Test réel : réponses correctes/incorrectes, indépendance
+des messages et explication des rôles.
+
+Navigation modèle ↔ presenter et badge home à sept pages. Pas de JavaScript.
+Sources auteur : https://kotlinlang.org/docs/classes.html ,
+https://kotlinlang.org/docs/packages.html et
+https://developer.android.com/develop/ui/compose/state . Le guide ne modifie
+pas le dépôt Android.
