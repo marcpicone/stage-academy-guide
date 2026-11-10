@@ -100,3 +100,13 @@ le diff et lancer l’app avec l’encadrant. Codex est un exemple documenté, s
 figés ni installation automatique. Ne pas confondre les snippets du parcours et
 le contenu réel du dépôt Android starter. La page est statique et ne lance rien.
 Pas de refonte des questions à cette étape ; les règles existantes sont conservées.
+
+## Consignes de projet — LLM page 5
+
+`module_agents_project_instructions_view/` enseigne AGENTS.md à la racine et la
+différence avec .agents/skills/ et .codex/config.toml. L’élève adapte les consignes
+au clone réel sans écraser un fichier existant. Aucune configuration ou skill
+créé automatiquement. La tâche d’application réalise le design des questions,
+sans changement de règles, avec revue et observation. Le guide reste statique ;
+les exemples d’instructions sont du contenu pédagogique, pas de nouvelles règles
+pour le développement du guide ou une autorisation de modifier le dépôt Android.

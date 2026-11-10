@@ -630,3 +630,27 @@ Sources officielles consultées pour cette page :
 - https://learn.chatgpt.com/docs/projects — accès aux dossiers de projet locaux.
 - https://learn.chatgpt.com/docs/environments/modes — travail dans le dossier local.
 - https://learn.chatgpt.com/docs/code-review — panneau de revue et état Git.
+
+## LLM et agents — page 5 : AGENTS.md et dossiers d’outillage
+
+`module_agents_project_instructions_view/` distingue tâche courante et consignes
+durables, puis fait écrire un AGENTS.md court à la racine du clone Android de
+l’élève. Un fichier existant est relu et adapté, jamais remplacé aveuglément.
+L’exemple suit le quiz réalisé pendant le cours, pas le dépôt starter inchangé.
+Les règles restent dans le presenter ; les instructions ne changent pas l’app.
+
+.agents/skills/ et SKILL.md sont présentés comme procédures réutilisables ;
+.codex/config.toml comme réglages Codex (projets fiables). Aucun skill, dossier
+ou réglage réel n’est créé par le guide. Un seul fichier de consignes est demandé
+à l’élève. Le prompt de vérification demande une lecture explicite dans une nouvelle
+session ; une reformulation correcte ne garantit pas le respect futur des règles.
+
+L’application concrète est le design des questions dans le style de l’accueil,
+avec références fournies, revue du diff et observation sur appareil. Le guide
+reste statique, sans génération ni modification Android. Brouillon sans stockage.
+Home à cinq pages LLM, navigation desktop ↔ consignes. Aucun lien futur anticipé.
+
+Sources officielles consultées :
+- https://learn.chatgpt.com/docs/agent-configuration/agents-md
+- https://learn.chatgpt.com/docs/build-skills
+- https://learn.chatgpt.com/docs/config-file/config-basic
