@@ -100,6 +100,9 @@ stage-academy-guide/
   module_code_data_lifecycle_view/
     index.html                 # Mémoire, vue, activité, processus et persistance
     module_code_data_lifecycle_view.css
+  module_code_async_view/
+    index.html                 # Synchrone/asynchrone, coroutines et Flow
+    module_code_async_view.css
   README.md
   AGENTS.md                    # Objectif, architecture et consignes de travail
   .gitignore
@@ -510,3 +513,31 @@ prévue, sans lien vers une page inexistante. Sources auteur :
 - https://developer.android.com/topic/libraries/architecture/datastore
 - https://developer.android.com/training/data-storage
 - https://developer.android.com/reference/android/util/Log
+
+## Code — page 14 : coroutines et Flow
+
+`module_code_async_view/index.html` distingue synchrone/asynchrone, thread,
+coroutine, suspend, delay et Flow/emit/collect. Une lecture suspendable fictive
+à résultat unique sert à comparer ; la démo utilise un flow froid fini qui émet
+2 puis 4 après deux attentes de 1500 ms. Ce sont des valeurs contrôlées, sans
+DataStore, fichier, réseau, meilleur score réel ou écriture persistante.
+
+LaunchedEffect(Unit) lance la collecte dans un if piloté par un bouton. Retirer
+le bloc annule la coroutine ; réafficher recommence la source. La page distingue
+ce cycle de composition du passage de l’app à l’arrière-plan et signale qu’une
+observation réelle doit aussi choisir son comportement de cycle de vie Android.
+Suspend ne déplace pas le travail vers un autre thread, une annulation est
+coopérative et une coroutine lancée n’est pas une garantie de sauvegarde.
+
+Le cadre AsyncBestScoreDemo s’ajoute dans le Column principal de WelcomeScreen.
+Les imports LaunchedEffect et kotlinx.coroutines sont fournis ; les bibliothèques
+sont accessibles via la base Compose actuelle, sans ajout de version au hasard.
+Le presenter, son contrat et le score restent inchangés. Pas de cours de tests
+automatisés : le parcours propose une observation sur appareil.
+
+Navigation données ↔ asynchrone et home à quatorze pages. Aucun JS requis.
+Sources auteur : https://kotlinlang.org/docs/coroutines-basics.html ,
+https://kotlinlang.org/docs/coroutines-flow.html ,
+https://developer.android.com/develop/ui/compose/side-effects et
+https://developer.android.com/topic/libraries/architecture/coroutines .
+Le guide ne modifie pas le dépôt Android et ne pilote pas l’appareil.
