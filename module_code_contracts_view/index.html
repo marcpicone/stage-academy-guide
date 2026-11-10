@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Décrire les opérations du quiz avec une interface, comprendre le contrat et son implémentation, puis faire dépendre la vue du contrat."><title>Contrats et interfaces · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_code_contracts_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="contracts-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>03 / Premiers pas en code · Page 11</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Décrire ce qu’on peut attendre d’une action</p><h1 id="titre">Contrats et interfaces.</h1><p class="lead">La vue doit pouvoir envoyer une réponse, lire le score et avancer. Elle n’a pas besoin de connaître la façon dont le presenter garde ses informations.</p><p>Écris ce dont elle a besoin dans une interface, puis fais respecter ce contrat par QuizPresenter. Le quiz conserve ses règles et son affichage.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#contrat">Le contrat</a><a href="#interface">L’interface</a><a href="#implementation">L’implémentation</a><a href="#vue">La vue</a><a href="#limites">Les garanties</a><a href="#exercice">Appliquer et vérifier</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="contrat" aria-labelledby="titre-contrat"><p class="eyebrow">01 / Une promesse entre deux parties</p><h2 id="titre-contrat">Que peut attendre la vue ?</h2>
+<p>Un contrat décrit ce qu’une partie du programme propose et les règles de son utilisation. Pour chaque opération, nous devons comprendre ce qu’elle reçoit, ce qu’elle renvoie et son effet.</p><dl class="contract-rules"><div><dt>submitAnswer · envoyer une réponse</dt><dd>Reçoit un texte et renvoie le résultat de la première réponse enregistrée pour la question. Compte au plus un point et ne remplace pas une réponse déjà enregistrée.</dd></div><div><dt>goToNextQuestion · avancer</dt><dd>Ne fait rien tant qu’aucune réponse n’a été donnée. Sinon, avance et remet les informations de réponse à leur état initial.</dd></div><div><dt>getCurrentQuestion · lire la question</dt><dd>S’utilise seulement lorsque le quiz n’est pas terminé. La vue vérifie isFinished avant de demander cette lecture.</dd></div><div><dt>restart · recommencer</dt><dd>Revient au début et remet le score ainsi que les informations de réponse à zéro.</dd></div></dl>
+<p>La vue s’appuie sur ces promesses. Si avancer sautait parfois deux questions, elle ne pourrait plus utiliser cette action de façon fiable, même si les types étaient corrects.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Contrat · contract</h3><p>Ce qu’une partie du programme promet de fournir, avec les conditions d’utilisation et les résultats attendus.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Condition d’utilisation · precondition</h3><p>Ce qui doit être vrai avant une action. Exemple : le quiz ne doit pas être terminé avant getCurrentQuestion.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="interface" aria-labelledby="titre-interface"><p class="eyebrow">02 / Écrire les opérations disponibles</p><h2 id="titre-interface">Une interface décrit les signatures.</h2>
+<p>Crée un fichier QuizContract.kt dans le même dossier et le même package que QuizPresenter.kt :</p><pre id="contract-file"><code>package fr.stageacademy.quiz
+
+interface QuizContract {
+    fun getScore(): Int
+    fun getCurrentQuestionIndex(): Int
+    fun isFinished(): Boolean
+    fun getCurrentQuestion(): Question
+    fun submitAnswer(selectedAnswer: String): Boolean
+    fun canGoToNextQuestion(): Boolean
+    fun goToNextQuestion(): Unit
+    fun restart(): Unit
+}</code></pre>
+<p><code>interface</code> déclare ici un type qui décrit les opérations attendues. Nous écrivons uniquement leurs signatures : nom, paramètres et type de retour. Il n’y a pas de corps de méthode dans ce contrat.</p><p>La vue utilise ces huit opérations. La comparaison privée isCorrectAnswer ne figure pas dans l’interface : c’est un détail de l’implémentation.</p><p>Une interface Kotlin peut aussi proposer certaines méthodes avec un corps. Nous n’en avons pas besoin ici : nous séparons volontairement la description des opérations et leur réalisation.</p>
+<aside class="takeaway"><strong>Le contrat décrit ce qu’on peut demander, pas comment le travail est fait.</strong><p>Il ne déclare ni score privé, ni indice privé, ni code de comptage. Une classe va fournir ces détails.</p></aside>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Interface · interface</h3><p>Un type qui décrit ici les opérations qu’une implémentation doit fournir. Ce mot ne désigne pas l’interface graphique de l’application.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Signature · signature</h3><p>Le nom d’une fonction, ses paramètres et son type de retour : la forme de l’appel autorisé.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>QuizContract</h3><p>« Contrat du quiz ». Comme pour une classe, le nom de ce type commence par une majuscule.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="implementation" aria-labelledby="titre-implementation"><p class="eyebrow">03 / Fournir le code promis</p><h2 id="titre-implementation">QuizPresenter implémente le contrat.</h2>
+<p>La classe annonce l’interface qu’elle réalise après le signe <code>:</code> :</p><pre><code>class QuizPresenter(private val questions: List&lt;Question&gt;) : QuizContract {
+    // Les méthodes sont fournies dans cette classe.
+}</code></pre>
+<p>Elle place le mot-clé <code>override</code> devant chaque méthode déclarée dans QuizContract. Exemple :</p><pre><code>override fun getScore(): Int {
+    return score
+}</code></pre>
+<p>Override indique que cette méthode fournit l’opération annoncée par le contrat. Le nom, les paramètres et le retour doivent correspondre. Le compilateur vérifie que cette classe concrète fournit toutes les méthodes nécessaires.</p><details><summary>QuizPresenter.kt complet avec les huit méthodes du contrat</summary><pre id="presenter-file"><code>package fr.stageacademy.quiz
+
+class QuizPresenter(private val questions: List&lt;Question&gt;) : QuizContract {
+    private var currentQuestionIndex: Int = 0
+    private var hasAnsweredCurrentQuestion: Boolean = false
+    private var isCurrentAnswerCorrect: Boolean = false
+    private var score: Int = 0
+
+    override fun getScore(): Int {
+        return score
+    }
+
+    override fun getCurrentQuestionIndex(): Int {
+        return currentQuestionIndex
+    }
+
+    override fun isFinished(): Boolean {
+        return currentQuestionIndex &gt;= questions.size
+    }
+
+    override fun getCurrentQuestion(): Question {
+        return questions[currentQuestionIndex]
+    }
+
+    private fun isCorrectAnswer(
+        question: Question,
+        selectedAnswer: String,
+    ): Boolean {
+        val result: Boolean = selectedAnswer == question.correctAnswer
+        return result
+    }
+
+    override fun submitAnswer(selectedAnswer: String): Boolean {
+        if (isFinished()) {
+            return false
+        }
+        if (hasAnsweredCurrentQuestion) {
+            return isCurrentAnswerCorrect
+        }
+        val question: Question = getCurrentQuestion()
+        isCurrentAnswerCorrect = isCorrectAnswer(question, selectedAnswer)
+        hasAnsweredCurrentQuestion = true
+        if (isCurrentAnswerCorrect) {
+            score = score + 1
+        }
+        return isCurrentAnswerCorrect
+    }
+
+    override fun canGoToNextQuestion(): Boolean {
+        return hasAnsweredCurrentQuestion
+    }
+
+    override fun goToNextQuestion(): Unit {
+        if (canGoToNextQuestion()) {
+            currentQuestionIndex = currentQuestionIndex + 1
+            hasAnsweredCurrentQuestion = false
+            isCurrentAnswerCorrect = false
+        }
+    }
+
+    override fun restart(): Unit {
+        currentQuestionIndex = 0
+        hasAnsweredCurrentQuestion = false
+        isCurrentAnswerCorrect = false
+        score = 0
+    }
+}</code></pre></details>
+<p>Le corps des méthodes ne change pas. Les propriétés restent privées et isCorrectAnswer reste privée. Les méthodes du contrat restent publiques ; on ne peut pas promettre une opération utilisable puis la rendre privée dans cette implémentation.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Implémentation · implementation</h3><p>Le code qui réalise les opérations promises. Ici, QuizPresenter implémente QuizContract.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>override</h3><p>Le mot-clé qui relie la méthode de la classe à l’opération décrite par l’interface.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Classe concrète</h3><p>Une classe dont on peut créer une instance ici, comme QuizPresenter. L’interface seule ne fournit pas le fonctionnement du quiz.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="vue" aria-labelledby="titre-vue"><p class="eyebrow">04 / Utiliser le contrat comme type</p><h2 id="titre-vue">La vue reçoit ce dont elle a besoin.</h2>
+<p>Dans WelcomeScreen, le type de la variable change, mais la création reste explicite :</p><pre><code>val presenter: QuizContract = remember(questions) { QuizPresenter(questions) }</code></pre>
+<p>À gauche, QuizContract indique les opérations que le code pourra utiliser. À droite, QuizPresenter(questions) crée l’objet concret qui les réalisera. L’objet n’est pas transformé : il est utilisable sous le type de son interface.</p><p>Dans les paramètres de QuestionView, remplace aussi <code>presenter: QuizPresenter</code> par <code>presenter: QuizContract</code>. Les appels submitAnswer, getScore ou restart gardent la même forme.</p><details><summary>QuestionView complète dépendant du contrat</summary><pre id="question-view"><code>@Composable
+private fun QuestionView(
+    question: Question,
+    questionIndex: Int,
+    presenter: QuizContract,
+    onAnswerSubmitted: () -&gt; Unit,
+    onNextQuestion: () -&gt; Unit,
+) {
+    var feedbackText: String by remember(presenter, questionIndex) {
+        mutableStateOf(&quot;Choisis une réponse.&quot;)
+    }
+    var canGoToNextQuestion: Boolean by remember(presenter, questionIndex) {
+        mutableStateOf(presenter.canGoToNextQuestion())
+    }
+
+    fun checkAnswer(selectedAnswer: String): Unit {
+        val isAnswerCorrect: Boolean = presenter.submitAnswer(selectedAnswer)
+        if (isAnswerCorrect) {
+            feedbackText = &quot;Bonne réponse !&quot;
+        } else {
+            feedbackText = &quot;Réponse incorrecte.&quot;
+        }
+        canGoToNextQuestion = presenter.canGoToNextQuestion()
+        onAnswerSubmitted()
+    }
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(text = question.text)
+        for (choice: String in question.choices) {
+            Button(
+                onClick = { checkAnswer(choice) },
+                enabled = !canGoToNextQuestion,
+            ) {
+                Text(text = choice)
+            }
+        }
+        Text(text = feedbackText)
+        Button(
+            onClick = onNextQuestion,
+            enabled = canGoToNextQuestion,
+        ) {
+            Text(text = &quot;Question suivante&quot;)
+        }
+    }
+}</code></pre></details><details><summary>WelcomeScreen complet</summary><pre id="welcome-example"><code>@Composable
+fun WelcomeScreen(modifier: Modifier = Modifier) {
+    val firstQuestion: Question = Question(
+        text = &quot;Quel outil garde l’historique du code ?&quot;,
+        choices = listOf(&quot;Git&quot;, &quot;Android&quot;, &quot;Compose&quot;),
+        correctAnswer = &quot;Git&quot;,
+    )
+
+    val secondQuestion: Question = Question(
+        text = &quot;Quel composant Compose affiche du texte ?&quot;,
+        choices = listOf(&quot;Button&quot;, &quot;Text&quot;, &quot;Column&quot;),
+        correctAnswer = &quot;Text&quot;,
+    )
+
+    val thirdQuestion: Question = Question(
+        text = &quot;Quel mot-clé déclare une fonction en Kotlin ?&quot;,
+        choices = listOf(&quot;fun&quot;, &quot;val&quot;, &quot;if&quot;),
+        correctAnswer = &quot;fun&quot;,
+    )
+
+    val fourthQuestion: Question = Question(
+        text = &quot;Quel type représente vrai ou faux ?&quot;,
+        choices = listOf(&quot;String&quot;, &quot;Boolean&quot;, &quot;Int&quot;),
+        correctAnswer = &quot;Boolean&quot;,
+    )
+
+    val questions: List&lt;Question&gt; = listOf(
+        firstQuestion,
+        secondQuestion,
+        thirdQuestion,
+        fourthQuestion,
+    )
+    val presenter: QuizContract = remember(questions) { QuizPresenter(questions) }
+    var displayedQuestionIndex: Int by remember(presenter) {
+        mutableStateOf(presenter.getCurrentQuestionIndex())
+    }
+    var isQuizFinished: Boolean by remember(presenter) {
+        mutableStateOf(presenter.isFinished())
+    }
+    var displayedScore: Int by remember(presenter) {
+        mutableStateOf(presenter.getScore())
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = stringResource(R.string.welcome_title),
+            style = MaterialTheme.typography.headlineMedium,
+        )
+        Text(text = &quot;Score : $displayedScore / ${questions.size}&quot;)
+        if (isQuizFinished) {
+            Text(text = &quot;Quiz terminé&quot;)
+            Button(onClick = {
+                presenter.restart()
+                displayedQuestionIndex = presenter.getCurrentQuestionIndex()
+                isQuizFinished = presenter.isFinished()
+                displayedScore = presenter.getScore()
+            }) {
+                Text(text = &quot;Recommencer&quot;)
+            }
+        } else {
+            Text(text = &quot;Question ${displayedQuestionIndex + 1}&quot;)
+            val question: Question = presenter.getCurrentQuestion()
+            QuestionView(
+                question = question,
+                questionIndex = displayedQuestionIndex,
+                presenter = presenter,
+                onAnswerSubmitted = {
+                    displayedScore = presenter.getScore()
+                },
+                onNextQuestion = {
+                    presenter.goToNextQuestion()
+                    displayedQuestionIndex = presenter.getCurrentQuestionIndex()
+                    isQuizFinished = presenter.isFinished()
+                },
+            )
+        }
+    }
+}</code></pre></details>
+<p>QuestionView ne crée pas elle-même le presenter. WelcomeScreen choisit l’implémentation et la transmet. Plus tard, une autre classe qui respecte ce contrat pourrait être fournie à cette vue sans changer ses appels.</p>
+<details><summary>Peut-on écrire QuizContract() pour créer le quiz ?</summary><p>Non. Cette interface décrit les opérations, mais elle n’est pas une classe concrète à construire ici. On crée QuizPresenter(questions), puis on peut conserver cet objet dans une variable de type QuizContract.</p></details>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Dépendre du contrat</h3><p>Écrire les appels avec le type QuizContract. La vue utilise ses opérations, sans demander les détails propres à QuizPresenter.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Même objet, type différent</h3><p>La variable presenter désigne toujours l’instance créée par QuizPresenter(questions). Son type déclaré montre seulement ce que le code peut lui demander.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="limites" aria-labelledby="titre-limites"><p class="eyebrow">05 / Ce que le compilateur garantit</p><h2 id="titre-limites">Une bonne signature ne suffit pas.</h2>
+<p>Si QuizPresenter oublie restart ou lui donne un retour incompatible, le compilateur refuse cette implémentation. C’est une aide pour conserver la forme des échanges.</p><p>En revanche, une méthode restart vide peut avoir la bonne signature et compiler sans remettre le score à zéro. La promesse de comportement doit donc être expliquée et vérifiée avec des tests.</p><dl class="contract-rules"><div><dt>Vérifié par le compilateur</dt><dd>Les méthodes nécessaires, leurs paramètres et les types de retour compatibles.</dd></div><div><dt>À expliquer et tester</dt><dd>Le premier choix définitif, le comptage unique, le passage après réponse, la fin et la remise à zéro.</dd></div></dl>
+<details><summary>À toi : getCurrentQuestion est dans le contrat. Puis-je l’appeler après la fin ?</summary><p>Non : la présence de la méthode n’annule pas sa condition d’utilisation. La vue continue de vérifier isFinished avant la lecture. Le contrat inclut aussi cette règle, même si la signature seule ne l’exprime pas.</p></details>
+<p>Une interface ajoute un fichier et des noms à comprendre. Nous l’utilisons ici pour rendre visibles les échanges entre vue et presenter. Il n’est pas nécessaire de créer une interface pour chaque classe : un contrat doit correspondre à un besoin, pas seulement à une habitude.</p>
+</section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Respecter le contrat</h3><p>Fournir la bonne forme d’opération et le comportement promis. Les deux sont nécessaires.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Remplaçable · replaceable</h3><p>Une autre implémentation ne doit pas seulement avoir les mêmes méthodes : elle doit aussi respecter les attentes de ceux qui l’utilisent.</p></aside></div></div>
+<section class="lesson-section" id="exercice" aria-labelledby="titre-exercice"><p class="eyebrow">06 / Appliquer sans changer le quiz</p><h2 id="titre-exercice">Relie le contrat, la classe et la vue.</h2><ol class="steps"><li>Avec l’encadrant, garde la version précédente dans Git puis prépare une branche comme <code>ab/definir_contrat_quiz</code>.</li><li>Ajoute QuizContract.kt à côté de Question.kt et QuizPresenter.kt, avec la même ligne package.</li><li>Fais implémenter QuizContract par QuizPresenter et ajoute override aux huit méthodes. Garde isCorrectAnswer privée et hors du contrat.</li><li>Dans MainActivity.kt, utilise QuizContract comme type de la variable presenter et du paramètre de QuestionView. Garde QuestionView privée au fichier.</li><li>Compile, puis vérifie une partie et le recommencement. Les règles et les résultats doivent rester identiques.</li></ol>
+<details><summary>Expérience avec l’encadrant : observer une promesse manquante</summary><p>Retire temporairement la méthode restart de QuizPresenter, sans la retirer du contrat. Observe le message indiquant que la classe ne fournit pas une opération requise. Restaure ensuite sa méthode complète avant de compiler et de lancer.</p><p>Essaie aussi de retirer seulement override sur getScore : l’IDE demande de rétablir le lien avec la méthode du contrat. Restaure le code, sans supprimer l’opération de l’interface pour contourner le message.</p></details>
+<details><summary>Quel fichier modifier pour chaque besoin ?</summary><p>Changer le comptage sans modifier les opérations disponibles : QuizPresenter.kt. Décrire une nouvelle opération attendue : QuizContract.kt, puis son implémentation et ses appels. Modifier le texte d’un message affiché : QuestionView dans MainActivity.kt.</p></details>
+<fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue le contrat et le code qui le réalise.</span></label><label><input type="checkbox"><span>Je sais lire interface, : QuizContract et override.</span></label><label><input type="checkbox"><span>Je retrouve le choix de l’implémentation et sa transmission à la vue.</span></label><label><input type="checkbox"><span>Je sais que les types ne garantissent pas toutes les règles de comportement.</span></label><label><input type="checkbox"><span>J’ai restauré les expériences invalides et testé le score, la fin et le recommencement.</span></label></fieldset><p class="caption">Confirmations personnelles : le guide ne lit pas ton projet, ne compile pas ton code et ne sauvegarde pas ta progression.</p><p class="closing">Tu sais maintenant nommer les responsabilités, limiter les accès et décrire les échanges. La suite permettra de regarder l’architecture d’ensemble et de reconnaître des organisations courantes.</p></section><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_code_visibility_view/index.html" rel="prev"><span>← Précédent</span><span>private et public</span></a></nav></main></div></body></html>
