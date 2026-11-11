@@ -724,3 +724,19 @@ Lecture longue à vérifier ; les navigations des exercices agents sont à adapt
 Home à deux extensions, navigation animation ↔ listes. Aucun changement Android
 par le guide, aucun service ou JS. Brouillons manuels sans sauvegarde. Grille et
 pager restent à venir sans lien anticipé. Source : documentation Android des listes.
+
+## Pour aller plus loin — page 3 : grilles lazy
+
+`module_further_lazy_grid_view/` réutilise ReviewScreen/ReviewCard et les questions
+sans changement de score. Remplacer le seul bloc de liste par LazyVerticalGrid,
+puis comparer Fixed(2) et Adaptive(180.dp / 240.dp). Imports lazy.grid.items,
+hauteur restante bornée et retrait de la largeur fixe de la variante LazyRow.
+LazyHorizontalGrid est identifié sans deuxième implémentation imposée.
+
+Schéma HTML/CSS interactif explicitement distinct de Compose. Lecture longue,
+petit/grand écran, dernière ligne et retour au résultat à observer manuellement.
+Les changements de configuration ne garantissent pas la conservation d’état ;
+aucune sauvegarde ajoutée. La grille peut être abandonnée au profit d’une liste.
+Pas de nouveau modèle, thème ou fonctionnalité de jeu. Notes sans stockage.
+Home à trois extensions et navigation listes ↔ grille, sans lien futur anticipé.
+Source : documentation Android des listes et grilles Compose.
