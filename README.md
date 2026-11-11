@@ -673,3 +673,19 @@ références sont conservés par l’élève dans son dossier de design.
 
 Home à six pages LLM, navigation consignes ↔ résultat ; aucun lien futur anticipé.
 Aucun changement au dépôt Android, aucun agent ou service lancé par cette page.
+
+## Bilan : expliquer son application
+
+`module_review_view/` conclut le parcours sans nouvelle notion : démonstration
+prévue/observée, trajet d’un clic, repères de code, difficulté comprise, trace Git,
+travail avec l’agent et bilan personnel. Les noms du code des leçons sont des
+repères à adapter au clone réel. Les observations de cycle de vie et Flow sont
+accessibles en aide facultative, sans prétendre qu’une sauvegarde existe.
+
+L’élève présente les preuves disponibles et distingue maquette, modification,
+compilation et observation sur appareil. Les étapes inachevées restent explicites.
+Les notes sont des textarea sans envoi ni sauvegarde ; les cases sont personnelles.
+Ni examen automatique ni nouveau code ou comportement Android demandé.
+
+Entrée home distincte « 08 / Présenter », navigation résultat ↔ bilan ; dernier
+lien vers le parcours, sans faux lien suivant. Le guide ne pilote aucune app.
