@@ -773,3 +773,24 @@ score/message/boutons après retour et interactions avec le pager de révision.
 Extraits à adapter au clone réel, imports/package/visibilité/prévisualisations inclus
 au déplacement. Aucun fichier Android ni AGENTS.md du clone modifié par le guide.
 Home à cinq extensions, navigation pager ↔ deux espaces. Prise de photo puis édition et sauvegarde du profil à venir.
+
+## Pour aller plus loin — page 6 : caméra depuis Profil
+
+`module_further_camera_view/` présente manifeste/permission runtime, clic volontaire,
+aperçu intégré CameraX, capture en cache et affichage. L’intégration Android complète
+est une tâche guidée à réaliser avec l’agent dans le clone, pas un bloc exécutable
+fourni par le site. Aucune version CameraX arbitraire : vérifier les dépendances
+compatibles au moment de réaliser la tâche. Manifeste, appel isActive et contrat /
+presenter sont des extraits partiels explicitement situés, pas une app complète.
+
+Le profil actif dans le pager ne suffit pas : demande volontaire, permission et
+cycle de vie sont distingués. Libération à la sortie, refus, accès modifié depuis
+les paramètres et initialisation tardive sont des critères de l’intégration.
+ProfilePresenter garde un chemin nullable en mémoire ; la vue relit le résultat.
+Cache privé temporaire, aucune galerie ou sauvegarde durable de profil promise.
+
+Observations accompagnées sur appareil/émulateur avec cas non reproduits laissés
+non vérifiés. Le site ne demande aucune permission ni n’exécute caméra ou agent.
+Notes sans stockage, home à six extensions, navigation deux espaces ↔ caméra.
+Sources : docs Android manifeste, permissions, CameraX aperçu/capture/architecture
+et fichiers spécifiques à l’app, liées dans la page.
