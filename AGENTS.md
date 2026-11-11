@@ -159,3 +159,13 @@ Pager, images et permissions restent des étapes futures sans liens anticipés.
 lecture verticale bornée, numéro et boutons précédent/suivant, cas vide/unique.
 Pas de nouvelle règle de score ni garantie de sauvegarde de position. Brouillons
 sans stockage ; images et autorisations restent les prochaines extensions.
+
+## Extensions facultatives — deux espaces MVP
+
+`module_further_app_navigation_view/` groupe les MVP sous home_view et profile_view,
+convention explicitement choisie par l’utilisateur, sans suffixer les modèles.
+MainActivity assemble le pager et la barre à état unique. Surface Profil blanche,
+contrat/presenter minimaux, aucune caméra/permission ici. Conserver le parcours
+existant et son état entre les deux pages (deux pages composées dans cet exemple).
+Pas de garantie de sauvegarde ni d’activation de la caméra hors écran à la suite.
+Les exemples ne sont pas une autorisation de modifier le dépôt Android réel.

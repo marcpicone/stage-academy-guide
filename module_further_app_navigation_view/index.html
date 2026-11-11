@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Extraire le quiz dans home_view, préparer le MVP profile_view et relier deux destinations par un pager et une barre de navigation sans perdre la partie en cours."><title>Deux espaces pour ton application · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_further_app_navigation_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="agents-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 5</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Du quiz à une app avec deux espaces</p><h1 id="titre">Accueil et Profil : deux destinations.</h1><p class="lead">Regroupe chaque MVP dans un package terminé par _view, prépare un nouvel écran et assemble la navigation dans MainActivity.</p><p>Prérequis : ton clone contient le quiz fonctionnel et ses évolutions. L’étape déplace le code existant sans reconstruire le quiz. Aucun accès caméra pour le moment.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#objectif">Le besoin</a><a href="#packages">Les packages</a><a href="#profil">Le nouveau MVP</a><a href="#assembler">La navigation</a><a href="#etat">L’état</a><a href="#observer">Observer</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="objectif" aria-labelledby="titre-objectif"><p class="eyebrow">01 / Deux espaces dans une même application</p><h2 id="titre-objectif">Accueil conserve ton quiz ; Profil commence vide.</h2><p>Tu as déjà un parcours fonctionnel et des fiches de révision. Nous allons maintenant organiser l’app en deux destinations principales : « Accueil », avec tout ce qui fonctionne déjà, et « Profil », une surface blanche pour commencer.</p><p>La barre du bas montre une maison et une silhouette de profil, avec leurs libellés. Le pager et la barre doivent rester synchronisés : un clic change la page, un balayage change la destination sélectionnée.</p><aside class="takeaway"><strong>Une seule position de navigation.</strong><p>La page courante du pager indique aussi quel élément de la barre est sélectionné. N’ajoute pas un deuxième numéro d’onglet à mettre à jour manuellement.</p></aside><p>Pas encore de prise de photo, d’autorisation ou de formulaire de profil sur cette page. Le nouvel espace doit seulement apparaître et laisser revenir au quiz.</p></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Destination</h3><p>Un espace de l’application accessible depuis sa navigation principale.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Barre de navigation · navigation bar</h3><p>La barre qui permet de choisir une destination. Elle reste visible sous le contenu.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="packages" aria-labelledby="titre-packages"><p class="eyebrow">02 / Regrouper les fichiers qui travaillent ensemble</p><h2 id="titre-packages">Un package terminé par _view pour chaque MVP.</h2><p>Nous choisissons une convention d’équipe : chaque groupe de fichiers d’un MVP d’écran est rangé dans un package terminé par <code>_view</code>. Ce suffixe aide à reconnaître ces groupes quand l’application grandit ; ce n’est pas une règle imposée par Kotlin.</p><pre><code>fr/stageacademy/quiz/
+├── MainActivity.kt
+├── Question.kt
+├── home_view/
+│   ├── HomeView.kt
+│   ├── QuizContract.kt
+│   └── QuizPresenter.kt
+└── profile_view/
+    ├── ProfileView.kt
+    ├── ProfileContract.kt
+    └── ProfilePresenter.kt</code></pre><p><code>home_view</code> regroupe la vue, le contrat et le presenter existants du quiz. Le suffixe qualifie le groupe ; il ne transforme pas son presenter en composant visuel. Les données <code>Question</code> restent ici hors des packages de vue.</p><ol class="steps"><li>Avec l’encadrant, garde une trace Git de la version fonctionnelle avant de déplacer les fichiers.</li><li>Crée <code>home_view</code> sous <code>fr.stageacademy.quiz</code>. Déplace l’ancien accueil et son parcours dans <code>HomeView.kt</code>, avec ses helpers privés comme QuestionView et ReviewScreen.</li><li>Renomme la fonction d’entrée de ce parcours en <code>HomeView</code>, avec le paramètre <code>modifier: Modifier = Modifier</code>. Garde son code et son état existants.</li><li>Déplace QuizContract et QuizPresenter dans ce même package. Fais corriger les déclarations <code>package</code> et les imports par la fonction de déplacement de l’IDE.</li><li>Compile avant d’ajouter la seconde page : un déplacement seul ne doit pas changer le résultat du quiz.</li></ol><p><code>HomeView</code> doit être accessible depuis MainActivity : ne la déclare pas privée au fichier. Les helpers internes peuvent le rester s’ils sont utilisés dans le même fichier. Ajoute notamment les imports de <code>Question</code> et de <code>R</code> lorsque les fichiers déplacés les utilisent. Mets aussi les prévisualisations à jour.</p><details><summary>Mon agent a créé une organisation un peu différente</summary><p>Fais repérer les fichiers actuels puis déplacer l’ensemble cohérent, sans reconstruire le quiz. Mets à jour AGENTS.md avec la convention des packages <code>_view</code>, en conservant les consignes déjà utiles.</p></details></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Package</h3><p>Un regroupement nommé de code Kotlin. Sa déclaration en haut du fichier détermine à quel groupe il appartient.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Refactoriser · refactor</h3><p>Changer l’organisation du code en conservant son comportement.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Import</h3><p>La déclaration qui permet à un fichier d’utiliser un nom défini dans un autre package.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="profil" aria-labelledby="titre-profil"><p class="eyebrow">03 / Préparer le second MVP</p><h2 id="titre-profil">Trois fichiers, aucune donnée de profil pour le moment.</h2><p>Crée <code>profile_view</code>, puis les fichiers suivants. Le contrat et son implémentation sont volontairement vides : ils préparent la structure demandée. Nous n’ajoutons pas de fausse opération pour les remplir.</p><h3>ProfileContract.kt</h3><pre id="profile-contract"><code>package fr.stageacademy.quiz.profile_view
+
+interface ProfileContract</code></pre><h3>ProfilePresenter.kt</h3><pre id="profile-presenter"><code>package fr.stageacademy.quiz.profile_view
+
+class ProfilePresenter : ProfileContract</code></pre><h3>ProfileView.kt</h3><pre id="profile-view"><code>package fr.stageacademy.quiz.profile_view
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+
+@Composable
+fun ProfileView(
+    presenter: ProfileContract,
+    modifier: Modifier = Modifier,
+) {
+    Box(modifier = modifier.fillMaxSize().background(Color.White))
+}</code></pre><p>L’IDE peut signaler que le paramètre <code>presenter</code> n’est pas utilisé. C’est attendu à ce stade : la vue est blanche et ne déclenche aucune action. La prochaine étape donnera un rôle concret à ce contrat.</p><p>Ce squelette sert à notre progression. Il ne signifie pas que chaque écran blanc de tout projet exige immédiatement une interface et une classe.</p></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Squelette</h3><p>Une structure minimale préparée avant de lui ajouter son comportement.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Implémentation</h3><p>La classe concrète qui réalise le contrat. Ici, il ne décrit pas encore d’opération.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="assembler" aria-labelledby="titre-assembler"><p class="eyebrow">04 / MainActivity assemble les deux destinations</p><h2 id="titre-assembler">Un pager et une barre liés au même état.</h2><p>Crée les deux ressources vectorielles <code>ic_home.xml</code> et <code>ic_profile.xml</code> dans <code>app/src/main/res/drawable/</code>. Tu peux utiliser les exemples fournis ; leur dessin n’est pas une photo ni une permission d’accès à la caméra.</p><details><summary>ic_home.xml — icône maison</summary><pre id="home-icon"><code>&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:width=&quot;24dp&quot; android:height=&quot;24dp&quot;
+    android:viewportWidth=&quot;24&quot; android:viewportHeight=&quot;24&quot;&gt;
+    &lt;path android:fillColor=&quot;#FF000000&quot;
+        android:pathData=&quot;M3,10L12,3L21,10L21,21L14,21L14,14L10,14L10,21L3,21Z&quot; /&gt;
+&lt;/vector&gt;</code></pre></details><details><summary>ic_profile.xml — icône de profil</summary><pre id="profile-icon"><code>&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:width=&quot;24dp&quot; android:height=&quot;24dp&quot;
+    android:viewportWidth=&quot;24&quot; android:viewportHeight=&quot;24&quot;&gt;
+    &lt;path android:fillColor=&quot;#FF000000&quot; android:fillType=&quot;evenOdd&quot;
+        android:pathData=&quot;M12,3A4,4 0,1 0,12,11A4,4 0,1 0,12,3Z M4,21L4,18C4,14 20,14 20,18L20,21Z&quot; /&gt;
+&lt;/vector&gt;</code></pre></details><p>Dans MainActivity.kt, ajoute les imports manquants et la fonction <code>AppContent</code> ci-dessous, à l’extérieur de la classe. Elle prend en charge le Scaffold principal : ne garde pas l’ancien Scaffold autour d’elle.</p><pre id="app-imports"><code>import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import fr.stageacademy.quiz.home_view.HomeView
+import fr.stageacademy.quiz.profile_view.ProfileContract
+import fr.stageacademy.quiz.profile_view.ProfilePresenter
+import fr.stageacademy.quiz.profile_view.ProfileView
+import kotlinx.coroutines.launch</code></pre><details><summary>AppContent complète — le bloc d’assemblage fourni</summary><pre id="app-content"><code>@Composable
+private fun AppContent() {
+    val pagerState = rememberPagerState(pageCount = { 2 })
+    val coroutineScope = rememberCoroutineScope()
+    val profilePresenter: ProfileContract = remember { ProfilePresenter() }
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = {
+            NavigationBar {
+                NavigationBarItem(
+                    selected = pagerState.currentPage == 0,
+                    enabled = !pagerState.isScrollInProgress,
+                    onClick = {
+                        coroutineScope.launch { pagerState.animateScrollToPage(0) }
+                    },
+                    icon = {
+                        Icon(painterResource(R.drawable.ic_home), contentDescription = null)
+                    },
+                    label = { Text(&quot;Accueil&quot;) },
+                )
+                NavigationBarItem(
+                    selected = pagerState.currentPage == 1,
+                    enabled = !pagerState.isScrollInProgress,
+                    onClick = {
+                        coroutineScope.launch { pagerState.animateScrollToPage(1) }
+                    },
+                    icon = {
+                        Icon(painterResource(R.drawable.ic_profile), contentDescription = null)
+                    },
+                    label = { Text(&quot;Profil&quot;) },
+                )
+            }
+        },
+    ) { innerPadding -&gt;
+        HorizontalPager(
+            state = pagerState,
+            beyondViewportPageCount = 1,
+            modifier = Modifier.fillMaxSize().padding(innerPadding),
+        ) { page: Int -&gt;
+            if (page == 0) {
+                HomeView(modifier = Modifier.fillMaxSize())
+            } else {
+                ProfileView(
+                    presenter = profilePresenter,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            }
+        }
+    }
+}</code></pre></details><p>Dans le <code>setContent</code> existant de MainActivity, garde ton thème et appelle cette fonction à la place de l’ancien bloc principal :</p><pre id="app-entry"><code>QuizTheme {
+    AppContent()
+}</code></pre><p><code>innerPadding</code> réserve l’espace de la barre et des zones système : le contenu ne doit pas être masqué en dessous. Les icônes sont accompagnées de libellés ; leur description est nulle pour ne pas répéter ces mêmes mots.</p><p>Le premier indice est 0 (« Accueil »), le second 1 (« Profil »). La barre lit <code>currentPage</code>, et ses clics demandent un déplacement au même pager. Les boutons sont désactivés pendant ce déplacement.</p><details><summary>J’ai déjà plusieurs Scaffold après les exercices de design</summary><p>Repère avec l’encadrant le conteneur principal, les barres et les espacements existants. L’assemblage doit réserver une seule fois la place de la nouvelle barre du bas. Adapte la structure plutôt que de superposer plusieurs conteneurs qui ajoutent les mêmes espacements.</p></details></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Scaffold</h3><p>Le conteneur Compose qui organise notamment le contenu principal et les barres de l’écran.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Ressource vectorielle</h3><p>Un dessin décrit en XML et intégré à l’app. Le nom du fichier permet de le retrouver via R.drawable.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>bottomBar</h3><p>« Barre du bas » : l’emplacement fourni au Scaffold pour la navigation.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="etat" aria-labelledby="titre-etat"><p class="eyebrow">05 / Passer d’un espace à l’autre sans perdre la partie</p><h2 id="titre-etat">Conserver en mémoire n’est pas sauvegarder.</h2><p>Le pager peut retirer des pages qui ne sont plus nécessaires. Si le presenter et l’état du quiz appartiennent à une vue retirée, les recréer peut réinitialiser la partie.</p><p>Pour cette première application à seulement deux destinations, <code>beyondViewportPageCount = 1</code> garde aussi la page voisine composée. Les deux vues et leurs états restent ainsi présents pendant le changement d’onglet.</p><aside class="takeaway"><strong>Un choix limité à cette étape.</strong><p>Garder les deux pages est simple ici. Cela ne sauvegarde pas les données sur disque et ne garantit pas la conservation après recréation de l’activité ou arrêt du processus. On ne généralise pas ce réglage à une grande collection.</p></aside><p>Si l’app grandit, on pourra donner explicitement un propriétaire plus durable à l’état de chaque espace. La page <a href="../module_code_data_lifecycle_view/index.html">sur le cycle de vie des données</a> explique pourquoi le nom d’un package ne décide pas de la durée de vie des objets.</p><p>Autre conséquence : <code>ProfileView</code> peut déjà être composée alors que l’onglet Accueil est visible. La prochaine page devra déclencher la caméra ou sa demande d’autorisation au bon moment, pas simplement parce qu’une fonction de vue est appelée.</p><details><summary>Le pager de révision existe aussi dans Accueil</summary><p>Ce sont deux navigations différentes. Vérifie qui reçoit le geste quand le pager de révision arrive à une extrémité. Si un balayage peut changer d’espace, assure-toi que la barre l’indique clairement et que la fiche est conservée au retour. Les boutons de révision et de navigation restent des moyens explicites de choisir le déplacement.</p></details></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Page composée</h3><p>Une vue dont les composants sont présents dans la composition, même si elle n’est pas la page actuellement visible.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Propriétaire de l’état</h3><p>La partie du programme qui conserve une information et décide de sa durée de vie.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="observer" aria-labelledby="titre-observer"><p class="eyebrow">06 / Vérifier avant la caméra</p><h2 id="titre-observer">Deux destinations, un quiz toujours fonctionnel.</h2><ol class="steps"><li>Lance l’app : « Accueil » est sélectionné et le parcours existant est accessible.</li><li>Clique sur « Profil » : une page blanche apparaît, l’icône Profil est sélectionnée et aucune caméra ou autorisation ne s’ouvre.</li><li>Reviens par la barre puis passe d’une destination à l’autre par balayage. La sélection doit suivre le pager.</li><li>Commence une partie, réponds à une question et note le score, le message et les boutons disponibles. Passe à Profil puis reviens : ces informations doivent être conservées.</li><li>Refais l’expérience après une mauvaise réponse : les choix doivent rester désactivés. Cela vérifie plus que le seul score.</li><li>Termine une partie, ouvre la révision, change d’espace puis reviens. Vérifie la destination et l’état de lecture attendus ; observe aussi les gestes aux extrémités du pager de révision.</li><li>Vérifie le résultat et le recommencement : le déplacement des fichiers ne doit pas avoir changé les règles.</li></ol><label class="draft-label" for="navigation-observations">Mes observations</label><textarea id="navigation-observations" rows="8" spellcheck="true">Fichiers regroupés dans home_view :
+Rôle de profile_view et de MainActivity :
+Clic sur la barre / sélection après balayage :
+État avant le changement d’onglet :
+État retrouvé après le retour :
+Révision et gestes imbriqués :
+Résultat et recommencement :
+Ce qui reste à vérifier :</textarea><fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je peux expliquer la convention des packages _view.</span></label><label><input type="checkbox"><span>Le pager et la barre utilisent la même position.</span></label><label><input type="checkbox"><span>La nouvelle vue est blanche et ne déclenche aucune caméra.</span></label><label><input type="checkbox"><span>La partie retrouve son score, son message et ses boutons au retour.</span></label></fieldset><p class="caption">Notes et confirmations personnelles sans envoi ni sauvegarde. Le guide ne déplace aucun fichier Android et ne vérifie pas l’appareil. Copie tes observations avant de fermer la page.</p><p class="closing">Après relecture, conserve cette étape dans Git et mets les consignes de projet à jour. La prochaine extension ajoutera la prise de photo depuis cet espace Profil ; la saisie et la sauvegarde des données du profil viendront ensuite.</p></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Vérifier une refactorisation</h3><p>Comparer le comportement avant et après le déplacement des fichiers, puis vérifier séparément la nouvelle navigation.</p></aside></div></div><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_pager_view/index.html" rel="prev"><span>← Précédent</span><span>Parcourir les fiches avec un pager</span></a></nav><footer class="lesson-footer"><span>Références officielles :</span><a href="https://developer.android.com/develop/ui/compose/layouts/pager">Pager Compose</a><a href="https://developer.android.com/develop/ui/compose/components/navigation-bar">Barre de navigation</a><a href="https://developer.android.com/develop/ui/compose/state-hoisting">Propriétaire de l’état</a></footer></main></div></body></html>

@@ -755,3 +755,21 @@ longs. Liste vide explicite, une question et extrémités à observer. Aucune
 persistance de position promise après retrait de la vue. Notes sans stockage.
 Home à quatre extensions, navigation grille ↔ pager ; pas de nouveau package ou
 changement Android dans le guide. Source : documentation Android Pager in Compose.
+
+## Pour aller plus loin — page 5 : packages _view et navigation
+
+`module_further_app_navigation_view/` adopte la convention d’équipe home_view /
+profile_view pour regrouper chaque MVP. Déplacer le parcours existant et ses helpers,
+QuizContract et QuizPresenter ; Question reste hors des groupes de vue. MainActivity
+assemble un Scaffold, HorizontalPager et NavigationBar avec une seule position.
+Icônes vectorielles fournies en XML, sans dépendance d’icônes supplémentaire.
+ProfileContract/Presenter vides préparent le second MVP, ProfileView blanche sans action.
+
+Deux pages conservées composées via beyondViewportPageCount=1 pour garder les
+remember existants pendant le changement d’onglet. Choix limité à deux espaces,
+aucune persistance ou survie à recréation promise. Ne pas lancer la caméra depuis
+une simple composition ; l’espace Profil peut être composé hors écran. Observer
+score/message/boutons après retour et interactions avec le pager de révision.
+Extraits à adapter au clone réel, imports/package/visibilité/prévisualisations inclus
+au déplacement. Aucun fichier Android ni AGENTS.md du clone modifié par le guide.
+Home à cinq extensions, navigation pager ↔ deux espaces. Prise de photo puis édition et sauvegarde du profil à venir.
