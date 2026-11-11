@@ -740,3 +740,18 @@ aucune sauvegarde ajoutée. La grille peut être abandonnée au profit d’une l
 Pas de nouveau modèle, thème ou fonctionnalité de jeu. Notes sans stockage.
 Home à trois extensions et navigation listes ↔ grille, sans lien futur anticipé.
 Source : documentation Android des listes et grilles Compose.
+
+## Pour aller plus loin — page 4 : pager de révision
+
+`module_further_pager_view/` remplace seulement ReviewScreen par HorizontalPager.
+Mêmes données et ReviewCard, accès après résultat et retour sans score modifié.
+Différence avec LazyRow et ancien nom ViewPager explicitée ; VerticalPager cité
+sans variante imposée. PagerState distinct de l’indice du presenter ; currentPage
+sert au repère et peut évoluer pendant le geste. Boutons bornés et désactivés
+pendant le défilement, animateScrollToPage via rememberCoroutineScope/launch.
+
+Chaque page peut défiler verticalement dans une hauteur bornée pour les énoncés
+longs. Liste vide explicite, une question et extrémités à observer. Aucune
+persistance de position promise après retrait de la vue. Notes sans stockage.
+Home à quatre extensions, navigation grille ↔ pager ; pas de nouveau package ou
+changement Android dans le guide. Source : documentation Android Pager in Compose.

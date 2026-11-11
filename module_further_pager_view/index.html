@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Parcourir la révision du quiz fiche par fiche avec HorizontalPager, un repère de position et des boutons, sans changer la progression ni le score de la partie."><title>Parcourir les fiches avec un pager · Stage Academy</title><link rel="stylesheet" href="../theme.css"><link rel="stylesheet" href="../theme_page.css"><link rel="stylesheet" href="module_further_pager_view.css"></head><body><a class="skip-link" href="#contenu">Aller au contenu</a><div class="agents-view"><header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 4</span></header><main id="contenu"><section class="course-hero" aria-labelledby="titre"><p class="eyebrow">Une fiche à la fois</p><h1 id="titre">Parcourir les fiches avec un pager.</h1><p class="lead">Choisis une lecture page par page pour la révision. Relie le balayage, les boutons et le numéro affiché au même état de navigation.</p><p>Cette extension reprend les questions et ReviewCard de la page sur les listes. Seule la présentation de ReviewScreen change.</p><nav class="lesson-nav" aria-label="Dans cette page"><a href="#besoin">Le besoin</a><a href="#choisir">Comparer</a><a href="#code">Dans le code</a><a href="#actions">Les actions</a><a href="#lecture">Lire</a><a href="#observer">Observer</a></nav></section>
+<div class="reading-row"><section class="lesson-section" id="besoin" aria-labelledby="titre-besoin"><p class="eyebrow">01 / Donner une place à chaque fiche</p><h2 id="titre-besoin">Pourquoi un pager plutôt qu’une rangée de cartes ?</h2><p>Dans une LazyRow, tu parcours librement les cartes. Pour réviser une question à la fois, tu peux préférer une présentation qui se cale sur une page après le geste.</p><p>Un pager sert à parcourir des pages de contenu. Dans notre révision, chaque page contient une question et sa bonne réponse. Le joueur peut avancer et revenir librement, sans donner de réponse ni gagner de point.</p><aside class="takeaway"><strong>Une autre façon de consulter, pas une nouvelle règle de jeu.</strong><p>Le pager remplace la présentation de la révision après le résultat. Il ne pilote pas l’indice de question du presenter et ne remplace pas « Question suivante » pendant la partie.</p></aside><p>Tu rencontreras le nom <code>ViewPager</code> dans des projets utilisant le système de vues Android. En Compose, nous utilisons <code>HorizontalPager</code> ; <code>VerticalPager</code> existe pour le défilement vertical. La <a href="https://developer.android.com/develop/ui/compose/layouts/pager">documentation Android</a> présente ces composants.</p></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Pager</h3><p>Un composant pour parcourir un contenu organisé en pages.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Balayer · swipe</h3><p>Faire glisser le doigt pour déplacer le contenu. Ici, le geste permet de passer d’une fiche à une autre.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="choisir" aria-labelledby="titre-choisir"><p class="eyebrow">02 / Le même contenu, un usage différent</p><h2 id="titre-choisir">Liste, grille ou page par page ?</h2><div class="comparison"><table><caption>Choisir la présentation de la révision</caption><thead><tr><th scope="col">Présentation</th><th scope="col">Ce qu’elle facilite</th></tr></thead><tbody><tr><th scope="row">LazyColumn</th><td>Lire des questions à la suite, avec toute la largeur disponible.</td></tr><tr><th scope="row">LazyRow</th><td>Parcourir horizontalement des cartes, sans imposer ici un arrêt page par page.</td></tr><tr><th scope="row">LazyVerticalGrid</th><td>Comparer plusieurs cartes visibles en colonnes.</td></tr><tr><th scope="row">HorizontalPager</th><td>Se concentrer sur une fiche et passer à une autre page.</td></tr></tbody></table></div><p>Dans cet exercice, les pages utilisent la largeur disponible. Leur contenu est préparé selon les besoins de l’affichage. Un numéro de page et des boutons rendent le parcours compréhensible sans dépendre uniquement du geste.</p><p>Nous conservons <code>ReviewCard</code>, la même liste de questions et le retour vers le résultat. Tu choisiras ensuite la présentation qui convient à ton quiz.</p></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Page</h3><p>Une unité de contenu du pager. Ici, une fiche de révision ; ce n’est pas une nouvelle activité Android.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Repère de position</h3><p>Une indication comme « Fiche 2 / 4 », pour savoir où l’on se trouve.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="code" aria-labelledby="titre-code"><p class="eyebrow">03 / Un état pour la position de lecture</p><h2 id="titre-code">Remplace seulement la vue de révision.</h2><p>Dans ton clone, remplace uniquement <code>ReviewScreen</code> et son annotation par l’exemple complet ci-dessous. Garde <code>ReviewCard</code>, les données et le branchement depuis le résultat. Ne conserve pas l’ancienne liste ou grille dans cette fonction.</p><p>Ajoute les imports manquants ; ceux de <code>Modifier</code>, des composants de base et des dimensions sont déjà présents dans la version de la page sur les listes.</p><pre id="pager-imports"><code>import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch</code></pre><details><summary>ReviewScreen complète avec le pager</summary><pre id="pager-screen"><code>@Composable
+private fun ReviewScreen(
+    questions: List&lt;Question&gt;,
+    onBack: () -&gt; Unit,
+    modifier: Modifier = Modifier,
+) {
+    val pagerState = rememberPagerState(pageCount = { questions.size })
+    val coroutineScope = rememberCoroutineScope()
+
+    Column(
+        modifier = modifier.fillMaxSize().padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Text(text = &quot;Réviser les questions&quot;)
+        Button(onClick = onBack) {
+            Text(text = &quot;Retour au résultat&quot;)
+        }
+        if (questions.isEmpty()) {
+            Text(text = &quot;Aucune question à réviser.&quot;)
+        } else {
+            Text(text = &quot;Fiche ${pagerState.currentPage + 1} / ${questions.size}&quot;)
+            HorizontalPager(
+                state = pagerState,
+                modifier = Modifier.weight(1f).fillMaxWidth(),
+                pageSpacing = 16.dp,
+                verticalAlignment = Alignment.Top,
+            ) { page: Int -&gt;
+                Column(
+                    modifier = Modifier.fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
+                ) {
+                    ReviewCard(question = questions[page])
+                }
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                        }
+                    },
+                    enabled = pagerState.currentPage &gt; 0 &amp;&amp; !pagerState.isScrollInProgress,
+                    modifier = Modifier.weight(1f),
+                ) {
+                    Text(text = &quot;Précédente&quot;)
+                }
+                Button(
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        }
+                    },
+                    enabled = pagerState.currentPage &lt; questions.lastIndex
+                        &amp;&amp; !pagerState.isScrollInProgress,
+                    modifier = Modifier.weight(1f),
+                ) {
+                    Text(text = &quot;Suivante&quot;)
+                }
+            }
+        }
+    }
+}</code></pre></details><p><code>rememberPagerState</code> conserve l’état de navigation pendant les mises à jour de cette vue. <code>pageCount</code> fournit le nombre de pages, ici la taille de la liste.</p><p>Le bloc du pager reçoit l’indice <code>page</code>. <code>questions[page]</code> fournit la donnée à afficher. Le numéro lu par le joueur ajoute 1 car les indices commencent à zéro.</p><p>La branche de liste vide affiche un message et évite de chercher une question inexistante. Les données de cette révision restent inchangées pendant sa consultation.</p><details><summary>Ma navigation ou mes noms ont changé après le travail avec l’agent</summary><p>Demande de remplacer seulement la présentation de la révision par un pager. Fournis le code actuel ; conserve l’accès après la partie, le score et le retour au résultat. N’ajoute pas de nouveau presenter pour les fiches.</p></details></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>PagerState</h3><p>L’état du pager, notamment sa position. Il est distinct de l’état de la partie.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>pageCount</h3><p>« Nombre de pages ». Ici, il dépend du nombre de questions, pas d’une valeur fixée à quatre.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>currentPage</h3><p>L’indice de la page proche de la position d’arrêt. Il peut changer pendant un mouvement ; le repère affiché suit cet état.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="actions" aria-labelledby="titre-actions"><p class="eyebrow">04 / Le geste et les boutons commandent la même vue</p><h2 id="titre-actions">Une coroutine accompagne le déplacement.</h2><p>Les boutons utilisent <code>animateScrollToPage</code> pour demander au pager un déplacement animé. Cet appel suspendable est lancé dans une coroutine liée à la vue par <code>rememberCoroutineScope</code>.</p><p>Tu retrouves l’idée de la partie asynchrone : le déplacement se déroule dans le temps sans bloquer le fil d’interface. Le presenter ne calcule rien pour cette animation.</p><ul><li>À la première fiche, « Précédente » est désactivé.</li><li>À la dernière, « Suivante » est désactivé.</li><li>Pendant un déplacement, les deux boutons attendent sa fin.</li><li>Le bouton « Retour au résultat » conserve son rôle : quitter la révision sans recommencer.</li></ul><p>Dans <code>enabled</code>, <code>&amp;&amp;</code> signifie « et » : il faut être dans les bornes de la liste <em>et</em> ne pas être en cours de déplacement. La valeur <code>lastIndex</code> désigne l’indice du dernier élément.</p><details><summary>Pourquoi les pages ne sont-elles pas les questions du quiz en cours ?</summary><p>La révision montre déjà les solutions et permet de revenir en arrière. La partie conserve ses règles de première réponse et de comptage. Mélanger ces états imposerait de nouvelles décisions sur les réponses sautées ou revues ; ce n’est pas l’objectif de cette extension.</p></details><details><summary>Et si je ferme la révision pendant le déplacement ?</summary><p>La coroutine liée à cette vue est annulée quand elle quitte la composition. Ce n’est pas une sauvegarde de la position. Dans la version de cet exercice, ne promets pas de retrouver la dernière fiche après fermeture et réouverture.</p></details></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>animateScrollToPage</h3><p>« Faire défiler avec animation vers une page ». L’argument est l’indice de destination.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>CoroutineScope</h3><p>Le cadre de vie des coroutines lancées. Ici, il est associé à la vue de révision.</p></aside><aside class="word-note"><span aria-hidden="true">💡</span><h3>Bornes de la liste</h3><p>Les indices utilisables : de zéro au dernier indice lorsqu’il existe des éléments.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="lecture" aria-labelledby="titre-lecture"><p class="eyebrow">05 / Une page doit rester lisible</p><h2 id="titre-lecture">Sépare le balayage horizontal de la lecture verticale.</h2><p>Le pager reçoit la hauteur restante sous le titre, le retour et le repère. Dans chaque page, une Column défilante permet de lire une fiche plus longue que cette zone.</p><p>Le déplacement horizontal change de fiche ; le déplacement vertical permet de lire la fiche actuelle. Ce sont deux directions différentes, avec une hauteur bornée dans cet exemple. N’ajoute pas un parent défilant horizontal autour du pager.</p><p>Garde les textes entiers et vérifie les boutons sur un petit écran et avec une police plus grande. Si la présentation devient encombrée, une liste verticale peut mieux répondre à ton besoin.</p><details><summary>Peut-on utiliser VerticalPager ?</summary><p>Oui, pour changer de page verticalement. Ce n’est pas juste un remplacement de nom à faire ici : il faudrait aussi réfléchir au geste de lecture d’un texte long qui défile déjà verticalement. On garde une seule variante pour comprendre le besoin avant d’étendre.</p></details></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Zone de lecture</h3><p>La place disponible pour consulter la fiche. Elle doit permettre d’accéder à l’ensemble du contenu, même lorsqu’il est long.</p></aside></div></div>
+<div class="reading-row"><section class="lesson-section" id="observer" aria-labelledby="titre-observer"><p class="eyebrow">06 / Prévoir, parcourir et comparer</p><h2 id="titre-observer">La révision avance, le score reste identique.</h2><ol class="steps"><li>Termine une partie et note son score. Ouvre la révision : vérifie le premier numéro et la première question.</li><li>Avance par balayage, puis avec le bouton. Le repère doit correspondre à la fiche consultée après le déplacement.</li><li>Reviens à la première fiche, puis atteins la dernière. Vérifie les boutons désactivés aux extrémités et l’absence de page supplémentaire.</li><li>Lis un énoncé long en faisant défiler son contenu verticalement.</li><li>Retourne au résultat : le score doit être identique. Vérifie aussi une nouvelle partie avec « Recommencer ».</li><li>Avec l’encadrant, essaie une seule question puis une liste vide dans les données du clone. Le total attendu change : vérifie une fiche unique sans déplacement, puis le message de révision vide. Restaure ensuite tes données.</li></ol><label class="draft-label" for="pager-observations">Mes observations</label><textarea id="pager-observations" rows="8" spellcheck="true">Différence avec LazyRow :
+Lien entre indice et numéro affiché :
+Première et dernière fiches :
+Lecture d’un texte long :
+Score avant et après consultation :
+Cas d’une question et d’une liste vide :
+Présentation que je préfère et pourquoi :
+Ce qui reste à vérifier :</textarea><fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je sais quand choisir des pages plutôt qu’un défilement libre.</span></label><label><input type="checkbox"><span>Je distingue la position de révision et la progression de la partie.</span></label><label><input type="checkbox"><span>Les gestes, les boutons et le numéro de fiche restent cohérents.</span></label><label><input type="checkbox"><span>La consultation ne change pas le score.</span></label></fieldset><p class="caption">Notes et confirmations personnelles sans envoi ni sauvegarde. Le guide ne lance pas les extraits, ne lit pas ton clone et ne vérifie pas l’appareil. Copie tes notes avant de fermer la page.</p><p class="closing">Après relecture, conserve la présentation choisie dans Git. Tu peux <a href="../module_review_view/index.html">compléter ton bilan</a>. Les prochaines extensions aborderont les images puis les échanges avec Android.</p></section><div class="reading-notes"><aside class="word-note"><span aria-hidden="true">💡</span><h3>Cas limite</h3><p>Une situation aux extrémités du fonctionnement attendu, comme une seule question ou aucune question. On observe aussi son comportement.</p></aside></div></div><nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_lazy_grid_view/index.html" rel="prev"><span>← Précédent</span><span>Organiser les cartes en grille</span></a></nav><footer class="lesson-footer"><span>Référence officielle :</span><a href="https://developer.android.com/develop/ui/compose/layouts/pager">Pager dans Compose</a></footer></main></div></body></html>

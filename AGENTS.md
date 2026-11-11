@@ -151,3 +151,11 @@ existante, sans changer les données ou le score. Garder la hauteur bornée et
 l’import grid.items. L’illustration CSS n’est pas un rendu Android. Faire choisir
 selon les textes et la largeur ; la grille n’est pas un progrès obligatoire.
 Pager, images et permissions restent des étapes futures sans liens anticipés.
+
+## Extensions facultatives — pager
+
+`module_further_pager_view/` parcourt les fiches de révision, jamais les questions
+évaluées. Garder les états de révision et de partie distincts. Pager horizontal,
+lecture verticale bornée, numéro et boutons précédent/suivant, cas vide/unique.
+Pas de nouvelle règle de score ni garantie de sauvegarde de position. Brouillons
+sans stockage ; images et autorisations restent les prochaines extensions.
