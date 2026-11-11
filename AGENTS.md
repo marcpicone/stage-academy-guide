@@ -169,3 +169,13 @@ contrat/presenter minimaux, aucune caméra/permission ici. Conserver le parcours
 existant et son état entre les deux pages (deux pages composées dans cet exemple).
 Pas de garantie de sauvegarde ni d’activation de la caméra hors écran à la suite.
 Les exemples ne sont pas une autorisation de modifier le dépôt Android réel.
+
+## Extensions facultatives — caméra
+
+`module_further_camera_view/` guide une intégration CameraX via l’agent dans le
+clone de l’élève : manifeste, permission au clic, aperçu et capture en cache.
+Ne pas faire passer les extraits partiels pour une implémentation complète.
+isActive du pager, accord et cycle de vie sont distincts ; empêcher un démarrage
+hors écran ou tardif et libérer les usages propres à cet écran. Refus et limites
+sur matériel non observé restent explicites. ProfilePresenter reçoit le résultat,
+la vue relit son état ; fichier en cache sans promesse de profil durable.
