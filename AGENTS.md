@@ -143,3 +143,11 @@ accessible après la fin du quiz, sans score modifié. Le branchement se fait av
 le parent défilant, après les états persistants de WelcomeScreen. La variante
 horizontale remplace la liste verticale. Ne pas confondre lazy et téléchargement,
 ni promettre un gain mesuré sur quatre éléments. Pas de grille/pager anticipé.
+
+## Extensions facultatives — grilles lazy
+
+`module_further_lazy_grid_view/` compare Fixed et Adaptive dans la révision
+existante, sans changer les données ou le score. Garder la hauteur bornée et
+l’import grid.items. L’illustration CSS n’est pas un rendu Android. Faire choisir
+selon les textes et la largeur ; la grille n’est pas un progrès obligatoire.
+Pager, images et permissions restent des étapes futures sans liens anticipés.
