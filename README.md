@@ -689,3 +689,20 @@ Ni examen automatique ni nouveau code ou comportement Android demandé.
 
 Entrée home distincte « 08 / Présenter », navigation résultat ↔ bilan ; dernier
 lien vers le parcours, sans faux lien suivant. Le guide ne pilote aucune app.
+
+## Pour aller plus loin — page 1 : animations
+
+`module_further_animation_view/` ajoute une extension facultative après le bilan.
+AnimatedVisibility fait apparaître le résultat de QuestionView avec fadeIn/tween,
+piloté par canGoToNextQuestion. Le texte initial reste visible avant réponse.
+Les imports et le remplacement ciblé sont fournis pour la version contrats ;
+le code issu des agents est à adapter sans nouveau calcul ou validation.
+
+Le score et les boutons réagissent sans attendre l’animation. Le passage à la
+question suivante réinitialise l’état local ; pas de garantie d’exit si le parent
+est retiré. Comparaison 300/900 ms, réponse correcte/incorrecte et recommencement.
+Illustration HTML/CSS distincte de Compose, case native, mouvement réduit respecté.
+Aucun JS, aucun nouveau package, aucun fichier Android modifié par le guide.
+Brouillon sans stockage. Navigation bilan ↔ animation et entrée home « 09 / Explorer ».
+Collections, grilles, pager, images et manifeste restent les extensions prévues,
+sans liens anticipés. Source : documentation Android des animations Compose.

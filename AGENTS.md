@@ -126,3 +126,12 @@ les rôles du code, une trace Git et les vérifications du travail avec l’agen
 Pas de notion nouvelle, note automatique ou exigence de réciter tout le cours.
 Nommer les étapes réellement réalisées et les limites restantes. Notes sans
 envoi ni sauvegarde ; entrée home distincte et lien depuis l’exercice résultat.
+
+## Extensions facultatives — animations
+
+`module_further_animation_view/` ouvre « Pour aller plus loin » après le bilan.
+Une modification de présentation à la fois : AnimatedVisibility du résultat,
+piloté par l’état de réponse existant, règles et calcul immédiats inchangés.
+Ne pas promettre d’exit quand le parent est retiré. L’illustration HTML/CSS n’est
+pas une exécution Compose ; respecter le mouvement réduit. Les futures pages de
+collections/images/permissions seront ajoutées progressivement sans lien vide.
