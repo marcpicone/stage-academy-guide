@@ -118,3 +118,11 @@ pour le développement du guide ou une autorisation de modifier le dépôt Andro
 Conserver le calcul du score et le recommencement direct du quiz. Vérifications
 manuelles zéro/toutes/partie des bonnes réponses puis remise à zéro, adaptées au
 nombre réel de questions. Brouillons non sauvegardés, aucune exécution du guide.
+
+## Bilan final
+
+`module_review_view/` fait expliquer l’app avec une démo, le trajet d’un clic,
+les rôles du code, une trace Git et les vérifications du travail avec l’agent.
+Pas de notion nouvelle, note automatique ou exigence de réciter tout le cours.
+Nommer les étapes réellement réalisées et les limites restantes. Notes sans
+envoi ni sauvegarde ; entrée home distincte et lien depuis l’exercice résultat.
