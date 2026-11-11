@@ -135,3 +135,11 @@ piloté par l’état de réponse existant, règles et calcul immédiats inchang
 Ne pas promettre d’exit quand le parent est retiré. L’illustration HTML/CSS n’est
 pas une exécution Compose ; respecter le mouvement réduit. Les futures pages de
 collections/images/permissions seront ajoutées progressivement sans lien vide.
+
+## Extensions facultatives — listes lazy
+
+`module_further_lazy_lists_view/` compare les dispositions avec une révision
+accessible après la fin du quiz, sans score modifié. Le branchement se fait avant
+le parent défilant, après les états persistants de WelcomeScreen. La variante
+horizontale remplace la liste verticale. Ne pas confondre lazy et téléchargement,
+ni promettre un gain mesuré sur quatre éléments. Pas de grille/pager anticipé.

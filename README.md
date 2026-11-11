@@ -706,3 +706,21 @@ Aucun JS, aucun nouveau package, aucun fichier Android modifié par le guide.
 Brouillon sans stockage. Navigation bilan ↔ animation et entrée home « 09 / Explorer ».
 Collections, grilles, pager, images et manifeste restent les extensions prévues,
 sans liens anticipés. Source : documentation Android des animations Compose.
+
+## Pour aller plus loin — page 2 : LazyColumn et LazyRow
+
+`module_further_lazy_lists_view/` crée une révision en lecture seule accessible
+depuis le résultat. ReviewScreen reçoit la liste existante et onBack, les cartes
+affichent énoncé/bonne réponse. Choix Column/Row versus listes lazy, items, hauteur
+bornée et comparaison verticale/horizontale. Pas de téléchargement/pagination.
+Pas de benchmark prétendu à quatre questions, pas d’item state ou de clés ajoutés.
+
+L’intégration fournie se place avant la Column défilante du quiz : presenter et
+états conservés avant le branchement ; bouton dans isQuizFinished, retour sans
+restart. LazyColumn occupe la hauteur restante, sans parent vertical non borné.
+La variante LazyRow remplace le seul bloc de liste, avec carte de largeur fournie.
+Lecture longue à vérifier ; les navigations des exercices agents sont à adapter.
+
+Home à deux extensions, navigation animation ↔ listes. Aucun changement Android
+par le guide, aucun service ou JS. Brouillons manuels sans sauvegarde. Grille et
+pager restent à venir sans lien anticipé. Source : documentation Android des listes.
