@@ -27,7 +27,7 @@
 .project-caption { text-align: center; margin-top: var(--space-lg); font-size: 0.8rem; }
 .project-caption > span { color: var(--color-accent); }
 
-/* Méthode et aperçu du parcours. Seule une introduction disponible possède un lien. */
+/* Méthode, parcours principal et extensions facultatives. */
 .method-section, .course-section { padding: var(--space-2xl) 0; border-top: 1px solid var(--color-border); }
 .section-heading { margin-bottom: var(--space-xl); }
 .section-heading h2 { font-size: clamp(1.6rem, 3vw, 2.25rem); letter-spacing: -0.035em; }
@@ -36,9 +36,9 @@
 .method-item h3 { font-size: 1.1rem; margin-bottom: var(--space-sm); }
 .method-item p, .course-card > p { color: var(--color-muted); font-size: 0.9rem; }
 .course-heading { display: flex; align-items: end; justify-content: space-between; gap: var(--space-lg); }
-.course-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); }
-.course-card { padding: var(--space-lg); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
-.card-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--space-sm); font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-muted); margin-bottom: var(--space-xl); }
+.course-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md); }
+.course-card { min-width: 0; padding: var(--space-lg); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.card-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-sm); font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-muted); margin-bottom: var(--space-xl); }
 .status { white-space: nowrap; border: 1px solid var(--color-border); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); }
 .course-card h3 { font-size: 1.2rem; margin-bottom: var(--space-md); }
 .course-card .card-outcome { border-top: 1px solid var(--color-border); margin-top: var(--space-lg); padding-top: var(--space-md); font-size: 0.78rem; }
@@ -61,6 +61,20 @@
 }
 
 .course-link { display: inline-block; color: var(--color-accent); margin-top: var(--space-md); font-weight: 650; font-size: 0.9rem; }
-.course-card:first-child .card-meta { flex-wrap: wrap; }
 
-.course-card:nth-child(2) .card-meta { flex-wrap: wrap; }
+
+.home-path-nav { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-lg); margin-top: var(--space-lg); font-size: .85rem; color: var(--color-accent); }
+.code-card { grid-column: 1 / -1; }
+.code-stages { list-style: none; padding: 0; margin: var(--space-xl) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); }
+.code-stages li, .extension-group { min-width: 0; padding: var(--space-md); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+.code-stages li { background: var(--color-surface-soft); }
+.stage-meta { color: var(--color-accent); font: 650 .7rem var(--font-mono); margin-bottom: var(--space-md); }
+.code-stages h4 { margin: 0 0 var(--space-sm); font-size: 1rem; line-height: 1.3; }
+.code-stages li > p:last-child, .extension-group > p:last-child { color: var(--color-muted); font-size: .85rem; }
+.extension-grid { list-style: none; padding: 0; margin: var(--space-xl) 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); }
+.extension-group { padding: var(--space-lg); background: var(--color-surface); }
+.extension-group h3 { font-size: 1.1rem; margin-bottom: var(--space-md); }
+.extension-intro, .extension-note { color: var(--color-muted); max-width: 52rem; font-size: .95rem; }
+.extension-note { font-size: .85rem; }
+@media (max-width: 1000px) { .code-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .code-stages, .extension-grid { grid-template-columns: 1fr; } }

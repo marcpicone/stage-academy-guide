@@ -816,3 +816,17 @@ non reproduits restent non vérifiés. Le score de partie n’est pas sauvegard�
 par cette tâche. Home à sept extensions, navigation caméra ↔ profil persistant.
 Notes sans stockage ; le site ne crée ni profil ni données Android. Sources :
 documentation Android DataStore et fichiers spécifiques à l’app.
+
+## Accueil — parcours principal et extensions
+
+La home distingue 27 pages principales (Git 2, IDE 4, code 14, LLM 6, bilan 1)
+et 7 extensions facultatives. Les anciennes cartes Actions & état, Debug & Logcat
+et Responsabilités ne sont plus « À venir » : ces notions sont déjà traitées dans
+les sections existantes. Une entrée par section, sans raccourci vers Git page 2.
+
+Les quatorze pages de code sont présentées en cinq étapes de 2/4/3/3/2 pages,
+sans modifier l’ordre, les URL ou le contenu des leçons. Les extensions sont
+regroupées visuellement en animation, collections et profil/caméra/persistance ;
+le point d’entrée reste leur première page, avec les prérequis explicités.
+Ancres locales parcours/extensions, pas de progression enregistrée ou de nouvelle
+installation requise. Les compteurs décrivent les pages, pas les exercices réalisés.

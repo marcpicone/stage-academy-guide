@@ -189,3 +189,11 @@ packages _view, dépendances explicites au presenter. Extraits partiels et tâch
 agent, sans prétendre une intégration exécutable fournie. Ne pas confondre
 transaction DataStore et copie photo ; conserver l’ancien profil en cas d’échec.
 Observer après arrêt du processus ; pas de sauvegarde de partie ou de cloud ajouté.
+
+## Accueil réorganisé
+
+La home distingue parcours principal (27 pages) et extensions facultatives (7).
+Ne pas réintroduire les cartes « À venir » pour des thèmes déjà couverts. La carte
+code rend visibles cinq étapes sans modifier l’ordre des leçons. Conserver une
+entrée de début par section et les prérequis des extensions ; pas de progression
+implicite, nouveau raccourci Git page 2 ou renumérotation des en-têtes des leçons.

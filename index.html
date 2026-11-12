@@ -29,6 +29,7 @@
                         À chaque étape, tu découvres une notion, tu la mets en pratique et tu observes le résultat.</p>
                     <a class="button" href="#parcours">Découvrir le parcours <span aria-hidden="true">↗</span></a>
                     <p class="hero-note">Tu pars de zéro ? C’est justement le point de départ.</p>
+                    <nav class="home-path-nav" aria-label="Les deux parties du guide"><a href="#parcours">Le parcours principal</a><a href="#extensions">Les extensions facultatives</a></nav>
                 </div>
 
                 <div class="project-preview">
@@ -65,44 +66,53 @@
 
             <section class="course-section" id="parcours" aria-labelledby="course-title">
                 <div class="section-heading course-heading">
-                    <div><p class="eyebrow">Le fil rouge</p><h2 id="course-title">Construire ton quiz, pas à pas.</h2></div>
-                    <p>Voici les thèmes prévus.<br>Les cours seront ajoutés progressivement.</p>
+                    <div><p class="eyebrow">Le parcours principal</p><h2 id="course-title">Construire et expliquer ton quiz.</h2></div>
+                    <p>27 pages, à parcourir dans l’ordre avec ton encadrant.<br>Avance à ton rythme : comprendre une étape compte plus que tout terminer.</p>
                 </div>
                 <ol class="course-grid">
-                    <li class="course-card"><div class="card-meta"><span>01 / Récupérer</span><span class="status">2 pages disponibles</span></div>
-                        <h3>Git &amp; GitHub</h3><p>Récupérer un projet, garder une trace de tes changements et les partager.</p>
-                        <p class="card-outcome">D’abord : comprendre Git, GitHub et l’historique.</p>
-                        <a class="course-link" href="./module_git_intro_view/index.html">Découvrir Git &amp; GitHub →</a></li>
-                    <li class="course-card"><div class="card-meta"><span>02 / Se repérer</span><span class="status">4 pages disponibles</span></div>
-                        <h3>L’IDE : ton atelier</h3><p>Découvrir Android Studio, les fichiers, l’éditeur et les outils pour lancer une application.</p>
-                        <p class="card-outcome">D’abord : comprendre le rôle de chaque outil.</p>
+                    <li class="course-card"><div class="card-meta"><span>Récupérer le projet</span><span class="status">2 pages</span></div>
+                        <h3>Git &amp; GitHub</h3><p>Comprendre l’historique, les branches et les propositions de changement, puis créer ton compte, faire un fork et cloner le projet.</p>
+                        <p class="card-outcome">À l’arrivée : le projet est sur ton ordinateur et tu sais d’où il vient.</p>
+                        <a class="course-link" href="./module_git_intro_view/index.html">Commencer avec Git &amp; GitHub →</a></li>
+                    <li class="course-card"><div class="card-meta"><span>Se repérer et observer</span><span class="status">4 pages</span></div>
+                        <h3>L’IDE : ton atelier</h3><p>Découvrir Android Studio, ouvrir et lancer le quiz, comprendre un bug avec Logcat, puis partager ta correction.</p>
+                        <p class="card-outcome">À l’arrivée : tu sais où modifier, lancer, observer et proposer ton travail.</p>
                         <a class="course-link" href="./module_ide_intro_view/index.html">Découvrir l’IDE →</a></li>
-                    <li class="course-card"><div class="card-meta"><span>03 / Décrire</span><span class="status">14 pages disponibles</span></div>
-                        <h3>Premiers pas en code</h3><p>Nommer les données, écrire une règle de validation et relier les réponses à un écran Compose.</p>
-                        <p class="card-outcome">Ton étape : construire le quiz et comprendre son organisation.</p>
-                        <a class="course-link" href="./module_code_variables_view/index.html">Découvrir les variables et les types →</a></li>
-                    <li class="course-card"><div class="card-meta"><span>04 / Réagir</span><span class="status">À venir</span></div>
-                        <h3>Actions &amp; état</h3><p>Relier un clic, une règle et un changement visible dans l’application.</p>
-                        <p class="card-outcome">Ton étape : vérifier une réponse.</p></li>
-                    <li class="course-card"><div class="card-meta"><span>05 / Observer</span><span class="status">À venir</span></div>
-                        <h3>Debug &amp; Logcat</h3><p>Suivre ce que fait le programme et chercher pourquoi il se trompe.</p>
-                        <p class="card-outcome">Ton étape : comprendre un bug.</p></li>
-                    <li class="course-card"><div class="card-meta"><span>06 / Organiser</span><span class="status">À venir</span></div>
-                        <h3>Les responsabilités</h3><p>Séparer les questions, les règles du quiz et ce qui s’affiche à l’écran.</p>
-                        <p class="card-outcome">Ton étape : ajouter des questions et un score.</p></li>
-                    <li class="course-card"><div class="card-meta"><span>07 / Collaborer</span><span class="status">6 pages disponibles</span></div>
-                        <h3>LLM &amp; agents</h3><p>Apprendre à demander, créer des textes et des visuels, puis guider un agent de code.</p>
-                        <p class="card-outcome">Ton étape : préparer le design et guider une première modification.</p>
+                    <li class="course-card code-card"><div class="card-meta"><span>Construire le quiz</span><span class="status">14 pages · 5 étapes</span></div>
+                        <h3>Premiers pas en code</h3><p>Pars des informations d’une question, rends le quiz utilisable, puis comprends l’organisation et la durée de vie de ses données.</p>
+                        <ol class="code-stages" aria-label="Les cinq étapes du code">
+                            <li><p class="stage-meta">Pages 1–2</p><h4>Nommer et décrire</h4><p>Variables, types, fonctions et portée : des données et une première règle de validation.</p></li>
+                            <li><p class="stage-meta">Pages 3–6</p><h4>Afficher et regrouper</h4><p>Compose, clics, conditions et état, puis listes et modèle de question pour éviter les répétitions.</p></li>
+                            <li><p class="stage-meta">Pages 7–9</p><h4>Faire vivre la partie</h4><p>Un presenter, des questions qui s’enchaînent, un score et un recommencement.</p></li>
+                            <li><p class="stage-meta">Pages 10–12</p><h4>Donner une place à chaque rôle</h4><p>Visibilité, contrats et interfaces, puis lecture des architectures MVP, MVVM et plate.</p></li>
+                            <li><p class="stage-meta">Pages 13–14</p><h4>Comprendre la durée et l’attente</h4><p>Cycle de vie, mémoire et stockage, puis synchrone, asynchrone, coroutines et Flow.</p></li>
+                        </ol>
+                        <p class="card-outcome">À l’arrivée : une partie complète et des liens que tu peux expliquer entre l’écran, les données et les règles.</p>
+                        <a class="course-link" href="./module_code_variables_view/index.html">Commencer par les variables et les types →</a></li>
+                    <li class="course-card"><div class="card-meta"><span>Concevoir et collaborer</span><span class="status">6 pages</span></div>
+                        <h3>LLM &amp; agents</h3><p>Formuler une demande, préparer les textes et les visuels, guider un agent dans le projet et relire ses changements.</p>
+                        <p class="card-outcome">À l’arrivée : le design des trois écrans et une méthode pour réaliser et vérifier les améliorations, avec les consignes du projet.</p>
                         <a class="course-link" href="./module_agents_intro_view/index.html">Apprendre à formuler une demande →</a></li>
-                    <li class="course-card"><div class="card-meta"><span>08 / Présenter</span><span class="status">1 page disponible</span></div>
-                        <h3>Explique ton application</h3><p>Montrer ton quiz, suivre un clic dans le code et raconter ce que tu as vérifié.</p>
-                        <p class="card-outcome">Ton étape : présenter ton travail avec tes mots et des exemples.</p>
+                    <li class="course-card"><div class="card-meta"><span>Présenter son travail</span><span class="status">1 page</span></div>
+                        <h3>Explique ton application</h3><p>Montrer une partie, suivre un clic dans le code et raconter une modification, un bug compris et les vérifications réalisées.</p>
+                        <p class="card-outcome">À l’arrivée : tu présentes ton travail avec tes mots, des exemples et les points que tu veux encore reprendre.</p>
                         <a class="course-link" href="./module_review_view/index.html">Préparer mon bilan →</a></li>
-                    <li class="course-card"><div class="card-meta"><span>09 / Explorer</span><span class="status">7 pages disponibles</span></div>
-                        <h3>Pour aller plus loin</h3><p>Choisir des améliorations pour ton quiz et comprendre le problème qu’elles résolvent.</p>
-                        <p class="card-outcome">Tes extensions : animations, collections, caméra et profil sauvegardé.</p>
-                        <a class="course-link" href="./module_further_animation_view/index.html">Découvrir les animations →</a></li>
                 </ol>
+            </section>
+
+            <section class="course-section extension-section" id="extensions" aria-labelledby="extensions-title">
+                <div class="section-heading course-heading">
+                    <div><p class="eyebrow">Les extensions facultatives</p><h2 id="extensions-title">Pour aller plus loin avec ton quiz.</h2></div>
+                    <p>7 pages après le bilan.<br>Choisis avec ton encadrant selon tes envies et les étapes déjà réalisées.</p>
+                </div>
+                <p class="extension-intro">Le parcours principal suffit pour construire et expliquer le quiz. Ces extensions explorent d’autres besoins ; certaines reprennent le résultat des précédentes.</p>
+                <ol class="extension-grid">
+                    <li class="extension-group"><p class="stage-meta">Page 1 · Rendre un changement visible</p><h3>Animations</h3><p>Faire apparaître le retour après une réponse et distinguer l’effet visuel des règles de la partie.</p></li>
+                    <li class="extension-group"><p class="stage-meta">Pages 2–4 · Parcourir les questions</p><h3>Listes, grilles et pager</h3><p>Comparer une liste verticale, une rangée, une grille et des fiches page par page dans un espace de révision.</p></li>
+                    <li class="extension-group"><p class="stage-meta">Pages 5–7 · Personnaliser l’app</p><h3>Profil, caméra et sauvegarde</h3><p>Regrouper les MVP dans des packages _view, naviguer entre Accueil et Profil, prendre une photo puis retrouver le profil enregistré.</p></li>
+                </ol>
+                <p class="extension-note">Chaque page indique ses prérequis. Pour la caméra et la sauvegarde, tu guides une intégration avec l’agent et tu observes son résultat avec l’encadrant.</p>
+                <a class="course-link" href="./module_further_animation_view/index.html">Découvrir les extensions, en commençant par les animations →</a>
             </section>
         </main>
         <footer class="home-footer"><span>Stage Academy</span><p>On avance une notion et une modification à la fois.</p></footer>
