@@ -794,3 +794,25 @@ non vérifiés. Le site ne demande aucune permission ni n’exécute caméra ou 
 Notes sans stockage, home à six extensions, navigation deux espaces ↔ caméra.
 Sources : docs Android manifeste, permissions, CameraX aperçu/capture/architecture
 et fichiers spécifiques à l’app, liées dans la page.
+
+## Pour aller plus loin — page 7 : profil local persistant
+
+`module_further_profile_storage_view/` distingue brouillon, cache, image privée
+persistante et petites métadonnées Preferences DataStore. Nom obligatoire après
+trim, photo facultative, sauvegarde explicite et annulation du brouillon.
+PlayerProfile et ProfileStorage restent hors des packages _view ; injection
+explicite au presenter sans graph. Les extraits sont modèle/contrat, pas une
+implémentation DataStore complète ; intégration guidée à réaliser par l’agent.
+
+Une photo candidate n’écrase pas la précédente : nouveau fichier, métadonnées,
+puis nettoyage après réussite. DataStore et copie de fichier ne sont pas une
+transaction unique. Gestion erreur/annulation sans faux succès, lecture initiale
+sans écraser l’édition et image absente avec remplacement. Une instance DataStore
+par fichier/processus. Aucun cloud, compte ou permission de stockage ajouté.
+
+Validation manuelle après véritable arrêt/relance, et cache vidé si disponible ;
+ne pas désinstaller/effacer les données pour prouver la persistance. Les cas
+non reproduits restent non vérifiés. Le score de partie n’est pas sauvegardé
+par cette tâche. Home à sept extensions, navigation caméra ↔ profil persistant.
+Notes sans stockage ; le site ne crée ni profil ni données Android. Sources :
+documentation Android DataStore et fichiers spécifiques à l’app.
