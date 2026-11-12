@@ -179,3 +179,13 @@ isActive du pager, accord et cycle de vie sont distincts ; empêcher un démarra
 hors écran ou tardif et libérer les usages propres à cet écran. Refus et limites
 sur matériel non observé restent explicites. ProfilePresenter reçoit le résultat,
 la vue relit son état ; fichier en cache sans promesse de profil durable.
+
+## Extensions facultatives — profil persistant
+
+`module_further_profile_storage_view/` guide nom/photo avec brouillon, validation,
+annulation et sauvegarde. Image validée dans filesDir, métadonnées DataStore ;
+jamais une référence de cache présentée comme durable. Modèle/stockage hors des
+packages _view, dépendances explicites au presenter. Extraits partiels et tâche
+agent, sans prétendre une intégration exécutable fournie. Ne pas confondre
+transaction DataStore et copie photo ; conserver l’ancien profil en cas d’échec.
+Observer après arrêt du processus ; pas de sauvegarde de partie ou de cloud ajouté.
