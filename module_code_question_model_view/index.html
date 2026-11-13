@@ -26,7 +26,7 @@
     choices = listOf(&quot;Button&quot;, &quot;Text&quot;, &quot;Column&quot;),
     correctAnswer = &quot;Text&quot;,
 )</code></pre>
-<p>Les objets ont la même forme, mais des contenus différents. La première question attend « Git », la deuxième attend « Text ».</p>
+<p>Reporte dans <code>choices</code> les choix que tu as conservés à la page précédente, y compris « Logcat » si tu l’as ajouté, et leur ordre. Les trois choix du bloc fourni sont un exemple de référence, pas une consigne pour retirer les tiens. Garde aussi ton énoncé et sa bonne réponse.</p><p>Les objets ont la même forme, mais des contenus différents. La première question attend « Git », la deuxième attend « Text ».</p>
 <details><summary>Comment lire une information dans une question ?</summary><pre><code>val questionText: String = firstQuestion.text
 val choices: List&lt;String&gt; = firstQuestion.choices
 val correctAnswer: String = firstQuestion.correctAnswer</code></pre><p>Le point permet de lire une propriété de cet objet. <code>firstQuestion.correctAnswer</code> vaut « Git » ; <code>secondQuestion.correctAnswer</code> vaut « Text ».</p></details>

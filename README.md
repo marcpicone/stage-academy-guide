@@ -843,3 +843,33 @@ Le composant fourni est un exemple de présentation à adapter, avec imports.
 Home à 27 pages principales et 8 extensions ; navigation profil ↔ images.
 Notes sans stockage, pas de lecture des fichiers Android par le site. Sources :
 documentation Android des images (chargement/personnalisation/optimisation).
+
+## Relecture de l’enchaînement — 13 novembre 2026
+
+Relecture des 35 leçons, du fork au composant d’image, avec corrections de
+transition dans 14 pages. Les consignes précisent désormais la reprise du dev
+corrigé après la première PR, la conservation des questions personnalisées lors
+des changements de structure, la différence entre le calcul du premier exercice
+et le score du quiz, le retrait de la démo asynchrone et la mise à jour des appels
+lors du déplacement de WelcomeScreen vers home_view. Les annonces de la suite
+et le risque de redéclarer ProfilePhoto après le travail avec l’agent sont clarifiés.
+
+Vérifications techniques réalisées sur une copie temporaire du projet Android :
+
+- Rejeu cumulatif avec 26 étapes compilées par `./gradlew --offline :app:compileDebugKotlin`,
+  en faisant évoluer les mêmes fichiers de la correction initiale à l’affichage
+  d’image. Les changements de disposition et le déplacement de packages sont inclus.
+- Exécution de l’exemple console des fonctions et contrôle de la logique du
+  presenter : scores 0/4, 3/4 et 4/4, première réponse définitive, absence de double
+  comptage, progression, fin, recommencement et liste vide.
+- Contrôle des 36 pages HTML : cibles locales, fragments, identifiants et références
+  des libellés ; chaîne des 35 leçons et réciprocité des liens précédent/suivant.
+  Analyse XML des SVG et vérification syntaxique des trois fichiers JavaScript.
+
+Ces vérifications ne valident pas une application complète produite par un élève.
+Les designs réalisés avec l’agent peuvent varier. CameraX et DataStore restent des
+intégrations guidées à réaliser dans le clone : seuls leurs extraits de modèle et
+contrat ont été compilés ici. Aucun fonctionnement caméra, sauvegarde ou cycle de
+vie sur appareil n’est attesté par cette relecture. Le rendu dans un navigateur,
+la navigation au clavier et l’exécution sous Windows restent à vérifier.
+Le dépôt Android de départ n’a pas été modifié par ce rejeu.
