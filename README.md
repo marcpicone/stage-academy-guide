@@ -820,7 +820,7 @@ documentation Android DataStore et fichiers spécifiques à l’app.
 ## Accueil — parcours principal et extensions
 
 La home distingue 27 pages principales (Git 2, IDE 4, code 14, LLM 6, bilan 1)
-et 7 extensions facultatives. Les anciennes cartes Actions & état, Debug & Logcat
+et 8 extensions facultatives. Les anciennes cartes Actions & état, Debug & Logcat
 et Responsabilités ne sont plus « À venir » : ces notions sont déjà traitées dans
 les sections existantes. Une entrée par section, sans raccourci vers Git page 2.
 
@@ -830,3 +830,16 @@ regroupées visuellement en animation, collections et profil/caméra/persistance
 le point d’entrée reste leur première page, avec les prérequis explicités.
 Ancres locales parcours/extensions, pas de progression enregistrée ou de nouvelle
 installation requise. Les compteurs décrivent les pages, pas les exercices réalisés.
+
+## Pour aller plus loin — page 8 : affichage des images
+
+`module_further_images_view/` compare ressource drawable et fichier photo, puis
+Fit/Crop, taille, proportions, découpe ronde et description accessible. Schéma SVG
+original explicitement illustratif et rendu en CSS, sans photo personnelle.
+ProfilePhoto reçoit un Painter déjà préparé ; il ne charge pas de fichier. La vue
+parente conserve les états absence/chargement/erreur et l’intégration existante.
+Aucun nouveau chargeur, package, accès caméra ou changement de sauvegarde imposé.
+Le composant fourni est un exemple de présentation à adapter, avec imports.
+Home à 27 pages principales et 8 extensions ; navigation profil ↔ images.
+Notes sans stockage, pas de lecture des fichiers Android par le site. Sources :
+documentation Android des images (chargement/personnalisation/optimisation).

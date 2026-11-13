@@ -192,8 +192,17 @@ Observer après arrêt du processus ; pas de sauvegarde de partie ou de cloud aj
 
 ## Accueil réorganisé
 
-La home distingue parcours principal (27 pages) et extensions facultatives (7).
+La home distingue parcours principal (27 pages) et extensions facultatives (8).
 Ne pas réintroduire les cartes « À venir » pour des thèmes déjà couverts. La carte
 code rend visibles cinq étapes sans modifier l’ordre des leçons. Conserver une
 entrée de début par section et les prérequis des extensions ; pas de progression
 implicite, nouveau raccourci Git page 2 ou renumérotation des en-têtes des leçons.
+
+## Extension affichage des images et compteurs
+
+`module_further_images_view/` termine la comparaison de présentation : source,
+Fit/Crop, dimensions, cercle et accessibilité. Le Painter est préparé par le
+chargeur existant ; ne pas présenter painterResource comme un lecteur de chemin
+photo. Le SVG est une illustration du guide. Aucun ajout de caméra/stockage.
+La home compte désormais 27 pages principales et 8 extensions ; conserver son
+organisation et adapter ces compteurs au nombre réel de pages.
