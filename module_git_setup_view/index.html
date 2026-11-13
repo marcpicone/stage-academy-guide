@@ -145,7 +145,7 @@
 <p>Cherche <code>On branch dev</code> (« sur la branche dev ») et <code>nothing to commit, working tree clean</code> (« aucun changement à enregistrer »). Le message exact peut varier selon la langue et la version.</p>
 <h3>Quel historique ai-je récupéré ?</h3>
 <pre class="command"><code>git --no-pager log --oneline -5</code></pre>
-<p><code>log</code> affiche l’historique ; <code>--oneline</code> résume chaque commit sur une ligne ; <code>-5</code> limite aux cinq derniers ; <code>--no-pager</code> évite d’ouvrir une visionneuse séparée. Retrouve le message du commit initial : <code>[Initial] Initial commit</code>. Le nombre de commits peut évoluer.</p>
+<p><code>log</code> affiche l’historique ; <code>--oneline</code> résume chaque commit sur une ligne ; <code>-5</code> limite aux cinq derniers ; <code>--no-pager</code> évite d’ouvrir une visionneuse séparée. Cherche le message initial <code>[Initial] Initial commit</code>. S’il n’apparaît pas dans les cinq dernières lignes, l’historique contient simplement davantage d’étapes : avec l’encadrant, augmente le nombre affiché. Le nombre de commits peut évoluer.</p>
 <h3>À quel dépôt GitHub ma copie est-elle reliée ?</h3>
 <pre class="command"><code>git remote -v</code></pre>
 <div class="terminal-example"><p class="terminal-label">Forme attendue — exemple à comparer, pas à exécuter</p><pre><samp data-command="remote">origin  https://github.com/TON_PSEUDO/stage_academy.git (fetch)
