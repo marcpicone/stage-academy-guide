@@ -901,3 +901,40 @@ APK présent au chemin enseigné, archive lisible avec manifeste et code DEX.
 Contrôles statiques : 37 pages HTML et chaîne de 36 leçons valides, liens/ancres
 et libellés vérifiés, `git diff --check` sans erreur. Le rendu navigateur, le
 clavier et les commandes Windows ne sont pas vérifiés ici ; aucun appareil lancé.
+
+
+## Pour aller plus loin — page 10 : Compose Desktop
+
+`module_further_desktop_view/` ouvre Kotlin/Compose à une fenêtre d’ordinateur,
+dans un projet compagnon distinct du quiz Android. Préparation guidée avec
+l’assistant officiel JetBrains, cible Desktop seule et fenêtre générée observée
+avant ajout de code. Les emplacements et commandes sont adaptés au modèle réel.
+
+Les extraits fournissent la même fonction isCorrectAnswer que la page fonctions,
+un DesktopQuiz à une question et l’assemblage main/application/Window. Package
+explicite, séparation du composable commun et du lanceur Desktop. Première réponse
+définitive, Réessayer, défilement et retour à l’état initial après relance ; pas de
+score, de reprise complète des MVP, de caméra, de stockage ou de module partagé
+entre les deux projets. Le code recopié n’est pas synchronisé automatiquement.
+
+Le lancement local ne produit pas un installateur ; les tâches de packaging
+Compose sont propres au système compatible. La page ne crée ni projet ni fenêtre,
+et les observations de l’élève restent manuelles. Notes sans envoi ni sauvegarde.
+Accueil à 27 pages principales et 10 extensions ; navigation Gradle ↔ Desktop.
+Sources : documentation officielle Kotlin/JetBrains, générateur, quickstart,
+relation Jetpack Compose/Compose Multiplatform et distributions natives.
+Python et les ressources restent à traiter séparément ; l’angle Python doit être
+rediscuté avec l’utilisateur avant réalisation.
+
+
+Vérifications de la page Desktop : extraits extraits du HTML puis compilés dans
+un projet JVM temporaire avec Kotlin 2.3.21, plugin Compose 1.9.3 et Material 3.
+Commande `:desktopApp:compileKotlin :desktopApp:tasks --all` réussie ; tâche run
+présente. Les fichiers compilés correspondent aux blocs du guide et la fonction
+isCorrectAnswer est identique à celle de la page fonctions. Les versions servent
+à cette vérification, pas de versions imposées au projet généré de l’élève.
+La configuration de contrôle est un projet JVM minimal, pas un rejeu du générateur.
+Contrôles statiques : 38 pages HTML et chaîne des 37 leçons, liens locaux, ancres
+et libellés valides ; `git diff --check` sans erreur. Aucune fenêtre Desktop
+lancée, aucun installateur produit ; rendu navigateur, clavier, Windows et Linux
+non vérifiés ici.

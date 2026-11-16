@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Réutiliser Kotlin et Compose dans une première fenêtre Desktop, avec une question et sa validation, dans un projet compagnon séparé du quiz Android.">
+    <title>Ton quiz dans une fenêtre Desktop · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="module_further_desktop_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="desktop-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 10</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Un autre terrain pour ce que tu connais</p>
+            <h1 id="titre">Ton quiz dans une fenêtre Desktop.</h1>
+            <p class="lead">Kotlin et Compose peuvent aussi servir à créer une application pour ordinateur. Réutilise une règle du quiz et affiche une question dans une vraie fenêtre.</p>
+            <p>Cette ouverture reprend les fonctions, les listes et l’état Compose. La page Gradle t’aide à reconnaître la construction. On prépare un petit projet compagnon : ton application Android reste ton projet principal.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#reutiliser">Ce qui reste</a><a href="#projet">Préparer</a><a href="#regle">La règle</a><a href="#interface">L’interface</a><a href="#fenetre">La fenêtre</a><a href="#observer">Observer</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="reutiliser" aria-labelledby="titre-reutiliser">
+                <p class="eyebrow">01 / Une autre plateforme</p>
+                <h2 id="titre-reutiliser">Tu ne repars pas de zéro.</h2>
+                <p><strong>Desktop</strong> signifie ici « application pour ordinateur » : Windows, macOS ou Linux. <strong>Compose Multiplatform</strong>, développé par JetBrains, reprend les principes de Compose pour plusieurs plateformes, dont Desktop.</p>
+                <div class="comparison"><table><caption>Relier l’expérience Android à Desktop</caption><thead><tr><th scope="col">Ce que tu connais</th><th scope="col">Dans cette expérience Desktop</th></tr></thead><tbody>
+                    <tr><th scope="row">Kotlin et la validation</th><td>La fonction qui compare deux textes garde ses paramètres et son résultat.</td></tr>
+                    <tr><th scope="row">Text, Button, Column et remember</th><td>Les mêmes idées permettent de décrire l’écran et son état.</td></tr>
+                    <tr><th scope="row">MainActivity et setContent</th><td>Un point d’entrée main et une Window accueillent l’interface.</td></tr>
+                    <tr><th scope="row">R, permissions Android, CameraX</th><td>Ces usages liés à Android demandent d’autres solutions sur ordinateur. Ils ne font pas partie de cette petite fenêtre.</td></tr>
+                </tbody></table></div>
+                <p>Notre séparation vue/logique devient utile : une règle qui reçoit des valeurs et retourne un résultat est plus facile à reprendre qu’un calcul mélangé aux outils Android. Une classe Kotlin peut aussi être réutilisable si ses dépendances le permettent.</p>
+                <p>Dans une application plus grande, on peut organiser du code réellement partagé entre plateformes. Ici, on recopie une petite fonction pour observer le principe ; les deux projets n’ont pas encore de source commune et leurs changements ne se synchronisent pas.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Plateforme · platform</h3><p>L’environnement visé par l’application, avec ses outils et ses possibilités. Android et un ordinateur de bureau ne fournissent pas tous les mêmes services.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Multiplatform · multiplateforme</h3><p>La possibilité de viser plusieurs plateformes. Cela ne signifie pas que tout le code fonctionne partout sans adaptation.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="projet" aria-labelledby="titre-projet">
+                <p class="eyebrow">02 / Un point de départ préparé avec l’encadrant</p>
+                <h2 id="titre-projet">Crée un projet compagnon qui lance déjà une fenêtre.</h2>
+                <p>Avec l’encadrant, utilise l’assistant officiel Kotlin Multiplatform dans un IDE compatible, ou le <a href="https://kmp.jetbrains.com/">générateur JetBrains</a>. La <a href="https://kotlinlang.org/docs/multiplatform/quickstart.html">procédure officielle</a> accompagne la préparation de l’IDE et de son extension Kotlin Multiplatform.</p>
+                <ol class="steps"><li>Crée <code>StageAcademyDesktop</code> dans un dossier voisin du clone Android, à l’extérieur de celui-ci.</li><li>Choisis Gradle et la cible <strong>Desktop avec Compose</strong>. Pour cette expérience, une seule cible suffit ; ne sélectionne pas Android, iOS, Web ou serveur.</li><li>Garde les versions compatibles produites par l’assistant. Si l’environnement n’est pas prêt, fais cette préparation avec l’encadrant avant d’essayer les blocs suivants.</li><li>Ouvre ce nouveau projet, attends sa préparation et lance la configuration Desktop générée. Une première fenêtre de démonstration doit s’ouvrir, puis se fermer normalement.</li><li>Retrouve le fichier qui contient <code>fun main</code> et <code>Window</code>, puis la fonction d’interface appelée dans cette fenêtre.</li></ol>
+                <p>Les noms des modules et dossiers dépendent du modèle généré. Tu peux rencontrer <code>desktopApp</code> pour le lanceur et <code>shared</code> pour du code commun, ou un module <code>composeApp</code> avec une cible JVM. Repère les rôles dans ton projet réel plutôt que de renommer ses dossiers pour copier un arbre.</p>
+                <details><summary>Je veux demander de l’aide à l’agent</summary><p>Ouvre l’agent dans le dossier du projet compagnon, puis cadre la préparation :</p><pre><code>Nous préparons une petite expérience Compose Desktop avec mon encadrant.
+Travaille uniquement dans StageAcademyDesktop, pas dans le clone Android.
+Utilise la documentation officielle JetBrains pour le modèle et les versions.
+Le projet utilise Gradle et vise seulement Desktop avec Compose et Material 3.
+Si le projet est déjà généré, lis-le et conserve sa configuration compatible.
+Fais d’abord fonctionner la fenêtre de démonstration, sans reprendre mon app entière.
+Indique le module Desktop, son point d’entrée, la fonction affichée,
+le dossier où ajouter notre composable et la commande de lancement.
+Distingue ce qui a compilé de la fenêtre réellement lancée et observée.</code></pre></details>
+                <aside class="expected"><strong>Point d’arrêt : la fenêtre générée fonctionne avant de poursuivre.</strong><p>Les blocs de cette page ajoutent une question à un projet Desktop préparé ; ils ne constituent pas à eux seuls toute sa configuration Gradle. Le guide ne génère et ne lance aucun projet.</p></aside>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>JVM</h3><p>Java Virtual Machine : l’environnement qui exécute cette application Desktop. Notre code Kotlin est compilé pour cet environnement.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Point d’entrée · entry point</h3><p>L’endroit où le programme commence. Ici, une fonction main prépare la fenêtre.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Source set · groupe de sources</h3><p>Des fichiers compilés pour une ou plusieurs cibles. commonMain peut contenir du code commun ; jvmMain ou desktopMain du code destiné à Desktop selon le modèle.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="regle" aria-labelledby="titre-regle">
+                <p class="eyebrow">03 / Une règle qui connaît seulement ses paramètres</p>
+                <h2 id="titre-regle">Reprends la fonction de validation.</h2>
+                <p>Dans le dossier de sources que l’encadrant vient de repérer, crée <code>DesktopQuiz.kt</code>. Si le modèle sépare le code commun du lanceur, le dossier <code>commonMain/kotlin</code> qui contient déjà l’interface convient à ce composable et à sa règle. Ne place pas Window dans ce dossier commun.</p>
+                <p>Le fichier commence par ce package. Il sert d’adresse pour retrouver nos fonctions depuis le lanceur :</p>
+                <pre id="quiz-package"><code>package fr.stageacademy.quizdesktop</code></pre>
+                <p>Après le package et les imports que nous ajouterons ensuite, reprends cette définition déjà rencontrée à la <a href="../module_code_functions_view/index.html#validation">page des fonctions</a>. Si l’agent l’a déjà ajoutée au même endroit, garde une seule définition.</p>
+                <pre id="desktop-validator"><code>fun isCorrectAnswer(
+    selectedAnswer: String,
+    correctAnswer: String,
+): Boolean {
+    val result: Boolean = selectedAnswer == correctAnswer
+    return result
+}</code></pre>
+                <p>Elle ne demande ni Activity, ni permission, ni accès à un appareil. Elle reçoit deux textes et retourne un Boolean. Son rôle reste le même sur Android et Desktop.</p>
+                <p>Cette expérience s’appuie volontairement sur une seule question. On ne déplace pas les MVP, la caméra ou le stockage du quiz complet : on vérifie d’abord une petite réutilisation que tu peux expliquer.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Package</h3><p>Un espace de noms pour organiser et retrouver le code. Ici, le lanceur pourra appeler fr.stageacademy.quizdesktop.DesktopQuiz.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="interface" aria-labelledby="titre-interface">
+                <p class="eyebrow">04 / Des composants familiers</p>
+                <h2 id="titre-interface">Affiche la question et ses trois choix.</h2>
+                <p>Ajoute les imports ci-dessous après le package, puis le composable après la fonction de validation, à l’extérieur de son bloc. Material 3 doit être disponible dans le module qui compile ce fichier ; si nécessaire, fais vérifier cette dépendance dans le projet généré, sans reprendre les plugins Android.</p>
+                <details><summary>Imports de DesktopQuiz.kt</summary><pre id="desktop-imports"><code>import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp</code></pre></details>
+                <pre id="desktop-quiz"><code>@Composable
+fun DesktopQuiz() {
+    val questionText: String = "Quel outil garde l’historique du code ?"
+    val choices: List&lt;String&gt; = listOf("Git", "Android", "Compose")
+    val correctAnswer: String = "Git"
+    var feedbackText: String by remember { mutableStateOf("Choisis une réponse.") }
+    var hasAnswered: Boolean by remember { mutableStateOf(false) }
+
+    MaterialTheme {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Column(
+                modifier = Modifier.fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                Text(
+                    text = "Mon quiz sur ordinateur",
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+                Text(text = questionText)
+                for (choice: String in choices) {
+                    Button(
+                        enabled = !hasAnswered,
+                        onClick = {
+                            if (!hasAnswered) {
+                                val isCorrect: Boolean = isCorrectAnswer(choice, correctAnswer)
+                                feedbackText = if (isCorrect) "Bonne réponse !" else "Réponse incorrecte."
+                                hasAnswered = true
+                            }
+                        },
+                    ) {
+                        Text(text = choice)
+                    }
+                }
+                Text(text = feedbackText)
+                Button(
+                    enabled = hasAnswered,
+                    onClick = {
+                        feedbackText = "Choisis une réponse."
+                        hasAnswered = false
+                    },
+                ) {
+                    Text(text = "Réessayer")
+                }
+            }
+        }
+    }
+}</code></pre>
+                <p>Les noms des composants ressemblent à ceux d’Android parce qu’on retrouve les API Compose. Le texte vient ici de valeurs Kotlin ; nous n’avons pas copié <code>R.string</code> ou le système de ressources Android.</p>
+                <p><code>hasAnswered</code> signifie « a répondu ». Le premier choix est définitif jusqu’à Réessayer : les boutons sont désactivés après la réponse. Ce petit écran ne compte pas de points et ne prétend pas être le portage de la partie complète.</p>
+                <p>Tu peux remplacer l’énoncé et les choix par une de tes questions, en conservant sa bonne réponse parmi les propositions. Adapte alors les vérifications de la fin de page.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Réutiliser une API</h3><p>Retrouver des composants et opérations connus. Cela demande quand même un projet et des dépendances adaptés à la nouvelle cible.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Surface</h3><p>Un conteneur Material qui fournit notamment un fond et une couleur de contenu cohérents avec le thème.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="fenetre" aria-labelledby="titre-fenetre">
+                <p class="eyebrow">05 / Accueillir l’interface sur ordinateur</p>
+                <h2 id="titre-fenetre">Branche le composable dans la fenêtre existante.</h2>
+                <p>Retourne au fichier du lanceur Desktop repéré au début. Dans le contenu de sa Window, remplace l’appel de démonstration, souvent <code>App()</code>, par :</p>
+                <pre id="desktop-call"><code>fr.stageacademy.quizdesktop.DesktopQuiz()</code></pre>
+                <p>Cette adresse complète retrouve la fonction même si le lanceur utilise un autre package. Garde le package, le nom du fichier d’entrée et la configuration Gradle générés.</p>
+                <details><summary>À quoi ressemble un point d’entrée Desktop simple ?</summary><p>Voici la forme minimale de l’assemblage. Lis-la pour repérer les rôles ; n’ajoute pas un deuxième main si le modèle en possède déjà un. La classe d’entrée configurée dans Gradle doit toujours correspondre à ton vrai fichier.</p><pre id="desktop-entry"><code>import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
+
+fun main() = application {
+    Window(
+        onCloseRequest = ::exitApplication,
+        title = "Stage Academy Desktop",
+    ) {
+        fr.stageacademy.quizdesktop.DesktopQuiz()
+    }
+}</code></pre></details>
+                <p><code>application</code> prépare l’application Desktop et <code>Window</code> sa fenêtre. <code>onCloseRequest</code> décrit l’action demandée à la fermeture ; <code>::exitApplication</code> transmet ici l’action de quitter.</p>
+                <ol class="steps"><li>Relance la configuration Desktop déjà utilisée pour la démonstration. Une vraie fenêtre du système doit afficher la question.</li><li>Dans Gradle, retrouve le module et ses tâches comme à la page précédente. Le modèle peut proposer <code>run</code> ou une configuration avec <code>hotRun</code>, qui permet aussi de recharger des changements pendant le développement.</li><li>Note la commande réellement utilisée dans ce projet. Si elle est <code>:desktopApp:run</code>, les deux formes ci-dessous conviennent. Si le module a un autre nom, adapte-le avec l’encadrant.</li></ol>
+                <div class="command-variants">
+                    <article><h3>Windows · PowerShell</h3><pre><code>.\gradlew.bat :desktopApp:run</code></pre></article>
+                    <article><h3>macOS / Linux · terminal</h3><pre><code>./gradlew :desktopApp:run</code></pre></article>
+                </div>
+                <p class="caption">Commandes d’exemple conditionnées au module et à la tâche repérés, depuis la racine du projet compagnon. Elles ne s’exécutent pas dans le clone Android. Une tâche run peut rester active jusqu’à la fermeture de la fenêtre.</p>
+                <details><summary>Et le fichier .exe sous Windows ?</summary><p>Lancer une fenêtre depuis le projet et fabriquer un installateur sont deux étapes. Le plugin Compose peut préparer des distributions adaptées au système. Avec ses tâches de packaging, un installateur Windows se construit sur Windows ; un build macOS ne produit pas automatiquement l’installateur Windows. Cette première page s’arrête au lancement local ; consulte ensuite la <a href="https://kotlinlang.org/docs/multiplatform/compose-native-distribution.html">documentation des distributions</a> avec l’encadrant.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Window · fenêtre</h3><p>La fenêtre de l’application sur l’ordinateur. Elle contient ici notre composable.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Distribution / packaging</h3><p>Préparer les fichiers pour installer et utiliser l’application sur une autre machine. Le lancement pendant le développement ne réalise pas à lui seul cette étape.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="observer" aria-labelledby="titre-observer">
+            <p class="eyebrow">06 / Prévoir, observer et raconter</p>
+            <h2 id="titre-observer">Explique ce que tu as réutilisé.</h2>
+            <ol class="steps"><li>Au lancement, retrouve l’énoncé, trois choix et « Choisis une réponse. ». Réessayer est désactivé.</li><li>Clique sur Android : le message devient « Réponse incorrecte. » et les choix se désactivent. La réponse ne peut pas être remplacée par un autre clic.</li><li>Clique sur Réessayer, puis sur Git : observe « Bonne réponse ! » et les mêmes règles de désactivation.</li><li>Redimensionne la fenêtre, y compris en hauteur. Vérifie que les textes restent lisibles et que le contenu peut défiler s’il manque de place.</li><li>Ferme puis relance : l’expérience repart sans réponse. remember conserve ici un état en mémoire pendant la composition, pas une sauvegarde sur disque.</li><li>Montre l’appel entre le clic, isCorrectAnswer et le message. Compare la fonction avec sa version Android, puis montre le point d’entrée propre à Desktop.</li></ol>
+            <details><summary>La fonction de validation fonctionne-t-elle toujours sans fenêtre ?</summary><p>Oui : elle peut recevoir les mêmes textes dans un programme console. C’est l’interface qui choisit ici quand l’appeler et comment montrer son résultat.</p></details>
+            <details><summary>Pourquoi ne pas copier tout MainActivity.kt ?</summary><p>Parce qu’il contient aussi le lancement et des outils Android. On reprend les parties adaptées à Desktop et on remplace l’accueil de l’interface par une fenêtre. Le reste d’un portage demanderait d’examiner les dépendances une par une.</p></details>
+            <label class="draft-label" for="desktop-observations">Mes observations</label>
+            <textarea id="desktop-observations" rows="8" spellcheck="true">Projet compagnon et cible préparés :
+Fichier du point d’entrée et dossier de DesktopQuiz.kt :
+Configuration ou commande de lancement réelle :
+Fonction reprise sans changement :
+Réponse incorrecte / Réessayer / réponse correcte :
+Redimensionnement et fermeture :
+Ce qui dépend d’Android et ce qui dépend de Desktop :
+Ce qui reste à vérifier :</textarea>
+            <fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue le quiz Android et son projet compagnon Desktop.</span></label><label><input type="checkbox"><span>Je peux expliquer la fonction réutilisée et le rôle de Window.</span></label><label><input type="checkbox"><span>J’ai lancé et observé la fenêtre sur mon ordinateur.</span></label><label><input type="checkbox"><span>Je distingue une compilation, un lancement local et un installateur.</span></label></fieldset>
+            <p class="caption">Confirmations personnelles et notes sans envoi ni sauvegarde. Le guide n’installe aucun IDE, ne génère pas le projet et n’exécute pas Compose. Copie tes observations avant de fermer ou recharger la page. Un lancement sur macOS ne vaut pas une vérification Windows ou Linux.</p>
+            <p class="closing">Complète ton <a href="../module_review_view/index.html">bilan</a> avec cette ouverture : un même langage, des composants familiers, une règle réutilisée et un autre point d’entrée.</p>
+        </section>
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_gradle_view/index.html" rel="prev"><span>← Précédent</span><span>Gradle : du code à l’application</span></a></nav>
+        <footer class="lesson-footer"><span>Références officielles JetBrains :</span><a href="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-and-jetpack-compose.html">Compose sur plusieurs plateformes</a><a href="https://kotlinlang.org/docs/multiplatform/quickstart.html">Préparer et lancer le projet</a><a href="https://kmp.jetbrains.com/">Générateur de projet</a><a href="https://kotlinlang.org/docs/multiplatform/compose-native-distribution.html">Lancement et distributions</a></footer>
+    </main>
+</div>
+</body>
+</html>
