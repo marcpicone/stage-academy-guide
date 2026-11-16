@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Découvrir Codex dans le terminal et lui donner son quiz Android comme référence pour reprendre les questions, la progression et le score dans le projet Compose Desktop.">
+    <title>Utiliser Codex dans le terminal · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="module_further_codex_cli_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="cli-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 11</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Tes deux projets, une nouvelle façon de guider l’agent</p>
+            <h1 id="titre">Utiliser Codex dans le terminal.</h1>
+            <p class="lead">Tu as un quiz Android et une première fenêtre Desktop. Demande maintenant à Codex de lire le premier comme référence, puis d’en reprendre le fonctionnement dans le second.</p>
+            <p>Le but : retrouver les questions, la progression, le score et le recommencement sur ordinateur. Le projet Android sert de référence et reste inchangé.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#cli">La CLI</a><a href="#preparer">Préparer</a><a href="#demarrer">Démarrer</a><a href="#lire">Faire lire</a><a href="#transferer">Transférer</a><a href="#verifier">Comparer</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="cli" aria-labelledby="titre-cli">
+                <p class="eyebrow">01 / Un outil que tu peux lancer par une commande</p>
+                <h2 id="titre-cli">Une CLI s’utilise depuis un terminal.</h2>
+                <p><strong>CLI</strong> signifie <strong>Command Line Interface</strong>, « interface en ligne de commande ». Au lieu de commencer par un bouton dans une application, tu écris une commande dans un terminal pour demander du travail à un outil.</p>
+                <p>Tu connais déjà cette idée avec <code>git status</code> et les commandes Gradle. <strong>Codex CLI</strong> est l’outil Codex utilisable dans le terminal : il peut examiner le code local, proposer des changements et utiliser les commandes du projet selon les accès disponibles.</p>
+                <p>Le terminal accueille ces outils. Quand tu démarres Codex, une interface de conversation apparaît à l’intérieur : tu peux alors écrire tes demandes en français, comme avec un agent dans une app desktop.</p>
+                <div class="comparison"><table><caption>Trois choses à écrire à des endroits différents</caption><thead><tr><th scope="col">Exemple</th><th scope="col">Où l’écrire ?</th><th scope="col">À quoi cela sert ?</th></tr></thead><tbody>
+                    <tr><th scope="row"><code>codex</code></th><td>Dans le terminal, avant la conversation Codex.</td><td>Démarrer l’outil.</td></tr>
+                    <tr><th scope="row"><code>/status</code></th><td>Dans la zone de saisie de Codex.</td><td>Consulter l’état et les réglages de la session.</td></tr>
+                    <tr><th scope="row">« Explique où le score est calculé. »</th><td>Dans cette même conversation Codex.</td><td>Donner une demande à l’agent : un prompt.</td></tr>
+                </tbody></table></div>
+                <p>La CLI change l’interface utilisée pour travailler. Elle ne remplace pas le besoin de donner du contexte, de comprendre les changements et d’observer leur résultat.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Terminal</h3><p>La fenêtre dans laquelle tu écris des commandes et lis leurs résultats. Plusieurs outils peuvent s’y succéder.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Commande interne · slash command</h3><p>Une commande de l’interface Codex qui commence par /. Elle n’est pas une commande Git ou une instruction Kotlin.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Session</h3><p>La conversation en cours avec l’agent, son contexte et ses réglages. Ne suppose pas qu’elle connaît automatiquement tes anciens échanges dans une autre interface.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="preparer" aria-labelledby="titre-preparer">
+                <p class="eyebrow">02 / Une référence et une destination</p>
+                <h2 id="titre-preparer">Retrouve tes deux projets avant de demander le transfert.</h2>
+                <p>Utilise ton <strong>clone Android construit pendant le cours</strong>, avec sa partie complète. Le dépôt de départ qui ne contient encore que le bouton « Click me » ne peut pas servir de référence pour un quiz terminé.</p>
+                <p>Le projet Desktop est celui de la page précédente : une fenêtre avec une question et une validation. Les deux versions doivent déjà se lancer avant ce travail, pour distinguer un problème existant d’un effet du transfert.</p>
+                <div class="project-roles"><article><h3>Quiz Android · référence</h3><p>Lire les questions, les règles et l’organisation qui existent réellement.</p><p><strong>Aucune modification dans ce projet.</strong></p></article><article><h3>StageAcademyDesktop · destination</h3><p>Reprendre la logique et l’assembler à une interface adaptée à l’ordinateur.</p><p><strong>Les changements sont réalisés ici.</strong></p></article></div>
+                <ol class="steps"><li>Avec l’encadrant, retrouve le chemin complet de chaque dossier sur ton ordinateur. Une adresse GitHub ne désigne pas directement ces fichiers locaux.</li><li>Enregistre les fichiers et conserve une version de départ dans Git. Dans un terminal de chaque projet, lis <code>git status</code> et note la branche ainsi que les éventuels changements déjà présents.</li><li>Dans Desktop, crée une branche pour le transfert selon notre convention. Par exemple : <code>git switch -c ab/transfer_quiz_logic</code>, en remplaçant ab par tes initiales.</li><li>Garde ces chemins et l’état initial à portée de main pour les fournir à Codex.</li></ol>
+                <details><summary>Le projet Desktop n’est pas encore suivi par Git</summary><p>Fais préparer avec l’encadrant son historique initial et un gitignore adapté au projet généré, puis vérifiez un premier commit avant la branche de transfert. La page sur <a href="../module_ide_share_view/index.html">le partage depuis l’IDE</a> rappelle les repères de branche, diff et commit. Ne supprime pas de travail pour obtenir un état vide.</p></details>
+                <p>Si les projets possèdent déjà des consignes comme <code>AGENTS.md</code>, fais-les repérer. Le rôle « référence Android / destination Desktop » doit rester explicite dans la demande ; une consigne propre à Android peut demander une adaptation dans Desktop.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Chemin complet · absolute path</h3><p>L’adresse complète d’un dossier sur l’ordinateur, depuis le disque ou la racine du système. Elle dépend de ta machine.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Point de départ Git</h3><p>Une version enregistrée et un état connus avant la tâche. Ils permettent de relire les changements de l’agent.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="demarrer" aria-labelledby="titre-demarrer">
+                <p class="eyebrow">03 / Entrer dans le bon dossier</p>
+                <h2 id="titre-demarrer">Démarre Codex depuis le projet Desktop.</h2>
+                <p>L’installation et l’accès au compte sont préparés avec l’encadrant. La <a href="https://learn.chatgpt.com/docs/codex/cli">documentation officielle de Codex CLI</a> donne les méthodes d’installation pour Windows, macOS et Linux. Choisissez celle adaptée à l’ordinateur ; cette page ne l’installe pas.</p>
+                <p>Dans un terminal normal, vérifie d’abord que la commande est disponible :</p>
+                <pre id="cli-version"><code>codex --version</code></pre>
+                <p>Un numéro de version doit apparaître. Si la commande est inconnue, fais vérifier l’installation avec l’encadrant ; il peut être nécessaire de rouvrir le terminal après celle-ci.</p>
+                <p>Remplace <code>CHEMIN_COMPLET_DU_PROJET_DESKTOP</code> par le vrai chemin du dossier. Garde les guillemets, notamment si ce chemin contient des espaces. Les commandes suivantes conviennent dans PowerShell et dans un terminal macOS/Linux :</p>
+                <pre id="cli-start"><code>cd "CHEMIN_COMPLET_DU_PROJET_DESKTOP"
+pwd
+codex</code></pre>
+                <p><code>cd</code> change de dossier ; <code>pwd</code> affiche celui dans lequel tu te trouves. Vérifie le résultat avant de lancer Codex. Au premier démarrage, suis la connexion proposée avec le compte et l’accès préparés par l’encadrant.</p>
+                <p>Quand la conversation Codex est ouverte, utilise ces commandes internes une à la fois :</p>
+                <div class="file-list"><article><h3><code>/permissions</code> : commencer par lire</h3><p>Avec l’encadrant, choisis le mode de lecture seule, nommé Read Only dans la documentation. Nous allons d’abord explorer, sans demander de modification. Les options disponibles dépendent de la version et de la configuration.</p></article><article><h3><code>/status</code> : retrouver le cadre de la session</h3><p>Lis les réglages et les dossiers autorisés en écriture. Vérifie que la destination de travail est bien Desktop. Ces accès sont des réglages de l’outil ; écrire une consigne dans le prompt ne les configure pas à lui seul.</p></article><article><h3><code>/quit</code> : revenir au terminal</h3><p>Quand Codex ne travaille plus, cette commande quitte son interface. Tu retrouves le terminal pour lancer toi-même Git ou Gradle. Les changements déjà écrits dans les fichiers ne sont pas annulés en quittant.</p></article></div>
+                <details><summary>Je ne sais plus si je suis dans le terminal ou dans Codex</summary><p>Repère l’interface et la zone de saisie. Les phrases destinées à l’agent et les commandes commençant par / se saisissent dans Codex. Pour exécuter toi-même une commande comme git status, utilise un autre terminal ou quitte Codex. Tu peux garder un terminal pour l’agent et un autre pour tes vérifications.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Dossier de travail · working directory</h3><p>Le dossier depuis lequel on travaille. Ici, il désigne la destination Desktop, pas le clone Android ni le dossier parent des deux projets.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Lecture seule · read only</h3><p>Un mode prévu pour examiner le projet avant de demander des changements. Les permissions se vérifient dans l’outil avec l’encadrant.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="lire" aria-labelledby="titre-lire">
+                <p class="eyebrow">04 / Donner une référence de code précise</p>
+                <h2 id="titre-lire">Fais retrouver les règles avant de les transférer.</h2>
+                <p>Dans le prompt ci-dessous, remplace les indications entre crochets par tes chemins complets. Envoie-le dans la conversation Codex, pas comme une commande du terminal.</p>
+                <pre id="analysis-prompt"><code>Je poursuis mon quiz Kotlin sur ordinateur.
+Référence Android : [chemin complet de mon clone Android].
+Destination Desktop : [chemin complet de StageAcademyDesktop].
+
+Commence par lire les deux projets sans modifier de fichier.
+Lis leurs consignes et indique les fichiers effectivement consultés.
+Dans Android, retrouve les questions, la validation, la progression,
+le score, l’écran de résultat et le recommencement.
+Dans Desktop, retrouve le point d’entrée et la question de démonstration.
+
+Explique ce qui peut être repris et ce qui dépend d’Android.
+Propose les fichiers à créer ou adapter côté Desktop et les vérifications utiles.
+Garde la séparation vue/logique et les contrats déjà utiles au quiz.
+Le projet Android sert uniquement de référence et doit rester inchangé.
+Si tu ne peux pas lire un chemin, signale-le sans inventer son contenu.</code></pre>
+                <p>Lis la réponse avec l’encadrant. Ouvre au moins un fichier cité pour les données, un pour les règles et celui de l’interface Desktop. Retrouves-tu les noms et le comportement décrits ?</p>
+                <p>Dans la version du cours, tu peux reconnaître <code>Question</code>, <code>QuizContract</code> et <code>QuizPresenter</code>. Si ton projet a évolué avec l’agent, les noms ou emplacements peuvent différer : c’est son code actuel qui sert de référence.</p>
+                <details><summary>Codex ne peut pas lire le projet Android voisin</summary><p>Vérifie d’abord le chemin. Si l’accès reste bloqué, fais examiner les possibilités de lecture avec l’encadrant ou transmets le contenu des fichiers nécessaires dans la conversation. <code>--add-dir</code> ajoute un accès en écriture ; ce n’est pas une simple option pour donner une référence à lire. Le clone Android ne doit pas devenir une deuxième destination à modifier.</p></details>
+                <details><summary>La proposition reprend aussi la caméra et le profil</summary><p>Recentre la demande sur la partie quiz : questions, réponses, progression, score, résultat et recommencement. Le profil et sa photo font appel à d’autres besoins de plateforme ; ils ne sont pas nécessaires à cet objectif.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Référence</h3><p>Le code existant dont on veut comprendre et reprendre le fonctionnement. Ce n’est pas une autorisation de le modifier.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Portage · port</h3><p>Adapter un programme à une autre plateforme. Certaines parties se reprennent facilement ; d’autres demandent une solution propre à la destination.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="transferer" aria-labelledby="titre-transferer">
+                <p class="eyebrow">05 / Une demande de réalisation séparée</p>
+                <h2 id="titre-transferer">Fais évoluer le quiz Desktop.</h2>
+                <p>Quand tu comprends la proposition, vérifie avec l’encadrant les permissions nécessaires pour travailler dans Desktop. Utilise <code>/permissions</code> pour permettre les modifications dans cet espace et <code>/status</code> pour relire le cadre. Lis les demandes d’accès ou de commande dans leur contexte.</p>
+                <p>Envoie ensuite la demande de réalisation dans la même conversation. Adapte-la si tes règles diffèrent de celles du cours :</p>
+                <pre id="implementation-prompt"><code>Réalise le transfert proposé dans le projet Desktop uniquement.
+Reprends les vraies questions et les règles du quiz Android :
+- une question à la fois, sans passer à la suivante avant une réponse ;
+- premier choix définitif, un point si correct, aucun sinon ;
+- aucun double comptage et aucune correction du choix après réponse ;
+- résultat final et recommencement à la première question avec score à zéro.
+
+Conserve le point d’entrée et la configuration Desktop compatibles.
+Adapte la mini-interface existante pour utiliser cette logique,
+sans garder un deuxième circuit de validation en parallèle.
+Garde des noms anglais, une logique séparée de la vue et les contrats utiles.
+Ne reprends pas MainActivity, CameraX, le profil ou son stockage Android.
+Préserve les choix de présentation Desktop déjà réalisés quand ils conviennent.
+
+Avance par petites étapes qui compilent. Utilise les tâches Gradle du vrai projet.
+Ne modifie pas le projet Android et ne fais pas de commit ou de push.
+À la fin, explique les fichiers modifiés, les vérifications exécutées
+et ce qui doit encore être observé dans la fenêtre.</code></pre>
+                <p>Observe les étapes et les messages. Si l’agent propose une modification inattendue, demande-lui son rôle avant de continuer. Tu peux lui demander de reprendre une étape précise plutôt que de lui donner une nouvelle demande générale de refonte.</p>
+                <aside class="expected"><strong>Résultat attendu : le déroulement de ton quiz dans une fenêtre Desktop.</strong><p>Le quiz complet remplace l’expérience à une question de la page précédente. Une seule logique de partie doit piloter les réponses et le score.</p></aside>
+                <p>Pour cette expérience, les données et la logique adaptées sont des copies dans le projet Desktop. Si tu modifies ensuite une question dans Android, elle ne sera pas actualisée automatiquement sur ordinateur. Organiser un module réellement partagé sera une autre étape possible.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Adapter / partager</h3><p>Adapter une copie permet de découvrir le portage. Partager une même source entre plateformes demande une organisation commune des projets.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="verifier" aria-labelledby="titre-verifier">
+            <p class="eyebrow">06 / Le résultat doit se voir et se relire</p>
+            <h2 id="titre-verifier">Compare les deux quiz, puis garde ton travail.</h2>
+            <ol class="steps"><li>Dans Codex, utilise <code>/diff</code> pour lire les changements. Retrouve les données, les règles et leur branchement à la vue ; demande une explication d’un passage que tu ne comprends pas.</li><li>Dans un terminal Desktop séparé, lis <code>git status</code> et <code>git diff</code>. Pense aussi aux nouveaux fichiers indiqués par status, qui ne sont pas encore suivis.</li><li>Dans le clone Android, relis status et diff : compare-les à l’état de départ. Aucun changement de cette tâche ne doit y avoir été ajouté.</li><li>Construis Desktop avec la tâche identifiée dans ce projet, puis lance sa fenêtre. Distingue la compilation annoncée par l’agent et le lancement que tu observes.</li></ol>
+            <div class="comparison"><table><caption>Vérifications dans la fenêtre Desktop — à adapter à tes questions</caption><thead><tr><th scope="col">Situation</th><th scope="col">Ce que tu dois retrouver</th></tr></thead><tbody>
+                <tr><th scope="row">Début de partie</th><td>Première question, score à zéro, choix activés et suite indisponible avant une réponse.</td></tr>
+                <tr><th scope="row">Une réponse correcte</th><td>Un seul point, choix désactivés, progression ensuite possible.</td></tr>
+                <tr><th scope="row">Une réponse incorrecte</th><td>Aucun point ; impossible de la remplacer par la bonne réponse sur cette même question.</td></tr>
+                <tr><th scope="row">Fin de partie</th><td>Les questions se sont succédé dans le bon ordre. Le résultat correspond aux choix faits.</td></tr>
+                <tr><th scope="row">Zéro / toutes / une partie des réponses correctes</th><td>Des totaux attendus calculés avant la partie, selon le vrai nombre de questions. Aucune règle n’impose de rester à quatre questions.</td></tr>
+                <tr><th scope="row">Recommencer</th><td>Première question et score nul, sans état de réponse restant de la partie précédente.</td></tr>
+            </tbody></table></div>
+            <p>Compare aussi les énoncés et les choix avec Android. Pour ce transfert de logique, les fenêtres n’ont pas à être visuellement identiques. Vérifie toutefois que les textes longs, les boutons et le résultat restent accessibles en redimensionnant la fenêtre.</p>
+            <p>Après relecture et observations avec l’encadrant, fais un commit des changements Desktop utiles, selon la méthode déjà apprise. Un message possible est <code>[DesktopQuiz] Transfer quiz rules from Android</code>. Si tu veux ensuite partager ton projet, vérifie sa destination GitHub avant de pousser.</p>
+            <details><summary>« Tout fonctionne » dans la réponse de l’agent suffit-il ?</summary><p>Demande quelles commandes ont été exécutées et quels comportements ont réellement été observés. Une compilation réussie ne prouve pas que le score ou le recommencement fonctionne dans la fenêtre. Note les cas que tu n’as pas encore reproduits.</p></details>
+            <label class="draft-label" for="cli-observations">Mes observations</label>
+            <textarea id="cli-observations" rows="9" spellcheck="true">Version de Codex CLI et dossier de travail :
+Chemin Android de référence / chemin Desktop de destination :
+Fichiers repérés pour les données et les règles :
+Une adaptation nécessaire à Desktop et sa raison :
+Commande de compilation et résultat :
+Parties observées, résultats prévus et obtenus :
+Recommencement et redimensionnement :
+État Android avant et après / commit Desktop retenu :
+Ce qui reste à vérifier :</textarea>
+            <fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue terminal, CLI, commande interne et prompt.</span></label><label><input type="checkbox"><span>J’ai démarré Codex dans Desktop et fourni Android comme référence.</span></label><label><input type="checkbox"><span>Je peux retrouver une règle transférée et expliquer son usage par la vue.</span></label><label><input type="checkbox"><span>J’ai comparé les changements Git et observé une partie ainsi qu’un recommencement.</span></label></fieldset>
+            <p class="caption">Notes et confirmations personnelles, sans envoi ni sauvegarde. Le guide ne lance pas Codex, ne se connecte pas à un compte et ne lit ni ne modifie tes projets. Les prompts sont des exemples à adapter ; les résultats dépendent de leur code actuel et du travail réalisé avec l’encadrant.</p>
+            <p class="closing">Complète ton <a href="../module_review_view/index.html">bilan</a> : explique quelle référence tu as fournie, ce que l’agent a repris, ce qu’il a adapté et comment tu as vérifié son travail.</p>
+        </section>
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_desktop_view/index.html" rel="prev"><span>← Précédent</span><span>Ton quiz dans une fenêtre Desktop</span></a></nav>
+        <footer class="lesson-footer"><span>Documentation officielle OpenAI :</span><a href="https://learn.chatgpt.com/docs/codex/cli">Installation et premiers pas</a><a href="https://learn.chatgpt.com/docs/cli/slash-commands">Commandes dans Codex</a><a href="https://learn.chatgpt.com/docs/cli/reference">Options de la CLI</a><a href="https://learn.chatgpt.com/docs/agent-approvals-security">Accès et permissions</a></footer>
+    </main>
+</div>
+</body>
+</html>
