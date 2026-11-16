@@ -1015,3 +1015,50 @@ validées (ressources, liens locaux, ancres, libellés, précédent/suivant).
 `git diff --check` sans erreur. Aucun projet Android/Desktop modifié ; rendu
 navigateur, clavier et exécution Windows non vérifiés ici. Les densités Android
 ne sont ni introduites ni générées par cette première page.
+
+
+## Pour aller plus loin — page 13 : images et densités Android
+
+`module_further_density_view/` relie pixels, dp et densité à une illustration
+d’accueil de 96 dp. Schéma CSS explicitement illustratif, table des cinq variantes
+96/144/192/288/384 px, même nom de fichier et une seule référence R.drawable.
+Les autres densités existent ; les cinq dossiers sont le périmètre de l’exercice.
+Images bitmap distinguées des vectoriels, photos de profil et icônes de lancement.
+
+Le script téléchargeable generate_android_images.py réutilise resize_image.py de
+la page précédente ; les deux fichiers doivent être côte à côte dans l’outil.
+PNG carré ≥384 px, sortie nouvelle, boucle sur un dictionnaire de tailles.
+Génération d’abord dans un dossier séparé, contrôle des fichiers puis copie
+accompagnée dans app/src/main/res. Une interruption peut laisser une sortie partielle.
+Ajout Image Compose décoratif dans l’accueil réel, règles du quiz inchangées.
+
+ImageMagick facultatif : commande magick avec réduction seulement, proportions
+conservées et nouveau nom choisi. Les refus de réécriture du script ne s’y
+transfèrent pas ; uv ne fournit pas ce programme externe. subprocess comme piste
+pour un autre outillage, sans deuxième implémentation imposée. Pas de JS, de
+génération ou de lecture des images de l’élève par le navigateur.
+Home à 27 pages principales et 13 extensions ; navigation Python ↔ densités.
+Sources : documentation officielle Android ressources/densités/Compose,
+Pillow et ImageMagick. Observations sur plusieurs configurations avec l’encadrant,
+cas non reproduits explicitement laissés non vérifiés.
+
+
+Vérifications réelles : exécution des deux scripts téléchargés côte à côte avec
+uv/Pillow 13.0.0 sur une image synthétique 512×512. Cinq PNG RGBA de dimensions
+96/144/192/288/384, transparence conservée, chemins avec espaces. Refus vérifiés
+pour sortie existante et sources petite, rectangulaire, non-PNG, absente ou
+illisible, sans création de dossier de résultat pour ces sources invalides.
+Sources et sorties existantes inchangées par comparaison SHA-256. ImageMagick
+exécuté sur les fichiers temporaires : réduction à 96 px et absence d’agrandissement.
+
+Les cinq ressources et le bloc Compose extrait de la page ont été compilés dans
+la copie Android temporaire avec `./gradlew --offline :app:assembleDebug` : succès.
+L’APK est lisible et contient les cinq variantes dans leurs dossiers de densité.
+Cette vérification ne démontre pas leur sélection ou leur rendu sur appareil.
+Aucun fichier du vrai dépôt Android de départ n’a été modifié.
+
+Contrôles du guide : 41 pages HTML, chaîne des 40 leçons, liens/ancres/libellés
+valides ; code affiché identique au générateur téléchargeable, syntaxe Python,
+structure HTML et tokens CSS valides ; `git diff --check` sans erreur. Rendu
+navigateur, clavier, exécution Windows et affichage sur plusieurs densités non
+vérifiés ici. Les images de contrôle sont synthétiques et restent temporaires.

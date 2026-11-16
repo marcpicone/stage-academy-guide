@@ -192,7 +192,7 @@ Observer après arrêt du processus ; pas de sauvegarde de partie ou de cloud aj
 
 ## Accueil réorganisé
 
-La home distingue parcours principal (27 pages) et extensions facultatives (12).
+La home distingue parcours principal (27 pages) et extensions facultatives (13).
 Ne pas réintroduire les cartes « À venir » pour des thèmes déjà couverts. La carte
 code rend visibles cinq étapes sans modifier l’ordre des leçons. Conserver une
 entrée de début par section et les prérequis des extensions ; pas de progression
@@ -204,7 +204,7 @@ implicite, nouveau raccourci Git page 2 ou renumérotation des en-têtes des le�
 Fit/Crop, dimensions, cercle et accessibilité. Le Painter est préparé par le
 chargeur existant ; ne pas présenter painterResource comme un lecteur de chemin
 photo. Le SVG est une illustration du guide. Aucun ajout de caméra/stockage.
-La home compte désormais 27 pages principales et 12 extensions ; conserver son
+La home compte désormais 27 pages principales et 13 extensions ; conserver son
 organisation et adapter ces compteurs au nombre réel de pages.
 
 
@@ -216,7 +216,7 @@ qui se construit déjà dans l’IDE ; aucune intégration caméra/profil requis
 Commandes distinctes PowerShell et macOS/Linux, pas de mise à jour des versions,
 nouvelle bibliothèque, signature release ou publication. Construire n’installe
 ni ne lance l’app. La page ne lance rien ; les observations sont personnelles.
-Home à 27 pages principales et 12 extensions, navigation images ↔ Gradle.
+Home à 27 pages principales et 13 extensions, navigation images ↔ Gradle.
 Les ressources restent à traiter séparément sur demande. L’angle Python est
 désormais validé : outillage personnel, bibliothèques, uv et premier redimensionnement Pillow.
 
@@ -232,7 +232,7 @@ Séparer le composable/règle et le main/Window Desktop, conserver le point d’
 configuré. Commandes adaptées au vrai module, distinction lancement/installateur,
 aucune promesse de packaging Windows depuis macOS. Pas de migration du dépôt
 Android ni création d’un projet élève par le guide. Home à 27 pages principales
-et 12 extensions, navigation Gradle ↔ Desktop. L’ouverture Python suit la page CLI.
+et 13 extensions, navigation Gradle ↔ Desktop. L’ouverture Python suit la page CLI.
 
 
 ## Extension Codex CLI et transfert du quiz
@@ -247,7 +247,7 @@ Transfert des questions, progression, premier choix définitif, score et restart
 avec une seule logique de partie. Aucun portage caméra/profil, nouveau dépôt ou
 module commun imposé. Diff et état Git des deux projets comparés, observations
 Desktop adaptées aux données de l’élève. Les prompts n’exécutent rien sur le site.
-Home à 27 pages principales et 12 extensions ; navigation Desktop ↔ Codex CLI.
+Home à 27 pages principales et 13 extensions ; navigation Desktop ↔ Codex CLI.
 Python s’ouvre ensuite sur les bibliothèques, uv et Pillow.
 
 
@@ -262,6 +262,23 @@ ou de versions figées sans lock. Aucun ImageMagick nécessaire à cette étape.
 Travail dans un dossier distinct des projets Android/Desktop, source originale
 conservée, sortie existante refusée, taille maximale positive et chemin PNG explicites.
 Conventions Python snake_case expliquées, cadre de lecture fourni sans enseigner
-toute la syntaxe. L’agent peut aider à expliquer avant de modifier. Pas de densités
-Android ou de génération des cinq variantes avant la prochaine page demandée.
-Home à 27 pages principales et 12 extensions ; navigation CLI ↔ Python.
+toute la syntaxe. L’agent peut aider à expliquer avant de modifier. Les densités
+Android et les cinq variantes sont abordées dans la page suivante,
+pas dans cette première manipulation.
+Home à 27 pages principales et 13 extensions ; navigation CLI ↔ Python.
+
+
+## Extension densités Android et génération des variantes
+
+`module_further_density_view/` distingue px, dp, densité et taille d’écran. Une
+illustration bitmap carrée de 96 dp, cinq variantes mdpi/hdpi/xhdpi/xxhdpi/xxxhdpi
+de 96/144/192/288/384 px. Le script generate_android_images.py importe le helper
+resize_image.py téléchargé à la page précédente ; les deux restent côte à côte.
+Source PNG carrée ≥384 px, destination nouvelle, vérifications avant génération.
+Sortie de travail séparée puis copie accompagnée dans app/src/main/res, sans
+écraser les autres ressources. Une seule référence R.drawable côté accueil ;
+bloc Image fourni et décoratif. Pas de photo du profil ou d’icône de lancement.
+ImageMagick est une alternative facultative en CLI, pas une dépendance installée
+par uv ; sa commande ne reprend pas les gardes du script. Distinguer fichiers
+générés, compilation et observation sur plusieurs densités. Schéma CSS illustratif.
+Home à 27 pages principales et 13 extensions ; navigation Python ↔ densités.
