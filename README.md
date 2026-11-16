@@ -977,3 +977,41 @@ valides. Contrôle des 39 pages HTML et de la chaîne des 38 leçons : ressource
 ancres, libellés et précédent/suivant valides ; `git diff --check` sans erreur.
 Aucun transfert Android vers Desktop réalisé, aucune installation/connexion ou
 fenêtre observée ; rendu navigateur, clavier et exécution Windows non vérifiés.
+
+
+## Pour aller plus loin — page 12 : Python, bibliothèques et uv
+
+`module_further_python_view/` introduit Python par l’outillage personnel :
+bibliothèque standard, écosystème PyPI, rôles de Pillow et uv. Script fourni et
+téléchargeable resize_image.py avec métadonnées inline Python/Pillow ; contenu
+identique au bloc de code du cours. Installation uv accompagnée par la doc officielle.
+
+Exercice dans un dossier de travail séparé : source PNG, chemin de sortie et
+limite en pixels. thumbnail conserve les proportions, ne crée pas d’agrandissement
+et produit un PNG RGBA. Refus d’une taille non positive, d’une sortie non PNG,
+d’une source/sortie identiques et d’une sortie déjà présente. Les erreurs de
+lecture/écriture sont signalées ; aucune image de l’élève n’est lue par le guide.
+
+Syntaxe Python présentée par analogie avec les fonctions/conditions déjà connues,
+indentation et snake_case expliqués. Dimensions distinguées du poids du fichier.
+uv prépare un environnement et peut télécharger Python/Pillow ; ce n’est pas une
+application autonome ni une garantie de dépendances figées sans verrouillage.
+Notes sans stockage, aucun JavaScript ou lancement du script depuis le navigateur.
+Home à 27 pages principales et 12 extensions, navigation CLI ↔ Python.
+Les densités Android et variantes de ressources restent pour la page suivante.
+
+
+Vérification réelle du script téléchargé via `uv run`, avec uv 0.11.26 et
+Pillow 13.0.0 : carré 512×512 vers 256×256, rectangle 800×400 vers 256×128,
+petite image 64×64 non agrandie, noms de fichiers avec espaces et limite 128.
+PNG RGBA et transparence conservés ; SHA-256 des sources inchangés. Refus et
+absence de résultat trompeur vérifiés pour sortie existante, source/sortie
+identiques, taille nulle/négative, extension de sortie non PNG et source absente
+ou illisible. Aide du script vérifiée. Images synthétiques temporaires uniquement.
+
+Contrôles du guide : téléchargement identique au code affiché, syntaxe Python,
+structure HTML et tokens CSS valides ; 40 pages HTML et chaîne des 39 leçons
+validées (ressources, liens locaux, ancres, libellés, précédent/suivant).
+`git diff --check` sans erreur. Aucun projet Android/Desktop modifié ; rendu
+navigateur, clavier et exécution Windows non vérifiés ici. Les densités Android
+ne sont ni introduites ni générées par cette première page.

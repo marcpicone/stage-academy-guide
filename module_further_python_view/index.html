@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Découvrir Python pour le tooling personnel, utiliser une bibliothèque et lancer avec uv un premier script Pillow qui crée une copie redimensionnée d’une image.">
+    <title>Python : fabriquer tes outils · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="module_further_python_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="python-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 12</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Une tâche répétitive peut devenir ton propre outil</p>
+            <h1 id="titre">Python : fabriquer tes outils.</h1>
+            <p class="lead">Utilise une bibliothèque pour préparer une image du quiz. Avec un petit script Python et uv, crée une copie plus petite que tu pourras retrouver et comparer à l’original.</p>
+            <p>Tu connais déjà les variables, fonctions et conditions, ainsi que le terminal. Cette page les retrouve dans un autre langage avec un objectif concret : produire une image PNG réduite, sans changer l’original.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#besoin">Le besoin</a><a href="#bibliotheques">Les bibliothèques</a><a href="#uv">uv</a><a href="#script">Le script</a><a href="#lancer">Lancer</a><a href="#observer">Observer</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="besoin" aria-labelledby="titre-besoin">
+                <p class="eyebrow">01 / Programmer aussi ce qui t’aide à travailler</p>
+                <h2 id="titre-besoin">Préparer une image sans répéter les mêmes manipulations.</h2>
+                <p>Tu récupères une illustration pour ton quiz. Elle est grande, et tu veux une copie plus petite. Tu peux le faire dans un logiciel d’image ; tu peux aussi écrire une fois les étapes et demander à l’ordinateur de les refaire pour une autre source.</p>
+                <p>Un <strong>script</strong> est ici un fichier de code qu’on lance pour réaliser cette tâche. <strong>Python</strong> est le langage utilisé. Il peut servir à de nombreux types de programmes ; nous l’utilisons maintenant pour un outil de préparation de fichiers.</p>
+                <ol class="tool-flow"><li><strong>Une entrée</strong><p>Le chemin de l’image que tu veux préparer.</p></li><li><strong>Une action</strong><p>Réduire ses dimensions en conservant ses proportions.</p></li><li><strong>Une sortie</strong><p>Un nouveau fichier PNG et un message indiquant où le retrouver.</p></li></ol>
+                <p>Le script travaille sur des fichiers dans ton ordinateur, avant leur éventuelle utilisation dans l’application. Ce n’est pas un effet de taille appliqué à un composant Compose pendant l’affichage.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Tooling · outillage</h3><p>Les outils qui facilitent le travail : préparer des fichiers, vérifier des données ou enchaîner des opérations.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Automatiser · automate</h3><p>Décrire une tâche pour qu’un programme puisse l’exécuter à nouveau, selon les informations qu’on lui donne.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="bibliotheques" aria-labelledby="titre-bibliotheques">
+                <p class="eyebrow">02 / Profiter du travail déjà disponible</p>
+                <h2 id="titre-bibliotheques">Tu n’as pas à écrire le traitement d’image toi-même.</h2>
+                <p>Python possède une bibliothèque standard, fournie avec le langage, et un très grand écosystème de bibliothèques supplémentaires. <a href="https://pypi.org/">PyPI</a> est un catalogue de paquets Python où beaucoup d’entre elles sont distribuées.</p>
+                <div class="file-list"><article><h3>Fichiers et dossiers</h3><p>La bibliothèque standard fournit notamment pathlib pour représenter les chemins, ainsi que des outils pour copier des fichiers et préparer des archives.</p></article><article><h3>Images</h3><p><strong>Pillow</strong> peut ouvrir une image, en modifier les dimensions et enregistrer un résultat. C’est la bibliothèque supplémentaire choisie pour cet exercice.</p></article><article><h3>Données, réseau et autres besoins</h3><p>D’autres bibliothèques aident à manipuler des tableaux, produire des documents ou communiquer avec des services. On choisit selon la tâche et sa documentation, plutôt que d’installer tout un catalogue.</p></article></div>
+                <p>Tu retrouves l’idée des dépendances Gradle : ton code utilise une bibliothèque existante. Ici, <code>pillow</code> est le nom du paquet à déclarer, et <code>PIL</code> est le nom utilisé par ses imports Python :</p>
+                <pre><code>from PIL import Image</code></pre>
+                <p>Cette ligne rend les possibilités d’Image accessibles dans le script. Il faut aussi que Pillow soit disponible dans son environnement d’exécution : c’est là qu’uv nous aide.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Bibliothèque · library</h3><p>Du code réutilisable qui fournit des possibilités à ton programme. Dans les échanges, tu verras aussi l’abréviation « lib ».</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Paquet · package</h3><p>Une forme de distribution du code Python à installer. Ici, le paquet Pillow contient les outils de traitement d’image que nous importons.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="uv" aria-labelledby="titre-uv">
+                <p class="eyebrow">03 / Préparer ce dont le script a besoin</p>
+                <h2 id="titre-uv">uv lance le script avec ses dépendances.</h2>
+                <p>Copier un fichier Python sur une autre machine ne suffit pas toujours : il faut une version compatible de Python et les bibliothèques utilisées. <strong>uv</strong> est un outil qui peut préparer cet environnement et lancer le script.</p>
+                <div class="tool-roles"><article><h3>Python</h3><p>Le langage et l’interpréteur qui exécutent le code.</p></article><article><h3>Pillow</h3><p>La bibliothèque qui réalise le traitement de l’image.</p></article><article><h3>uv</h3><p>L’outil qui prépare l’environnement et lance notre fichier.</p></article></div>
+                <p>Notre script déclare ses besoins dans un petit en-tête. uv le lit, choisit un Python compatible et prépare un environnement isolé avec Pillow. Il réutilise des éléments déjà disponibles ; un premier lancement peut télécharger Python ou des dépendances et demander une connexion.</p>
+                <p>Cela facilite le partage du script et évite de préparer manuellement son environnement à chaque fois. uv ne transforme pas ce fichier en application autonome et ne garantit pas que tous les outils externes soient installés. ImageMagick, par exemple, est un autre outil ; il n’est pas nécessaire à cet exercice Pillow.</p>
+                <p>Avec l’encadrant, prépare uv en suivant sa <a href="https://docs.astral.sh/uv/getting-started/installation/">documentation d’installation</a> adaptée à Windows, macOS ou Linux. Dans un terminal normal, vérifie :</p>
+                <pre><code>uv --version</code></pre>
+                <p>Un numéro doit apparaître. Si la commande n’est pas reconnue, fais vérifier l’installation et rouvre le terminal si nécessaire. Le guide reste consultable hors ligne, mais cette préparation de l’environnement peut utiliser le réseau.</p>
+                <details><summary>Comment uv connaît-il Pillow ?</summary><p>Les lignes entre <code># /// script</code> et <code># ///</code> déclarent la version Python acceptée et la dépendance Pillow. Ce sont des métadonnées : des informations pour l’outil, placées dans des commentaires Python.</p><p>La plage de versions déclarée n’impose pas une version unique de Pillow. uv permet aussi de verrouiller les dépendances dans un fichier associé ; on pourra approfondir ce besoin lorsque l’outil devra être conservé et partagé durablement.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Interpréteur · interpreter</h3><p>Le programme qui exécute le code Python. Le fichier .py est ton code ; l’interpréteur est l’outil qui le fait fonctionner.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Environnement isolé</h3><p>Un espace de dépendances préparé pour ce script, afin de ne pas supposer que les mêmes bibliothèques sont déjà installées partout.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="script" aria-labelledby="titre-script">
+                <p class="eyebrow">04 / Un premier outil fourni et expliqué</p>
+                <h2 id="titre-script">Prépare resize_image.py et une image source.</h2>
+                <p>Crée un petit dossier de travail <code>quiz_image_tool</code>, distinct des projets Android et Desktop. Ouvre-le dans ton IDE ou ton éditeur. Pour cette première manipulation, choisis une illustration PNG que tu peux utiliser, idéalement carrée et d’au moins 512 × 512 pixels.</p>
+                <pre><code>quiz_image_tool/
+├── resize_image.py
+└── source.png</code></pre>
+                <p><a href="resize_image.py" download>Télécharger le script resize_image.py</a>, ou copie son contenu ci-dessous dans un fichier portant exactement ce nom. Place ton image à côté sous le nom <code>source.png</code> ; choisis une vraie image PNG, pas un autre format simplement renommé.</p>
+                <details><summary>Le script complet fourni</summary><pre id="python-script"><code># /// script
+# requires-python = &quot;&gt;=3.11&quot;
+# dependencies = [&quot;pillow&gt;=11,&lt;14&quot;]
+# ///
+
+import argparse
+from pathlib import Path
+
+from PIL import Image
+
+
+def resize_image(source_path: Path, output_path: Path, max_size: int) -&gt; None:
+    with Image.open(source_path) as source_image:
+        original_width: int = source_image.width
+        original_height: int = source_image.height
+        result_image: Image.Image = source_image.convert(&quot;RGBA&quot;)
+        result_image.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        result_image.save(output_path, format=&quot;PNG&quot;)
+
+    print(f&quot;Source : {original_width} x {original_height} px&quot;)
+    print(f&quot;Résultat : {result_image.width} x {result_image.height} px&quot;)
+    print(f&quot;Image créée : {output_path.resolve()}&quot;)
+
+
+def main() -&gt; None:
+    parser = argparse.ArgumentParser(
+        description=&quot;Créer une copie PNG réduite, sans déformer l’image.&quot;
+    )
+    parser.add_argument(&quot;source&quot;, type=Path, help=&quot;Chemin de l’image source&quot;)
+    parser.add_argument(&quot;output&quot;, type=Path, help=&quot;Chemin du nouveau fichier PNG&quot;)
+    parser.add_argument(&quot;--max-size&quot;, type=int, default=256, help=&quot;Côté maximal en pixels&quot;)
+    args = parser.parse_args()
+
+    if args.max_size &lt;= 0:
+        parser.error(&quot;La taille maximale doit être supérieure à zéro.&quot;)
+    if args.output.suffix.lower() != &quot;.png&quot;:
+        parser.error(&quot;Le fichier de sortie doit avoir l’extension .png.&quot;)
+    if args.source.resolve() == args.output.resolve():
+        parser.error(&quot;La source et la sortie doivent être des fichiers différents.&quot;)
+    if args.output.exists():
+        parser.error(&quot;La sortie existe déjà. Choisis un nouveau nom pour la conserver.&quot;)
+
+    try:
+        resize_image(args.source, args.output, args.max_size)
+    except OSError as error:
+        parser.exit(1, f&quot;Impossible de préparer l’image : {error}\n&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre></details>
+                <p>Lis d’abord ces trois appels dans <code>resize_image</code> : <code>Image.open</code> ouvre la source, <code>thumbnail</code> réduit l’image et <code>save</code> écrit le résultat. Pillow effectue le traitement ; notre code organise les chemins, la taille et les messages.</p>
+                <div class="comparison"><table><caption>Des notions connues, avec une autre syntaxe</caption><thead><tr><th scope="col">Dans le script</th><th scope="col">Ce que tu reconnais</th></tr></thead><tbody>
+                    <tr><th scope="row"><code>def resize_image(...) -&gt; None:</code></th><td>Une fonction, ses paramètres et aucun résultat utile retourné à l’appelant. Son travail est de créer un fichier et d’afficher des messages.</td></tr>
+                    <tr><th scope="row"><code>max_size: int</code></th><td>Un paramètre entier. Les annotations aident à lire les types ; Python ne les impose pas comme le compilateur Kotlin.</td></tr>
+                    <tr><th scope="row"><code>if args.max_size &lt;= 0:</code></th><td>Une condition pour refuser une taille qui n’a pas de sens.</td></tr>
+                    <tr><th scope="row">Les lignes décalées sous def, if ou with</th><td>Des blocs de code. En Python, l’indentation délimite ces blocs ; il faut conserver les espaces du script.</td></tr>
+                </tbody></table></div>
+                <p>Les noms restent en anglais. Python emploie couramment le <strong>snake_case</strong> : <code>source_path</code> signifie « chemin source » et <code>max_size</code> « taille maximale ». Les mots d’un nom sont séparés par des underscores.</p>
+                <details><summary>Que font les autres lignes fournies ?</summary><p><code>argparse</code>, fourni avec Python, lit les informations de la commande. <code>Path</code> représente un chemin. <code>with</code> aide à fermer le fichier ouvert après le travail. <code>try/except</code> permet d’afficher un message si une opération de fichier échoue.</p><p>La fonction <code>main</code> prépare les arguments et lance l’action. Les deux dernières lignes la déclenchent quand ce fichier est exécuté comme script. Tu peux utiliser ce cadre fourni et approfondir chaque partie quand tu en as besoin.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Pixel · px</h3><p>Un point de l’image. 512 × 512 signifie ici 512 pixels de large et 512 pixels de haut ; cette page travaille sur ces dimensions du fichier.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Proportions</h3><p>Le rapport entre largeur et hauteur. On le conserve pour éviter de transformer un cercle en ovale.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Indentation</h3><p>Les espaces au début des lignes. Dans ce code, quatre espaces marquent un niveau de bloc.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="lancer" aria-labelledby="titre-lancer">
+                <p class="eyebrow">05 / Une commande, une nouvelle image</p>
+                <h2 id="titre-lancer">Lance le script depuis son dossier.</h2>
+                <p>Ouvre le terminal dans <code>quiz_image_tool</code>, à côté du script et de source.png. Si tu es encore dans Codex, quitte sa conversation avec <code>/quit</code> ou utilise un autre terminal : la commande ci-dessous doit être exécutée par le terminal.</p>
+                <pre id="resize-command"><code>uv run resize_image.py "source.png" "output/quiz_small.png" --max-size 256</code></pre>
+                <p>Cette même forme convient dans PowerShell et dans un terminal macOS/Linux après préparation d’uv. <code>uv run</code> lance le fichier ; les deux chemins sont la source et la sortie ; <code>--max-size 256</code> fixe la limite de largeur et de hauteur.</p>
+                <p>Le script crée le dossier output s’il manque. Il garde l’original et refuse d’écraser un fichier de sortie existant. Pour refaire un essai, donne un nouveau nom au résultat.</p>
+                <aside class="expected"><strong>Avec une source carrée de 512 × 512 px : une sortie de 256 × 256 px.</strong><p>Le terminal indique les dimensions source et résultat, ainsi que le chemin du fichier créé. Ouvre ce fichier pour observer l’image ; un message seul ne remplace pas cette vérification.</p></aside>
+                <p>256 × 256 est une <strong>limite</strong>, pas une demande de carré déformé. Une image de 800 × 400 px devient 256 × 128 px. Une image déjà plus petite, comme 128 × 128 px, reste à cette taille : ce script n’agrandit pas la source.</p>
+                <p>La réduction du nombre de pixels ne garantit pas une taille de fichier toujours plus faible : le format, la transparence et la compression interviennent aussi. Ici, on vérifie d’abord les dimensions et les proportions.</p>
+                <details><summary>Comment afficher l’aide du script ?</summary><pre><code>uv run resize_image.py --help</code></pre><p>Tu retrouves les chemins attendus et l’option de taille. Les noms source, output et max-size sont les paramètres de notre outil, pas de nouvelles commandes uv.</p></details>
+                <details><summary>Le lancement échoue</summary><p>Lis le message et le dossier courant. Vérifie le nom du script, la présence de source.png et les guillemets autour des chemins avec espaces. Si la sortie existe déjà, change son nom ; si la source est absente ou illisible, retrouve une vraie image valide.</p><p>Si uv ne peut pas préparer Python ou Pillow, examine avec l’encadrant le téléchargement ou la compatibilité signalée. Un <code>ModuleNotFoundError</code> sur PIL peut aussi venir d’un lancement avec un autre environnement que celui préparé par uv : reprends la commande complète et conserve l’en-tête du script.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Argument de commande</h3><p>Une information transmise au script lors du lancement. Ici, les chemins et la taille jouent ce rôle.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>thumbnail · miniature</h3><p>L’opération Pillow choisie pour réduire une image dans des dimensions maximales, en conservant ses proportions.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="observer" aria-labelledby="titre-observer">
+            <p class="eyebrow">06 / Comprendre ton outil en le manipulant</p>
+            <h2 id="titre-observer">Change un paramètre et prévois le résultat.</h2>
+            <ol class="steps"><li>Vérifie les dimensions de la source et annonce celles attendues. Lance la commande à 256, puis ouvre le résultat et compare-le à l’original.</li><li>Relance avec <code>--max-size 128</code> et une sortie différente, par exemple <code>output/quiz_smaller.png</code>. Prévois ce qui changera.</li><li>Avec une seconde image rectangulaire, vérifie que le script garde ses proportions. Avec une petite image, vérifie qu’il ne l’agrandit pas.</li><li>Essaie une taille nulle ou le même nom de sortie déjà créé. Lis le refus et vérifie que les fichiers existants sont conservés.</li><li>Montre l’en-tête qui déclare Pillow, la fonction qui traite l’image et la commande qui fournit ses informations.</li></ol>
+            <details><summary>Utiliser l’agent pour comprendre, puis améliorer</summary><p>Depuis le dossier de l’outil, tu peux demander :</p><pre><code>Lis resize_image.py sans le modifier.
+Explique les rôles de Python, uv, argparse, pathlib et Pillow.
+Montre comment les arguments de la commande arrivent dans resize_image.
+Explique pourquoi une source 800 x 400 devient 256 x 128 avec la limite 256.
+Indique ce qui protège l’original et une sortie déjà présente.</code></pre><p>Retrouve ensuite les lignes citées. Pour une amélioration, décris d’abord le besoin et les résultats attendus ; le traitement de plusieurs fichiers pourra venir après ce premier outil à une image.</p></details>
+            <p>Pour partager ton outil, conserve le script avec son en-tête et sa commande d’exemple. L’autre personne aura besoin d’uv, de l’image d’entrée et des accès nécessaires à la préparation de l’environnement. La configuration dépend des besoins déclarés, pas de ce qui est installé par hasard sur ton ordinateur.</p>
+            <label class="draft-label" for="python-observations">Mes observations</label>
+            <textarea id="python-observations" rows="8" spellcheck="true">Rôles de Python, Pillow et uv :
+Image source et dimensions :
+Commande utilisée et résultat attendu :
+Fichier produit et dimensions observées :
+Essai à 128 / image rectangulaire / petite image :
+Refus observé et fichiers conservés :
+Une explication de l’agent retrouvée dans le code :
+Ce qui reste à vérifier :</textarea>
+            <fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je sais pourquoi un script peut aider à préparer le quiz.</span></label><label><input type="checkbox"><span>Je distingue la bibliothèque Pillow et l’outil uv.</span></label><label><input type="checkbox"><span>J’ai créé et ouvert une copie redimensionnée sans remplacer l’original.</span></label><label><input type="checkbox"><span>Je peux relier un paramètre, l’action et le résultat obtenu.</span></label></fieldset>
+            <p class="caption">Notes et confirmations personnelles sans envoi ni sauvegarde. Le guide ne lance pas Python ou uv et ne lit pas tes images. Le script téléchargé travaille uniquement lorsque tu le lances sur ton ordinateur. Copie tes observations avant de fermer ou recharger la page.</p>
+            <p class="closing">Tu as préparé une première image avec ton outil. La prochaine étape pourra expliquer les densités Android et produire plusieurs variantes pour les ressources du quiz. Pour le moment, conserve ce résultat dans le dossier de travail et <a href="../module_review_view/index.html">complète ton bilan</a>.</p>
+        </section>
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_codex_cli_view/index.html" rel="prev"><span>← Précédent</span><span>Utiliser Codex dans le terminal</span></a></nav>
+        <footer class="lesson-footer"><span>Références officielles :</span><a href="https://docs.python.org/3/tutorial/stdlib.html">Bibliothèque standard Python</a><a href="https://pypi.org/">Catalogue PyPI</a><a href="https://docs.astral.sh/uv/getting-started/installation/">Installer uv</a><a href="https://docs.astral.sh/uv/guides/scripts/">Scripts et dépendances avec uv</a><a href="https://pillow.readthedocs.io/en/stable/handbook/tutorial.html">Premiers pas Pillow</a><a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.thumbnail">Réduire avec thumbnail</a></footer>
+    </main>
+</div>
+</body>
+</html>
