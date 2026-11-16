@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Comprendre pixels, dp et densités Android, puis réutiliser le script Pillow pour générer cinq variantes d’une illustration et les afficher dans le quiz.">
+    <title>Préparer une image pour Android · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="module_further_density_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="density-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 13</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Une image dans l’app, plusieurs variantes sur disque</p>
+            <h1 id="titre">Préparer une image pour Android.</h1>
+            <p class="lead">Pourquoi plusieurs dossiers drawable pour la même illustration ? Relie les pixels de ton fichier à la taille affichée, puis automatise les cinq variantes de notre exemple.</p>
+            <p>Reprends le dossier quiz_image_tool, uv, Pillow et resize_image.py de la page précédente. Cette fois, le résultat sera utilisé comme illustration d’accueil dans ton clone Android.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#densite">Pixels et dp</a><a href="#variantes">Les variantes</a><a href="#generer">Générer</a><a href="#android">Dans Android</a><a href="#magick">Autre outil</a><a href="#observer">Observer</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="densite" aria-labelledby="titre-densite">
+                <p class="eyebrow">01 / Plus de pixels dans un même espace</p>
+                <h2 id="titre-densite">Densité et taille d’écran sont deux choses différentes.</h2>
+                <p>Deux écrans de taille proche peuvent contenir un nombre différent de pixels. La <strong>densité</strong> décrit la quantité de pixels dans un espace physique donné.</p>
+                <div class="density-sketch"><figure><div class="pixel-grid pixel-grid-coarse" aria-hidden="true"></div><figcaption>Moins de points dans le cadre</figcaption></figure><figure><div class="pixel-grid pixel-grid-fine" aria-hidden="true"></div><figcaption>Plus de points dans le même cadre</figcaption></figure></div>
+                <p class="caption">Schéma HTML/CSS : les cadres ont la même taille et les grilles représentent deux densités. Ce ne sont pas des captures d’appareils ni une mesure de ton écran.</p>
+                <p>Dans le fichier, nous comptons des <strong>pixels</strong>, ou px. Pour une dimension de l’interface Android, tu utilises déjà les <strong>dp</strong>, des unités indépendantes de la densité. Android les traduit en pixels adaptés à l’écran.</p>
+                <p>Dans notre exemple, l’illustration occupe un cadre de <code>96.dp</code>. Elle peut demander 96 pixels de côté sur une densité de référence et davantage sur une densité plus élevée.</p>
+                <aside class="expected"><strong>Le cadre reste de 96 dp ; le fichier adapté peut contenir plus de pixels.</strong><p>On cherche une image assez détaillée pour ce cadre, pas une illustration quatre fois plus grande à l’écran.</p></aside>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Densité · density</h3><p>Le nombre de pixels dans un espace donné. Ce n’est pas simplement la largeur de l’écran.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>dp</h3><p>Density-independent pixel : une unité de dimension de l’interface Android, distincte des pixels du fichier image.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="variantes" aria-labelledby="titre-variantes">
+                <p class="eyebrow">02 / Cinq fichiers, un seul nom de ressource</p>
+                <h2 id="titre-variantes">Le dossier précise la densité.</h2>
+                <p>Android reconnaît des groupes de densité. Pour notre illustration carrée de 96 dp, préparons les cinq variantes suivantes :</p>
+                <div class="comparison"><table><caption>Tailles de l’exercice, pour un cadre de 96 × 96 dp</caption><thead><tr><th scope="col">Dossier</th><th scope="col">Facteur</th><th scope="col">Image en pixels</th></tr></thead><tbody>
+                    <tr><th scope="row"><code>drawable-mdpi</code></th><td>×1</td><td>96 × 96</td></tr>
+                    <tr><th scope="row"><code>drawable-hdpi</code></th><td>×1,5</td><td>144 × 144</td></tr>
+                    <tr><th scope="row"><code>drawable-xhdpi</code></th><td>×2</td><td>192 × 192</td></tr>
+                    <tr><th scope="row"><code>drawable-xxhdpi</code></th><td>×3</td><td>288 × 288</td></tr>
+                    <tr><th scope="row"><code>drawable-xxxhdpi</code></th><td>×4</td><td>384 × 384</td></tr>
+                </tbody></table></div>
+                <p>Le fichier portera partout le nom <code>quiz_illustration.png</code>. Dans le code, une seule référence, <code>R.drawable.quiz_illustration</code>, désigne la ressource. Android sélectionne une variante selon la configuration et peut ajuster son échelle.</p>
+                <p>Ces nombres sont liés à notre choix de 96 dp. Ils ne sont pas les dimensions universelles d’une image Android. D’autres groupes existent, comme ldpi et tvdpi ; cette première génération se limite aux cinq variantes du tableau.</p>
+                <details><summary>Faut-il créer cinq PNG pour chaque image de l’app ?</summary><p>Non. L’exercice concerne une illustration bitmap intégrée à l’accueil. Une icône vectorielle Android peut s’adapter à plusieurs densités sans ces cinq PNG. La photo du profil créée pendant l’usage reste un fichier chargé par l’app, pas une ressource générée dans res.</p><p>Les icônes de lancement utilisent les dossiers mipmap et d’autres règles ; ne remplace pas ces icônes ici. Un dossier drawable-nodpi sert à un autre choix de mise à l’échelle et ne remplace pas nos variantes pour cette expérience.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Bitmap</h3><p>Une image décrite par ses pixels, comme notre PNG. Une image vectorielle décrit plutôt des formes et des tracés.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Qualificatif · qualifier</h3><p>Une précision dans le nom du dossier de ressources. Ici, le suffixe -xhdpi précise une densité.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="generer" aria-labelledby="titre-generer">
+                <p class="eyebrow">03 / Réutiliser ton premier outil</p>
+                <h2 id="titre-generer">Un script organise cinq redimensionnements.</h2>
+                <p>Reprends une source PNG <strong>carrée d’au moins 384 × 384 px</strong>, idéalement ton original de 512 × 512 px ou plus. Ne pars pas de la copie réduite à 256 px : elle n’a plus assez de pixels pour notre plus grande variante.</p>
+                <p>Dans quiz_image_tool, conserve <a href="../module_further_python_view/resize_image.py" download>resize_image.py de la page précédente</a> et ajoute <a href="generate_android_images.py" download>generate_android_images.py</a>. Les deux scripts doivent être côte à côte :</p>
+                <pre><code>quiz_image_tool/
+├── resize_image.py
+├── generate_android_images.py
+└── source.png</code></pre>
+                <details><summary>Le nouveau script complet fourni</summary><pre id="density-script"><code># /// script
+# requires-python = &quot;&gt;=3.11&quot;
+# dependencies = [&quot;pillow&gt;=11,&lt;14&quot;]
+# ///
+
+import argparse
+from pathlib import Path
+
+from PIL import Image
+from resize_image import resize_image
+
+
+def generate_android_images(source_path: Path, output_dir: Path) -&gt; None:
+    density_sizes: dict[str, int] = {
+        &quot;mdpi&quot;: 96,
+        &quot;hdpi&quot;: 144,
+        &quot;xhdpi&quot;: 192,
+        &quot;xxhdpi&quot;: 288,
+        &quot;xxxhdpi&quot;: 384,
+    }
+
+    with Image.open(source_path) as source_image:
+        if source_image.format != &quot;PNG&quot;:
+            raise ValueError(&quot;Pour cet exercice, utilise une vraie image PNG.&quot;)
+        if source_image.width != source_image.height:
+            raise ValueError(&quot;La source doit être carrée pour notre illustration de 96 dp.&quot;)
+        if source_image.width &lt; 384:
+            raise ValueError(&quot;La source doit mesurer au moins 384 x 384 pixels.&quot;)
+
+    output_dir.mkdir(parents=True, exist_ok=False)
+    for density, size in density_sizes.items():
+        output_path: Path = output_dir / f&quot;drawable-{density}&quot; / &quot;quiz_illustration.png&quot;
+        resize_image(source_path, output_path, size)
+
+    print(f&quot;Cinq variantes créées dans : {output_dir.resolve()}&quot;)
+
+
+def main() -&gt; None:
+    parser = argparse.ArgumentParser(
+        description=&quot;Préparer les cinq variantes Android d’une illustration carrée de 96 dp.&quot;
+    )
+    parser.add_argument(&quot;source&quot;, type=Path, help=&quot;Source PNG carrée, au moins 384 x 384 px&quot;)
+    parser.add_argument(&quot;output_dir&quot;, type=Path, help=&quot;Nouveau dossier de sortie&quot;)
+    args = parser.parse_args()
+
+    if args.output_dir.exists():
+        parser.error(&quot;La sortie existe déjà. Choisis un nouveau dossier.&quot;)
+    try:
+        generate_android_images(args.source, args.output_dir)
+    except (OSError, ValueError) as error:
+        parser.exit(1, f&quot;Impossible de préparer les ressources : {error}\n&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre></details>
+                <p><code>from resize_image import resize_image</code> reprend la fonction de ton premier fichier. Son bloc de démarrage ne s’exécute pas quand on l’importe : ici, nous voulons sa fonction, pas lancer son ancienne commande.</p>
+                <p><code>density_sizes</code> associe chaque nom de densité à sa taille. C’est un dictionnaire Python. La boucle parcourt ces associations et appelle cinq fois la même action, chaque fois avec un dossier et une taille différents. Chaque variante repart de la source originale, pas de la variante réduite juste avant.</p>
+                <p>Dans le terminal placé dans quiz_image_tool, lance :</p>
+                <pre id="density-command"><code>uv run generate_android_images.py "source.png" "generated_res"</code></pre>
+                <p>Le nouveau script déclare aussi Pillow pour qu’uv prépare son environnement. Il vérifie le format, la forme carrée et la taille avant de créer les sorties. Un dossier de destination déjà présent est refusé : utilise un nouveau nom pour refaire un essai.</p>
+                <pre><code>generated_res/
+├── drawable-mdpi/quiz_illustration.png
+├── drawable-hdpi/quiz_illustration.png
+├── drawable-xhdpi/quiz_illustration.png
+├── drawable-xxhdpi/quiz_illustration.png
+└── drawable-xxxhdpi/quiz_illustration.png</code></pre>
+                <p>Vérifie les cinq fichiers et leurs dimensions avant de les intégrer. Une interruption ou une erreur d’écriture peut laisser une sortie partielle : le dossier seul ne prouve pas que la génération est terminée.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Dictionnaire · dictionary</h3><p>Une collection d’associations entre une clé et une valeur. Ici : le nom de densité et la taille correspondante.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Génération par lot · batch</h3><p>Le même travail appliqué à plusieurs sorties. Les règles sont décrites une fois, puis la boucle les répète.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="android" aria-labelledby="titre-android">
+                <p class="eyebrow">04 / Utiliser ce que ton outil a produit</p>
+                <h2 id="titre-android">Ajoute les variantes à l’accueil du quiz.</h2>
+                <ol class="steps"><li>Dans ton clone Android, retrouve <code>app/src/main/res/</code>. Copie les cinq dossiers drawable-* depuis generated_res vers ce dossier.</li><li>Si un dossier existe déjà, ajoute le fichier à son contenu sans remplacer ses autres ressources. Si quiz_illustration existe déjà dans le projet, fais examiner ce cas avec l’encadrant avant d’écraser quoi que ce soit.</li><li>Vérifie que chaque dossier contient quiz_illustration.png. Ne copie ni le dossier generated_res lui-même sous res, ni la grande source de travail dans drawable par défaut.</li><li>Dans le composable de ton accueil Android, ajoute le bloc fourni après le titre, ou adapte l’illustration existante à cette ressource. Garde le reste du design et les règles du quiz.</li></ol>
+                <details><summary>Imports à ajouter seulement s’ils manquent</summary><pre id="density-imports"><code>import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.size
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import fr.stageacademy.quiz.R</code></pre></details>
+                <pre id="density-compose"><code>Image(
+    painter = painterResource(id = R.drawable.quiz_illustration),
+    contentDescription = null,
+    modifier = Modifier.size(96.dp),
+)</code></pre>
+                <p>Ce bloc va à l’intérieur du composable de l’accueil, pas au niveau du fichier. L’import R correspond au namespace du quiz du cours ; adapte-le si ton projet utilise un autre namespace.</p>
+                <p>L’illustration est ici décorative, accompagnée du titre du quiz : la description vaut null. Si ton image transmet une information utile, donne-lui une description accessible adaptée, comme à la <a href="../module_further_images_view/index.html#accessible">page sur l’affichage des images</a>.</p>
+                <p>Construis puis lance l’app. Le même code garde un cadre de 96 dp : il n’a pas à contenir cinq chemins ou une condition sur la densité. Ces dossiers sont des ressources Android ; le projet Desktop n’utilise pas automatiquement cette organisation.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>R.drawable</h3><p>Les identifiants générés pour retrouver les ressources graphiques Android. L’extension .png ne figure pas dans l’identifiant.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Ressource intégrée</h3><p>Un fichier ajouté au projet et livré dans l’application. Il est distinct d’une photo créée pendant l’utilisation.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="magick" aria-labelledby="titre-magick">
+                <p class="eyebrow">05 / Une autre façon de réaliser la même opération</p>
+                <h2 id="titre-magick">Une bibliothèque Python ou un outil en CLI.</h2>
+                <p>Avec Pillow, Python appelle directement des fonctions de bibliothèque. <strong>ImageMagick</strong> propose aussi le traitement d’image comme outil en ligne de commande. Si l’encadrant l’a installé, tu peux essayer cette variante facultative depuis le dossier de travail :</p>
+                <pre id="magick-command"><code>magick "source.png" -resize "96x96&gt;" "magick_96.png"</code></pre>
+                <p>Le résultat tient dans 96 × 96 pixels en gardant les proportions. Le signe &gt; signifie ici « réduire seulement » ; les guillemets font partie de la commande, pour que le terminal ne traite pas ce signe autrement.</p>
+                <p>Choisis un nom de sortie encore libre : cette commande ne reprend pas les refus de réécriture de notre script Python. Pour une source carrée suffisante, compare ses dimensions à la variante mdpi de Pillow ; les fichiers n’ont pas besoin d’être identiques octet par octet.</p>
+                <details><summary>Comment Python pourrait-il piloter ImageMagick ?</summary><p>Python peut lancer un programme externe avec le module standard subprocess. Un autre script pourrait organiser les mêmes cinq commandes et vérifier leurs résultats. Ce serait une alternative au traitement Pillow, à préparer séparément avec l’agent ; ne lance pas les deux approches vers les mêmes fichiers.</p><p>uv prépare les dépendances Python déclarées, mais n’installe pas à lui seul la commande magick. Cette première génération fonctionne entièrement avec Pillow ; ImageMagick n’est pas un prérequis.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Outil externe</h3><p>Un autre programme que le script peut appeler. Ses besoins d’installation restent distincts des paquets Python.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="observer" aria-labelledby="titre-observer">
+            <p class="eyebrow">06 / Un outil dont tu peux expliquer les règles</p>
+            <h2 id="titre-observer">Vérifie les fichiers, puis l’application.</h2>
+            <ol class="steps"><li>Avant la génération, annonce les cinq tailles attendues pour le cadre de 96 dp. Après, retrouve-les dans les propriétés des fichiers.</li><li>Compare l’original et les variantes : la source doit être conservée, l’image carrée et ses proportions inchangées.</li><li>Avec une source trop petite ou rectangulaire, observe le refus et explique pourquoi le premier script acceptait ces images alors que cet exercice impose un autre contrat.</li><li>Dans l’app, vérifie l’illustration d’accueil et lance une partie : les questions, le score et le recommencement restent ceux d’avant.</li><li>Avec l’encadrant, si deux appareils ou émulateurs de densités différentes sont disponibles, compare le cadre affiché et la netteté. Un redimensionnement de fenêtre ou une taille d’écran différente ne prouve pas à lui seul une autre densité. Laisse ce point non vérifié si tu n’as qu’une configuration.</li><li>Relis le diff Git : cinq ressources et l’affichage ciblé, puis conserve les changements après vérification. Les scripts et la source de travail restent hors de res.</li></ol>
+            <details><summary>Pourquoi refuser une source plus petite que 384 pixels ?</summary><p>Le premier outil ne l’agrandit pas. Sans cette vérification, un fichier pourrait être placé dans drawable-xxxhdpi alors qu’il ne contient pas les 384 × 384 pixels attendus. Agrandir une petite image n’invente pas les détails manquants.</p></details>
+            <details><summary>Comment faire évoluer cet outil avec l’agent ?</summary><p>Demande-lui d’abord de retrouver la table des tailles, la boucle et l’appel à resize_image. Il pourra ensuite proposer un paramètre pour une autre taille en dp. Fais calculer les nouvelles dimensions attendues avant toute modification et conserve une source assez grande.</p></details>
+            <label class="draft-label" for="density-observations">Mes observations</label>
+            <textarea id="density-observations" rows="8" spellcheck="true">Différence entre pixels, dp et densité :
+Source et dimensions :
+Cinq variantes prévues / dimensions vérifiées :
+Rôle du dictionnaire, de la boucle et de resize_image :
+Ressource utilisée dans l’accueil et cadre en dp :
+Appareils/configurations réellement observés :
+Comparaison ImageMagick si réalisée :
+Ce qui reste à vérifier :</textarea>
+            <fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue la taille du fichier en pixels et celle du cadre en dp.</span></label><label><input type="checkbox"><span>J’ai vérifié les cinq variantes avant leur copie dans res.</span></label><label><input type="checkbox"><span>Je retrouve une seule référence R.drawable dans le code.</span></label><label><input type="checkbox"><span>J’ai observé l’accueil et conservé le fonctionnement du quiz.</span></label></fieldset>
+            <p class="caption">Notes et confirmations personnelles sans envoi ni sauvegarde. Le guide n’exécute pas les scripts, n’installe pas ImageMagick et ne copie rien dans ton clone Android. Le schéma n’est pas un appareil connecté. Copie tes observations avant de fermer ou recharger la page.</p>
+            <p class="closing">Tu as relié un besoin Android à un outil personnel : une fonction réutilisée, une table de tailles et cinq fichiers générés. Ajoute cette expérience à ton <a href="../module_review_view/index.html">bilan</a>.</p>
+        </section>
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_python_view/index.html" rel="prev"><span>← Précédent</span><span>Python : fabriquer tes outils</span></a></nav>
+        <footer class="lesson-footer"><span>Références officielles :</span><a href="https://developer.android.com/training/multiscreen/screendensities">Densités Android</a><a href="https://developer.android.com/guide/topics/resources/providing-resources">Organisation des ressources</a><a href="https://developer.android.com/develop/ui/compose/graphics/images/loading">Images dans Compose</a><a href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.thumbnail">Pillow thumbnail</a><a href="https://imagemagick.org/command-line-processing/#geometry">Tailles avec ImageMagick</a></footer>
+    </main>
+</div>
+</body>
+</html>
