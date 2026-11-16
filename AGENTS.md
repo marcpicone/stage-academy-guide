@@ -282,3 +282,18 @@ ImageMagick est une alternative facultative en CLI, pas une dépendance install�
 par uv ; sa commande ne reprend pas les gardes du script. Distinguer fichiers
 générés, compilation et observation sur plusieurs densités. Schéma CSS illustratif.
 Home à 27 pages principales et 13 extensions ; navigation Python ↔ densités.
+
+
+## Ressources indépendantes du parcours
+
+`resources_view/` fournit des modèles à télécharger pour le quiz : consignes
+AGENTS.md/CLAUDE.md et deux skills review-quiz-change/add-quiz-question. Les kits
+ZIP utilisent les vrais noms et emplacements .agents/skills ou .claude/skills.
+Les fichiers individuels ont des noms préfixés, à renommer lors de la copie.
+Ces textes sont des assets pédagogiques, pas des consignes actives pour le guide.
+Aucun skill ou réglage installé dans les projets, ni action externe autorisée
+par un exemple de prompt. Préviews et téléchargements doivent rester identiques.
+Expliquer l’adaptation Android/Desktop et la vérification du chargement effectif.
+La home a une entrée Ressources indépendante : conserver 27 pages principales et
+13 extensions ; ne pas ajouter cette bibliothèque à la chaîne des 40 leçons.
+La page de liens utiles et de projets à explorer reste à réaliser séparément.
