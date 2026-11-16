@@ -1062,3 +1062,42 @@ valides ; code affiché identique au générateur téléchargeable, syntaxe Pyth
 structure HTML et tokens CSS valides ; `git diff --check` sans erreur. Rendu
 navigateur, clavier, exécution Windows et affichage sur plusieurs densités non
 vérifiés ici. Les images de contrôle sont synthétiques et restent temporaires.
+
+
+## Ressources — consignes et skills
+
+`resources_view/` est une bibliothèque indépendante du parcours : entrée home et
+liens depuis la leçon des consignes et la fin des extensions, sans nouvelle leçon
+ou compteur de progression. Le parcours conserve 27 pages principales et 13 extensions.
+
+Deux kits ZIP de trois fichiers chacun : AGENTS.md + .agents/skills pour Codex,
+CLAUDE.md + .claude/skills pour Claude Code. Même contenu pédagogique de consignes,
+deux procédures review-quiz-change et add-quiz-question. Les quatre fichiers
+individuels portent des noms de téléchargement préfixés, à renommer à destination.
+Les archives conservent les vrais noms et dossiers ; aucun réglage d’outil fourni.
+
+Les modèles sont à lire et adapter au projet réel, puis à fusionner avec les
+consignes existantes. Android par défaut, adaptation explicite pour Desktop et
+ses tâches Gradle. Explication du rôle des instructions, skills et permissions,
+de la reconnaissance des fichiers et de l’invocation dans l’interface de l’agent.
+La revue est sans modification ; l’ajout de question reste une tâche ciblée.
+La page ne télécharge ni n’installe automatiquement un kit et ne démarre aucun agent.
+Les fichiers de ressources sont du contenu pédagogique, pas des instructions
+actives ou des skills installés pour le développement du guide.
+Sources : docs officielles OpenAI AGENTS.md/skills et Anthropic mémoire/skills.
+La sélection de documentation et de dépôts utiles reste une page à réaliser ensuite.
+
+
+Vérifications des ressources : deux ZIP lisibles extraits dans un dossier
+temporaire, trois fichiers attendus chacun, chemins relatifs sans traversée,
+contenus identiques aux téléchargements individuels et aux aperçus HTML.
+Les quatre copies de skills extraites passent quick_validate.py de skill-creator
+(en-têtes YAML et nommage). Cela ne valide pas leur comportement avec un agent.
+Aucun exemple n’est présent dans les emplacements de skills actifs du guide.
+
+Contrôles : 42 pages HTML, 40 leçons toujours reliées dans la même chaîne ; liens,
+ancres et libellés valides. Structure HTML accueil/ressources et tokens CSS
+vérifiés, `git diff --check` sans erreur. Compteurs inchangés : 27 pages principales
+et 13 extensions, la bibliothèque restant indépendante. Installation/chargement
+réels dans Codex et Claude Code, clic de téléchargement dans un navigateur,
+rendu, clavier et Windows non vérifiés. Aucun projet Android/Desktop modifié.

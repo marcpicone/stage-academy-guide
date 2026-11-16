@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Des modèles à lire et adapter pour les consignes du quiz et deux skills, avec les emplacements Codex et Claude Code et des kits à télécharger.">
+    <title>Ressources : consignes et skills · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="resources_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="resources-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>Ressources · À consulter selon tes besoins</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Des points de départ pour tes projets</p>
+            <h1 id="titre">Consignes et skills pour ton quiz.</h1>
+            <p class="lead">Retrouve des fichiers courts à lire, comprendre et adapter avant de les utiliser avec ton agent. Choisis le kit correspondant à ton outil.</p>
+            <p>Cette boîte à outils complète la <a href="../module_agents_project_instructions_view/index.html">page sur les consignes de projet</a>. Elle ne remplace pas la lecture de ton code et n’installe rien automatiquement.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#roles">Les rôles</a><a href="#kits">Les kits</a><a href="#consignes">Les consignes</a><a href="#skills">Les skills</a><a href="#adapter">Adapter</a><a href="#verifier">Vérifier</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="roles" aria-labelledby="titre-roles">
+                <p class="eyebrow">01 / Choisir ce qui aide pour la tâche</p>
+                <h2 id="titre-roles">Une consigne durable et une procédure ont des rôles différents.</h2>
+                <div class="file-list"><article><h3>Le fichier de consignes du projet</h3><p>Il explique le projet et ses habitudes : règles du quiz, noms, organisation et vérifications. Ces repères servent à plusieurs demandes.</p></article><article><h3>Un skill</h3><p>Une procédure réutilisable pour un travail précis, par exemple relire une modification. Son fichier SKILL.md décrit quand l’utiliser et comment mener ce travail.</p></article><article><h3>Les réglages de l’outil</h3><p>Ils définissent notamment des accès et des préférences. Les kits ne changent pas ces réglages. Un texte Markdown ne configure pas à lui seul les permissions de l’agent.</p></article></div>
+                <p>Voici les conventions choisies pour les deux kits de cette page. Les noms exacts comptent :</p>
+                <div class="comparison"><table><caption>Emplacements proposés à la racine du projet concerné</caption><thead><tr><th scope="col">Ressource</th><th scope="col">Codex</th><th scope="col">Claude Code</th></tr></thead><tbody>
+                    <tr><th scope="row">Consignes du projet</th><td><code>AGENTS.md</code></td><td><code>CLAUDE.md</code></td></tr>
+                    <tr><th scope="row">Skill de revue</th><td><code>.agents/skills/review-quiz-change/SKILL.md</code></td><td><code>.claude/skills/review-quiz-change/SKILL.md</code></td></tr>
+                    <tr><th scope="row">Skill d’ajout de question</th><td><code>.agents/skills/add-quiz-question/SKILL.md</code></td><td><code>.claude/skills/add-quiz-question/SKILL.md</code></td></tr>
+                </tbody></table></div>
+                <p>Pour notre kit Codex, c’est <code>AGENTS.md</code> au pluriel et <code>.agents</code> avec un point. Un fichier nommé agent.md ou un dossier .agent créé librement ne reproduit pas ces emplacements.</p>
+                <details><summary>Claude Code peut-il aussi lire AGENTS.md ?</summary><p>Des versions récentes le permettent selon leurs réglages. Le kit Claude fournit ici un CLAUDE.md autonome pour garder un point de départ explicite. Consulte la documentation de ta version et vérifie les consignes effectivement chargées. Si tu utilises les deux fichiers dans un même projet, garde leurs décisions cohérentes.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Skill · procédure réutilisable</h3><p>Des instructions spécialisées pour une tâche identifiable. Un dossier .agents ne désigne pas à lui seul une équipe d’agents.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Racine · root</h3><p>Le dossier principal du projet auquel les consignes s’appliquent. Pour le quiz Android, c’est le niveau qui contient app et settings.gradle.kts.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="kits" aria-labelledby="titre-kits">
+            <p class="eyebrow">02 / Télécharger, puis lire avant de copier</p>
+            <h2 id="titre-kits">Deux kits, le même point de départ pédagogique.</h2>
+            <p>Chaque archive contient trois fichiers : les consignes et les deux skills. Ils sont préparés pour le quiz Android du cours ; le projet Desktop demande l’adaptation décrite plus bas.</p>
+            <div class="kit-grid">
+                <article class="kit-card"><h3>Kit Codex</h3><p><a href="downloads/quiz-codex-kit.zip" download>Télécharger le kit Codex · ZIP</a></p><pre><code>AGENTS.md
+.agents/skills/
+├── review-quiz-change/SKILL.md
+└── add-quiz-question/SKILL.md</code></pre><p><a href="downloads/codex-AGENTS.md" download>Télécharger seulement le modèle AGENTS.md</a></p></article>
+                <article class="kit-card"><h3>Kit Claude Code</h3><p><a href="downloads/quiz-claude-kit.zip" download>Télécharger le kit Claude Code · ZIP</a></p><pre><code>CLAUDE.md
+.claude/skills/
+├── review-quiz-change/SKILL.md
+└── add-quiz-question/SKILL.md</code></pre><p><a href="downloads/claude-CLAUDE.md" download>Télécharger seulement le modèle CLAUDE.md</a></p></article>
+            </div>
+            <p>Décompresse le kit dans un dossier de travail, lis les fichiers, puis copie seulement les éléments que tu veux utiliser. Si des consignes ou skills existent déjà dans ton clone, compare-les et conserve ce qui s’applique au projet ; ne remplace pas tout le dossier d’outillage.</p>
+            <p>Les fichiers téléchargés individuellement portent un préfixe pour être reconnaissables : renomme codex-AGENTS.md en AGENTS.md, ou claude-CLAUDE.md en CLAUDE.md, lorsque tu places le modèle adapté dans ton projet. Les archives utilisent déjà les noms et dossiers du tableau.</p>
+            <p class="caption">Le téléchargement fournit des fichiers à adapter. Il ne les installe pas, ne démarre aucun agent et ne modifie aucun projet. Les dossiers commençant par un point peuvent être masqués par l’explorateur ; vérifie leur présence avec l’IDE ou l’encadrant.</p>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="consignes" aria-labelledby="titre-consignes">
+                <p class="eyebrow">03 / Savoir expliquer ce qu’on donne à l’agent</p>
+                <h2 id="titre-consignes">Les modèles décrivent le quiz et ses règles.</h2>
+                <p>Les deux fichiers de consignes proposent le contenu suivant. Tu peux le lire ici avant de télécharger :</p>
+                <details><summary>Lire le modèle de consignes</summary><pre id="instructions-preview"><code># Consignes du quiz
+
+## Projet
+
+Ce modèle décrit le quiz Android du parcours Stage Academy : Kotlin, Compose
+et un module app. Avant de l’utiliser, confirme la cible et les noms réels du
+projet. Pour le compagnon Desktop, adapte ce paragraphe et les commandes Gradle.
+
+Lis le code et les consignes existantes avant une modification. Les données
+d’une question, les règles du presenter et l’affichage ont des rôles distincts.
+Conserve l’organisation réellement présente ; nos packages de vue portent le
+suffixe _view. Les modèles de données restent distincts des vues.
+
+## Règles de la partie
+
+- Afficher une question à la fois et attendre une réponse avant la suivante.
+- Garder le premier choix définitif : un point si correct, aucun sinon.
+- Empêcher le double comptage et le remplacement du choix après validation.
+- Afficher le résultat selon le vrai nombre de questions, sans supposer quatre.
+- Recommencer à la première question avec le score et l’état de réponse remis à zéro.
+
+Si la demande change une règle, explique son effet et adapte les comportements
+concernés. Pour un changement de présentation, garde les règles en place.
+
+## Manière de travailler
+
+- Utilise des identifiants anglais et des textes d’interface français.
+- Garde les changements liés au besoin demandé et explique les nouveaux concepts.
+- Vérifie les dépendances et les commandes dans le projet réel avant de les utiliser.
+- Pour un transfert entre projets, distingue la référence à lire et la destination à modifier.
+
+## Vérification et compte rendu
+
+Utilise le Gradle Wrapper du projet pour les tâches adaptées. Dans le quiz Android
+simple, :app:assembleDebug produit l’APK debug. Une compilation ne prouve pas le
+fonctionnement sur appareil.
+
+Pour une modification des règles, vérifie ou propose l’observation des scores
+zéro/toutes/une partie des bonnes réponses, du premier choix définitif et du
+recommencement. Pour la vue, examine aussi les textes longs et l’espace disponible.
+
+Explique ce qui a changé et pourquoi, les commandes réellement exécutées et leurs
+résultats, ainsi que les observations restantes. Les commits, push et PR suivent
+la demande de publication ; écrire ces consignes ne publie rien.
+</code></pre></details>
+                <p>Le début situe la cible et l’organisation ; la suite rend visibles les règles du jeu et les vérifications attendues. Ce texte doit décrire ton projet réel. S’il n’utilise plus les mêmes noms ou si une règle a été changée volontairement, adapte le modèle.</p>
+                <p>Écrire « un point si correct » ne réalise pas le calcul dans Kotlin. Cela guide le travail de l’agent ; le comportement reste à lire et à vérifier dans l’application.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Markdown · .md</h3><p>Du texte avec quelques signes de mise en forme : # pour un titre, - pour une liste. Les consignes restent lisibles dans un éditeur.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Modèle · template</h3><p>Un point de départ à adapter. Ce n’est pas une description vérifiée automatiquement de ton clone.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="skills" aria-labelledby="titre-skills">
+                <p class="eyebrow">04 / Deux procédures courtes</p>
+                <h2 id="titre-skills">Choisis un skill pour un besoin précis.</h2>
+                <article class="skill-card"><h3>review-quiz-change · relire une modification</h3><p>Il fait suivre les changements de la réponse à la progression, au score et à la vue. Il demande des défauts étayés, des scénarios concrets et une distinction entre vérifications réalisées et proposées. C’est une revue sans modification du code.</p><p><a href="downloads/review-quiz-change.skill.md" download>Télécharger le skill de revue seul</a></p><details><summary>Lire sa procédure</summary><pre id="review-preview"><code>---
+name: review-quiz-change
+description: Relire les changements d’un quiz Kotlin Compose pour repérer les régressions de progression, de score, de recommencement ou d’affichage. Utiliser pour une demande de revue, sans modifier le code.
+---
+
+# Relire une modification du quiz
+
+Lis les consignes du projet, son état Git et les changements concernés par la
+demande, y compris le contenu des nouveaux fichiers. Utilise le code environnant
+pour comprendre l’effet réel d’un changement ; n’invente pas un problème à partir
+du seul nom d’un fichier.
+
+Suivant le périmètre modifié, suis le trajet du clic à la validation, au score
+et à l’état relu par la vue. Recherche notamment :
+
+- une progression possible sans réponse ou une lecture de question après la fin ;
+- un deuxième comptage, un premier choix remplaçable ou un total fixé à quatre ;
+- un recommencement qui garde l’indice, le score ou l’état d’une ancienne réponse ;
+- une vue qui ne relit plus l’état ou masque une action avec un texte long.
+
+Pour chaque défaut étayé, donne le fichier et l’endroit, un scénario concret,
+l’effet observé dans le code et une correction suggérée. Distingue une régression
+d’une préférence de style. Si tu ne trouves pas de défaut étayé, indique-le.
+
+Propose les commandes et les observations utiles pour les incertitudes restantes.
+Présente ces propositions comme non exécutées. Cette revue ne modifie pas les
+fichiers et ne crée ni commit ni publication.
+</code></pre></details></article>
+                <article class="skill-card"><h3>add-quiz-question · ajouter une question</h3><p>Il fait retrouver le format actuel des données, ajouter une question avec ses choix et sa bonne réponse, puis vérifier le nombre de questions et le déroulement. Il conserve les règles de score et l’interface existante autant que possible.</p><p><a href="downloads/add-quiz-question.skill.md" download>Télécharger le skill d’ajout seul</a></p><details><summary>Lire sa procédure</summary><pre id="question-preview"><code>---
+name: add-quiz-question
+description: Ajouter une question dans les données d’un quiz Kotlin Compose en respectant son format actuel, ses choix et sa bonne réponse. Utiliser pour cet ajout ciblé, pas pour refaire l’architecture ou le calcul du score.
+---
+
+# Ajouter une question au quiz
+
+Lis les consignes et retrouve l’endroit où les questions sont réellement définies.
+Examine une question existante et les règles qui consomment ces données avant
+d’ajouter quoi que ce soit. Respecte le modèle déjà en place.
+
+Reprends l’énoncé, les choix et la bonne réponse demandés. S’il manque une
+information, distingue ta proposition du contenu fourni et fais préciser ce qui
+est nécessaire pour obtenir une question sans ambiguïté.
+
+Ajoute la question dans les données. Garde des noms de code anglais et des textes
+français. Vérifie que la bonne réponse correspond à un des choix et que les choix
+permettent une réponse claire. Conserve la logique de progression et de score ;
+l’ajout d’une question ne doit pas imposer une copie de l’interface.
+
+Repère les textes ou calculs qui supposeraient un ancien nombre de questions et
+adapte seulement ce qui est nécessaire à la demande. Explique toute adaptation
+qui dépasse l’ajout de données.
+
+Utilise la tâche de construction adaptée au projet si l’environnement le permet.
+Indique son résultat réel. Fais observer ou propose de vérifier la nouvelle
+question, ses choix, la fin de partie et le recommencement ; ne déclare pas un
+scénario validé sans l’avoir exécuté. Termine par les fichiers changés, la raison
+des changements et les vérifications restantes. Les actions Git de publication
+restent celles demandées par l’utilisateur.
+</code></pre></details></article>
+                <p>Pour un téléchargement individuel, crée le dossier du skill dans .agents/skills ou .claude/skills selon ton outil, puis renomme le fichier téléchargé en <code>SKILL.md</code>. Les deux skills ont chacun leur propre dossier ; ne les rassemble pas dans un unique fichier.</p>
+                <p>L’en-tête entre les lignes <code>---</code> contient un nom et une description. La description aide l’agent à reconnaître les demandes concernées. Le reste du fichier décrit la procédure.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Revue · review</h3><p>Relire un changement pour comprendre son effet et repérer un problème. Une proposition de vérification n’est pas une vérification exécutée.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Métadonnées</h3><p>Des informations qui décrivent le fichier. Ici, name et description identifient le skill et son usage.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="adapter" aria-labelledby="titre-adapter">
+            <p class="eyebrow">05 / Faire correspondre le texte au code</p>
+            <h2 id="titre-adapter">Adapte le modèle au projet choisi.</h2>
+            <ol class="steps"><li>Choisis le projet concerné : quiz Android ou compagnon Desktop. Les consignes se placent dans ce projet, pas dans le dossier parent des deux.</li><li>Relis le fichier existant s’il y en a un, puis adapte le contexte, les noms et les règles réellement conservées.</li><li>Pour Desktop, remplace la présentation Android et le module app par la cible Desktop réelle. Retrouve sa commande Gradle ; ne conserve pas :app:assembleDebug comme commande de construction Desktop.</li><li>Vérifie les chemins des skills et garde les permissions dans les réglages de l’outil, distincts de ces modèles.</li><li>Relis le diff Git et conserve les fichiers de consignes utiles avec le projet après validation avec l’encadrant.</li></ol>
+            <p>Si le travail utilise un projet comme référence et un autre comme destination, rappelle ces rôles dans la demande du moment. Une instruction durable ne remplace pas le contexte précis d’un transfert.</p>
+            <p>Ces kits ne contiennent ni configuration de modèle, ni connexion à un service, ni commande d’installation. Tu peux commencer par le seul fichier de consignes et ajouter un skill lorsqu’un besoin se répète.</p>
+        </section>
+
+        <section class="lesson-section" id="verifier" aria-labelledby="titre-verifier">
+            <p class="eyebrow">06 / Vérifier la prise en compte</p>
+            <h2 id="titre-verifier">Fais retrouver les fichiers dans une session du projet.</h2>
+            <p>Ouvre une nouvelle session de l’agent dans le projet choisi. Demande-lui de lire le fichier de consignes et d’expliquer trois règles sans modifier de fichier. Compare sa réponse au contenu que tu as installé.</p>
+            <p>Pour les skills, vérifie leur présence dans l’interface de ton outil. Dans Codex CLI, tu peux ouvrir <code>/skills</code> ou mentionner un skill avec <code>$</code>. Dans Claude Code, les skills de projet peuvent être invoqués par leur nom précédé de <code>/</code>. Les exemples suivants se saisissent dans la conversation de l’agent, pas comme des commandes du terminal :</p>
+            <div class="kit-grid"><article class="kit-card"><h3>Codex</h3><pre><code>$review-quiz-change Relis mes changements locaux sans modifier de fichier.</code></pre></article><article class="kit-card"><h3>Claude Code</h3><pre><code>/review-quiz-change Relis mes changements locaux sans modifier de fichier.</code></pre></article></div>
+            <p>Pour essayer l’ajout de question, prépare les données complètes. Par exemple : énoncé « Quel mot-clé déclare une fonction en Kotlin ? », choix « fun », « val », « class », bonne réponse « fun ». Utilise add-quiz-question seulement lorsque tu souhaites réellement cet ajout, puis relis et vérifie le résultat.</p>
+            <details><summary>Le skill n’apparaît pas ou l’agent ne retrouve pas les consignes</summary><p>Vérifie le dossier depuis lequel tu as ouvert l’agent, les noms exacts, l’emplacement des fichiers et l’absence d’une extension .txt ajoutée par l’éditeur. Consulte les règles de découverte de ta version et relance la session si nécessaire. La présence d’un ZIP dans le dossier Téléchargements ne signifie pas que le kit est installé.</p></details>
+            <p class="caption">Les fichiers ont été préparés pour le cours. Leur validation de format ne prouve ni leur chargement dans ton installation ni la qualité de chaque réponse de l’agent. Le guide ne consulte pas ton projet et n’enregistre aucune progression.</p>
+        </section>
+        <nav class="resource-nav" aria-label="Retrouver le guide"><a href="../index.html#ressources">← Ressources sur l’accueil</a><a href="../module_agents_project_instructions_view/index.html">Revoir les consignes et les skills →</a></nav>
+        <footer class="lesson-footer"><span>Documentation officielle :</span><a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md">AGENTS.md pour Codex</a><a href="https://learn.chatgpt.com/docs/build-skills">Skills Codex</a><a href="https://code.claude.com/docs/en/memory">Consignes Claude Code</a><a href="https://code.claude.com/docs/en/skills">Skills Claude Code</a></footer>
+    </main>
+</div>
+</body>
+</html>
