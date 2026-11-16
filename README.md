@@ -938,3 +938,42 @@ Contrôles statiques : 38 pages HTML et chaîne des 37 leçons, liens locaux, an
 et libellés valides ; `git diff --check` sans erreur. Aucune fenêtre Desktop
 lancée, aucun installateur produit ; rendu navigateur, clavier, Windows et Linux
 non vérifiés ici.
+
+
+## Pour aller plus loin — page 11 : Codex dans le terminal
+
+`module_further_codex_cli_view/` prolonge la fenêtre à une question par un transfert
+guidé du vrai quiz Android vers Desktop. CLI/terminal/prompt et commandes internes
+distingués ; installation et accès préparés avec l’encadrant. Vérification de
+version, dossier courant, démarrage Codex, /permissions, /status, /diff et /quit.
+Les commandes ne sont pas exécutées par la page, qui reste sans JavaScript.
+
+Les projets restent distincts : Android est la référence en lecture, Desktop la
+destination. Chemins réels, historique initial et état Git connus, branche de
+travail. Lecture des règles puis demande de réalisation séparée. Questions,
+progression, score, résultat et recommencement, sans caméra/profil ni deuxième
+validation conservée. Les copies ne constituent pas un module de code partagé.
+Un chemin inaccessible est signalé, jamais inventé ; --add-dir n’est pas présenté
+comme une option de lecture seule. Accès contrôlés dans l’outil, pas par le prompt.
+
+Relecture Git des deux projets et vérification manuelle de la partie, des scores,
+du premier choix définitif et de restart. Total adapté au nombre de questions.
+La compilation annoncée par l’agent reste distincte des observations en fenêtre.
+Notes sans envoi ni stockage. Aucune installation, connexion ou migration réelle
+des projets Android/Desktop n’est effectuée par la réalisation du guide.
+Home à 27 pages principales et 11 extensions ; navigation Desktop ↔ Codex CLI.
+Sources : documentation officielle OpenAI CLI, commandes internes, options et accès.
+Python reste à discuter avant réalisation.
+
+
+Vérifications de la page CLI : documentation officielle OpenAI consultée pour
+l’installation, le démarrage, les commandes internes et les droits. CLI locale
+0.169.0 : `codex --version` et `codex --help` consultés, sans connexion ni session
+agent démarrée pour l’exercice. Le bac à sable a signalé une impossibilité de
+créer des alias PATH lors de cette consultation ; version et aide étaient lisibles.
+Syntaxe des blocs terminal analysée avec `bash -n`, sans exécuter les chemins
+à remplacer. Structure HTML équilibrée, titre principal unique et tokens CSS
+valides. Contrôle des 39 pages HTML et de la chaîne des 38 leçons : ressources,
+ancres, libellés et précédent/suivant valides ; `git diff --check` sans erreur.
+Aucun transfert Android vers Desktop réalisé, aucune installation/connexion ou
+fenêtre observée ; rendu navigateur, clavier et exécution Windows non vérifiés.

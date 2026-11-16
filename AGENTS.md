@@ -192,7 +192,7 @@ Observer après arrêt du processus ; pas de sauvegarde de partie ou de cloud aj
 
 ## Accueil réorganisé
 
-La home distingue parcours principal (27 pages) et extensions facultatives (10).
+La home distingue parcours principal (27 pages) et extensions facultatives (11).
 Ne pas réintroduire les cartes « À venir » pour des thèmes déjà couverts. La carte
 code rend visibles cinq étapes sans modifier l’ordre des leçons. Conserver une
 entrée de début par section et les prérequis des extensions ; pas de progression
@@ -204,7 +204,7 @@ implicite, nouveau raccourci Git page 2 ou renumérotation des en-têtes des le�
 Fit/Crop, dimensions, cercle et accessibilité. Le Painter est préparé par le
 chargeur existant ; ne pas présenter painterResource comme un lecteur de chemin
 photo. Le SVG est une illustration du guide. Aucun ajout de caméra/stockage.
-La home compte désormais 27 pages principales et 10 extensions ; conserver son
+La home compte désormais 27 pages principales et 11 extensions ; conserver son
 organisation et adapter ces compteurs au nombre réel de pages.
 
 
@@ -216,7 +216,7 @@ qui se construit déjà dans l’IDE ; aucune intégration caméra/profil requis
 Commandes distinctes PowerShell et macOS/Linux, pas de mise à jour des versions,
 nouvelle bibliothèque, signature release ou publication. Construire n’installe
 ni ne lance l’app. La page ne lance rien ; les observations sont personnelles.
-Home à 27 pages principales et 10 extensions, navigation images ↔ Gradle.
+Home à 27 pages principales et 11 extensions, navigation images ↔ Gradle.
 Python et les ressources restent à traiter séparément sur demande ;
 l’angle Python doit être rediscuté avec l’utilisateur avant toute réalisation.
 
@@ -232,4 +232,20 @@ Séparer le composable/règle et le main/Window Desktop, conserver le point d’
 configuré. Commandes adaptées au vrai module, distinction lancement/installateur,
 aucune promesse de packaging Windows depuis macOS. Pas de migration du dépôt
 Android ni création d’un projet élève par le guide. Home à 27 pages principales
-et 10 extensions, navigation Gradle ↔ Desktop. Python reste en discussion.
+et 11 extensions, navigation Gradle ↔ Desktop. Python reste en discussion.
+
+
+## Extension Codex CLI et transfert du quiz
+
+`module_further_codex_cli_view/` distingue terminal, CLI, commandes internes et
+prompt. Installation et compte préparés avec l’encadrant via les docs officielles.
+Codex démarre dans le projet Desktop, Android reste une référence à lire. Lecture
+et proposition avant réalisation, permissions vérifiées dans l’outil ; un prompt
+ne configure pas les droits. --add-dir accorde une écriture, pas une simple lecture.
+Le clone Android doit contenir le vrai quiz réalisé, pas seulement le starter.
+Transfert des questions, progression, premier choix définitif, score et restart,
+avec une seule logique de partie. Aucun portage caméra/profil, nouveau dépôt ou
+module commun imposé. Diff et état Git des deux projets comparés, observations
+Desktop adaptées aux données de l’élève. Les prompts n’exécutent rien sur le site.
+Home à 27 pages principales et 11 extensions ; navigation Desktop ↔ Codex CLI.
+Python reste à discuter avant réalisation.
