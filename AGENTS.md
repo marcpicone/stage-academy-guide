@@ -192,7 +192,7 @@ Observer après arrêt du processus ; pas de sauvegarde de partie ou de cloud aj
 
 ## Accueil réorganisé
 
-La home distingue parcours principal (27 pages) et extensions facultatives (8).
+La home distingue parcours principal (27 pages) et extensions facultatives (9).
 Ne pas réintroduire les cartes « À venir » pour des thèmes déjà couverts. La carte
 code rend visibles cinq étapes sans modifier l’ordre des leçons. Conserver une
 entrée de début par section et les prérequis des extensions ; pas de progression
@@ -204,5 +204,18 @@ implicite, nouveau raccourci Git page 2 ou renumérotation des en-têtes des le�
 Fit/Crop, dimensions, cercle et accessibilité. Le Painter est préparé par le
 chargeur existant ; ne pas présenter painterResource comme un lecteur de chemin
 photo. Le SVG est une illustration du guide. Aucun ajout de caméra/stockage.
-La home compte désormais 27 pages principales et 8 extensions ; conserver son
+La home compte désormais 27 pages principales et 9 extensions ; conserver son
 organisation et adapter ces compteurs au nombre réel de pages.
+
+
+## Extension Gradle
+
+`module_further_gradle_view/` explique build, modules, dépendances, plugins et
+Wrapper, puis fait produire l’APK debug depuis le terminal. Précondition : un clone
+qui se construit déjà dans l’IDE ; aucune intégration caméra/profil requise.
+Commandes distinctes PowerShell et macOS/Linux, pas de mise à jour des versions,
+nouvelle bibliothèque, signature release ou publication. Construire n’installe
+ni ne lance l’app. La page ne lance rien ; les observations sont personnelles.
+Home à 27 pages principales et 9 extensions, navigation images ↔ Gradle.
+Python, Desktop et les ressources restent à traiter séparément sur demande ;
+l’angle Python doit être rediscuté avec l’utilisateur avant toute réalisation.

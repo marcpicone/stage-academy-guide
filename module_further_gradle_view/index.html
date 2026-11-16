@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Comprendre Gradle, les modules, les dépendances et le Wrapper, puis construire l’APK debug de ton quiz depuis le terminal.">
+    <title>Gradle : du code à l’application · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="module_further_gradle_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="gradle-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>09 / Pour aller plus loin · Page 9</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Comprendre ce qui travaille derrière Run</p>
+            <h1 id="titre">Gradle : du code à l’application.</h1>
+            <p class="lead">Ton téléphone n’ouvre pas directement les fichiers Kotlin du projet. Découvre comment Gradle organise leur transformation en application, puis produis le fichier APK de ton quiz.</p>
+            <p>Il suffit d’un clone Android qui se construit déjà avec Android Studio. Les extensions Profil et caméra ne sont pas nécessaires : utilise la version de ton quiz que tu as réellement réalisée.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#role">Le rôle</a><a href="#fichiers">Les fichiers</a><a href="#bibliotheques">Les bibliothèques</a><a href="#wrapper">Le Wrapper</a><a href="#construire">Construire</a><a href="#observer">Expliquer</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="role" aria-labelledby="titre-role">
+                <p class="eyebrow">01 / Préparer ce que l’appareil pourra installer</p>
+                <h2 id="titre-role">Gradle organise la construction.</h2>
+                <p>Tu écris du code et tu ajoutes des ressources : textes, icônes, images. La <strong>construction</strong>, appelée <strong>build</strong> en anglais, prépare ces éléments et les assemble dans un format utilisable par Android.</p>
+                <p><strong>Gradle</strong> est l’outil qui organise ce travail. Il utilise la configuration du projet et des outils spécialisés, comme le compilateur Kotlin. Le <strong>plugin Android</strong> lui ajoute les règles et les tâches propres à une application Android.</p>
+                <ol class="build-flow" aria-label="Schéma simplifié de la construction">
+                    <li><strong>Les entrées</strong><p>Ton code, les ressources, le manifeste et les bibliothèques du projet.</p></li>
+                    <li><strong>Le travail organisé par Gradle</strong><p>Préparer, compiler et assembler les éléments avec les outils nécessaires.</p></li>
+                    <li><strong>Le résultat de cet exercice</strong><p>Un fichier <code>.apk</code>, le paquet d’installation Android de ton quiz.</p></li>
+                </ol>
+                <p class="caption">Schéma simplifié pour comprendre le trajet ; les vraies tâches sont plus nombreuses et certaines peuvent être réutilisées.</p>
+                <div class="comparison"><table><caption>Trois actions que tu rencontres dans l’IDE</caption><thead><tr><th scope="col">Action</th><th scope="col">Son rôle</th></tr></thead><tbody>
+                    <tr><th scope="row">Sync · synchroniser</th><td>Actualiser la compréhension du projet par l’IDE à partir de la configuration Gradle, notamment après un changement de dépendance. Cela ne lance pas ton quiz.</td></tr>
+                    <tr><th scope="row">Build · construire</th><td>Produire les fichiers demandés à partir du projet. Dans cet exercice, on demande un APK.</td></tr>
+                    <tr><th scope="row">Run · lancer</th><td>Préparer puis installer ou mettre à jour l’app sur l’appareil sélectionné, et la lancer. La construction fait partie de ce parcours.</td></tr>
+                </tbody></table></div>
+                <details><summary>Pourquoi apprendre une commande si Run fonctionne déjà ?</summary><p>Pour reconnaître ce que fait l’IDE et pouvoir demander la même construction depuis un terminal, un agent ou une machine d’automatisation. Tu retrouves le même projet et sa configuration.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Compiler · compile</h3><p>Transformer le code source en une forme que les étapes suivantes pourront utiliser. Compiler fait partie de la construction.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Plugin · extension d’outil</h3><p>Un composant qui ajoute des possibilités à un outil. Ici, il équipe Gradle pour construire une application Android.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>APK</h3><p>Android Package : le fichier qui rassemble l’application à installer. Il est produit à partir du projet.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="fichiers" aria-labelledby="titre-fichiers">
+                <p class="eyebrow">02 / Une configuration à plusieurs niveaux</p>
+                <h2 id="titre-fichiers">Retrouve le projet et son module app.</h2>
+                <p>Dans le clone Android, affiche les fichiers du projet avec l’encadrant. L’affichage Android de l’IDE peut les regrouper autrement ; l’arbre ci-dessous décrit leurs emplacements réels.</p>
+                <pre><code>ton-clone-android/
+├── settings.gradle.kts
+├── build.gradle.kts
+├── gradlew
+├── gradlew.bat
+├── gradle/wrapper/
+│   ├── gradle-wrapper.jar
+│   └── gradle-wrapper.properties
+└── app/
+    ├── build.gradle.kts
+    └── src/</code></pre>
+                <div class="file-list">
+                    <article><h3><code>settings.gradle.kts</code> : quels modules ?</h3><p>Il décrit notamment les modules inclus dans le projet. Dans le projet de départ, <code>include(":app")</code> déclare le module app. Il indique aussi où rechercher les plugins et les bibliothèques.</p></article>
+                    <article><h3><code>build.gradle.kts</code> à la racine : les plugins du projet</h3><p>Dans notre projet de départ, il déclare les plugins et leurs versions. <code>apply false</code> signifie qu’on ne les applique pas à ce niveau ; ils seront utilisés dans le module concerné.</p></article>
+                    <article><h3><code>app/build.gradle.kts</code> : comment construire l’app ?</h3><p>On y retrouve les plugins appliqués à app, les réglages Android, l’activation de Compose et les dépendances utilisées par ce module.</p></article>
+                </div>
+                <p>Ces fichiers se terminent par <code>.gradle.kts</code> : ils décrivent le travail de Gradle avec une syntaxe Kotlin. Ils ne décrivent pas l’écran du quiz.</p>
+                <ol class="steps"><li>Retrouve <code>include(":app")</code> dans les settings.</li><li>Ouvre ensuite <code>app/build.gradle.kts</code> et repère <code>minSdk</code>, <code>compose = true</code> et <code>dependencies</code>.</li><li>Explique pourquoi les deux fichiers nommés build.gradle.kts n’ont pas le même emplacement ni le même rôle.</li></ol>
+                <details><summary>Que signifient minSdk, compileSdk et targetSdk ?</summary><p><code>minSdk</code> fixe la version minimale d’Android acceptée. <code>compileSdk</code> choisit les API Android disponibles pour compiler. Une API est un ensemble de possibilités qu’un autre code peut utiliser, par exemple les fonctions fournies par Android. <code>targetSdk</code> indique la version d’Android pour laquelle l’app déclare avoir été adaptée, ce qui influence certains comportements du système. Ces nombres répondent à des besoins différents ; les repérer ne demande pas de les changer.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Module</h3><p>Une partie du projet qui possède sa configuration de construction. Ici, app est le module de l’application Android.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Racine · root</h3><p>Le dossier principal du clone. Le terminal de cet exercice doit être placé dans ce dossier, au même niveau que gradlew.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>SDK</h3><p>Software Development Kit : un ensemble d’outils et de ressources pour développer sur une plateforme. L’IDE a déjà aidé à préparer le SDK Android.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="bibliotheques" aria-labelledby="titre-bibliotheques">
+                <p class="eyebrow">03 / Utiliser du code fourni par d’autres</p>
+                <h2 id="titre-bibliotheques">Une dépendance rend une bibliothèque disponible.</h2>
+                <p>Tu utilises Text et Button sans avoir écrit leur fonctionnement. Ils viennent d’une <strong>bibliothèque</strong>, un ensemble de code réutilisable. Déclarer une <strong>dépendance</strong> indique à Gradle que ton module a besoin de cette bibliothèque.</p>
+                <p>Voici un extrait déjà présent dans le projet de départ, à lire dans le fichier plutôt qu’à ajouter une seconde fois :</p>
+                <pre><code>dependencies {
+    implementation("androidx.compose.material3:material3")
+}</code></pre>
+                <p><code>implementation</code> déclare ici une bibliothèque utilisée par le module app. Le nom avant les deux-points situe sa famille ; celui après identifie la bibliothèque. Un <strong>import</strong> Kotlin permet ensuite d’utiliser ses noms dans un fichier de code : l’import et la déclaration Gradle ont donc des rôles complémentaires.</p>
+                <details><summary>Pourquoi certaines lignes ont-elles une version et pas celle-ci ?</summary><p>Le projet de départ utilise une <strong>BOM</strong> Compose, une liste de versions prévues pour fonctionner ensemble. Elle fournit les versions des bibliothèques Compose concernées. D’autres dépendances indiquent directement leur version. Dans d’autres projets, ces informations peuvent aussi être rangées dans un catalogue. Pour cette page, retrouve l’organisation de ton clone sans mettre les versions à jour.</p></details>
+                <p>Quand une bibliothèque manque sur l’ordinateur, Gradle peut la télécharger depuis un dépôt configuré, puis la garder dans son cache local. Le guide s’ouvre hors ligne ; construire Android peut demander une connexion, notamment lors de la première préparation.</p>
+                <details><summary>Ajouter une bibliothèque ajoute-t-il automatiquement une fonctionnalité au quiz ?</summary><p>Non. Cela rend du code disponible. Il reste à l’utiliser et à vérifier le résultat : déclarer une bibliothèque de caméra ne crée pas l’écran de capture.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Dépendance · dependency</h3><p>Un élément dont ton projet a besoin. Ici, une bibliothèque déclarée pour le module app.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Dépôt de bibliothèques · repository</h3><p>Un endroit où Gradle recherche des bibliothèques, par exemple Google Maven ou Maven Central. Le mot dépôt ne désigne pas ici ton historique Git.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Cache</h3><p>Une copie locale conservée pour éviter de refaire certains téléchargements ou travaux.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="wrapper" aria-labelledby="titre-wrapper">
+                <p class="eyebrow">04 / Lancer la version choisie pour le projet</p>
+                <h2 id="titre-wrapper">Utilise le Gradle Wrapper du clone.</h2>
+                <p>Le <strong>Wrapper</strong> est le lanceur Gradle livré avec le projet. Les scripts <code>gradlew</code> et <code>gradlew.bat</code>, avec les fichiers de <code>gradle/wrapper/</code>, permettent d’utiliser la version de Gradle choisie pour ce projet. Elle est indiquée par <code>distributionUrl</code> dans <code>gradle-wrapper.properties</code>.</p>
+                <p>Tu n’as donc pas besoin d’installer une autre version de Gradle pour cet exercice. Le Wrapper télécharge celle du projet si elle n’est pas déjà disponible. Le JDK et le SDK Android doivent, eux aussi, être correctement préparés.</p>
+                <p>Une <strong>tâche</strong>, ou <strong>task</strong>, est un travail qu’on demande à Gradle. Dans <code>:app:assembleDebug</code>, <code>:app</code> désigne le module et <code>assembleDebug</code> la tâche qui assemble sa version de développement. Gradle organise aussi les tâches nécessaires avant celle-ci.</p>
+                <div class="command-variants">
+                    <article><h3>Windows · PowerShell</h3><pre><code>.\gradlew.bat :app:tasks --all</code></pre></article>
+                    <article><h3>macOS / Linux · terminal</h3><pre><code>./gradlew :app:tasks --all</code></pre></article>
+                </div>
+                <p><code>tasks</code> liste les tâches ; <code>--all</code> élargit la liste. Lance seulement la commande qui correspond à ton terminal, depuis la racine du clone Android. Dans le résultat, cherche <code>assembleDebug</code> et <code>installDebug</code>.</p>
+                <details><summary>J’utilise Git Bash sous Windows</summary><p>Depuis la racine du clone, tu peux utiliser <code>./gradlew :app:tasks --all</code>, puis <code>./gradlew :app:assembleDebug</code> pour construire. Les exemples PowerShell utilisent explicitement le script Windows ; choisis la forme adaptée au terminal ouvert.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Wrapper · lanceur du projet</h3><p>Les fichiers qui permettent de lancer Gradle avec la version prévue par le projet.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Task · tâche</h3><p>Un travail nommé. Les plugins fournissent notamment les tâches de construction Android.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>JDK</h3><p>Java Development Kit : les outils Java nécessaires notamment au fonctionnement de Gradle. Le terminal et l’IDE doivent utiliser une version compatible avec le projet.</p></aside>
+            </div>
+        </div>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="construire" aria-labelledby="titre-construire">
+                <p class="eyebrow">05 / Ton résultat observable</p>
+                <h2 id="titre-construire">Construis l’APK et retrouve le fichier.</h2>
+                <ol class="steps"><li>Enregistre les fichiers du quiz dans l’IDE. Vérifie que tu es dans le clone Android, avec gradlew et le dossier app visibles à la racine.</li><li>Avant de lancer la commande, annonce ce qu’elle doit produire et si elle doit ouvrir l’appareil.</li><li>Lance la commande correspondant à ton terminal, puis attends la fin du travail.</li></ol>
+                <div class="command-variants">
+                    <article><h3>Windows · PowerShell</h3><pre><code>.\gradlew.bat :app:assembleDebug</code></pre></article>
+                    <article><h3>macOS / Linux · terminal</h3><pre><code>./gradlew :app:assembleDebug</code></pre></article>
+                </div>
+                <p>Dans la sortie, repère les lignes <code>&gt; Task</code> et le message final. Une construction réussie se termine par <code>BUILD SUCCESSFUL</code>. Si elle échoue, retrouve le premier message utile avec l’encadrant avant de réessayer.</p>
+                <p>Après réussite, ouvre ce chemin depuis le dossier du projet, dans l’explorateur de fichiers ou l’affichage Project de l’IDE :</p>
+                <pre><code>app/build/outputs/apk/debug/app-debug.apk</code></pre>
+                <p>Ce chemin correspond à notre module app dans sa configuration simple. Si le projet a été adapté, le nom ou les sous-dossiers peuvent varier : retrouve le dossier <code>app/build/outputs/apk/</code> avec l’encadrant.</p>
+                <aside class="expected"><strong>Résultat attendu : une construction réussie et un APK retrouvé.</strong><p><code>assembleDebug</code> ne demande pas d’appareil connecté et ne lance pas le quiz. L’APK sert au développement ; sa création ne publie rien sur GitHub ou Google Play.</p></aside>
+                <p>La tâche <code>installDebug</code> peut construire puis installer sur un appareil préparé ; l’installation et l’ouverture de l’écran restent deux actions différentes. Pour cette première expérience, produire et retrouver le fichier suffit.</p>
+                <details><summary>La deuxième construction va plus vite ou affiche UP-TO-DATE</summary><p><code>UP-TO-DATE</code> signifie que Gradle juge le résultat d’une tâche déjà à jour. <code>FROM-CACHE</code> indique qu’il réutilise un résultat du cache. Il n’est pas obligé de refaire chaque étape. Une nouvelle construction peut réussir sans changer la date de l’APK si rien n’a changé.</p></details>
+                <details><summary>Un APK est présent, mais la dernière commande a échoué</summary><p>Le fichier peut venir d’une construction précédente. Sa présence ne prouve pas la réussite de la dernière commande. Lis son résultat avant d’associer ce fichier à ta version actuelle.</p></details>
+                <details><summary>Le terminal indique une erreur de Java, de SDK ou de téléchargement</summary><p>Commence par vérifier le dossier courant. Pour Java, compare avec l’encadrant le JDK du terminal et celui utilisé par Gradle dans Android Studio. Pour le SDK, vérifiez son installation et le chemin local. Pour un téléchargement, lisez le nom de l’élément manquant et vérifiez la connexion. Une erreur d’environnement n’appelle pas forcément un changement du code du quiz ou des versions Gradle.</p><p>Sur macOS/Linux, si le script indique « Permission denied », fais vérifier ses droits avec l’encadrant. Le nom de fichier seul ne garantit pas qu’il est exécutable.</p></details>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Debug / release</h3><p>Deux types de construction : debug pour développer, release pour préparer une distribution. Ici, on utilise debug ; la publication et sa signature seront un autre sujet.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Artefact · artifact</h3><p>Un fichier produit par la construction. Dans cette expérience, l’APK est l’artefact que tu retrouves.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>SUCCESSFUL / FAILED</h3><p>« Réussi » / « échoué ». Le message final t’aide à distinguer une construction terminée avec succès d’une tentative interrompue par une erreur.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="observer" aria-labelledby="titre-observer">
+            <p class="eyebrow">06 / Retrouver les liens</p>
+            <h2 id="titre-observer">Explique ce que tu as demandé à Gradle.</h2>
+            <ol class="steps"><li>Montre le fichier qui inclut le module app, puis celui qui déclare Material 3.</li><li>Dans ta commande, désigne le lanceur, le module et la tâche.</li><li>Montre le résultat de la commande et le fichier produit. Explique pourquoi le téléphone n’a pas besoin de s’allumer pendant cette construction.</li><li>Lance une deuxième construction sans modifier le code et compare les messages. Tu n’as pas à obtenir un temps précis.</li><li>Ouvre le diff Git. Les sorties de build sont générées et ignorées dans le projet de départ ; garde les sources et le Wrapper versionnés. L’exercice de lecture et de construction ne demande pas de commit sans modification utile.</li></ol>
+            <details><summary>Question : ajouter un import suffit-il toujours à utiliser une nouvelle bibliothèque ?</summary><p>Non. L’import permet de désigner du code déjà disponible. Si la bibliothèque n’est pas une dépendance du module, il faut d’abord la déclarer correctement et synchroniser le projet.</p></details>
+            <details><summary>Question : BUILD SUCCESSFUL prouve-t-il que le quiz compte bien les points ?</summary><p>Non. Cela confirme la réussite des tâches demandées. Il reste à observer le comportement du quiz, comme dans les pages précédentes.</p></details>
+            <label class="draft-label" for="gradle-observations">Mes observations</label>
+            <textarea id="gradle-observations" rows="7" spellcheck="true">Terminal et commande utilisés :
+Rôle de :app et de assembleDebug :
+Résultat final de la commande :
+Chemin de l’APK retrouvé :
+Différence entre les deux constructions :
+Ce qui relève de Gradle et ce qui relève du lancement :
+Ce qui reste à vérifier :</textarea>
+            <fieldset class="checklist"><legend>Mes repères</legend><label><input type="checkbox"><span>Je distingue synchroniser, construire et lancer.</span></label><label><input type="checkbox"><span>Je retrouve le module app, ses dépendances et le Wrapper.</span></label><label><input type="checkbox"><span>J’ai lancé une construction et lu son résultat.</span></label><label><input type="checkbox"><span>Je peux montrer l’APK produit et expliquer ce qu’il représente.</span></label></fieldset>
+            <p class="caption">Notes et confirmations personnelles, sans envoi ni sauvegarde. Cette page n’exécute aucune commande, ne télécharge aucune dépendance et ne consulte pas ton clone. Copie tes observations avant de fermer ou recharger la page.</p>
+            <p class="closing">Tu peux maintenant relier les fichiers du projet, la commande de construction et l’APK. Ajoute cette expérience à ton <a href="../module_review_view/index.html">bilan</a> en expliquant le travail qui se cache derrière Run.</p>
+        </section>
+        <nav class="course-pagination" aria-label="Navigation entre les pages du cours"><a class="course-pagination-prev" href="../module_further_images_view/index.html" rel="prev"><span>← Précédent</span><span>Afficher une image dans ton app</span></a></nav>
+        <footer class="lesson-footer"><span>Références officielles :</span><a href="https://developer.android.com/build">Configuration Android</a><a href="https://developer.android.com/build/building-cmdline">Construire depuis le terminal</a><a href="https://docs.gradle.org/current/userguide/gradle_wrapper_basics.html">Gradle Wrapper</a><a href="https://docs.gradle.org/current/userguide/task_basics.html">Les tâches Gradle</a></footer>
+    </main>
+</div>
+</body>
+</html>

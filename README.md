@@ -873,3 +873,31 @@ contrat ont été compilés ici. Aucun fonctionnement caméra, sauvegarde ou cyc
 vie sur appareil n’est attesté par cette relecture. Le rendu dans un navigateur,
 la navigation au clavier et l’exécution sous Windows restent à vérifier.
 Le dépôt Android de départ n’a pas été modifié par ce rejeu.
+
+
+## Pour aller plus loin — page 9 : comprendre Gradle
+
+`module_further_gradle_view/` relie le code à l’APK : construction et compilation,
+sync/build/run, fichiers racine et module app, dépendances/imports, plugins et
+Gradle Wrapper. Exercice : lire les tâches, lancer `:app:assembleDebug` depuis la
+racine Android et retrouver `app/build/outputs/apk/debug/app-debug.apk`.
+Commandes PowerShell et macOS/Linux séparées, adaptation Git Bash expliquée.
+
+Le clone doit déjà se construire dans l’IDE. Aucune version ou dépendance n’est
+modifiée ; ni caméra ni profil requis. Les états UP-TO-DATE/FROM-CACHE, un ancien
+APK après échec, le JDK du terminal et les besoins de téléchargement sont expliqués.
+Le Wrapper reste versionné et les sorties build ignorées. L’exercice ne lance pas
+l’appareil et ne publie rien. Notes sans stockage, page sans JavaScript.
+Accueil à 27 pages principales et 9 extensions, navigation images ↔ Gradle.
+Sources : documentations officielles Android build/CLI et Gradle Wrapper/tasks.
+Les prochaines pages Desktop, Python et ressources ne sont pas créées ici ;
+l’angle Python doit être rediscuté avant réalisation.
+
+
+Vérifications de cette page : lecture des tâches avec `projects :app:tasks --all`
+et construction `:app:assembleDebug` réussies sur la copie temporaire du quiz,
+avec `--offline` uniquement parce que le cache de vérification était déjà prêt.
+APK présent au chemin enseigné, archive lisible avec manifeste et code DEX.
+Contrôles statiques : 37 pages HTML et chaîne de 36 leçons valides, liens/ancres
+et libellés vérifiés, `git diff --check` sans erreur. Le rendu navigateur, le
+clavier et les commandes Windows ne sont pas vérifiés ici ; aucun appareil lancé.
