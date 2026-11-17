@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Une sélection commentée de documentation officielle et de quatre projets GitHub pour réviser Kotlin, Compose, Git, Gradle, Python et le travail avec les agents.">
+    <title>Documentation et projets à explorer · Stage Academy</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../theme_page.css">
+    <link rel="stylesheet" href="useful_links_view.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="links-view">
+    <header class="course-header"><a href="../index.html">Stage Academy</a><span>Ressources · Documentation et projets</span></header>
+    <main id="contenu">
+        <section class="course-hero" aria-labelledby="titre">
+            <p class="eyebrow">Choisir une question, puis une ressource</p>
+            <h1 id="titre">Documentation et projets à explorer.</h1>
+            <p class="lead">Retrouve une explication, observe un exemple et reviens à ton quiz avec une idée précise. Chaque lien ci-dessous indique un besoin et un point de départ.</p>
+            <p>Cette sélection accompagne le parcours. Les liens ouvrent des sites externes et demandent une connexion ; le guide lui-même reste consultable localement. Pour les fichiers d’instructions et les skills, retrouve les <a href="../resources_view/index.html">modèles du guide</a>.</p>
+            <nav class="lesson-nav" aria-label="Dans cette page"><a href="#commencer">Par où commencer</a><a href="#git-code">Git et code</a><a href="#build-desktop">Build et Desktop</a><a href="#python-agents">Python et agents</a><a href="#projets">Projets GitHub</a><a href="#explorer">Explorer avec l’agent</a></nav>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="commencer" aria-labelledby="titre-commencer">
+                <p class="eyebrow">01 / Une lecture utile à ton besoin actuel</p>
+                <h2 id="titre-commencer">Commence par une seule piste.</h2>
+                <ul class="reading-picks"><li><strong>Une notion Kotlin reste floue ?</strong> Reprends une notion dans le <a href="https://kotlinlang.org/docs/kotlin-tour-welcome.html">tour Kotlin</a> et essaie son exemple.</li><li><strong>Tu veux comprendre un écran ?</strong> Pars des <a href="https://developer.android.com/develop/ui/compose/documentation">bases Compose</a>, puis cherche le composant utilisé dans ton quiz.</li><li><strong>Tu veux améliorer ton outil d’images ?</strong> Lis un exemple du <a href="https://pillow.readthedocs.io/en/stable/handbook/tutorial.html">tutoriel Pillow</a> avant de modifier ton script.</li></ul>
+                <p>Une documentation technique contient souvent plus d’options que tu n’en utilises aujourd’hui. Lis le passage qui répond à ta question, puis vérifie ton interprétation avec un petit exemple ou ton encadrant.</p>
+                <p>Les langues sont indiquées pour t’aider à choisir. Si tu utilises une traduction ou l’agent pour comprendre une page en anglais, garde les noms d’API, de fichiers et de commandes tels qu’ils sont écrits.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Documentation</h3><p>Les explications fournies pour comprendre et utiliser un langage, une bibliothèque ou un outil.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>API</h3><p>Les opérations et composants qu’un code met à disposition. Leurs noms exacts permettent de les retrouver dans la documentation.</p></aside>
+            </div>
+        </div>
+
+        <section class="lesson-section" id="git-code" aria-labelledby="titre-git-code">
+            <p class="eyebrow">02 / Réviser les bases et comprendre l’écran</p>
+            <h2 id="titre-git-code">Git, Kotlin et Compose.</h2>
+            <div class="doc-list">
+                <article class="doc-card"><p class="resource-meta">Git · Français</p><h3><a href="https://git-scm.com/book/fr/v2">Pro Git — le livre en français</a></h3><p><strong>Quand l’ouvrir :</strong> pour retrouver ce que font un commit, l’historique et les branches.</p><p><strong>Commence par :</strong> le chapitre « Les bases de Git », puis « Les branches avec Git » selon ta question. Lis un sujet à la fois.</p></article>
+                <article class="doc-card"><p class="resource-meta">GitHub · Français</p><h3><a href="https://docs.github.com/fr/get-started/using-github/hello-world">Hello World — documentation GitHub</a></h3><p><strong>Quand l’ouvrir :</strong> pour revoir le trajet branche → modification → pull request.</p><p><strong>Commence par :</strong> les étapes de création d’une branche et d’ouverture d’une PR. Tu peux lire le déroulement avant de choisir de refaire l’exercice dans un autre dépôt.</p></article>
+                <article class="doc-card"><p class="resource-meta">Kotlin · Anglais · Exemples dans le navigateur</p><h3><a href="https://kotlinlang.org/docs/kotlin-tour-welcome.html">Le tour officiel de Kotlin</a></h3><p><strong>Quand l’ouvrir :</strong> pour pratiquer les variables, types, fonctions et collections déjà rencontrés.</p><p><strong>Commence par :</strong> le parcours Beginner et une notion que tu peux relier au quiz. Ce tour se pratique dans le navigateur.</p></article>
+                <article class="doc-card"><p class="resource-meta">Compose Android · Anglais</p><h3><a href="https://developer.android.com/develop/ui/compose/documentation">Premiers pas avec Jetpack Compose</a></h3><p><strong>Quand l’ouvrir :</strong> pour comprendre les composants, les modifiers et l’organisation de l’interface.</p><p><strong>Commence par :</strong> le tutoriel de base ou le guide du composant que tu veux utiliser. Compare avec une fonction de vue de ton quiz.</p></article>
+                <article class="doc-card"><p class="resource-meta">État Compose · Anglais · Après les premiers clics</p><h3><a href="https://developer.android.com/develop/ui/compose/state">L’état dans Compose</a></h3><p><strong>Quand l’ouvrir :</strong> si tu veux comprendre pourquoi une valeur change mais que l’écran ne se met pas à jour comme prévu.</p><p><strong>Commence par :</strong> remember et mutableStateOf. Retrouve ensuite dans ton code l’état affiché et l’action qui le modifie.</p></article>
+            </div>
+        </section>
+
+        <section class="lesson-section" id="build-desktop" aria-labelledby="titre-build-desktop">
+            <p class="eyebrow">03 / Construire et viser l’ordinateur</p>
+            <h2 id="titre-build-desktop">Gradle et Compose Desktop.</h2>
+            <div class="doc-list">
+                <article class="doc-card"><p class="resource-meta">Construction Android · Anglais</p><h3><a href="https://developer.android.com/build/building-cmdline">Construire Android depuis le terminal</a></h3><p><strong>Quand l’ouvrir :</strong> pour retrouver les tâches de construction et la production de l’APK.</p><p><strong>Commence par :</strong> « Build a debug APK », puis compare la commande avec la <a href="../module_further_gradle_view/index.html">page Gradle du guide</a> et ton terminal.</p></article>
+                <article class="doc-card"><p class="resource-meta">Gradle · Anglais · Référence</p><h3><a href="https://docs.gradle.org/current/userguide/gradle_basics.html">Les concepts de base de Gradle</a></h3><p><strong>Quand l’ouvrir :</strong> pour distinguer projet, fichier de configuration, dépendance, plugin et tâche.</p><p><strong>Commence par :</strong> le schéma des fichiers et le rôle du Wrapper. La documentation « current » peut décrire une version différente de celle de ton projet ; garde sa version prévue pour les exercices.</p></article>
+                <article class="doc-card"><p class="resource-meta">Compose Multiplatform · Anglais · Avec l’encadrant</p><h3><a href="https://kotlinlang.org/docs/multiplatform/quickstart.html">Préparer un projet Compose Multiplatform</a></h3><p><strong>Quand l’ouvrir :</strong> pour préparer l’environnement et retrouver la cible Desktop.</p><p><strong>Commence par :</strong> la préparation de l’IDE puis le lancement Desktop. Pour notre ouverture, suis seulement les plateformes réellement choisies dans ton projet compagnon.</p></article>
+            </div>
+        </section>
+
+        <section class="lesson-section" id="python-agents" aria-labelledby="titre-python-agents">
+            <p class="eyebrow">04 / Outillage et collaboration</p>
+            <h2 id="titre-python-agents">Python, images et agents.</h2>
+            <div class="doc-list">
+                <article class="doc-card"><p class="resource-meta">Python · Français · Après les bases du code</p><h3><a href="https://docs.python.org/fr/3/tutorial/">Le tutoriel Python</a></h3><p><strong>Quand l’ouvrir :</strong> pour retrouver en Python une notion déjà comprise en Kotlin.</p><p><strong>Commence par :</strong> fonctions, conditions ou modules selon ce que tu lis dans le script d’images. Ce tutoriel suppose quelques bases de programmation.</p></article>
+                <article class="doc-card"><p class="resource-meta">uv · Anglais</p><h3><a href="https://docs.astral.sh/uv/guides/scripts/">Lancer des scripts avec uv</a></h3><p><strong>Quand l’ouvrir :</strong> pour comprendre comment le script déclare ses dépendances et comment uv prépare leur environnement.</p><p><strong>Commence par :</strong> « Declaring script dependencies ». Compare l’exemple à l’en-tête de resize_image.py.</p></article>
+                <article class="doc-card"><p class="resource-meta">Pillow · Anglais</p><h3><a href="https://pillow.readthedocs.io/en/stable/handbook/tutorial.html">Le tutoriel Pillow</a></h3><p><strong>Quand l’ouvrir :</strong> pour ouvrir, transformer et enregistrer des images dans ton outil.</p><p><strong>Commence par :</strong> les exemples de miniature avec thumbnail. Prévois les dimensions du résultat avant d’exécuter une variante.</p></article>
+                <article class="doc-card"><p class="resource-meta">ImageMagick · Anglais · Complément facultatif</p><h3><a href="https://imagemagick.org/command-line-processing/">Comprendre les commandes ImageMagick</a></h3><p><strong>Quand l’ouvrir :</strong> pour piloter le traitement d’une image avec un outil en CLI.</p><p><strong>Commence par :</strong> « Image Geometry Reference » pour la taille et les signes &gt;, ! ou ^. Leur sens change le résultat ; retrouve celui choisi dans la <a href="../module_further_density_view/index.html#magick">page des densités</a>.</p></article>
+                <article class="doc-card"><p class="resource-meta">Codex CLI · Anglais</p><h3><a href="https://learn.chatgpt.com/docs/codex/cli">Installation et premiers pas Codex CLI</a></h3><p><strong>Quand l’ouvrir :</strong> pour retrouver la préparation de l’outil et le démarrage dans un dossier de projet.</p><p><strong>Commence par :</strong> « Getting started », avec la <a href="../module_further_codex_cli_view/index.html">page CLI du guide</a>. Les versions et réglages disponibles peuvent évoluer.</p></article>
+                <article class="doc-card"><p class="resource-meta">Claude Code · Anglais · Autre outil</p><h3><a href="https://code.claude.com/docs/en/quickstart">Premiers pas Claude Code</a></h3><p><strong>Quand l’ouvrir :</strong> si tu utilises Claude Code avec l’encadrant.</p><p><strong>Commence par :</strong> le démarrage dans un projet. Pour les fichiers de consignes et de skills, reprends ensuite les <a href="../resources_view/index.html">kits du guide</a> et leurs références officielles.</p></article>
+            </div>
+        </section>
+
+        <section class="lesson-section" id="projets" aria-labelledby="titre-projets">
+            <p class="eyebrow">05 / Lire un projet à travers une question</p>
+            <h2 id="titre-projets">Quatre dépôts GitHub à explorer.</h2>
+            <p>Ces projets répondent à des besoins et des niveaux différents. Choisis un exemple ou une fonction ; tu peux commencer par lire dans GitHub sans tout cloner ou lancer.</p>
+            <div class="project-list">
+                <article class="project-card"><p class="resource-meta">Kotlin · Pour pratiquer une notion</p><h3><a href="https://github.com/Kotlin/kotlin-koans-edu">Kotlin / kotlin-koans-edu</a></h3><p>Le contenu des exercices Kotlin Koans : une occasion de reconnaître les petites fonctions, les classes et les collections dans des exercices ciblés.</p><p><strong>Première lecture :</strong> le README, puis le dossier <a href="https://github.com/Kotlin/kotlin-koans-edu/tree/master/Introduction">Introduction</a>. Pour pratiquer, le README conseille notamment la <a href="https://play.kotlinlang.org/koans/overview">version en ligne</a> ; cloner ce dépôt n’est pas nécessaire.</p><p><strong>Question à explorer :</strong> quelles valeurs une fonction reçoit-elle, et quel résultat doit-elle produire ?</p></article>
+                <article class="project-card"><p class="resource-meta">Android / Compose · Lecture ciblée avec l’encadrant</p><h3><a href="https://github.com/android/compose-samples">Android / compose-samples</a></h3><p>Des applications d’exemple officielles pour voir Compose dans des interfaces plus complètes que notre quiz.</p><p><strong>Première lecture :</strong> le README, puis un seul exemple, comme <a href="https://github.com/android/compose-samples/tree/main/JetNews">JetNews</a>. Repère un écran et ses composants avant d’examiner le reste.</p><p><strong>Question à explorer :</strong> où l’écran reçoit-il ses données et ses actions ? Ces exemples peuvent utiliser ViewModel et d’autres choix ; compare les responsabilités à notre presenter sans imposer toute leur architecture au quiz.</p></article>
+                <article class="project-card"><p class="resource-meta">Compose Multiplatform · Après la fenêtre Desktop</p><h3><a href="https://github.com/JetBrains/compose-multiplatform">JetBrains / compose-multiplatform</a></h3><p>Le projet Compose Multiplatform et son dossier d’exemples, dont certains visent plusieurs plateformes.</p><p><strong>Première lecture :</strong> la <a href="https://github.com/JetBrains/compose-multiplatform/blob/master/examples/README.md">liste des exemples</a>, puis <a href="https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer">Imageviewer</a> si tu veux suivre le thème des images. Choisis la cible qui t’intéresse dans son README.</p><p><strong>Question à explorer :</strong> quelles parties décrivent l’interface commune et lesquelles préparent la plateforme ? Le dépôt est vaste ; ce point d’entrée suffit pour une première visite.</p></article>
+                <article class="project-card"><p class="resource-meta">Python / Pillow · Curiosité avancée</p><h3><a href="https://github.com/python-pillow/Pillow">python-pillow / Pillow</a></h3><p>Le code de la bibliothèque que ton script utilise. Il permet de voir comment un outil de ton projet est développé et documenté.</p><p><strong>Première lecture :</strong> le README, puis le fichier <a href="https://github.com/python-pillow/Pillow/blob/main/src/PIL/Image.py">src/PIL/Image.py</a> pour rechercher thumbnail. Commence par sa description et sa signature plutôt que par tout son fonctionnement interne.</p><p><strong>Question à explorer :</strong> quelle différence entre appeler une méthode de bibliothèque et écrire cette méthode ? Pour utiliser Pillow, conserve la bibliothèque installée par uv ; ce dépôt n’a pas à être copié dans le quiz.</p></article>
+            </div>
+            <p class="caption">Les quatre dépôts ont été consultés et leur statut non archivé vérifié le 16 novembre 2026. L’ancien dépôt Kotlin/kotlin-koans se déclare obsolète ; le lien retenu est kotlin-koans-edu. Ces projets externes n’ont pas été compilés ou lancés pour cette sélection.</p>
+        </section>
+
+        <div class="reading-row">
+            <section class="lesson-section" id="explorer" aria-labelledby="titre-explorer">
+                <p class="eyebrow">06 / Revenir avec une explication vérifiable</p>
+                <h2 id="titre-explorer">Utilise l’agent pour guider une lecture.</h2>
+                <p>Avant de lancer ou reprendre du code, lis le README, les prérequis et le fichier de licence du dépôt. Les exemples peuvent demander d’autres versions d’outils que ton quiz. Prépare leur exécution avec l’encadrant dans un dossier distinct.</p>
+                <p>Si tu veux utiliser un projet comme référence, précise ce que l’agent doit examiner et quels fichiers il peut lire. Par exemple :</p>
+                <pre><code>Je veux comprendre une idée de ce dépôt : [URL ou chemin local].
+Ma question est : [un besoin précis, par exemple comment l’écran reçoit ses actions].
+Commence sans modifier de fichier et indique ce que tu as effectivement consulté.
+Trouve un exemple limité et explique-le avec les notions de mon quiz.
+Donne les fichiers et les noms de fonctions qui étayent ton explication.
+Si tu ne peux pas accéder au contenu, signale-le.
+Propose ensuite ce qui serait utile à mon projet, avec les adaptations nécessaires.</code></pre>
+                <p>Ouvre un des fichiers cités et retrouve le passage décrit. Pour réutiliser du code, conserve la référence d’origine et examine les conditions de sa licence avec l’encadrant. Une simple lecture ou une demande d’explication ne demande pas de créer une PR.</p>
+                <p>Une bonne visite peut se terminer avec trois éléments : une question de départ, un exemple retrouvé et une idée que tu peux expliquer avec tes mots.</p>
+            </section>
+            <div class="reading-notes">
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>README</h3><p>Le document d’entrée du dépôt : il présente le projet, ses usages et souvent la manière de le préparer.</p></aside>
+                <aside class="word-note"><span aria-hidden="true">💡</span><h3>Licence · license</h3><p>Le texte qui précise les conditions de réutilisation du projet. La présence d’un dépôt public ne remplace pas sa lecture.</p></aside>
+            </div>
+        </div>
+        <nav class="resource-nav" aria-label="Retrouver les ressources"><a href="../resources_view/index.html">← Modèles de consignes et skills</a><a href="../index.html#ressources">Ressources sur l’accueil →</a></nav>
+        <footer class="lesson-footer"><p>Sélection consultée le 16 novembre 2026. Les descriptions donnent des points d’entrée, pas une garantie de compatibilité avec ton environnement. Les liens peuvent évoluer ; les références proches d’une leçon restent aussi disponibles dans son pied de page.</p></footer>
+    </main>
+</div>
+</body>
+</html>

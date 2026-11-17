@@ -296,4 +296,21 @@ par un exemple de prompt. Préviews et téléchargements doivent rester identiqu
 Expliquer l’adaptation Android/Desktop et la vérification du chargement effectif.
 La home a une entrée Ressources indépendante : conserver 27 pages principales et
 13 extensions ; ne pas ajouter cette bibliothèque à la chaîne des 40 leçons.
-La page de liens utiles et de projets à explorer reste à réaliser séparément.
+La documentation et les dépôts à explorer sont regroupés dans useful_links_view/.
+
+
+## Liens utiles et projets GitHub
+
+`useful_links_view/` complète les ressources indépendantes avec 14 références
+officielles commentées et quatre dépôts : Kotlin/kotlin-koans-edu,
+android/compose-samples, JetBrains/compose-multiplatform et python-pillow/Pillow.
+Indiquer le besoin, la langue et une première lecture ; distinguer pratique,
+exemple ciblé et curiosité avancée. Le vieux dépôt Kotlin/kotlin-koans se déclare
+obsolète et n’est pas la recommandation retenue. Pas de compilation ou lancement
+des dépôts externes attesté par la seule consultation du README et des métadonnées.
+Les projets servent à lire une idée, pas à imposer leur architecture au quiz.
+Conserver les références d’origine et faire lire la licence avant une réutilisation.
+La home propose deux entrées Ressources ; compteurs inchangés à 27 + 13 leçons.
+Aucun JavaScript, téléchargement automatique, clone ou accès de l’agent au projet
+de l’élève effectué par cette page. Dater les consultations sans promettre que
+les liens ou les environnements resteront identiques.
