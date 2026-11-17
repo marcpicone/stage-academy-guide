@@ -84,3 +84,5 @@
 .resource-card h3 { margin-bottom: var(--space-md); }
 .resource-card p { max-width: 48rem; color: var(--color-muted); }
 @media (max-width: 720px) { .resource-card { grid-template-columns: 1fr; padding: var(--space-lg); } }
+
+.resource-card + .resource-card { margin-top: var(--space-lg); }

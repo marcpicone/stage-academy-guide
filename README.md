@@ -1085,7 +1085,7 @@ La page ne télécharge ni n’installe automatiquement un kit et ne démarre au
 Les fichiers de ressources sont du contenu pédagogique, pas des instructions
 actives ou des skills installés pour le développement du guide.
 Sources : docs officielles OpenAI AGENTS.md/skills et Anthropic mémoire/skills.
-La sélection de documentation et de dépôts utiles reste une page à réaliser ensuite.
+La sélection de documentation et de dépôts utiles est accessible dans useful_links_view/.
 
 
 Vérifications des ressources : deux ZIP lisibles extraits dans un dossier
@@ -1101,3 +1101,40 @@ vérifiés, `git diff --check` sans erreur. Compteurs inchangés : 27 pages prin
 et 13 extensions, la bibliothèque restant indépendante. Installation/chargement
 réels dans Codex et Claude Code, clic de téléchargement dans un navigateur,
 rendu, clavier et Windows non vérifiés. Aucun projet Android/Desktop modifié.
+
+
+## Ressources — documentation et projets à explorer
+
+`useful_links_view/` ajoute une sélection commentée de 14 documentations
+officielles (Git/GitHub, Kotlin/Compose, Gradle/Desktop, Python/uv/Pillow/
+ImageMagick et agents), avec langue, besoin et point d’entrée. Trois pistes de
+départ pour choisir une question avant de parcourir les liens.
+
+Quatre dépôts GitHub : Kotlin/kotlin-koans-edu, android/compose-samples,
+JetBrains/compose-multiplatform et python-pillow/Pillow. README et contenu ciblé
+consultés, statut non archivé vérifié via l’API GitHub le 16 novembre 2026.
+Le dépôt Kotlin/kotlin-koans indique être obsolète et renvoie vers koans-edu.
+Exemples conseillés : Introduction, JetNews, Imageviewer, recherche de thumbnail
+dans src/PIL/Image.py. Niveau et question de lecture explicites ; aucune promesse
+de compatibilité, compilation ou exécution des projets externes.
+
+Méthode d’exploration avec l’agent : question précise, lecture sans changement,
+fichiers cités et accès manquants signalés. Lire les prérequis et la licence avant
+de réutiliser du code. Page statique, sans nouvelle tâche imposée à l’élève.
+Liens depuis la home et les modèles, retour vers ces deux entrées. Pas d’ajout à
+la chaîne du cours : 27 pages principales et 13 extensions conservées.
+
+
+Vérifications de la sélection : les 14 pages documentaires ont été consultées,
+ainsi que les README et les points d’entrée des projets. Métadonnées GitHub lues
+pour les quatre dépôts ; aucune compilation ou exécution de ces projets externes.
+Le README Koans distingue le dépôt de contenu et la pratique en ligne ; le guide
+conserve cette distinction. Les liens GitHub restent sur les branches consultées
+et peuvent évoluer. Le lecteur interactif Koans n’a pas été utilisé.
+
+Contrôles locaux : 43 pages HTML, chaîne des 40 leçons inchangée ; ressources,
+liens, ancres et libellés valides. Structure HTML home/ressources/liens utiles,
+titre principal unique et tokens CSS vérifiés. 14 cartes de documentation et
+quatre projets présents, aucun lien recommandé vers l’ancien dépôt Koans.
+`git diff --check` sans erreur. Rendu navigateur, clavier, clic réel sur chaque
+lien et Windows non vérifiés ; aucun projet Android/Desktop modifié.
